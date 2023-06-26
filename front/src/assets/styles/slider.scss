@@ -1,0 +1,33 @@
+.pagination-position {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    .swiper-pagination {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0 8px;
+        background: #FFFFFF4D;
+        padding: 16px;
+        border-radius: 50px;
+        margin: -72px auto 0;
+
+        .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            cursor: pointer;
+            background: white;
+            opacity: .3;
+            border-radius: 50px;
+
+            &.swiper-pagination-bullet-active {
+                background: white;
+                width: 48px;
+                height: 8px;
+                opacity: 1;
+            }
+        }
+    }
+}

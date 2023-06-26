@@ -1,0 +1,66 @@
+$greenBackground: #7B9561;
+$lightGreenBackground: #C1D4B2;
+$darkGreenBackground: #3E5532;
+
+@mixin header-link {
+    font-family: 'NotoSans', sans-serif;
+    font-size: 20px;
+    line-height: 22px;
+    text-decoration: none;
+    font-weight: 500;
+}
+@mixin h2 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 39px;
+    letter-spacing: -0.05em;
+    text-align: left;
+    color: black;
+}
+@mixin inter-300 {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    text-align: left;
+
+}
+@mixin inter-400 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.02em;
+    text-align: left;
+}
+@mixin inter-500 {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: -0.02em;
+    text-align: left;
+}
+@mixin comforta-500 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    font-family: 'Comfortaa', sans-serif;
+}
+@mixin green-button {
+    color: white;
+    background: $greenBackground;
+    border-radius: 16px;
+    padding: 16px 24px;
+    @include inter-500;
+    font-size: 20px;
+    line-height: 22px;
+    border: none;
+    cursor: pointer;
+}
+@mixin green-button-hover {
+    background: $lightGreenBackground;
+    color: black;
+}
