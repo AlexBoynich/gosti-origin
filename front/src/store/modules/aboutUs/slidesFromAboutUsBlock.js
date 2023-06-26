@@ -8,7 +8,7 @@ const slidesFromAboutUsBlock = {
     actions: {
         async GET_ABOUT_US_SLIDES({ commit }) {
             axios
-                .get('/requests/aboutUS/slidesForAboutUsBlock.json')
+                .get('/requests/aboutUs/slidesForAboutUsBlock.json')
                 .then(response => {
                     const data = response.data
                     commit('SET_ABOUT_US_SLIDES', data)
