@@ -8,7 +8,7 @@ const slidesFromMainBlock = {
     actions: {
         async GET_MAIN_SLIDES({ commit }) {
             axios
-                .get('/api/mainBlock/slidesForMainBlock.json')
+                .get('/requests/mainBlock/slidesForMainBlock.json')
                 .then(response => {
                     const data = response.data
                     commit('SET_MAIN_SLIDES', data)
