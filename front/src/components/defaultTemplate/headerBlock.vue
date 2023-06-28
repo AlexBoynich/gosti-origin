@@ -33,7 +33,7 @@
                     <router-link
                             v-if="!navItem.onAnotherSite"
                             :key="index"
-                            class="nav-item"
+                            :class="['nav-item', {'text' : navItem.isText}]"
                             :to="navItem.link"
                     >
                         <p v-if="navItem.title">
@@ -46,7 +46,7 @@
                             v-else
                             :key="index"
                             :href="navItem.link"
-                            class="nav-item"
+                            :class="['nav-item', {'text' : navItem.isText}]"
                     >
                         {{ navItem.title }}
                     </a>
@@ -64,12 +64,14 @@ export default {
             items: [
                 {
                     title: 'Кейтеринг',
-                    link: '/catering'
+                    link: '/catering',
+                    isText: true
                 },
                 {
                     title: 'Вакансии',
                     link: 'https://hr-torta.ru/',
-                    onAnotherSite: true
+                    onAnotherSite: true,
+                    isText: true
                 },
                 {
                     img: 'images/header/header-cart.svg',
@@ -98,7 +100,7 @@ header {
     top: 0;
     z-index: 11;
     width: 100%;
-    background: linear-gradient(180deg, #FFFFFF 40.04%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
 
     .header-content {
         display: flex;
@@ -154,13 +156,21 @@ header {
         .right-part {
             display: flex;
             align-items: center;
-            gap: 0 16px;
+            gap: 0 48px;
 
             .nav-item {
                 @include header-link;
                 color: black;
-                padding: 16px 21.5px;
+                padding: 16px 24px;
 
+                &.text {
+                    padding: 8px 24px;
+                    border-bottom: 2px solid transparent;
+
+                    &:active, &:hover {
+                        border-bottom: 2px solid $greenBackground;
+                    }
+                }
                 &:last-child {
                     width: 48px;
                     height: 48px;

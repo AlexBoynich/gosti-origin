@@ -8,7 +8,7 @@ const footerSocials = {
     actions: {
         async GET_FOOTER_SOCIALS({ commit }) {
             axios
-                .get('/api/footer/footerSocials.json')
+                .get('/requests/footer/footerSocials.json')
                 .then(response => {
                     const data = response.data
                     commit('SET_FOOTER_SOCIALS', data)
