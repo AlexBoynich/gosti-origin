@@ -59,7 +59,7 @@ export default {
                     prevEl: '.arrow_prev.about-us',
                 },
                 autoplay: {
-                    delay: 5000,
+                    delay: 10000,
                     disableOnInteraction: false
                 }
             }
