@@ -100,7 +100,7 @@ header {
     top: 0;
     z-index: 11;
     width: 100%;
-    background: linear-gradient(180deg, #FFFFFF 40.04%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
 
     .header-content {
         display: flex;
