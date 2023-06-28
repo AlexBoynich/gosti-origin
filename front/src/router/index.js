@@ -5,30 +5,36 @@ import HomeView from '../views/HomeView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/catalog',
-    name: 'catalog',
-    component: () => import( '../views/catalogView.vue')
-  },
-  {
-    path: '/catering',
-    name: 'catering',
-    component: () => import( '../views/catalogView.vue')  },
-  {
-    path: '/cart',
-    name: 'cart',
-    component: () => import( '../views/catalogView.vue')  },
+    {
+        path: '/',
+        name: 'Гости',
+        component: HomeView,
+    },
+    {
+        path: '/catalog',
+        name: 'Гости • Каталог',
+        component: () => import( '../views/catalogView.vue')
+    },
+    {
+        path: '/catering',
+        name: 'Гости • Кейтеринг',
+        component: () => import( '../views/cateringView.vue')
+    },
+    {
+        path: '/cart',
+        name: 'Гости • Корзина',
+        component: () => import( '../views/cartView.vue')
+    },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+})
+router.beforeEach((to, from, next) => {
+    document.title = to.name;
+    next();
 })
 
 export default router

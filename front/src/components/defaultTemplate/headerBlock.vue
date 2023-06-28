@@ -13,6 +13,7 @@
                 <div
                     @mouseenter="isHover = true"
                     @mouseleave="isHover = false"
+                    class="in-catalog-box"
                 >
                     <router-link
                         class="navItem from-main-in-catalog"
@@ -118,39 +119,43 @@ header {
                 width: 137px;
                 cursor: pointer;
             }
-            .from-main-in-catalog {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                @include green-button;
+            .in-catalog-box {
                 margin-left: 48px;
 
-                .burger-menu {
-                    width: 24px;
-                    height: 16px;
+                .from-main-in-catalog {
                     display: flex;
-                    justify-content: space-between;
-                    flex-direction: column;
-                    margin-right: 16px;
+                    align-items: center;
+                    justify-content: center;
+                    @include green-button;
 
-                    .line {
-                        width: 100%;
-                        height: 1px;
-                        background: white;
+                    .burger-menu {
+                        width: 24px;
+                        height: 16px;
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: column;
+                        margin-right: 16px;
 
-                        &.active {
-                            background: black;
+                        .line {
+                            width: 100%;
+                            height: 1px;
+                            background: white;
+
+                            &.active {
+                                background: black;
+                            }
                         }
                     }
-                }
-                p {
-                    @include header-link;
-                    padding: 0 1px 0 2px;
-                }
+                    p {
+                      @include header-link;
+                      padding: 0 1px 0 2px;
+                    }
 
-                &:hover, &:active {
-                    @include green-button-hover;
-                }
+                    &:hover, &:active {
+                      @include green-button-hover;
+                    }
+              }
+
             }
         }
         .right-part {

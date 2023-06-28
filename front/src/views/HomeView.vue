@@ -13,12 +13,12 @@ import aboutUsBlock from "@/components/aboutUs/aboutUsBlock.vue";
 import deliveryBlock from "@/components/deliveryBlock/deliveryBlock";
 
 export default {
-  name: 'HomeView',
+    name: 'HomeView',
     components: {
         deliveryBlock,
         aboutUsBlock,
         mainBlock
-    },
+    }
 }
 </script>
 <style scoped lang="scss">
