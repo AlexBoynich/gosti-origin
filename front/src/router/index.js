@@ -13,7 +13,7 @@ const routes = [
     {
         path: '/catalog',
         name: 'Гости • Каталог',
-        component: () => import( '../views/catalogView.vue')
+        component: () => import( '../views/catalog/catalogView.vue')
     },
     {
         path: '/catering',

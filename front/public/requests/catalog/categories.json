@@ -1,0 +1,66 @@
+{
+    "categories": [
+        {
+            "name": "Завтраки",
+            "id": 0,
+            "isActive": true,
+            "subcategories": [
+                { "title": "Каши", "link": "#" },
+                { "title": "Драники", "link": "#" },
+                { "title": "Сырники", "link": "#" },
+                { "title": "Блюда из яиц", "link": "#" },
+                { "title": "Блины", "link": "#" },
+                { "title": "Тосты и сэндвичи", "link": "#" },
+                { "title": "Сборные завтраки", "link": "#" }
+            ]
+        },
+        {
+            "name": "Бизнес-ланч",
+            "id": 1,
+            "isActive": false,
+            "subcategories": [
+                { "title": "Салаты" },
+                { "title": "Супы" },
+                { "title": "Горячее" }
+            ]
+        },
+        {
+            "name": "Меню кухни",
+            "id": 2,
+            "isActive": false,
+            "subcategories": [
+                { "title": "Каши", "link": "#" },
+                { "title": "Драники", "link": "#" },
+                { "title": "Сырники", "link": "#" },
+                { "title": "Блюда из яиц", "link": "#" },
+                { "title": "Блины", "link": "#" },
+                { "title": "Тосты и сэндвичи", "link": "#" },
+                { "title": "Сборные завтраки", "link": "#" }
+            ]
+        },
+        {
+            "name": "Меню лавки",
+            "id": 3,
+            "isActive": false,
+            "subcategories": [
+                { "title": "Салаты" },
+                { "title": "Супы" },
+                { "title": "Горячее" }
+            ]
+        },
+        {
+            "name": "Сезонное меню",
+            "id": 4,
+            "isActive": false,
+            "subcategories": [
+                { "title": "Каши", "link": "#" },
+                { "title": "Драники", "link": "#" },
+                { "title": "Сырники", "link": "#" },
+                { "title": "Блюда из яиц", "link": "#" },
+                { "title": "Блины", "link": "#" },
+                { "title": "Тосты и сэндвичи", "link": "#" },
+                { "title": "Сборные завтраки", "link": "#" }
+            ]
+        }
+    ]
+}

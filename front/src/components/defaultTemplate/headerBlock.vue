@@ -4,10 +4,10 @@
             <div class="left-part">
                 <router-link to="/">
                     <img
-                            src="/images/header/header-logo.svg"
-                            alt="header-logo"
-                            class="logo"
-                            @click="onTop()"
+                        src="/images/header/header-logo.svg"
+                        alt="header-logo"
+                        class="logo"
+                        @click="onTop()"
                     >
                 </router-link>
                 <div
@@ -16,15 +16,15 @@
                     class="in-catalog-box"
                 >
                     <router-link
-                        class="navItem from-main-in-catalog"
+                        :class="['navItem', 'from-main-in-catalog', {'in-catalog' : isCatalog}]"
                         to="/catalog"
                     >
                         <div class="burger-menu">
-                            <div :class="['line', 'line1', {'active' : isHover}]"></div>
-                            <div :class="['line', 'line2', {'active' : isHover}]"></div>
-                            <div :class="['line', 'line3', {'active' : isHover}]"></div>
+                            <div :class="['line', 'line1', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
+                            <div :class="['line', 'line2', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
+                            <div :class="['line', 'line3', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
                         </div>
-                        <p>Каталог</p>
+                        <p :class="{'in-catalog' : isCatalog}">Каталог</p>
                     </router-link>
                 </div>
             </div>
@@ -32,10 +32,10 @@
                 <template v-for="(navItem, index) in items">
 
                     <router-link
-                            v-if="!navItem.onAnotherSite"
-                            :key="index"
-                            :class="['nav-item', {'text' : navItem.isText}]"
-                            :to="navItem.link"
+                        v-if="!navItem.onAnotherSite"
+                        :key="index"
+                        :class="['nav-item', {'text' : navItem.isText}]"
+                        :to="navItem.link"
                     >
                         <p v-if="navItem.title">
                             {{ navItem.title }}
@@ -44,10 +44,10 @@
                     </router-link>
 
                     <a
-                            v-else
-                            :key="index"
-                            :href="navItem.link"
-                            :class="['nav-item', {'text' : navItem.isText}]"
+                        v-else
+                        :key="index"
+                        :href="navItem.link"
+                        :class="['nav-item', {'text' : navItem.isText}]"
                     >
                         {{ navItem.title }}
                     </a>
@@ -60,7 +60,7 @@
 <script>
 export default {
     name: "headerBlock",
-    data () {
+    data() {
         return {
             items: [
                 {
@@ -80,7 +80,8 @@ export default {
                     alt: 'header-cart'
                 },
             ],
-            isHover: false
+            isHover: false,
+            isCatalog: false
         }
     },
     methods: {
@@ -91,11 +92,17 @@ export default {
             })
         }
     },
+    watch: {
+        '$route.path'() {
+            window.location.pathname === '/catalog' ? this.isCatalog = true : this.isCatalog = false
+        }
+    }
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 header {
     position: fixed;
     top: 0;
@@ -119,6 +126,7 @@ header {
                 width: 137px;
                 cursor: pointer;
             }
+
             .in-catalog-box {
                 margin-left: 48px;
 
@@ -141,23 +149,29 @@ header {
                             height: 1px;
                             background: white;
 
-                            &.active {
+                            &.active, &.in-catalog {
                                 background: black;
                             }
                         }
                     }
+
                     p {
-                      @include header-link;
-                      padding: 0 1px 0 2px;
+                        @include header-link;
+                        padding: 0 1px 0 2px;
+
+                        &.in-catalog {
+                            color: black;
+                        }
                     }
 
-                    &:hover, &:active {
-                      @include green-button-hover;
+                    &:hover, &:active, &.in-catalog {
+                        @include green-button-hover;
                     }
-              }
+                }
 
             }
         }
+
         .right-part {
             display: flex;
             align-items: center;
@@ -176,6 +190,7 @@ header {
                         border-bottom: 2px solid $greenBackground;
                     }
                 }
+
                 &:last-child {
                     width: 48px;
                     height: 48px;
