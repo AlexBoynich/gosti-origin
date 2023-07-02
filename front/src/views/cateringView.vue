@@ -1,13 +1,12 @@
 <template>
-    <CatalogBlock />
+ <div></div>
 </template>
 
 <script>
-import CatalogBlock from "@/components/catalog/catalogBlock.vue";
+
 
 export default {
     name: "cateringView",
-    components: {CatalogBlock}
 }
 </script>
 

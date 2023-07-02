@@ -6,7 +6,7 @@
             <div class="desc">{{ delivery.desc }}</div>
             <div class="delivery-table">
                 <div class="table-column"
-                     v-for="(column, index) in delivery.tableColumn"
+                     v-for="(column, index) in delivery.tableColumns"
                      :key="index"
                 >
                     <div class="table-item"
@@ -34,7 +34,7 @@ export default {
             delivery: {
                 title: 'Доставка',
                 desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
-                tableColumn: [
+                tableColumns: [
                     {tableItems: ['Заказ', 'Доставка']},
                     {tableItems: ['До 1000 ₽', '150 ₽']},
                     {tableItems: ['От 1000 ₽', 'Бесплатно']},

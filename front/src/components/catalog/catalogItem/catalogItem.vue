@@ -1,26 +1,32 @@
 <template>
     <div class="catalog-item">
-        <div class="product-img">
+        <div class="product-img" @click="openModal">
             <img :src="catalogItem.img" alt="product-img">
         </div>
         <div class="catalog-item-content">
             <div class="title">{{ catalogItem.title }}</div>
             <div class="price-and-weight">
-                <div class="price">{{ catalogItem.price }}</div>
+                <div class="price">{{ catalogItem.price + ' ₽' }}</div>
                 <div class="weight">{{ catalogItem.weight }}</div>
             </div>
             <CatalogButton
                 :stopList="catalogItem.stopList"
+                :amount="catalogItem.amount"
             />
         </div>
     </div>
 </template>
 
 <script>
-import CatalogButton from "@/components/catalog/catalogItem/catalogButton";
+import CatalogButton from "@/components/catalog/catalogButton";
 export default {
     name: "catalogItem",
     components: {CatalogButton},
+    methods: {
+        openModal () {
+            this.$emit('openModal', this.catalogItem)
+        }
+    },
     props: ['catalogItem']
 }
 </script>
@@ -39,6 +45,7 @@ export default {
         height: 359px;
         border-radius: 16px;
         margin-bottom: 24px;
+        cursor: pointer;
 
         img {
             position: absolute;

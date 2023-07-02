@@ -1,5 +1,5 @@
 <template>
-    <a class="subcategories-item" :href="subcategoriesItem.title">
+    <a class="subcategories-item" :href="subcategoriesItem.link">
         {{ subcategoriesItem.title }}
     </a>
 </template>
