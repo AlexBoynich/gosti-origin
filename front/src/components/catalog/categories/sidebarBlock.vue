@@ -107,8 +107,8 @@ aside {
     }
     .content {
         position: sticky;
-        top: 120px;
-        padding-bottom: 30px;
+        top: 130px;
+        padding-bottom: 40px;
 
         .categories {
             display: flex;

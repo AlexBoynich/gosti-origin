@@ -87,12 +87,11 @@ export default {
 
     .message {
         border-radius: 16px;
-        padding: 40px;
+        padding: 40px 93px;
         margin-bottom: 24px;
 
         .txt {
             @include inter-400;
-            max-width: 732px;
             color: #000;
             font-size: 20px;
             line-height: 140%;
