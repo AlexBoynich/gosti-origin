@@ -11,6 +11,8 @@
                 v-for="(item, index) in categoriesItem.subcategories"
                 :key="index"
                 :subcategoriesItem="item"
+                :activeIndex="subcategoriesIndex"
+                @pickSubcategories="pickSubcategories"
             />
         </div>
     </div>
@@ -20,11 +22,19 @@
 import subcategoriesItem from "@/components/catalog/categories/subcategoriesItem";
 export default {
     name: "categoriesItem",
+    data () {
+        return {
+            subcategoriesIndex: 0
+        }
+    },
     methods: {
         toggleCategory () {
             this.$emit('toggleCategory',
                 this.categoriesItem.id
             )
+        },
+        pickSubcategories (id) {
+            this.subcategoriesIndex = id
         }
     },
     props: ['categoriesItem', 'activeIndex'],
