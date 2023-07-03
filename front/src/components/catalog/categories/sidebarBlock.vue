@@ -8,8 +8,9 @@
                         v-for="(category, index) in categories"
                         :key="index"
                         :categoriesItem="category"
-                        :activeIndex="activeIndex"
+                        :activeIndices="activeIndices"
                         @toggleCategory="toggleCategory"
+                        @pickSubcategories="activeItems"
                     />
                 </div>
                 <div class="filters-box">
@@ -34,11 +35,14 @@ import FiltersItem from "@/components/catalog/filter/filtersItem";
 import {mapActions, mapState} from "vuex";
 
 export default {
-    name: "catalogBlock",
+    name: "sidebarBlock",
     data() {
         return {
             title: 'Каталог',
-            activeIndex: 0,
+            activeIndices: {
+                categoriesIndex: 0,
+                subcategoriesIndex: 0
+            },
             filters: [
                 {
                     isActive: false,
@@ -66,16 +70,40 @@ export default {
     },
     methods: {
         toggleCategory (id) {
-            if (this.activeIndex === id) {
-                this.activeIndex = null
+            if (this.activeIndices.categoriesIndex === id) {
+                this.activeIndices.categoriesIndex = null
                 this.categories[id].isActive = false
             } else {
-                this.activeIndex = id
+                this.activeIndices.categoriesIndex = id
+                this.activeIndices.subcategoriesIndex = null
                 this.categories[id].isActive = true
             }
         },
         pickFilter (id) {
             this.filters[id].isActive = !this.filters[id].isActive
+        },
+        activeItems (subcategory) {
+            if (!subcategory) {
+                let categoriesName = this.categories[0].name
+                let subcategoriesName = this.categories[0].subcategories[0].title
+
+                this.$emit('activeItems', {
+                    categoryTitle: categoriesName,
+                    categoriesIndex: 0,
+                    subcategoryTitle: subcategoriesName,
+                    subcategoriesIndex: 0
+                })
+            } else {
+                this.activeIndices.subcategoriesIndex = subcategory.id
+
+                this.$emit('activeItems', {
+                    categoryTitle: this.categories[this.activeIndices.categoriesIndex].name,
+                    categoriesIndex: this.activeIndices.categoriesIndex,
+                    subcategoryTitle: subcategory.title,
+                    subcategoriesIndex: subcategory.id
+                })
+            }
+
         },
         ...mapActions('categories', ['GET_CATEGORIES'])
     },
@@ -84,7 +112,10 @@ export default {
         CategoriesItem
     },
     created() {
-        this.GET_CATEGORIES()
+        this.GET_CATEGORIES();
+    },
+    beforeUpdate() {
+        this.activeItems()
     }
 }
 </script>

@@ -1,17 +1,17 @@
 <template>
-    <div :class="['categories-item', {'active' : categoriesItem.id === activeIndex}]">
+    <div :class="['categories-item', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]">
         <div class="categories-header" @click="toggleCategory()">
             <div class="categories-title">
                 {{ categoriesItem.name }}
             </div>
-            <img src="/images/catalog/categories/categories-arrow.svg" alt="categories-arrow" :class="['toggle-arrow', { 'reverse-arrow' : categoriesItem.id === activeIndex}]">
+            <img src="/images/catalog/categories/categories-arrow.svg" alt="categories-arrow" :class="['toggle-arrow', { 'reverse-arrow' : categoriesItem.id === activeIndices.categoriesIndex}]">
         </div>
-        <div v-show="categoriesItem.id === activeIndex" class="categories-body">
+        <div v-show="categoriesItem.id === activeIndices.categoriesIndex" class="categories-body">
             <subcategoriesItem
                 v-for="(item, index) in categoriesItem.subcategories"
                 :key="index"
                 :subcategoriesItem="item"
-                :activeIndex="subcategoriesIndex"
+                :activeIndex="activeIndices.subcategoriesIndex"
                 @pickSubcategories="pickSubcategories"
             />
         </div>
@@ -22,22 +22,15 @@
 import subcategoriesItem from "@/components/catalog/categories/subcategoriesItem";
 export default {
     name: "categoriesItem",
-    data () {
-        return {
-            subcategoriesIndex: 0
-        }
-    },
     methods: {
         toggleCategory () {
-            this.$emit('toggleCategory',
-                this.categoriesItem.id
-            )
+            this.$emit('toggleCategory', this.categoriesItem.id)
         },
-        pickSubcategories (id) {
-            this.subcategoriesIndex = id
+        pickSubcategories (subcategories) {
+            this.$emit('pickSubcategories', subcategories)
         }
     },
-    props: ['categoriesItem', 'activeIndex'],
+    props: ['categoriesItem', 'activeIndices'],
     components: {
         subcategoriesItem
     }

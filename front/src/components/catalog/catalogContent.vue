@@ -1,18 +1,21 @@
 <template>
     <div class="catalog-content">
         <div
-            v-show="catalogContent.categoriesId === 0 || catalogContent.categoriesId === 1"
-            :class="['message', {'good' : isGood, 'bad' : !isGood}]"
+            v-show="showMessage"
+            :class="['message', {'bad' : !isGood}]"
         >
-            <div class="txt">
-                {{ catalogContent.message }}
+            <div class="txt" v-show="activeItems.categoriesIndex === 0">
+                {{ messageContent.first }}
+            </div>
+            <div class="txt" v-show="activeItems.categoriesIndex === 1">
+                {{ messageContent.second }}
             </div>
         </div>
-        <div class="categories-title">
-            {{ catalogContent.categoriesTitle }}
+        <div :class="['categories-title', {'no-message' : !showMessage}]">
+            {{ activeItems.categoriesTitle }}
         </div>
         <div class="subcategories-title">
-            {{ catalogContent.subcategoriesTitle }}
+            {{ activeItems.subcategoriesTitle }}
         </div>
         <div class="catalog-items">
             <catalogItem
@@ -41,14 +44,21 @@ export default {
         return {
             modalIsActive: false,
             isGood: true,
+            messageContent: {
+                first: 'Завтраки действуют по будням с 8:00 — 12:00/ по выходным с 8:00 — 16:00',
+                second: 'Бизнес-ланчи действуют по будням с 12:00 — 16:00'
+            },
             itemInModal: {}
         }
     },
     computed: {
-        ...mapState('catalogContent', ['catalogContent', 'catalogItems']),
+        ...mapState('catalogItems', ['catalogItems']),
+        showMessage: function () {
+            return this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1;
+        }
     },
     methods: {
-        ...mapActions('catalogContent', ['GET_CATALOG_CONTENT', 'GET_CATALOG_ITEMS']),
+        ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         closeScroll: function () {
             let body = document.querySelector('body')
 
@@ -70,8 +80,8 @@ export default {
         catalogItem,
         catalogItemModal
     },
+    props: ['activeItems'],
     created() {
-        this.GET_CATALOG_CONTENT()
         this.GET_CATALOG_ITEMS()
     },
     updated() {
@@ -89,6 +99,8 @@ export default {
         border-radius: 16px;
         padding: 40px 93px;
         margin-bottom: 24px;
+        background: #DFE8D7;
+        border-left: solid 5px $greenBackground;
 
         .txt {
             @include inter-400;
@@ -96,10 +108,6 @@ export default {
             font-size: 20px;
             line-height: 140%;
             letter-spacing: -0.4px;
-        }
-        &.good {
-            background: #DFE8D7;
-            border-left: solid 5px $greenBackground;
         }
         &.bad {
             background: #F3DADA;
@@ -113,6 +121,10 @@ export default {
         line-height: 110%;
         letter-spacing: -0.48px;
         margin-bottom: 16px;
+
+        &.no-message {
+            margin-top: 95px;
+        }
     }
     .subcategories-title {
         color: #000;

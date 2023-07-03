@@ -48,7 +48,7 @@
             </div>
             <div class="hr"></div>
             <div class="footer-bottom">
-                <a class="footer-link" href="#">
+                <a class="footer-link" target="_blank" href="#">
                     Политика конфиденциальности
                 </a>
             </div>
