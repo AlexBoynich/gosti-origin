@@ -48,6 +48,7 @@
                         :key="index"
                         :href="navItem.link"
                         :class="['nav-item', {'text' : navItem.isText}]"
+                        target="_blank"
                     >
                         {{ navItem.title }}
                     </a>
@@ -157,7 +158,7 @@ header {
 
                     p {
                         @include header-link;
-                        padding: 0 1px 0 2px;
+                        padding: 0 0 0 2px;
 
                         &.in-catalog {
                             color: black;

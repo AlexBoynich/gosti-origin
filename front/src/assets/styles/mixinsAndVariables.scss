@@ -3,11 +3,12 @@ $lightGreenBackground: #C1D4B2;
 $darkGreenBackground: #3E5532;
 
 @mixin header-link {
-    font-family: 'NotoSans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 20px;
     line-height: 22px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: -0.02em;
 }
 @mixin h2 {
     font-family: 'Comfortaa', sans-serif;

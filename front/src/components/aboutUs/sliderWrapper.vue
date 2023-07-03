@@ -52,8 +52,13 @@ export default {
             return {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
-                spaceBetween: 10,
+                allowTouchMove: false,
                 loop: this.oneSlide,
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    clickable: true
+                },
                 navigation: {
                     nextEl: '.arrow_next.about-us',
                     prevEl: '.arrow_prev.about-us',
@@ -61,6 +66,17 @@ export default {
                 autoplay: {
                     delay: 10000,
                     disableOnInteraction: false
+                },
+                on: {
+                    init() {
+                        this.el.addEventListener('mousedown', () => {
+                            this.autoplay.stop();
+                        });
+
+                        this.el.addEventListener('mouseup', () => {
+                            this.autoplay.start();
+                        });
+                    }
                 }
             }
         },

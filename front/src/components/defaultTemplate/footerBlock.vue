@@ -32,6 +32,7 @@
                            v-for="(item, index) in footerSocials"
                            :key="index"
                            :href="item.link"
+                           target="_blank"
                         >
                             <img
                                 :src="item.img"
@@ -47,9 +48,9 @@
             </div>
             <div class="hr"></div>
             <div class="footer-bottom">
-                <router-link to="/" class="footer-link">
+                <a class="footer-link" href="#">
                     Политика конфиденциальности
-                </router-link>
+                </a>
             </div>
         </div>
     </footer>
@@ -154,6 +155,7 @@ footer {
             @include inter-400;
             line-height: 20px;
             color: black;
+            cursor: pointer;
         }
     }
 }

@@ -54,6 +54,7 @@ export default {
             return {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
+                allowTouchMove: false,
                 loop: this.oneSlide,
                 pagination: {
                     el: '.swiper-pagination',
@@ -67,6 +68,17 @@ export default {
                 autoplay: {
                     delay: 10000,
                     disableOnInteraction: false
+                },
+                on: {
+                    init() {
+                        this.el.addEventListener('mousedown', () => {
+                            this.autoplay.stop();
+                        });
+
+                        this.el.addEventListener('mouseup', () => {
+                            this.autoplay.start();
+                        });
+                    }
                 }
             }
         },
