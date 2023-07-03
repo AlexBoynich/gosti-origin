@@ -17,8 +17,8 @@
                     </div>
                 </div>
             </div>
-            <router-link to="/">
-                <button class="delivery-button">
+            <router-link to="/catalog">
+                <button class="delivery-button" @click="onTop('auto')">
                     Перейти в каталог
                 </button>
             </router-link>
@@ -36,10 +36,18 @@ export default {
                 desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
                 tableColumns: [
                     {tableItems: ['Заказ', 'Доставка']},
-                    {tableItems: ['До 1000 ₽', '150 ₽']},
-                    {tableItems: ['От 1000 ₽', 'Бесплатно']},
+                    {tableItems: ['До 1500 ₽', '200 ₽']},
+                    {tableItems: ['От 1500 ₽', 'Бесплатно']},
                 ]
             }
+        }
+    },
+    methods: {
+        onTop (beh) {
+            window.scrollTo({
+                top: 0,
+                behavior: beh
+            })
         }
     }
 }

@@ -1,17 +1,36 @@
 <template>
     <div id="catalog" class="container">
-        <categoriesBlock class="categories"/>
-        <catalogContent />
+        <sidebarBlock class="categories" @activeItems="activeItems"/>
+        <catalogContent :activeIndices="activeIndices"/>
     </div>
 </template>
 
 <script>
-import categoriesBlock from "../../components/catalog/categories/sidebarBlock";
+import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
 
 export default {
     name: "catalogView",
-    components: {catalogContent, categoriesBlock}
+    data () {
+        return {
+            activeIndices: {
+                categoriesIndex: 0,
+                subcategoriesIndex: 0
+            }
+        }
+    },
+    methods: {
+        activeItems (el) {
+            this.activeIndices.categoriesIndex = el.categoriesIndex
+            if (!el.subcategoriesIndex) {
+                this.activeIndices.subcategoriesIndex = 0
+            } else {
+                this.activeIndices.subcategoriesIndex = el.subcategoriesIndex
+            }
+            console.log(this.activeIndices)
+        }
+    },
+    components: {catalogContent, sidebarBlock}
 }
 </script>
 

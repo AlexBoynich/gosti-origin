@@ -1,9 +1,9 @@
 <template>
     <a
             :class="['subcategories-item',
-            {'active' : this.activeIndex === this.subcategoriesItem.id}]"
+            {'active' : this.subcategoriesItem.id === this.activeIndex}]"
             :href="subcategoriesItem.link"
-            @click="pickSubcategories"
+            @click.prevent="pickSubcategories"
     >
         {{ subcategoriesItem.title }}
     </a>

@@ -8,8 +8,9 @@
                         v-for="(category, index) in categories"
                         :key="index"
                         :categoriesItem="category"
-                        :activeIndex="activeIndex"
+                        :activeIndices="activeIndices"
                         @toggleCategory="toggleCategory"
+                        @pickSubcategories="activeItems"
                     />
                 </div>
                 <div class="filters-box">
@@ -38,7 +39,10 @@ export default {
     data() {
         return {
             title: 'Каталог',
-            activeIndex: 0,
+            activeIndices: {
+                categoriesIndex: 0,
+                subcategoriesIndex: 0
+            },
             filters: [
                 {
                     isActive: false,
@@ -66,16 +70,26 @@ export default {
     },
     methods: {
         toggleCategory (id) {
-            if (this.activeIndex === id) {
-                this.activeIndex = null
+            if (this.activeIndices.categoriesIndex === id) {
+                this.activeIndices.categoriesIndex = null
                 this.categories[id].isActive = false
             } else {
-                this.activeIndex = id
+                this.activeIndices.categoriesIndex = id
+                this.activeIndices.subcategoriesIndex = null
                 this.categories[id].isActive = true
             }
         },
         pickFilter (id) {
             this.filters[id].isActive = !this.filters[id].isActive
+        },
+        activeItems (id) {
+            if (id) {
+                this.activeIndices.subcategoriesIndex = id
+            }
+            this.$emit('activeItems', {
+                categoriesIndex: this.activeIndices.categoriesIndex,
+                subcategoriesIndex: id
+            })
         },
         ...mapActions('categories', ['GET_CATEGORIES'])
     },
@@ -85,6 +99,10 @@ export default {
     },
     created() {
         this.GET_CATEGORIES()
+        this.activeItems()
+    },
+    updated() {
+        this.activeItems()
     }
 }
 </script>
