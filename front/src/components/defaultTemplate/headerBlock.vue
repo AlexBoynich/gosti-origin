@@ -7,13 +7,14 @@
                         src="/images/header/header-logo.svg"
                         alt="header-logo"
                         class="logo"
-                        @click="onTop()"
+                        @click="onTop('smooth')"
                     >
                 </router-link>
                 <div
                     @mouseenter="isHover = true"
                     @mouseleave="isHover = false"
                     class="in-catalog-box"
+                    @click="onTop('auto')"
                 >
                     <router-link
                         :class="['navItem', 'from-main-in-catalog', {'in-catalog' : isCatalog}]"
@@ -86,10 +87,10 @@ export default {
         }
     },
     methods: {
-        onTop () {
+        onTop (beh) {
             window.scrollTo({
                 top: 0,
-                behavior: "smooth"
+                behavior: beh
             })
         }
     },
