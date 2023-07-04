@@ -40,8 +40,8 @@ export default {
         return {
             title: 'Каталог',
             activeIndices: {
-                categoriesIndex: 0,
-                subcategoriesIndex: 0
+                categoriesIndex: 1,
+                subcategoriesIndex: 1
             },
             filters: [
                 {
@@ -97,8 +97,8 @@ export default {
                 this.activeIndices.subcategoriesIndex = subcategory.id
 
                 this.$emit('activeItems', {
-                    categoryTitle: this.categories[this.activeIndices.categoriesIndex].name,
-                    categoriesIndex: this.activeIndices.categoriesIndex,
+                    categoryTitle: this.categories[this.activeIndices.categoriesIndex - 1].name,
+                    categoriesIndex: this.activeIndices.categoriesIndex - 1,
                     subcategoryTitle: subcategory.title,
                     subcategoriesIndex: subcategory.id
                 })

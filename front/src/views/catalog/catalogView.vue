@@ -8,6 +8,7 @@
 <script>
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
+import {mapMutations} from "vuex";
 
 export default {
     name: "catalogView",
@@ -15,9 +16,9 @@ export default {
         return {
             activeItems: {
                 categoriesTitle: '',
-                categoriesIndex: 0,
+                categoriesIndex: null,
                 subcategoriesTitle: '',
-                subcategoriesIndex: 0
+                subcategoriesIndex: null
             }
         }
     },
@@ -33,7 +34,7 @@ export default {
             } else {
                 this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
-        }
+        },
     },
     components: {catalogContent, sidebarBlock}
 }
