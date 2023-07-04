@@ -35,7 +35,7 @@ import FiltersItem from "@/components/catalog/filter/filtersItem";
 import {mapActions, mapState} from "vuex";
 
 export default {
-    name: "catalogBlock",
+    name: "sidebarBlock",
     data() {
         return {
             title: 'Каталог',
@@ -82,14 +82,28 @@ export default {
         pickFilter (id) {
             this.filters[id].isActive = !this.filters[id].isActive
         },
-        activeItems (id) {
-            if (id) {
-                this.activeIndices.subcategoriesIndex = id
+        activeItems (subcategory) {
+            if (!subcategory) {
+                let categoriesName = this.categories[0].name
+                let subcategoriesName = this.categories[0].subcategories[0].title
+
+                this.$emit('activeItems', {
+                    categoryTitle: categoriesName,
+                    categoriesIndex: 0,
+                    subcategoryTitle: subcategoriesName,
+                    subcategoriesIndex: 0
+                })
+            } else {
+                this.activeIndices.subcategoriesIndex = subcategory.id
+
+                this.$emit('activeItems', {
+                    categoryTitle: this.categories[this.activeIndices.categoriesIndex].name,
+                    categoriesIndex: this.activeIndices.categoriesIndex,
+                    subcategoryTitle: subcategory.title,
+                    subcategoriesIndex: subcategory.id
+                })
             }
-            this.$emit('activeItems', {
-                categoriesIndex: this.activeIndices.categoriesIndex,
-                subcategoriesIndex: id
-            })
+
         },
         ...mapActions('categories', ['GET_CATEGORIES'])
     },
@@ -98,10 +112,9 @@ export default {
         CategoriesItem
     },
     created() {
-        this.GET_CATEGORIES()
-        this.activeItems()
+        this.GET_CATEGORIES();
     },
-    updated() {
+    beforeUpdate() {
         this.activeItems()
     }
 }

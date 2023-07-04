@@ -14,7 +14,10 @@ export default {
     name: "subcategoriesItem",
     methods: {
         pickSubcategories () {
-            this.$emit('pickSubcategories', this.subcategoriesItem.id)
+            this.$emit('pickSubcategories', {
+                id: this.subcategoriesItem.id,
+                title: this.subcategoriesItem.title
+            })
         }
     },
     props: ['subcategoriesItem', 'activeIndex']

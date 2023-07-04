@@ -4,18 +4,18 @@
             v-show="showMessage"
             :class="['message', {'bad' : !isGood}]"
         >
-            <div class="txt" v-show="activeIndices.categoriesIndex === 0">
+            <div class="txt" v-show="activeItems.categoriesIndex === 0">
                 {{ messageContent.first }}
             </div>
-            <div class="txt" v-show="activeIndices.categoriesIndex === 1">
+            <div class="txt" v-show="activeItems.categoriesIndex === 1">
                 {{ messageContent.second }}
             </div>
         </div>
-        <div class="categories-title">
-            {{ catalogContent.categoriesTitle }}
+        <div :class="['categories-title', {'no-message' : !showMessage}]">
+            {{ activeItems.categoriesTitle }}
         </div>
         <div class="subcategories-title">
-            {{ catalogContent.subcategoriesTitle }}
+            {{ activeItems.subcategoriesTitle }}
         </div>
         <div class="catalog-items">
             <catalogItem
@@ -54,7 +54,7 @@ export default {
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
         showMessage: function () {
-            return this.activeIndices.categoriesIndex === 0 || this.activeIndices.categoriesIndex === 1;
+            return this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1;
         }
     },
     methods: {
@@ -80,9 +80,9 @@ export default {
         catalogItem,
         catalogItemModal
     },
-    props: ['activeIndices'],
+    props: ['activeItems'],
     created() {
-        this.GET_CATALOG_ITEMS(),
+        this.GET_CATALOG_ITEMS()
     },
     updated() {
         this.closeScroll()
@@ -121,6 +121,10 @@ export default {
         line-height: 110%;
         letter-spacing: -0.48px;
         margin-bottom: 16px;
+
+        &.no-message {
+            margin-top: 95px;
+        }
     }
     .subcategories-title {
         color: #000;

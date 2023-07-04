@@ -1,7 +1,7 @@
 <template>
     <div id="catalog" class="container">
-        <sidebarBlock class="categories" @activeItems="activeItems"/>
-        <catalogContent :activeIndices="activeIndices"/>
+        <sidebarBlock class="categories" @activeItems="getActiveItems"/>
+        <catalogContent :activeItems="activeItems"/>
     </div>
 </template>
 
@@ -13,21 +13,26 @@ export default {
     name: "catalogView",
     data () {
         return {
-            activeIndices: {
+            activeItems: {
+                categoriesTitle: '',
                 categoriesIndex: 0,
+                subcategoriesTitle: '',
                 subcategoriesIndex: 0
             }
         }
     },
     methods: {
-        activeItems (el) {
-            this.activeIndices.categoriesIndex = el.categoriesIndex
+        getActiveItems (el) {
+            this.activeItems.categoriesTitle = el.categoryTitle
+            this.activeItems.categoriesIndex = el.categoriesIndex
+            this.activeItems.subcategoriesTitle = el.subcategoryTitle
+            this.activeItems.subcategoriesIndex = el.subcategoriesIndex
+
             if (!el.subcategoriesIndex) {
-                this.activeIndices.subcategoriesIndex = 0
+                this.activeItems.subcategoriesIndex = 0
             } else {
-                this.activeIndices.subcategoriesIndex = el.subcategoriesIndex
+                this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
-            console.log(this.activeIndices)
         }
     },
     components: {catalogContent, sidebarBlock}

@@ -26,8 +26,8 @@ export default {
         toggleCategory () {
             this.$emit('toggleCategory', this.categoriesItem.id)
         },
-        pickSubcategories (id) {
-            this.$emit('pickSubcategories', id)
+        pickSubcategories (subcategories) {
+            this.$emit('pickSubcategories', subcategories)
         }
     },
     props: ['categoriesItem', 'activeIndices'],
