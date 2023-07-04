@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/home/HomeView.vue'
 
 Vue.use(VueRouter)
 
@@ -18,12 +18,12 @@ const routes = [
     {
         path: '/catering',
         name: 'Гости • Кейтеринг',
-        component: () => import( '../views/cateringView.vue')
+        component: () => import( '../views/catering/cateringView.vue')
     },
     {
         path: '/cart',
         name: 'Гости • Корзина',
-        component: () => import( '../views/cartView.vue')
+        component: () => import( '../views/cart/cartView.vue')
     },
 ]
 

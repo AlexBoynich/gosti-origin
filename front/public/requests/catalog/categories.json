@@ -3,7 +3,6 @@
         {
             "name": "Завтраки",
             "id": 1,
-            "isActive": true,
             "subcategories": [
                 { "title": "Каши", "id": 1 },
                 { "title": "Драники", "id": 2 },
@@ -17,7 +16,6 @@
         {
             "name": "Бизнес-ланч",
             "id": 2,
-            "isActive": false,
             "subcategories": [
                 { "title": "Салаты", "id": 1 },
                 { "title": "Супы", "id": 2 },
@@ -27,7 +25,6 @@
         {
             "name": "Меню кухни",
             "id": 3,
-            "isActive": false,
             "subcategories": [
                 { "title": "Каши", "id": 1 },
                 { "title": "Драники", "id": 2 },
@@ -41,7 +38,6 @@
         {
             "name": "Меню лавки",
             "id": 4,
-            "isActive": false,
             "subcategories": [
                 { "title": "Салаты", "id": 0 },
                 { "title": "Супы", "id": 1 },
@@ -51,7 +47,6 @@
         {
             "name": "Сезонное меню",
             "id": 5,
-            "isActive": false,
             "subcategories": [
                 { "title": "Каши", "id": 0 },
                 { "title": "Драники", "id": 1 },

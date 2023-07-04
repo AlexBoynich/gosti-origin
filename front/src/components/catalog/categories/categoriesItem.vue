@@ -1,6 +1,6 @@
 <template>
     <div :class="['categories-item', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]">
-        <div class="categories-header" @click="toggleCategory()">
+        <div :class="['categories-header', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]" @click="toggleCategory()">
             <div class="categories-title">
                 {{ categoriesItem.name }}
             </div>
@@ -41,12 +41,11 @@ export default {
 @import "@/assets/styles/global";
 .categories-item {
     width: 100%;
-
     color: black;
     border-radius: 16px;
     border: 1px solid $greenBackground;
     background: #fff;
-    padding: 15px 0;
+    overflow: hidden;
 
     .categories-header {
         display: flex;
@@ -55,6 +54,11 @@ export default {
         width: 100%;
         cursor: pointer;
         position: relative;
+        padding: 16px 0;
+
+        &.active {
+            padding: 16px 0 12px;
+        }
 
         .categories-title {
             text-align: center;
@@ -83,7 +87,7 @@ export default {
         letter-spacing: -0.36px;
         text-align: left;
         gap: 16px 0;
-        margin: 24px 0;
+        margin: 12px 0 40px;
     }
 
     &.active {

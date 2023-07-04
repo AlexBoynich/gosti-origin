@@ -10,7 +10,7 @@
 
 import mainBlock from "@/components/mainBlock/mainBlock.vue";
 import aboutUsBlock from "@/components/aboutUs/aboutUsBlock.vue";
-import deliveryBlock from "@/components/deliveryBlock/deliveryBlock";
+import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 
 export default {
     name: 'HomeView',
