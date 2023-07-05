@@ -115,7 +115,11 @@ export default {
         this.GET_CATEGORIES();
     },
     beforeUpdate() {
+        console.log(this.activeIndices)
         this.activeItems()
+    },
+    updated() {
+        console.log(this.activeIndices)
     }
 }
 </script>

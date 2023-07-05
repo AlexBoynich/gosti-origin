@@ -156,6 +156,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 48px 40px;
+    min-width: 918px;
     width: 100%;
   }
 }
