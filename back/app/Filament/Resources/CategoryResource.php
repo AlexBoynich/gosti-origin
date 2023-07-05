@@ -60,7 +60,9 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id'),
                 TextColumn::make('title')
+                    ->searchable()
                     ->label('Категория'),
                 TextColumn::make('priority')
                     ->label('Приоритет')
@@ -71,26 +73,14 @@ class CategoryResource extends Resource
                     ->label('Доступно до:')
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-            ]);
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
             ]);
     }
 

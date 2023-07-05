@@ -10,7 +10,6 @@ use App\Models\Dish;
 use App\Models\Metric;
 use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -21,8 +20,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
 class DishResource extends Resource
@@ -80,7 +80,7 @@ class DishResource extends Resource
                         })
                         ->afterStateUpdated(null)
                         ->reactive()
-                        ->placeholder('Не выбрано')
+                        ->disablePlaceholderSelection()
                         ->label('Категория')
                         ->required(),
 
@@ -90,9 +90,9 @@ class DishResource extends Resource
                             return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
                         })
                         ->reactive()
-                        ->placeholder('Не выбрано')
-                        ->label('Подкатегория')
-                        ->required(),
+                        ->disablePlaceholderSelection()
+                        ->required()
+                        ->label('Подкатегория'),
 
                     TextInput::make('calorie')
                         ->default(0)
@@ -142,45 +142,61 @@ class DishResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id'),
                 SpatieMediaLibraryImageColumn::make('preview')
                     ->collection('dishes')
                     ->label('Изображение'),
                 TextColumn::make('title')
                     ->label('Блюдо')
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('price')
-                    ->label('Цена')
-                    ->money('rub')
-                    ->toggleable(),
-                TextColumn::make('calorie')
-                    ->label('К')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->tooltip('Калории'),
-                TextColumn::make('proteins')
-                    ->label('Б')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->tooltip('Белки'),
-                TextColumn::make('fats')
-                    ->label('Ж')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->tooltip('Жиры'),
-                TextColumn::make('carbohydrates')
-                    ->label('У')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->tooltip('Углеводы'),
-                TextColumn::make('composition')
-                    ->label('Состав')
-                    ->limit(50)
-                    ->wrap()
-                    ->toggleable(),
+                    ->searchable(),
+                TextColumn::make('subcategory.title')
+                    ->label('Подкатегория'),
+                TextColumn::make('subcategory.category.title')
+                    ->label('Категория'),
                 ToggleColumn::make('is_available')
-                    ->label('Доступно')
-                    ->toggleable(),
-
+                    ->label('Доступно'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                SelectFilter::make('subcategory')->form(
+                    [
+                        Forms\Components\Fieldset::make()->schema([
+                            Select::make('category')
+                                ->options(Category::all()->pluck('title', 'id'))
+                                ->afterStateUpdated(null)
+                                ->disablePlaceholderSelection()
+                                ->label('Категория'),
+                            Select::make('subcategory')
+                                ->options(function (callable $get) {
+                                    $category = Category::query()->find($get('category'));
+                                    return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
+                                })
+                                ->reactive()
+                                ->label('Подкатегория')
+                        ])->columns(1)->label('Подкатегория'),
+                    ]
+                )
+                    ->query(function (Builder $query, $data) {
+                        return $query->when(
+                            $data['subcategory'],
+                            fn(Builder $query, $subcategory) => $query->where('subcategory_id', $subcategory)
+                        );
+                    }),
+                Filter::make('is_available')
+                    ->query(fn(Builder $query) => $query->where('is_available', false))
+                    ->toggle()
+                    ->label('В стоп листе'),
+                Filter::make('sugar')
+                    ->query(fn(Builder $query) => $query->where('sugar', false))
+                    ->toggle()
+                    ->label('Без сахара'),
+                Filter::make('lactose')
+                    ->query(fn(Builder $query) => $query->where('lactose', false))
+                    ->toggle()
+                    ->label('Без лактозы'),
+                Filter::make('gluten')
+                    ->query(fn(Builder $query) => $query->where('gluten', false))
+                    ->toggle()
+                    ->label('Без глютена')
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -193,8 +209,6 @@ class DishResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
 
@@ -215,12 +229,5 @@ class DishResource extends Resource
         ];
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }
 

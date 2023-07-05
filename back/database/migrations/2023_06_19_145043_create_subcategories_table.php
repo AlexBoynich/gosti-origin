@@ -19,7 +19,6 @@ return new class extends Migration
                 ->comment('Приоритет');
             $table->foreignId('category_id')
                 ->constrained();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

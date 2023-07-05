@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained();
             $table->foreignId('order_id')
                 ->constrained();
-            $table->foreignId('adress_id')
+            $table->foreignId('address_id')
                 ->nullable()
                 ->constrained();
             $table->timestamps();

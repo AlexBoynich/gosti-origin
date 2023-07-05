@@ -25,5 +25,9 @@ class BlockSeeder extends Seeder
             'description' => 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
             'target_id' => 3
         ]);
+
+        Block::factory()->create([
+            'target_id' => 1
+        ]);
     }
 }

@@ -2,7 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Contact;
+use App\Models\Metric;
+use App\Models\Subcategory;
+use App\Models\Target;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // \App\Models\User::factory(10)->create();
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
@@ -23,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             TargetSeeder::class,
             BlockSeeder::class,
+            PaymentMethodSeeder::class,
         ]);
     }
 }
