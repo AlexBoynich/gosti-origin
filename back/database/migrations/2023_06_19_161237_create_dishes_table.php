@@ -39,7 +39,6 @@ return new class extends Migration
                 ->comment('Вес/объём блюда');
             $table->foreignId('subcategory_id')->constrained();
             $table->foreignId('metric_id')->constrained();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

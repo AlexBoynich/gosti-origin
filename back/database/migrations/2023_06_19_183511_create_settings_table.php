@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('section');
             $table->string('key');
-            $table->string('value');
-            $table->string('description');
+            $table->string('value')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

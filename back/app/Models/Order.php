@@ -17,4 +17,19 @@ class Order extends Model
         'customer_id',
         'payment_method_id',
     ];
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function pivot()
+    {
+        return $this->hasOne(ObtainingMethodOrder::class);
+    }
 }

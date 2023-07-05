@@ -14,4 +14,14 @@ class ObtainingMethodOrder extends Model
         'order_id',
         'address_id',
     ];
+
+    public function obtainingMethod()
+    {
+        return $this->belongsTo(ObtainingMethod::class);
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

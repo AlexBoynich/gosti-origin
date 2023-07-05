@@ -13,15 +13,19 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()->create([
-            'title' => 'Завтрак',
+            'title' => 'Завтраки',
             'priority' => 1,
         ]);
         Category::factory()->create([
-            'title' => 'Обед',
+            'title' => 'Лавка',
             'priority' => 2,
         ]);
         Category::factory()->create([
-            'title' => 'Ужин',
+            'title' => 'Основное меню',
+            'priority' => 3,
+        ]);
+        Category::factory()->create([
+            'title' => 'Бизнес-ланч',
             'priority' => 3,
         ]);
     }

@@ -12,25 +12,107 @@ class SubcategorySeeder extends Seeder
      */
     public function run(): void
     {
+        /**Завтраки 1**/
         Subcategory::factory()->create([
             'title' => 'Каши',
             'priority' => 1,
             'category_id' => 1,
         ]);
         Subcategory::factory()->create([
-            'title' => 'Выпечка',
-            'priority' => 3,
+            'title' => 'Драник',
+            'priority' => 1,
             'category_id' => 1,
         ]);
         Subcategory::factory()->create([
-            'title' => 'Напитки',
-            'priority' => 2,
+            'title' => 'Сырники',
+            'priority' => 1,
             'category_id' => 1,
         ]);
         Subcategory::factory()->create([
-            'title' => 'Другое',
-            'priority' => 3,
+            'title' => 'Блюда из яиц',
+            'priority' => 1,
             'category_id' => 1,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Блины',
+            'priority' => 1,
+            'category_id' => 1,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Тосты и сендвичи',
+            'priority' => 1,
+            'category_id' => 1,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Сборные завтраки',
+            'priority' => 1,
+            'category_id' => 1,
+        ]);
+
+        /**Лавка 2**/
+        Subcategory::factory()->create([
+            'title' => 'Приготовленное',
+            'priority' => 1,
+            'category_id' => 2,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Из заморозки',
+            'priority' => 1,
+            'category_id' => 2,
+        ]);
+
+        /**Основное меню**/
+        Subcategory::factory()->create([
+            'title' => 'Салаты',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Закуски',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Вторые блюда',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Супы',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Гарниры',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Детское меню',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Добавки',
+            'priority' => 1,
+            'category_id' => 3,
+        ]);
+
+        /**Бизнес-ланч**/
+        Subcategory::factory()->create([
+            'title' => 'Салаты',
+            'priority' => 1,
+            'category_id' => 4,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Супы',
+            'priority' => 1,
+            'category_id' => 4,
+        ]);
+        Subcategory::factory()->create([
+            'title' => 'Горячее',
+            'priority' => 1,
+            'category_id' => 4,
         ]);
     }
 }
