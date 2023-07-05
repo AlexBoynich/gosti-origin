@@ -1,0 +1,19 @@
+{
+    "leftPartFooterItems": [
+        {
+            "title": "Контакты",
+            "descItems": [
+                { "img": "/images/footer/footer-left-part-map-icon.svg", "desc": "г.Томск, пр.Фрунзе 90" },
+                { "img": "/images/footer/footer-left-part-phone-icon.svg", "desc": "8(3822)50-99-90", "href": "tel:+73822509990", "isClickable": true },
+                { "img": "/images/footer/footer-left-part-mail-icon.svg", "desc": "gosti.cafe@mail.ru", "href": "mailto:gosti.cafe@mail.ru", "isClickable": true }
+            ]
+        },
+        {
+            "title": "Время работы",
+            "descItems": [
+                { "img": "/images/footer/footer-left-part-time-icon.svg", "desc": "Вс - Чт 08.00 - 22.00" },
+                { "img": "/images/footer/footer-left-part-time-icon.svg", "desc": "Пт - Сб 08.00 - 23.00" }
+            ]
+        }
+    ]
+}
