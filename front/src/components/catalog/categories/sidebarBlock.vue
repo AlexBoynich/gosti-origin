@@ -5,8 +5,8 @@
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
-                        v-for="(category, index) in categories"
-                        :key="index"
+                        v-for="category in categories"
+                        :key="category.id"
                         :categoriesItem="category"
                         :activeIndices="activeIndices"
                         @toggleCategory="toggleCategory"
@@ -17,8 +17,8 @@
                     <div class="title">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
-                            v-for="(filter, index) in filters"
-                            :key="index"
+                            v-for="filter in filters"
+                            :key="filter.id"
                             :filtersItem="filter"
                             @pickFilter="pickFilter"
                         />
@@ -47,19 +47,19 @@ export default {
                 {
                     isActive: false,
                     label: 'без сахара',
-                    id: '0',
+                    id: 1,
                     img: '/images/catalog/filters/filters-img-1.svg'
                 },
                 {
                     isActive: false,
                     label: 'без глютена',
-                    id: '1',
+                    id: 2,
                     img: '/images/catalog/filters/filters-img-2.svg'
                 },
                 {
                     isActive: false,
                     label: 'без лактозы',
-                    id: '2',
+                    id: 3,
                     img: '/images/catalog/filters/filters-img-3.svg'
                 },
             ]
@@ -72,11 +72,10 @@ export default {
         toggleCategory (id) {
             if (this.activeIndices.categoriesIndex === id) {
                 this.activeIndices.categoriesIndex = null
-                this.categories[id].isActive = false
+                this.categories[id - 1].isActive = false
             } else {
                 this.activeIndices.categoriesIndex = id
-                this.activeIndices.subcategoriesIndex = null
-                this.categories[id].isActive = true
+                this.categories[id - 1].isActive = true
             }
         },
         pickFilter (id) {

@@ -6,9 +6,9 @@ const catalogItems = {
         catalogItems: []
     },
     actions: {
-        async GET_CATALOG_ITEMS({ commit }) {
+        async GET_CATALOG_ITEMS({ commit }, activeId) {
             axios
-                .get('/requests/catalog/catalogItems.json')
+                .get('/requests/catalog/catalogItems-' + activeId.subcategoryId + '.json')
                 .then(response => {
                     const data = response.data
                     commit('SET_CATALOG_ITEMS', data)

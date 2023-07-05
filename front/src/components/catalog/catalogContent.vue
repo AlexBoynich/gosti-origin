@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
 import catalogItem from "@/components/catalog/catalogItem/catalogItem.vue";
 import catalogItemModal from "@/components/catalog/catalogItem/catalogItemModal.vue";
 
@@ -49,18 +48,14 @@ export default {
             },
             itemInModal: {},
             isGood: true,
-            blockedCategories: null
         }
     },
     computed: {
-        ...mapState('catalogItems', ['catalogItems']),
         showMessage: function () {
             return this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1;
-
-        }
+        },
     },
     methods: {
-        ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         checkTime (id) {
             let date = new Date();
             let hour = date.getHours()
@@ -101,10 +96,7 @@ export default {
         catalogItem,
         catalogItemModal
     },
-    props: ['activeItems'],
-    created() {
-        this.GET_CATALOG_ITEMS()
-    },
+    props: ['activeItems', 'catalogItems'],
     updated() {
         this.closeScroll()
         this.checkTime(this.activeItems.categoriesIndex)
@@ -164,6 +156,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 48px 40px;
+    min-width: 918px;
     width: 100%;
   }
 }
