@@ -75,7 +75,6 @@ export default {
                 this.categories[id - 1].isActive = false
             } else {
                 this.activeIndices.categoriesIndex = id
-                this.activeIndices.subcategoriesIndex = null
                 this.categories[id - 1].isActive = true
             }
         },
@@ -115,11 +114,7 @@ export default {
         this.GET_CATEGORIES();
     },
     beforeUpdate() {
-        console.log(this.activeIndices)
         this.activeItems()
-    },
-    updated() {
-        console.log(this.activeIndices)
     }
 }
 </script>

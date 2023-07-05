@@ -40,7 +40,6 @@ export default {
             }
 
             this.GET_CATALOG_ITEMS({
-                categoryId: this.activeItems.categoriesIndex + 1,
                 subcategoryId: this.activeItems.subcategoriesIndex
             })
         },
