@@ -1,14 +1,14 @@
 <template>
     <div id="catalog" class="container">
         <sidebarBlock class="categories" @activeItems="getActiveItems"/>
-        <catalogContent :activeItems="activeItems"/>
+        <catalogContent :activeItems="activeItems" :catalogItems="catalogItems"/>
     </div>
 </template>
 
 <script>
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
-import {mapMutations} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
     name: "catalogView",
@@ -16,13 +16,17 @@ export default {
         return {
             activeItems: {
                 categoriesTitle: '',
-                categoriesIndex: null,
+                categoriesIndex: 0,
                 subcategoriesTitle: '',
-                subcategoriesIndex: null
+                subcategoriesIndex: 1
             }
         }
     },
+    computed: {
+        ...mapState('catalogItems', ['catalogItems']),
+    },
     methods: {
+        ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         getActiveItems (el) {
             this.activeItems.categoriesTitle = el.categoryTitle
             this.activeItems.categoriesIndex = el.categoriesIndex
@@ -30,13 +34,21 @@ export default {
             this.activeItems.subcategoriesIndex = el.subcategoriesIndex
 
             if (!el.subcategoriesIndex) {
-                this.activeItems.subcategoriesIndex = 0
+                this.activeItems.subcategoriesIndex = 1
             } else {
                 this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
+
+            this.GET_CATALOG_ITEMS({
+                categoryId: this.activeItems.categoriesIndex + 1,
+                subcategoryId: this.activeItems.subcategoriesIndex
+            })
         },
     },
-    components: {catalogContent, sidebarBlock}
+    components: {
+        catalogContent,
+        sidebarBlock
+    },
 }
 </script>
 
