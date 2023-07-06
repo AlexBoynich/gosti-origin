@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <catalogButton
-                    :stopList="catalogItem.stopList"
+                    :stopList="catalogItem.isActive"
                     :amount="catalogItem.amount"
                 />
             </div>
@@ -52,12 +52,12 @@ export default {
     name: "catalogItemModal",
     data () {
         return {
-            isActive: true
+            active: true
         }
     },
     methods: {
         closeModal () {
-            this.$emit('closeModal', !this.isActive)
+            this.$emit('closeModal', !this.active)
         }
     },
     components: {

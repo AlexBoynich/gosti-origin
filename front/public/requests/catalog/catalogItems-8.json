@@ -2,7 +2,7 @@
     "catalogItems": [
         {
             "id": 1,
-            "stopList": false,
+            "isActive": false,
             "img": "/images/catalog/catalogItem/product-image.png",
             "title": "Кукурузная каша с пармезаном и яйцом пашот",
             "desc": "Фарш индейки, лук репчатый, яйцо куриное, молоко, хлеб",
@@ -16,7 +16,7 @@
         },
         {
             "id": 2,
-            "stopList": true,
+            "isActive": true,
             "img": "/images/catalog/catalogItem/product-image-2.png",
             "title": "Кукурузная каша с пармезаном и яйцом пашот",
             "desc": "Фарш индейки, лук репчатый, яйцо куриное, молоко, хлеб",
@@ -30,7 +30,7 @@
         },
         {
             "id": 3,
-            "stopList": true,
+            "isActive": true,
             "img": "/images/catalog/catalogItem/product-image.png",
             "title": "Кукурузная каша с пармезаном и яйцом пашот",
             "desc": "Фарш индейки, лук репчатый, яйцо куриное, молоко, хлеб",

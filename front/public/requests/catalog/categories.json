@@ -1,7 +1,7 @@
 {
     "categories": [
         {
-            "name": "Завтраки",
+            "title": "Завтраки",
             "id": 1,
             "subcategories": [
                 { "title": "Каши", "id": 1 },
@@ -14,7 +14,7 @@
             ]
         },
         {
-            "name": "Бизнес-ланч",
+            "title": "Бизнес-ланч",
             "id": 2,
             "subcategories": [
                 { "title": "Салаты", "id": 8 },
@@ -23,7 +23,7 @@
             ]
         },
         {
-            "name": "Основное меню",
+            "title": "Основное меню",
             "id": 3,
             "subcategories": [
                 { "title": "Каши", "id": 11 },
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "Лавка",
+            "title": "Лавка",
             "id": 4,
             "subcategories": [
                 { "title": "Салаты", "id": 18 },
