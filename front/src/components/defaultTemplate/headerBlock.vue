@@ -38,10 +38,10 @@
                         :class="['nav-item', {'text' : navItem.isText}]"
                         :to="navItem.link"
                     >
-                        <p v-if="navItem.title">
+                        <p v-if="navItem.title" @click="onTop('auto')">
                             {{ navItem.title }}
                         </p>
-                        <img v-else :src="navItem.img" :alt="navItem.alt">
+                        <img v-else :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
                     </router-link>
 
                     <a
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import {onTop} from '@/utils/helpers.js'
 export default {
     name: "headerBlock",
     data() {
@@ -87,12 +88,7 @@ export default {
         }
     },
     methods: {
-        onTop (beh) {
-            window.scrollTo({
-                top: 0,
-                behavior: beh
-            })
-        }
+        onTop
     },
     watch: {
         '$route.path'() {

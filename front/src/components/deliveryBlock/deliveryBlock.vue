@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import {onTop} from '@/utils/helpers.js'
 export default {
     name: "deliveryBlock",
     data () {
@@ -43,12 +44,7 @@ export default {
         }
     },
     methods: {
-        onTop (beh) {
-            window.scrollTo({
-                top: 0,
-                behavior: beh
-            })
-        }
+        onTop
     }
 }
 </script>
