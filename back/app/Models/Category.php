@@ -13,8 +13,10 @@ class Category extends Model
     protected $fillable = [
         'title',
         'priority',
-        'available_start',
-        'available_end',
+        'weekday_available_start',
+        'weekday_available_end',
+        'weekend_available_start',
+        'weekend_available_end',
     ];
 
     public function subcategories()
