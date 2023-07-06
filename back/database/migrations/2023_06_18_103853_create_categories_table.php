@@ -30,6 +30,7 @@ return new class extends Migration
                 ->nullable()
                 ->comment('Время в выходные, по которое категория доступна');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
