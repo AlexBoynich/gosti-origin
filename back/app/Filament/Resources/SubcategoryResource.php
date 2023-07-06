@@ -66,10 +66,9 @@ class SubcategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //
             ]);
     }
 
@@ -84,7 +83,6 @@ class SubcategoryResource extends Resource
     {
         return [
             'index' => Pages\ListSubcategories::route('/'),
-            'create' => Pages\CreateSubcategory::route('/create'),
             'edit' => Pages\EditSubcategory::route('/{record}/edit'),
         ];
     }

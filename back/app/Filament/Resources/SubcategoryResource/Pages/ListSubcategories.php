@@ -13,7 +13,7 @@ class ListSubcategories extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            //
         ];
     }
 }
