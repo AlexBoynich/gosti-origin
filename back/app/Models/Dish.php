@@ -38,10 +38,10 @@ class Dish extends Model implements HasMedia
         return $this->belongsTo(Subcategory::class);
     }
 
-//    public function category()
-//    {
-//        return $this->subcategory->category;
-//    }
+    public function category()
+    {
+        return $this->subcategory->category;
+    }
 
     public function metric()
     {
