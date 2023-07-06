@@ -79,7 +79,7 @@ export default {
             }
         },
         pickFilter (id) {
-            this.filters[id].isActive = !this.filters[id].isActive
+            this.filters[id - 1].isActive = !this.filters[id - 1].isActive
         },
         activeItems (subcategory) {
             if (!subcategory) {
