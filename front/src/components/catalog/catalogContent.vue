@@ -58,20 +58,21 @@ export default {
     methods: {
         checkTime (id) {
             let date = new Date();
-            let hour = date.getHours()
+            let hour = date.getUTCHours() + 7
             const options = { weekday: 'long' };
             const dayOfWeek = date.toLocaleString('en-US', options);
+
             if (id === 0) {
                 if (dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday') {
-                    this.isGood = hour > 8 && hour < 16
+                    this.isGood = hour >= 8 && hour < 16
                 } else {
-                    this.isGood = hour > 8 && hour < 12
+                    this.isGood = hour >= 8 && hour < 12
                 }
             } else if (id === 1) {
                 if (dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday') {
                     this.isGood = false
                 } else {
-                    this.isGood = hour > 12 && hour < 16;
+                    this.isGood = hour >= 12 && hour < 16;
                 }
             }
         },
