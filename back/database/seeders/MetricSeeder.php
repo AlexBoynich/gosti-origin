@@ -14,13 +14,16 @@ class MetricSeeder extends Seeder
     public function run(): void
     {
         Metric::factory()->create([
-            'title' => 'л',
-        ]);
-        Metric::factory()->create([
             'title' => 'мл',
         ]);
         Metric::factory()->create([
+            'title' => 'л',
+        ]);
+        Metric::factory()->create([
             'title' => 'г',
+        ]);
+        Metric::factory()->create([
+            'title' => 'кг',
         ]);
     }
 }

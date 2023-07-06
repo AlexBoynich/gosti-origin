@@ -28,7 +28,7 @@ class Block extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('image')
+            ->addMediaConversion('images')
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }

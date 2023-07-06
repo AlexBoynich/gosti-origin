@@ -17,8 +17,8 @@ class ContactSeeder extends Seeder
             'phone' => '8(3822)50-99-90',
             'email' => 'gosti.cafe@mail.ru',
             'vk' => 'https://vk.com/cafegostitomsk',
-            'whatsapp' => '8(3822)50-99-90',
-            'gis' => 'https://2gis.ru/tomsk/search/томск%20гости/firm/70000001029574004/84.969226%2C56.47649?m=84.969257%2C56.476512%2F17.38',
+            'whatsapp' => 'https://wa.me/79138209990',
+            'gis' => 'https://yandex.ru/maps/org/gosti/228700453605/?ll=84.969567%2C56.476587&z=16.77',
             'address' => 'Томск, просп. Фрунзе, 90',
         ]);
     }

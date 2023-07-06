@@ -23,7 +23,6 @@ return new class extends Migration
             $table->time('available_end')
                 ->nullable()
                 ->comment('Время, по которого категория доступна');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

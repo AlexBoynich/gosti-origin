@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
@@ -14,9 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class Dish extends Model implements HasMedia
 {
     use HasFactory;
-    use SoftDeletes;
     use InteractsWithMedia;
-
 
     protected $fillable = [
         'title',
@@ -37,17 +33,17 @@ class Dish extends Model implements HasMedia
 
     public function subcategory()
     {
-        $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
-    public function category()
-    {
-        $this->hasOneThrough(Category::class, Subcategory::class);
-    }
+//    public function category()
+//    {
+//        return $this->subcategory->category;
+//    }
 
     public function metric()
     {
-        $this->belongsTo(Metric::class);
+        return $this->belongsTo(Metric::class);
     }
 
     public function registerMediaConversions(Media $media = null): void
