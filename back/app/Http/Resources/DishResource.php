@@ -20,9 +20,9 @@ class DishResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price / 100,
             'calories' => $this->calorie,
-            'proteins' => $this->proteins,
-            'fats' => $this->fats,
-            'carbohydrates' => $this->carbohydrates,
+            'proteins' => "{$this->proteins} г",
+            'fats' => "{$this->fats} г",
+            'carbohydrates' => "{$this->carbohydrates} г",
             'desc' => $this->composition,
             'sugar' => $this->sugar,
             'lactose' => $this->lactose,
@@ -36,6 +36,8 @@ class DishResource extends JsonResource
     private function checkAvailable(): bool
     {
         if (!$this->is_available) return false;
+
+        if (!$this->isSetTimeLimit()) return true;
 
         $date = Carbon::now(7);
         $day = $date->dayOfWeekIso;
@@ -51,7 +53,16 @@ class DishResource extends JsonResource
         return $this->isTimeInRange($time,$start, $end);
     }
 
-    function isTimeInRange($time, $startTime, $endTime)
+    private function isSetTimeLimit(): bool
+    {
+        if (is_null($this->category()->weekend_available_start)
+            && is_null($this->category()->weekday_available_start)) {
+            return false;
+        }
+        return true;
+    }
+
+    private function isTimeInRange($time, $startTime, $endTime)
     {
         $timeObj = Carbon::createFromFormat('H:i:s', $time);
         $startObj = Carbon::createFromFormat('H:i:s', $startTime);
