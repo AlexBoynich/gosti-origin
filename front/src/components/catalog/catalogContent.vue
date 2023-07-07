@@ -127,8 +127,8 @@ export default {
     }
 
     &.bad {
-      background: #F3DADA;
-      border-left: 5px solid #C94040
+      background: $lightRedBackground;
+      border-left: 5px solid $redBackground;
     }
   }
 
