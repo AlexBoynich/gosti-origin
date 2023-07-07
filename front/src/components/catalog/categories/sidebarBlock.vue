@@ -42,27 +42,7 @@ export default {
             activeIndices: {
                 categoriesIndex: 1,
                 subcategoriesIndex: 1
-            },
-            filters: [
-                {
-                    isActive: false,
-                    label: 'без сахара',
-                    id: 1,
-                    img: '/images/catalog/filters/filters-img-1.svg'
-                },
-                {
-                    isActive: false,
-                    label: 'без глютена',
-                    id: 2,
-                    img: '/images/catalog/filters/filters-img-2.svg'
-                },
-                {
-                    isActive: false,
-                    label: 'без лактозы',
-                    id: 3,
-                    img: '/images/catalog/filters/filters-img-3.svg'
-                },
-            ]
+            }
         }
     },
     computed: {
@@ -79,7 +59,9 @@ export default {
             }
         },
         pickFilter (id) {
-            this.filters[id - 1].isActive = !this.filters[id - 1].isActive
+            this.$emit('pickFilter', {
+                id: id
+            })
         },
         activeItems (subcategory) {
             if (!subcategory) {
@@ -110,6 +92,7 @@ export default {
         FiltersItem,
         CategoriesItem
     },
+    props: ['filters'],
     created() {
         this.GET_CATEGORIES();
     },

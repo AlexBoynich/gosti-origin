@@ -2,12 +2,12 @@
     <div class="filter-item">
         <div
             :id="filtersItem.id"
-            :class="['checkbox', {'active' : filtersItem.isActive}]"
+            :class="['checkbox', {'active' : !filtersItem.isActive}]"
             @click="pickFilter"
         >
             <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
         </div>
-        <label>{{ filtersItem.label }}</label>
+        <label :for="filtersItem.id">{{ filtersItem.label }}</label>
         <img :src="filtersItem.img" alt="filter-img">
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div id="catalog" class="container">
-        <sidebarBlock class="categories" @activeItems="getActiveItems"/>
+        <sidebarBlock class="categories" @activeItems="getActiveItems" @pickFilter="getFilter" :filters="filters"/>
         <catalogContent :activeItems="activeItems" :catalogItems="catalogItems"/>
     </div>
 </template>
@@ -19,11 +19,36 @@ export default {
                 categoriesIndex: 0,
                 subcategoriesTitle: '',
                 subcategoriesIndex: 1
-            }
+            },
+            filters: [
+                {
+                    isActive: true,
+                    label: 'без сахара',
+                    id: 1,
+                    img: '/images/catalog/filters/filters-img-1.svg',
+                    forRequest: 'sugar'
+                },
+                {
+                    isActive: true,
+                    label: 'без глютена',
+                    id: 2,
+                    img: '/images/catalog/filters/filters-img-2.svg',
+                    forRequest: 'gluten'
+                },
+                {
+                    isActive: true,
+                    label: 'без лактозы',
+                    id: 3,
+                    img: '/images/catalog/filters/filters-img-3.svg',
+                    forRequest: 'lactose'
+                },
+            ],
+            filtersForRequest: {}
         }
     },
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
+
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
@@ -39,10 +64,48 @@ export default {
                 this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
 
+            for (let i = 0; i < this.filters.length; i++) {
+                this.filters[i].isActive = true
+            }
+            Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key]);
+
             this.GET_CATALOG_ITEMS({
-                subcategoryId: this.activeItems.subcategoriesIndex
+                subcategoryId: this.activeItems.subcategoriesIndex,
+                requestFilter: ''
             })
         },
+        getFilter (obj) {
+            this.filters[obj.id - 1].isActive = !this.filters[obj.id - 1].isActive
+
+            function generateFilterRequest (sugar, gluten, lactose, filtersForRequest) {
+
+                if (!sugar) {
+                    filtersForRequest.sugar = 0
+                } else {
+                    delete filtersForRequest.sugar
+                }
+                if (!gluten) {
+                    filtersForRequest.gluten = 0
+                } else {
+                    delete filtersForRequest.gluten
+                }
+                if (!lactose) {
+                    filtersForRequest.lactose = 0
+                } else {
+                    delete filtersForRequest.lactose
+                }
+
+                return Object.keys(filtersForRequest)
+                    .map(key => `${key}=${filtersForRequest[key]}`)
+                    .join('&')
+            }
+            let requestFilter = generateFilterRequest(this.filters[0].isActive, this.filters[1].isActive, this.filters[2].isActive, this.filtersForRequest)
+            console.log(requestFilter)
+            this.GET_CATALOG_ITEMS({
+                subcategoryId: this.activeItems.subcategoriesIndex,
+                requestFilter: requestFilter
+            })
+        }
     },
     components: {
         catalogContent,
