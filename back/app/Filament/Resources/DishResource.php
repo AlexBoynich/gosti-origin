@@ -78,9 +78,8 @@ class DishResource extends Resource
                             }
                             return Category::query()->find($get('category_id'))->pluck('title', 'id');
                         })
-                        ->afterStateUpdated(null)
+                        ->afterStateUpdated(fn(callable $set) => $set('subcategory_id', null))
                         ->reactive()
-                        ->disablePlaceholderSelection()
                         ->label('Категория')
                         ->required(),
 
@@ -90,7 +89,6 @@ class DishResource extends Resource
                             return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
                         })
                         ->reactive()
-                        ->disablePlaceholderSelection()
                         ->required()
                         ->label('Подкатегория'),
 

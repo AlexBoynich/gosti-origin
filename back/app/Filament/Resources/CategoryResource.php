@@ -38,20 +38,20 @@ class CategoryResource extends Resource
                         ->autofocus()
                         ->label('Категория'),
 
-                    TextInput::make('priority')
-                        ->integer()
-                        ->required()
-                        ->label('Приоритет'),
-
-                    TimePicker::make('available_start')
-                        ->timezone('Asia/Tomsk')
-                        ->icon('heroicon-o-clock')
-                        ->label('Доступно с:'),
-
-                    TimePicker::make('available_end')
-                        ->timezone('Asia/Tomsk')
-                        ->icon('heroicon-o-clock')
-                        ->label('До:'),
+//                    TextInput::make('priority')
+//                        ->integer()
+//                        ->required()
+//                        ->label('Приоритет'),
+//
+//                    TimePicker::make('available_start')
+//                        ->timezone('Asia/Tomsk')
+//                        ->icon('heroicon-o-clock')
+//                        ->label('Доступно с:'),
+//
+//                    TimePicker::make('available_end')
+//                        ->timezone('Asia/Tomsk')
+//                        ->icon('heroicon-o-clock')
+//                        ->label('До:'),
                 ]),
             ]);
     }
@@ -64,13 +64,13 @@ class CategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Категория'),
-                TextColumn::make('priority')
-                    ->label('Приоритет')
-                    ->sortable(),
-                TextColumn::make('available_start')
-                    ->label('Доступно с:'),
-                TextColumn::make('available_end')
-                    ->label('Доступно до:')
+//                TextColumn::make('priority')
+//                    ->label('Приоритет')
+//                    ->sortable(),
+//                TextColumn::make('available_start')
+//                    ->label('Доступно с:'),
+//                TextColumn::make('available_end')
+//                    ->label('Доступно до:')
             ])
             ->filters([
                 //
