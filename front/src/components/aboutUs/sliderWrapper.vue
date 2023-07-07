@@ -54,11 +54,6 @@ export default {
                 slidesPerGroup: 1,
                 allowTouchMove: false,
                 loop: this.oneSlide,
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'bullets',
-                    clickable: true
-                },
                 navigation: {
                     nextEl: '.arrow_next.about-us',
                     prevEl: '.arrow_prev.about-us',

@@ -17,7 +17,7 @@ const catalogItems = {
     },
     mutations: {
         SET_CATALOG_ITEMS(state, data) {
-            state.catalogItems = data.catalogItems
+            state.catalogItems = data.data
         }
     },
 }

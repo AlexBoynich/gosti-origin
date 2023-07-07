@@ -4,15 +4,18 @@
             {'active' : this.subcategoriesItem.id === this.activeIndex}]"
             :href="subcategoriesItem.link"
             @click.prevent="pickSubcategories"
+            @click="onTop('smooth')"
     >
         {{ subcategoriesItem.title }}
     </a>
 </template>
 
 <script>
+import {onTop} from '@/utils/helpers.js'
 export default {
     name: "subcategoriesItem",
     methods: {
+        onTop,
         pickSubcategories () {
             this.$emit('pickSubcategories', {
                 id: this.subcategoriesItem.id,

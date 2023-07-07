@@ -3,13 +3,13 @@
         <div class="arrow-box">
             <button
                     v-if="slides.length > 1"
-                    :class="['arrows arrow_prev']"
+                    :class="['arrows arrow_prev main']"
             >
                 <img src="/images/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
             <button
                     v-if="slides.length > 1"
-                    :class="['arrows arrow_next']"
+                    :class="['arrows arrow_next main']"
             >
                 <img src="/images/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
@@ -33,7 +33,7 @@
             </swiper>
         </div>
         <div class="pagination-position">
-            <div v-if="slides.length > 1" :class="['swiper-pagination']"></div>
+            <div v-if="slides.length > 1" :class="['swiper-pagination main']"></div>
         </div>
     </div>
 </template>
@@ -57,13 +57,13 @@ export default {
                 allowTouchMove: false,
                 loop: this.oneSlide,
                 pagination: {
-                    el: '.swiper-pagination',
+                    el: '.swiper-pagination.main',
                     type: 'bullets',
                     clickable: true
                 },
                 navigation: {
-                    nextEl: '.arrow_next',
-                    prevEl: '.arrow_prev',
+                    nextEl: '.arrow_next.main',
+                    prevEl: '.arrow_prev.main',
                 },
                 autoplay: {
                     delay: 10000,

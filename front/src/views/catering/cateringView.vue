@@ -10,6 +10,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+@import "@/assets/styles/global.scss";
+div {
+    min-height: 100vh;
+    background: $lightGreenBackground;
+}
 </style>
