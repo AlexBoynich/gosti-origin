@@ -40,6 +40,7 @@ return new class extends Migration
             $table->foreignId('subcategory_id')->constrained();
             $table->foreignId('metric_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

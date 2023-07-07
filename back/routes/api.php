@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DishController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**Категории**/
+Route::get('/categories', [CategoryController::class, 'index'])->name('api.categories');
+
+/**Блюда**/
+Route::get('dishes', [DishController::class, 'index'])->name('api.dishes');

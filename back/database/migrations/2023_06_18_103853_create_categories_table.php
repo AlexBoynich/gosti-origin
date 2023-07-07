@@ -17,13 +17,20 @@ return new class extends Migration
                 ->comment('Наименование');
             $table->integer('priority')
                 ->comment('Приоритет');
-            $table->time('available_start')
+            $table->time('weekday_available_start')
                 ->nullable()
-                ->comment('Время, с которого категория доступна');
-            $table->time('available_end')
+                ->comment('Время в будни, с которого категория доступна');
+            $table->time('weekday_available_end')
                 ->nullable()
-                ->comment('Время, по которого категория доступна');
+                ->comment('Время в будни, по которое категория доступна');
+            $table->time('weekend_available_start')
+                ->nullable()
+                ->comment('Время в выходные, с которого категория доступна');
+            $table->time('weekend_available_end')
+                ->nullable()
+                ->comment('Время в выходные, по которое категория доступна');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
