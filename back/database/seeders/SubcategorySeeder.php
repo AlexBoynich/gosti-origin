@@ -53,12 +53,12 @@ class SubcategorySeeder extends Seeder
         Subcategory::factory()->create([
             'title' => 'Приготовленное',
             'priority' => 1,
-            'category_id' => 2,
+            'category_id' => 4,
         ]);
         Subcategory::factory()->create([
             'title' => 'Из заморозки',
             'priority' => 1,
-            'category_id' => 2,
+            'category_id' => 4,
         ]);
 
         /**Основное меню**/
@@ -102,17 +102,17 @@ class SubcategorySeeder extends Seeder
         Subcategory::factory()->create([
             'title' => 'Салаты',
             'priority' => 1,
-            'category_id' => 4,
+            'category_id' => 2,
         ]);
         Subcategory::factory()->create([
             'title' => 'Супы',
             'priority' => 1,
-            'category_id' => 4,
+            'category_id' => 2,
         ]);
         Subcategory::factory()->create([
             'title' => 'Горячее',
             'priority' => 1,
-            'category_id' => 4,
+            'category_id' => 2,
         ]);
     }
 }
