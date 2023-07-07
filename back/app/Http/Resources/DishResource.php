@@ -18,7 +18,7 @@ class DishResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'price' => $this->price,
+            'price' => $this->price / 100,
             'calories' => $this->calorie,
             'proteins' => $this->proteins,
             'fats' => $this->fats,
@@ -28,7 +28,7 @@ class DishResource extends JsonResource
             'lactose' => $this->lactose,
             'gluten' => $this->gluten,
             'weight' => "{$this->metric_value} {$this->metric->title}",
-            'image' => $this->getFirstMediaUrl('dishes'),
+            'img' => $this->getFirstMediaUrl('dishes'),
             'isAvailabel' => $this->checkAvailable(),
         ];
     }
