@@ -13,7 +13,7 @@
             </div>
         </div>
         <CatalogButton
-                :stopList="catalogItem.stopList"
+                :stopList="catalogItem.isActive"
                 :amount="catalogItem.amount"
         />
     </div>

@@ -79,11 +79,11 @@ export default {
             }
         },
         pickFilter (id) {
-            this.filters[id].isActive = !this.filters[id].isActive
+            this.filters[id - 1].isActive = !this.filters[id - 1].isActive
         },
         activeItems (subcategory) {
             if (!subcategory) {
-                let categoriesName = this.categories[0].name
+                let categoriesName = this.categories[0].title
                 let subcategoriesName = this.categories[0].subcategories[0].title
 
                 this.$emit('activeItems', {
@@ -96,7 +96,7 @@ export default {
                 this.activeIndices.subcategoriesIndex = subcategory.id
 
                 this.$emit('activeItems', {
-                    categoryTitle: this.categories[this.activeIndices.categoriesIndex - 1].name,
+                    categoryTitle: this.categories[this.activeIndices.categoriesIndex - 1].title,
                     categoriesIndex: this.activeIndices.categoriesIndex - 1,
                     subcategoryTitle: subcategory.title,
                     subcategoriesIndex: subcategory.id

@@ -2,7 +2,7 @@
     <div :class="['categories-item', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]">
         <div :class="['categories-header', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]" @click="toggleCategory()">
             <div class="categories-title">
-                {{ categoriesItem.name }}
+                {{ categoriesItem.title }}
             </div>
             <img src="/images/catalog/categories/categories-arrow.svg" alt="categories-arrow" :class="['toggle-arrow', { 'reverse-arrow' : categoriesItem.id === activeIndices.categoriesIndex}]">
         </div>
