@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title')
                 ->comment('Наименование');
             $table->integer('priority')
+                ->nullable()
                 ->comment('Приоритет');
             $table->foreignId('category_id')
                 ->constrained();

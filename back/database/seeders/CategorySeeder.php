@@ -21,18 +21,19 @@ class CategorySeeder extends Seeder
             'weekend_available_end' => '16:00:00',
         ]);
         Category::factory()->create([
-            'title' => 'Лавка',
-            'priority' => 2,
+            'title' => 'Бизнес-ланч',
+            'priority' => 3,
+            'weekday_available_start' => '12:00:00',
+            'weekday_available_end' => '16:00:00',
         ]);
         Category::factory()->create([
             'title' => 'Основное меню',
             'priority' => 3,
         ]);
         Category::factory()->create([
-            'title' => 'Бизнес-ланч',
-            'priority' => 3,
-            'weekday_available_start' => '12:00:00',
-            'weekday_available_end' => '16:00:00',
+            'title' => 'Лавка',
+            'priority' => 2,
         ]);
+
     }
 }

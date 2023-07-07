@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title')
                 ->comment('Наименование');
             $table->integer('priority')
+                ->nullable()
                 ->comment('Приоритет');
             $table->time('weekday_available_start')
                 ->nullable()
