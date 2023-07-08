@@ -127,7 +127,7 @@ footer {
                                 text-decoration: none;
                                 @include inter-300;
                                 font-size: 20px;
-                                line-height: 36px;
+                                line-height: 22px;
                                 color: black;
                             }
                         }

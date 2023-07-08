@@ -190,10 +190,15 @@ header {
                 }
 
                 &:last-child {
-                    width: 48px;
-                    height: 48px;
+                    width: 35px;
+                    height: 36px;
                     margin-left: 16px;
                     padding: 0;
+
+                    img {
+                      width: 35px;
+                      height: 36px;
+                    }
                 }
             }
         }
