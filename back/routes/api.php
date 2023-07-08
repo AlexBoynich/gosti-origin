@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/categories', [CategoryController::class, 'index'])->name('api.categories');
 
 /**Блюда**/
-Route::get('dishes', [DishController::class, 'index'])->name('api.dishes');
+Route::get('/dishes', [DishController::class, 'index'])->name('api.dishes');

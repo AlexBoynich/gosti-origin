@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
         ]);
         Category::factory()->create([
             'title' => 'Бизнес-ланч',
-            'priority' => 3,
+            'priority' => 2,
             'weekday_available_start' => '12:00:00',
             'weekday_available_end' => '16:00:00',
         ]);
@@ -32,7 +32,7 @@ class CategorySeeder extends Seeder
         ]);
         Category::factory()->create([
             'title' => 'Лавка',
-            'priority' => 2,
+            'priority' => 4,
         ]);
 
     }

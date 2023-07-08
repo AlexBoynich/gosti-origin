@@ -9,6 +9,7 @@ use App\Filament\Resources\AboutBlockResource\RelationManagers;
 use App\Models\AboutBlock;
 use App\Models\Block;
 use App\Models\Target;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -39,14 +40,17 @@ class AboutBlockResource extends Resource
                 TextInput::make('title')
                     ->label('Заголовок')
                     ->required(),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->label('Описание')
-                    ->required(),
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('about')
-                    ->image()
-                    ->label('Изображение')
-            ])->columns(1);
+                    ->required()
+                    ->toolbarButtons([
+                        //
+                    ]),
+                        SpatieMediaLibraryFileUpload::make('image')
+                            ->collection('about')
+                            ->image()
+                            ->label('Изображение')
+                    ])->columns(1);
     }
 
     public static function table(Table $table): Table
