@@ -29,10 +29,18 @@ class CategorySeeder extends Seeder
         Category::factory()->create([
             'title' => 'Основное меню',
             'priority' => 3,
+            'weekday_available_start' => '00:00:00',
+            'weekday_available_end' => '23:59:59',
+            'weekend_available_start' => '00:00:00',
+            'weekend_available_end' => '23:59:59',
         ]);
         Category::factory()->create([
             'title' => 'Лавка',
             'priority' => 4,
+            'weekday_available_start' => '00:00:00',
+            'weekday_available_end' => '23:59:59',
+            'weekend_available_start' => '00:00:00',
+            'weekend_available_end' => '23:59:59',
         ]);
 
     }

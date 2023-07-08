@@ -9,6 +9,7 @@ use App\Models\Category;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -37,6 +38,9 @@ class CategoryResource extends Resource
                         ->unique(Category::class, 'title', ignoreRecord: true)
                         ->autofocus()
                         ->label('Категория'),
+                    Toggle::make('qwe')
+                        ->afterStateUpdated(null),
+
 
 //                    TextInput::make('priority')
 //                        ->integer()

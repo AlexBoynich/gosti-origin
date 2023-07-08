@@ -37,8 +37,6 @@ class DishResource extends JsonResource
     {
         if (!$this->is_available) return false;
 
-        if (!$this->isSetTimeLimit()) return true;
-
         $date = Carbon::now(7);
         $day = $date->dayOfWeekIso;
         $time = $date->toTimeString();
@@ -50,13 +48,15 @@ class DishResource extends JsonResource
             $start = $this->category()->weekday_available_start;
             $end = $this->category()->weekday_available_end;
         }
+
+        if (!$this->isSetTimeLimit($start, $end)) return false;
+
         return $this->isTimeInRange($time,$start, $end);
     }
 
-    private function isSetTimeLimit(): bool
+    private function isSetTimeLimit($start, $end): bool
     {
-        if (is_null($this->category()->weekend_available_start)
-            && is_null($this->category()->weekday_available_start)) {
+        if (is_null($start) || is_null($end)) {
             return false;
         }
         return true;
