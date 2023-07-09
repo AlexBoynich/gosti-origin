@@ -5,22 +5,22 @@
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
-                        v-for="category in categories"
-                        :key="category.id"
-                        :categoriesItem="category"
-                        :activeIndices="activeIndices"
-                        @toggleCategory="toggleCategory"
-                        @pickSubcategories="activeItems"
+                            v-for="category in categories"
+                            :key="category.id"
+                            :categoriesItem="category"
+                            :activeIndices="activeIndices"
+                            @toggleCategory="toggleCategory"
+                            @pickSubcategories="activeItems"
                     />
                 </div>
                 <div class="filters-box">
                     <div class="title">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
-                            v-for="filter in filters"
-                            :key="filter.id"
-                            :filtersItem="filter"
-                            @pickFilter="pickFilter"
+                                v-for="filter in filters"
+                                :key="filter.id"
+                                :filtersItem="filter"
+                                @pickFilter="pickFilter"
                         />
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export default {
         ...mapState('categories', ['categories']),
     },
     methods: {
-        toggleCategory (id) {
+        toggleCategory(id) {
             if (this.activeIndices.categoriesIndex === id) {
                 this.activeIndices.categoriesIndex = null
                 this.categories[id - 1].isActive = false
@@ -58,12 +58,12 @@ export default {
                 this.categories[id - 1].isActive = true
             }
         },
-        pickFilter (id) {
+        pickFilter(id) {
             this.$emit('pickFilter', {
                 id: id
             })
         },
-        activeItems (subcategory) {
+        activeItems(subcategory) {
             if (!subcategory) {
                 let categoriesName = this.categories[0].title
                 let subcategoriesName = this.categories[0].subcategories[0].title
@@ -106,48 +106,45 @@ export default {
 @import "@/assets/styles/global";
 
 aside {
-    max-width: 274px;
-    width: 100%;
-    height: 100%;
+  max-width: 274px;
+  width: 100%;
+  height: 100%;
 
-    .title {
-        @include inter-500;
+  .title {
+    @include h2;
+    margin-bottom: 16px;
+  }
+
+  .content {
+    position: sticky;
+    top: 130px;
+    padding-bottom: 40px;
+
+    .categories {
+      display: flex;
+      flex-direction: column;
+      gap: 24px 0;
+      margin-bottom: 48px;
+    }
+
+    .filters-box {
+
+      .title {
         color: #000;
-        font-size: 72px;
+        @include inter-500;
+        font-size: 20px;
         line-height: 110%;
-        letter-spacing: -1.8px;
-        margin-bottom: 16px;
+        letter-spacing: -0.4px;
+        margin-bottom: 24px;
+      }
+
+      .filters {
+        display: flex;
+        flex-direction: column;
+        gap: 16px 0;
+      }
     }
-    .content {
-        position: sticky;
-        top: 130px;
-        padding-bottom: 40px;
-
-        .categories {
-            display: flex;
-            flex-direction: column;
-            gap: 24px 0;
-            margin-bottom: 48px;
-        }
-
-        .filters-box {
-
-            .title {
-                color: #000;
-                @include inter-500;
-                font-size: 20px;
-                line-height: 110%;
-                letter-spacing: -0.4px;
-                margin-bottom: 24px;
-            }
-
-            .filters {
-                display: flex;
-                flex-direction: column;
-                gap: 16px 0;
-            }
-        }
-    }
+  }
 }
 
 </style>

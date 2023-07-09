@@ -2,15 +2,7 @@
     <div class="about-us-slide">
         <div class="left-part">
             <h2 class="slide-title">{{ slide.title }}</h2>
-            <div class="slide-desc">
-                <p
-                        v-for="(slideDesc, index) in slide.desc"
-                        :key="index"
-                        class="desc-item"
-                >
-                    {{ slideDesc.descItem }}
-                </p>
-            </div>
+            <p class="slide-desc" v-html="slide.desc"></p>
         </div>
         <div class="right-part">
             <img :src="slide.img" alt="about-slider-slide">
@@ -35,7 +27,7 @@ export default {
         .left-part {
 
             .slide-title {
-                @include h2;
+                @include h3;
                 padding-bottom: 8px;
                 border-bottom: solid 1px rgba(123, 149, 97, 0.8);
                 display: inline-block;

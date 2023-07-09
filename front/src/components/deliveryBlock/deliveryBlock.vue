@@ -67,7 +67,7 @@ export default {
     max-width: 596px;
 
     .title {
-      @include h2;
+      @include h3;
       padding-bottom: 8px;
       border-bottom: solid 1px rgba(123, 149, 97, 0.35);
       display: inline-block;

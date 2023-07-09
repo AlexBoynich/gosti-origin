@@ -39,7 +39,7 @@ export default {
         cursor: pointer;
         width: 20px;
         height: 20px;
-        border: 1px solid $greenBackground;
+        border: 1px solid rgba(123, 149, 97, 0.5);
         border-radius: 3px;
         margin-right: 16px;
 
@@ -48,11 +48,16 @@ export default {
             height: 12px;
             display: none;
         }
-        &.active {
 
-            img {
+        &.active {
+          border: 1px solid $greenBackground;
+
+          img {
                 display: flex;
             }
+        }
+        &:hover {
+          border: 1px solid $greenBackground;
         }
     }
     label {
