@@ -23,13 +23,13 @@
                     v-if="slides.length > 1"
                     class="arrows arrow_prev about-us"
             >
-                <img src="/images/aboutUs/about-us-button-next.svg" alt="arrow"/>
+                <img src="/images/homePage/aboutUs/about-us-button-next.svg" alt="arrow"/>
             </button>
             <button
                     v-if="slides.length > 1"
                     class="arrows arrow_next about-us"
             >
-                <img src="/images/aboutUs/about-us-button-next.svg" alt="arrow"/>
+                <img src="/images/homePage/aboutUs/about-us-button-next.svg" alt="arrow"/>
             </button>
         </div>
     </div>

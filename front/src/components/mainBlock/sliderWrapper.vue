@@ -5,13 +5,13 @@
                     v-if="slides.length > 1"
                     :class="['arrows arrow_prev main']"
             >
-                <img src="/images/mainBlock/slider-button-next.svg" alt="arrow"/>
+                <img src="/images/homePage/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
             <button
                     v-if="slides.length > 1"
                     :class="['arrows arrow_next main']"
             >
-                <img src="/images/mainBlock/slider-button-next.svg" alt="arrow"/>
+                <img src="/images/homePage/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
         </div>
         <div class="slider-wrapper">
