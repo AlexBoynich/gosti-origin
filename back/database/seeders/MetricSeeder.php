@@ -13,17 +13,21 @@ class MetricSeeder extends Seeder
      */
     public function run(): void
     {
-        Metric::factory()->create([
-            'title' => 'мл',
-        ]);
-        Metric::factory()->create([
-            'title' => 'л',
-        ]);
-        Metric::factory()->create([
-            'title' => 'г',
-        ]);
-        Metric::factory()->create([
-            'title' => 'кг',
-        ]);
+        Metric::query()->firstOrCreate(
+            [
+                'title' => 'мл',
+            ]);
+        Metric::query()->firstOrCreate(
+            [
+                'title' => 'л',
+            ]);
+        Metric::query()->firstOrCreate(
+            [
+                'title' => 'г',
+            ]);
+        Metric::query()->firstOrCreate(
+            [
+                'title' => 'кг',
+            ]);
     }
 }

@@ -13,14 +13,21 @@ class ObtainingMethodSeeder extends Seeder
      */
     public function run(): void
     {
-        ObtainingMethod::factory()->create([
-            'title' => 'Доставка',
-            'price' => '150'
-        ]);
-
-        ObtainingMethod::factory()->create([
-            'title' => 'Самомывоз',
-            'price' => '0'
-        ]);
+        ObtainingMethod::query()->firstOrCreate(
+            [
+                'title' => 'Доставка',
+            ],
+            [
+                'price' => '150'
+            ]
+        );
+        ObtainingMethod::query()->firstOrCreate(
+            [
+                'title' => 'Самомывоз',
+            ],
+            [
+                'price' => '0'
+            ]
+        );
     }
 }
