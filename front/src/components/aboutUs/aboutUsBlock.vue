@@ -2,7 +2,7 @@
     <section v-if="oneSlide" class="about-us-block">
         <div class="container">
             <SliderWrapper :slides="aboutUsSlides" class="slider"/>
-            <img src="/images/aboutUs/about-us-block-background.png" alt="about-us-block-decor" class="about-us-decor">
+            <img src="/images/homePage/aboutUs/about-us-block-background.png" alt="about-us-block-decor" class="about-us-decor">
         </div>
     </section>
 </template>
