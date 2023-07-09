@@ -13,14 +13,20 @@ class TargetSeeder extends Seeder
      */
     public function run(): void
     {
-        Target::factory()->create([
-            'title' => 'главный'
-        ]);
-        Target::factory()->create([
-            'title' => 'о нас'
-        ]);
-        Target::factory()->create([
-            'title' => 'доставка'
-        ]);
+        Target::query()->firstOrCreate(
+            [
+                'title' => 'главный'
+            ]
+        );
+        Target::query()->firstOrCreate(
+            [
+                'title' => 'о нас'
+            ]
+        );
+        Target::query()->firstOrCreate(
+            [
+                'title' => 'доставка'
+            ]
+        );
     }
 }

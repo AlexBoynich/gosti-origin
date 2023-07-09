@@ -8,7 +8,7 @@ const categories = {
     actions: {
         async GET_CATEGORIES({ commit }) {
             axios
-                .get('/requests/catalog/categories.json')
+                .get('https://gosti-dev.tomsk-it.ru/api/categories')
                 .then(response => {
                     const data = response.data
                     commit('SET_CATEGORIES', data)

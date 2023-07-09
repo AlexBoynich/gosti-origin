@@ -5,22 +5,22 @@
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
-                        v-for="category in categories"
-                        :key="category.id"
-                        :categoriesItem="category"
-                        :activeIndices="activeIndices"
-                        @toggleCategory="toggleCategory"
-                        @pickSubcategories="activeItems"
+                            v-for="category in categories"
+                            :key="category.id"
+                            :categoriesItem="category"
+                            :activeIndices="activeIndices"
+                            @toggleCategory="toggleCategory"
+                            @pickSubcategories="activeItems"
                     />
                 </div>
                 <div class="filters-box">
                     <div class="title">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
-                            v-for="filter in filters"
-                            :key="filter.id"
-                            :filtersItem="filter"
-                            @pickFilter="pickFilter"
+                                v-for="filter in filters"
+                                :key="filter.id"
+                                :filtersItem="filter"
+                                @pickFilter="pickFilter"
                         />
                     </div>
                 </div>
@@ -42,34 +42,14 @@ export default {
             activeIndices: {
                 categoriesIndex: 1,
                 subcategoriesIndex: 1
-            },
-            filters: [
-                {
-                    isActive: false,
-                    label: 'без сахара',
-                    id: 1,
-                    img: '/images/catalog/filters/filters-img-1.svg'
-                },
-                {
-                    isActive: false,
-                    label: 'без глютена',
-                    id: 2,
-                    img: '/images/catalog/filters/filters-img-2.svg'
-                },
-                {
-                    isActive: false,
-                    label: 'без лактозы',
-                    id: 3,
-                    img: '/images/catalog/filters/filters-img-3.svg'
-                },
-            ]
+            }
         }
     },
     computed: {
         ...mapState('categories', ['categories']),
     },
     methods: {
-        toggleCategory (id) {
+        toggleCategory(id) {
             if (this.activeIndices.categoriesIndex === id) {
                 this.activeIndices.categoriesIndex = null
                 this.categories[id - 1].isActive = false
@@ -78,10 +58,12 @@ export default {
                 this.categories[id - 1].isActive = true
             }
         },
-        pickFilter (id) {
-            this.filters[id - 1].isActive = !this.filters[id - 1].isActive
+        pickFilter(id) {
+            this.$emit('pickFilter', {
+                id: id
+            })
         },
-        activeItems (subcategory) {
+        activeItems(subcategory) {
             if (!subcategory) {
                 let categoriesName = this.categories[0].title
                 let subcategoriesName = this.categories[0].subcategories[0].title
@@ -110,6 +92,7 @@ export default {
         FiltersItem,
         CategoriesItem
     },
+    props: ['filters'],
     created() {
         this.GET_CATEGORIES();
     },
@@ -123,48 +106,45 @@ export default {
 @import "@/assets/styles/global";
 
 aside {
-    max-width: 274px;
-    width: 100%;
-    height: 100%;
+  max-width: 274px;
+  width: 100%;
+  height: 100%;
 
-    .title {
-        @include inter-500;
+  .title {
+    @include h2;
+    margin-bottom: 16px;
+  }
+
+  .content {
+    position: sticky;
+    top: 130px;
+    padding-bottom: 40px;
+
+    .categories {
+      display: flex;
+      flex-direction: column;
+      gap: 24px 0;
+      margin-bottom: 48px;
+    }
+
+    .filters-box {
+
+      .title {
         color: #000;
-        font-size: 72px;
+        @include inter-500;
+        font-size: 20px;
         line-height: 110%;
-        letter-spacing: -1.8px;
-        margin-bottom: 16px;
+        letter-spacing: -0.4px;
+        margin-bottom: 24px;
+      }
+
+      .filters {
+        display: flex;
+        flex-direction: column;
+        gap: 16px 0;
+      }
     }
-    .content {
-        position: sticky;
-        top: 130px;
-        padding-bottom: 40px;
-
-        .categories {
-            display: flex;
-            flex-direction: column;
-            gap: 24px 0;
-            margin-bottom: 48px;
-        }
-
-        .filters-box {
-
-            .title {
-                color: #000;
-                @include inter-500;
-                font-size: 20px;
-                line-height: 110%;
-                letter-spacing: -0.4px;
-                margin-bottom: 24px;
-            }
-
-            .filters {
-                display: flex;
-                flex-direction: column;
-                gap: 16px 0;
-            }
-        }
-    }
+  }
 }
 
 </style>

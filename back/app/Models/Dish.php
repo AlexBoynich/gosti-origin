@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
@@ -13,6 +15,8 @@ class Dish extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+    use SoftDeletes;
+    use Filterable;
 
     protected $fillable = [
         'title',
@@ -36,10 +40,10 @@ class Dish extends Model implements HasMedia
         return $this->belongsTo(Subcategory::class);
     }
 
-//    public function category()
-//    {
-//        return $this->subcategory->category;
-//    }
+    public function category()
+    {
+        return $this->subcategory->category;
+    }
 
     public function metric()
     {

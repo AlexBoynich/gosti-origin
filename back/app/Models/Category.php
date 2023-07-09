@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
         'priority',
-        'available_start',
-        'available_end',
+        'weekday_available_start',
+        'weekday_available_end',
+        'weekend_available_start',
+        'weekend_available_end',
     ];
 
     public function subcategories()

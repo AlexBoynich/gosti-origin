@@ -1,6 +1,6 @@
 <template>
     <div class="card-button">
-        <template v-if="!stopList">
+        <template v-if="stopList">
             <button
                 v-show="!isActive"
                 class="main-button"
@@ -23,7 +23,7 @@
                 </button>
             </button>
         </template>
-        <template v-if="stopList">
+        <template v-if="!stopList">
             <button
                 class="stop-list main-button"
                 disabled

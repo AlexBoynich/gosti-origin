@@ -19,11 +19,11 @@ return new class extends Migration
                 ->comment('Цена');
             $table->integer('calorie')
                 ->comment('Калории');
-            $table->integer('proteins')
+            $table->float('proteins')
                 ->comment('Белки');
-            $table->integer('fats')
+            $table->float('fats')
                 ->comment('Жиры');
-            $table->integer('carbohydrates')
+            $table->float('carbohydrates')
                 ->comment('Углеводы');
             $table->string('composition')
                 ->comment('Состав');
@@ -40,6 +40,7 @@ return new class extends Migration
             $table->foreignId('subcategory_id')->constrained();
             $table->foreignId('metric_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

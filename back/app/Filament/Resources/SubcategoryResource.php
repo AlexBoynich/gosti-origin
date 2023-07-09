@@ -40,12 +40,12 @@ class SubcategoryResource extends Resource
 
                     TextInput::make('title')
                         ->required()
-                        ->label('Категория'),
-
-                    TextInput::make('priority')
-                        ->integer()
-                        ->required()
-                        ->label('Приоритет'),
+                        ->label('Подкатегория'),
+//
+//                    TextInput::make('priority')
+//                        ->integer()
+//                        ->required()
+//                        ->label('Приоритет'),
                 ]),
             ]);
     }
@@ -58,18 +58,17 @@ class SubcategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Подкатегория'),
-                TextColumn::make('priority')
-                    ->label('Приоритет'),
+//                TextColumn::make('priority')
+//                    ->label('Приоритет'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //
             ]);
     }
 
@@ -84,7 +83,6 @@ class SubcategoryResource extends Resource
     {
         return [
             'index' => Pages\ListSubcategories::route('/'),
-            'create' => Pages\CreateSubcategory::route('/create'),
             'edit' => Pages\EditSubcategory::route('/{record}/edit'),
         ];
     }

@@ -9,6 +9,7 @@ use App\Models\Category;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -37,21 +38,24 @@ class CategoryResource extends Resource
                         ->unique(Category::class, 'title', ignoreRecord: true)
                         ->autofocus()
                         ->label('Категория'),
+                    Toggle::make('qwe')
+                        ->afterStateUpdated(null),
 
-                    TextInput::make('priority')
-                        ->integer()
-                        ->required()
-                        ->label('Приоритет'),
 
-                    TimePicker::make('available_start')
-                        ->timezone('Asia/Tomsk')
-                        ->icon('heroicon-o-clock')
-                        ->label('Доступно с:'),
-
-                    TimePicker::make('available_end')
-                        ->timezone('Asia/Tomsk')
-                        ->icon('heroicon-o-clock')
-                        ->label('До:'),
+//                    TextInput::make('priority')
+//                        ->integer()
+//                        ->required()
+//                        ->label('Приоритет'),
+//
+//                    TimePicker::make('available_start')
+//                        ->timezone('Asia/Tomsk')
+//                        ->icon('heroicon-o-clock')
+//                        ->label('Доступно с:'),
+//
+//                    TimePicker::make('available_end')
+//                        ->timezone('Asia/Tomsk')
+//                        ->icon('heroicon-o-clock')
+//                        ->label('До:'),
                 ]),
             ]);
     }
@@ -64,23 +68,22 @@ class CategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Категория'),
-                TextColumn::make('priority')
-                    ->label('Приоритет')
-                    ->sortable(),
-                TextColumn::make('available_start')
-                    ->label('Доступно с:'),
-                TextColumn::make('available_end')
-                    ->label('Доступно до:')
+//                TextColumn::make('priority')
+//                    ->label('Приоритет')
+//                    ->sortable(),
+//                TextColumn::make('available_start')
+//                    ->label('Доступно с:'),
+//                TextColumn::make('available_end')
+//                    ->label('Доступно до:')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //
             ]);
     }
 
@@ -95,7 +98,6 @@ class CategoryResource extends Resource
     {
         return [
             'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }

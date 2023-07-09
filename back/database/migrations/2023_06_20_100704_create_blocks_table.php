@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title')
                 ->nullable()
                 ->comment('Наименование');
-            $table->string('description')
+            $table->text('description')
                 ->nullable()
                 ->comment('Описание');
             $table->foreignId('target_id')->constrained();

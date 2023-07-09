@@ -13,11 +13,15 @@ class ScheduleSeeder extends Seeder
      */
     public function run(): void
     {
-        Schedule::factory()->create([
-            'time_span' => 'Вс - ЧТ 08.00 - 22.00'
-        ]);
-        Schedule::factory()->create([
-            'time_span' => 'Пт - Сб 08.00 - 23.00'
-        ]);
+        Schedule::query()->firstOrCreate(
+            [
+                'time_span' => 'Вс - ЧТ 08.00 - 22.00'
+            ]
+        );
+        Schedule::query()->firstOrCreate(
+            [
+                'time_span' => 'Пт - Сб 08.00 - 23.00'
+            ]
+        );
     }
 }
