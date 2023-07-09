@@ -9,6 +9,7 @@
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
 import {mapActions, mapState} from "vuex";
+import {onTop} from "@/utils/helpers";
 
 export default {
     name: "catalogView",
@@ -52,6 +53,7 @@ export default {
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
+        onTop,
         getActiveItems (el) {
             this.activeItems.categoriesTitle = el.categoryTitle
             this.activeItems.categoriesIndex = el.categoriesIndex
@@ -67,12 +69,14 @@ export default {
             for (let i = 0; i < this.filters.length; i++) {
                 this.filters[i].isActive = true
             }
-            Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key]);
+            Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
+
 
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: ''
             })
+            this.onTop('smooth')
         },
         getFilter (obj) {
             this.filters[obj.id - 1].isActive = !this.filters[obj.id - 1].isActive
@@ -100,11 +104,12 @@ export default {
                     .join('&')
             }
             let requestFilter = generateFilterRequest(this.filters[0].isActive, this.filters[1].isActive, this.filters[2].isActive, this.filtersForRequest)
-            console.log(requestFilter)
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: requestFilter
             })
+            this.onTop('smooth')
+
         }
     },
     components: {
