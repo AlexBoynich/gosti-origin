@@ -13,12 +13,16 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run(): void
     {
-        PaymentMethod::factory()->create([
-            'title' => 'Наличный'
-        ]);
+        PaymentMethod::query()->firstOrCreate(
+            [
+                'title' => 'Наличный'
+            ]
+        );
 
-        PaymentMethod::factory()->create([
-            'title' => 'Картой'
-        ]);
+        PaymentMethod::query()->firstOrCreate(
+            [
+                'title' => 'Картой'
+            ]
+        );
     }
 }

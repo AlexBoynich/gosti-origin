@@ -13,25 +13,37 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        Setting::factory()->create([
-            'section'=> 'main',
-            'key' => 'Пороговая стоимость',
-            'value' => '1000',
-            'description' => 'Пороговая сумма заказа для расчёта стоимости доставки'
-        ]);
+        Setting::query()->firstOrCreate(
+            [
+                'section' => 'main',
+                'key' => 'Пороговая стоимость',
+            ],
+            [
+                'value' => '1000',
+                'description' => 'Пороговая сумма заказа для расчёта стоимости доставки'
+            ]
+        );
 
-        Setting::factory()->create([
-            'section'=> 'files',
-            'key' => 'Конфиденциальность',
-            'value' => null,
-            'description' => 'Политика конфиденциальности'
-        ]);
+        Setting::query()->firstOrCreate(
+            [
+                'section' => 'files',
+                'key' => 'Конфиденциальность',
+            ],
+            [
+                'value' => null,
+                'description' => 'Политика конфиденциальности'
+            ]
+        );
 
-        Setting::factory()->create([
-            'section'=> 'files',
-            'key' => 'Кейтеринг',
-            'value' => null,
-            'description' => 'Кейтеринг'
-        ]);
+        Setting::query()->firstOrCreate(
+            [
+                'section' => 'files',
+                'key' => 'Кейтеринг',
+            ],
+            [
+                'value' => null,
+                'description' => 'Кейтеринг'
+            ]
+        );
     }
 }
