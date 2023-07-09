@@ -1,6 +1,6 @@
 <template>
     <div class="delivery-block container">
-        <img src="/images/deliveryBlock/delivery-image.png" alt="delivery-image" class="left-part">
+        <img src="/images/homePage/deliveryBlock/delivery-image.png" alt="delivery-image" class="left-part">
         <div class="right-part">
             <h2 class="title"> {{ delivery.title }}</h2>
             <div class="desc">{{ delivery.desc }}</div>
