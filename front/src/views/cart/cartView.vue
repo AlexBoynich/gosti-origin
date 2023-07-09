@@ -2,7 +2,7 @@
     <div id="cart" class="container">
         <h2 class="title">Корзина</h2>
         <div class="content">
-
+            <cartContent />
             <orderFormsBlock />
         </div>
     </div>
@@ -10,10 +10,11 @@
 
 <script>
 import orderFormsBlock from "@/components/cart/orderFormsBlock.vue";
+import cartContent from "@/components/cart/cartContent.vue";
 
 export default {
     name: "cartView",
-    components: {orderFormsBlock}
+    components: {cartContent, orderFormsBlock}
 }
 </script>
 
@@ -28,7 +29,7 @@ export default {
   }
   .content {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
   }
 }
 </style>
