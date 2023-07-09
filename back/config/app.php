@@ -59,7 +59,7 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
-    'force_https' => end('FORCE_HTTPS', flase),
+    'force_https' => end('FORCE_HTTPS', false),
 
     /*
     |--------------------------------------------------------------------------
