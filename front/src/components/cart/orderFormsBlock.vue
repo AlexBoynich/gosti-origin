@@ -1,25 +1,40 @@
 <template>
     <div class="order-forms-block">
         <div class="title">Оформление заказа</div>
-        <div
-                v-for="(item, index) in orderForms"
-                :key="index"
-                class="form-item"
-        >
-            <div class="section-title">{{ item.title }}</div>
-            <div class="forms">
-                <form
-                        v-for="(form, index) in item.forms"
-                        :key="index"
+        <PersonForms/>
+        <div class="radio-buttons">
+            <div class="section-title">{{ wayToGet.title }}</div>
+            <div class="radio-container">
+                <div
+                    v-for="radio in wayToGet.radioButtons"
+                    :key="radio.id"
+                    class="radio-box"
                 >
-                    <div
-                            v-if="form.type === 'radio'"
-                            class="radio-buttons"
-                    >
+                    <div class="radio">
+                        <div v-show="radio.isActive" class="radio-dot"></div>
+                    </div>
+                    <label>{{ radio.label }}</label>
+                </div>
+            </div>
+        </div>
+        <pickupBlock
+            v-if="wayToGet.pickup.isPickup"
+            :pickup="wayToGet.pickup"
+        />
+        <deliveryForms
+            v-else
+            :delivery="wayToGet.delivery"
+        />
+        <DateAndTimeForms
+            :orderForms="orderForms"
+        />
+                <div class="radio-buttons">
+                    <div class="section-title">{{ payMethod.title }}</div>
+                    <div class="radio-container">
                         <div
-                                v-for="(radio, index) in form.radioButtons"
-                                :key="index"
-                                class="radio-container"
+                            v-for="radio in payMethod.radioButtons"
+                            :key="radio.id"
+                            class="radio-box"
                         >
                             <div class="radio">
                                 <div v-show="radio.isActive" class="radio-dot"></div>
@@ -27,108 +42,56 @@
                             <label>{{ radio.label }}</label>
                         </div>
                     </div>
-                    <div
-                            v-else
-                            :class="['form', form.class]"
-                    >
-                        <template v-if="form.label">
-                            <label :for="form.id">{{ form.label }}</label>
-                        </template>
-                        <textarea
-                                v-if="form.type === 'textarea'"
-                                :class="['default-form', 'textarea', form.class]"
-                                :placeholder="form.placeholder"
-                        >
-
-                            </textarea>
-                        <input
-                                v-else
-                                :type="form.type"
-                                :class="['default-form', form.class]"
-                                :placeholder="form.placeholder"
-                        >
-                        <img
-                                v-if="form.img"
-                                class="form-icon"
-                                :src="form.img.src"
-                                alt="form-icon"
-                        >
+                </div>
+                <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
+                    <div class="sum-delivery">
+                        <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
+                        <div class="price">{{ deliveryPrice }}</div>
                     </div>
-                </form>
-            </div>
-        </div>
+                    <div class="message">
+                        {{ wayToGet.delivery.deliveryPriceBlock.message }}
+                    </div>
+                </div>
+                <div class="finally-forms">
+                    <div class="to-pay">
+                        <div class="section-title">{{ toPay.title }}</div>
+                        <div class="price">{{ price }}</div>
+                    </div>
+                    <div class="personal-data">
+                        <div
+                            :id="personalData.id"
+                            :class="['checkbox', {'active' : personalData.isActive}]"
+                            @click="pickCheckbox"
+                        >
+                            <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
+                        </div>
+                        <label :for="personalData.id">{{ personalData.label }}</label>
+                    </div>
+                </div>
+                <button>Оформить заказ</button>
     </div>
 </template>
 
 <script>
+import deliveryForms from "./forms/deliveryForms";
+import PersonForms from "./forms/personForms";
+import pickupBlock from "./forms/pickupBlock";
+import DateAndTimeForms from "./forms/dateAndTimeForms";
+
 export default {
     name: "orderFormsBlock",
     data() {
         return {
-            orderForms: [
-                {
-                    title: 'Личные данные',
-                    forms: [
-                        {
-                            label: 'Фамилия, Имя, Отчество*',
-                            placeholder: 'Иванов Иван Иванович',
-                            class: 'full',
-                            type: 'text',
-                            id: 'fullName',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Телефон*',
-                            placeholder: '+7 (ХХХ) ХХХ - ХХ - ХХ',
-                            class: 'medium no-margin',
-                            type: 'text',
-                            id: 'phoneNumber',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Почта',
-                            placeholder: 'ivanovivan@yandex.ru',
-                            class: 'medium',
-                            type: 'text',
-                            id: 'email',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
-                            },
-                            isError: false
-                        },
-                        {
-                            placeholder: 'Комментарий',
-                            class: 'textarea',
-                            type: 'textarea',
-                            id: 'message'
-                        },
-                    ]
-                },
-                {
-                    title: 'Способ получения',
-                    forms: [
-                        {
-                            type: 'radio',
-                            class: 'radio',
-                            id: 'howToObtain',
-                            radioButtons: [
-                                {id: 1, label: 'самовывоз', isActive: false},
-                                {id: 2, label: 'доставка', isActive: true},
-                            ]
-                        },
-                    ]
-                },
-                {
+            wayToGet: {
+                title: 'Способ получения',
+                id: 'wayToGet',
+                radioButtons: [
+                    {id: 'pickup', label: 'самовывоз', isActive: true},
+                    {id: 'delivery', label: 'доставка', isActive: false},
+                ],
+                delivery: {
                     title: 'Адрес заказа',
+                    isDelivery: false,
                     forms: [
                         {
                             label: 'Улица*',
@@ -138,7 +101,8 @@ export default {
                             id: 'street',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         },
@@ -150,7 +114,8 @@ export default {
                             id: 'house',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         },
@@ -162,7 +127,8 @@ export default {
                             id: 'apartment',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         },
@@ -174,7 +140,8 @@ export default {
                             id: 'entrance',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         },
@@ -186,7 +153,8 @@ export default {
                             id: 'floor',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         },
@@ -198,43 +166,79 @@ export default {
                             id: 'intercomNumber',
                             img: {
                                 name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
+                                src: '/images/cart/form/error-icon.svg',
+                                class: 'error'
                             },
                             isError: false
                         }
-                    ]
+                    ],
+                    deliveryPriceBlock: {
+                        title: 'Сумма доставки',
+                        message: '*бесплатная доставка от 1500 рублей'
+                    },
                 },
-                {
-                    title: 'Дата и время',
-                    forms: [
-                        {
-                            label: 'Дата',
-                            placeholder: '24.07.2023',
-                            class: 'small',
-                            type: 'text',
-                            id: 'date',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg'
-                            },
-                            isError: false
+                pickup: {
+                    title: 'Адрес самовывоза',
+                    link: 'г.Томск, ул.Фрунзе, д.90',
+                    isPickup: true
+                },
+            },
+            payMethod: {
+                title: 'Способ оплаты',
+                id: 'paymentMethod',
+                radioButtons: [
+                    {id: 'payByCard', label: 'картой при получении', isActive: true},
+                    {id: 'payByCash', label: 'наличными при получении', isActive: false},
+                ]
+            },
+            orderForms: {
+                title: 'Дата и время',
+                forms: [
+                    {
+                        label: 'Дата',
+                        placeholder: '24.07.2023',
+                        class: 'small',
+                        type: 'text',
+                        id: 'date'
+                    },
+                    {
+                        label: 'Время',
+                        placeholder: '13:00-14:00',
+                        class: 'small',
+                        type: 'select',
+                        id: 'time',
+                        img: {
+                            name: 'select',
+                            src: '/images/cart/form/select-arrow.svg',
+                            class: 'arrow'
                         },
-                        {
-                            label: 'Время',
-                            placeholder: '13:00-14:00',
-                            class: 'small',
-                            type: 'text',
-                            id: 'time',
-                            img: {
-                                name: 'select',
-                                src: '/images/cart/form/error-icon.svg'
-                            },
-                        }
-                    ]
-                },
-            ]
+                    }
+                ]
+            },
+            toPay: {
+                title: 'К оплате:',
+            },
+            personalData: {
+                label: 'даю согласие на обработку персональных данных',
+                id: 'personalData',
+                isActive: false
+            }
         }
-    }
+    },
+    computed: {
+        price: function () {
+            return 800 + ' ₽'
+        },
+        deliveryPrice: function () {
+            return 200 + ' ₽'
+        }
+    },
+    methods: {
+        pickCheckbox() {
+            this.personalData.isActive = !this.personalData.isActive
+        }
+    },
+    components: {DateAndTimeForms, pickupBlock, PersonForms, deliveryForms},
 }
 </script>
 
@@ -242,151 +246,163 @@ export default {
 @import "@/assets/styles/global";
 
 .order-forms-block {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 596px;
-  width: 100%;
-  gap: 32px 0;
-
-  .title {
-    @include inter-500;
-  }
-
-  .section-title {
-    @include inter-500;
-    font-size: 20px;
-    line-height: 22px;
-    margin-bottom: 16px;
-  }
-
-  .form-item {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    min-height: 100vh;
+    max-width: 596px;
+    width: 100%;
+    gap: 32px 0;
 
-    .forms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 0;
-
-      form {
-        display: flex;
-        flex-wrap: wrap;
-
-        .form {
-          display: flex;
-          flex-direction: column;
-          position: relative;
-
-          label {
-            @include inter-400;
-            margin-bottom: 8px;
-            line-height: 20px;
-          }
-
-          .form-icon {
-            position: absolute;
-            right: 16px;
-            bottom: 12px;
-            cursor: pointer;
-            background-color: $lightRedBackground;
-            -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-            mask-image: url('@/../public/images/cart/form/error-icon.svg');
-
-            &:hover {
-              background-color: $redBackground;
-              -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-              mask-image: url('@/../public/images/cart/form/error-icon.svg');
-            }
-          }
-
-          .default-form {
-            border-radius: 16px;
-            border: 1px solid #7B9561;
-            outline: none;
-            padding: 13px 24px;
-            @include inter-300;
-            font-size: 16px;
-
-            &.full {
-              width: 100%;
-            }
-
-            &.medium {
-              width: 100%;
-
-              &.no-margin {
-                margin-right: 16px;
-              }
-            }
-
-            &.small {
-              width: 100%;
-            }
-
-            &.textarea {
-              height: 96px;
-              resize: none;
-            }
-          }
-          &.full {
-            width: 596px;
-          }
-          &.medium {
-            width: 290px;
-
-            &.no-margin {
-              margin-right: 16px;
-            }
-          }
-          &.small {
-            width: 172px;
-            margin-right: 39px;
-
-            &.no-margin {
-              margin-right: 0;
-            }
-          }
-          &.textarea {
-            width: 596px;
-          }
-        }
-        .radio-buttons {
-          display: flex;
-          gap: 0 64px;
-
-          .radio-container {
-            display: flex;
-            gap: 0 8px;
-
-            .radio {
-              width: 20px;
-              height: 20px;
-              border-radius: 50%;
-              border: solid 1px $greenBackground;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              cursor: pointer;
-
-              .radio-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: $greenBackground;
-              }
-            }
-            label {
-              @include inter-400;
-              line-height: 20px;
-              font-size: 20px;
-            }
-          }
-        }
-      }
+    .title {
+        @include inter-500;
     }
-  }
 
+    .radio-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0 64px;
+
+        .section-title {
+            @include inter-500;
+            font-size: 20px;
+            line-height: 22px;
+            margin-bottom: 16px;
+        }
+
+        .radio-container {
+            display: flex;
+            gap: 0 64px;
+
+            .radio-box {
+                display: flex;
+                gap: 0 8px;
+
+                .radio {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    border: solid 1px $greenBackground;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    .radio-dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: $greenBackground;
+                    }
+                }
+
+                label {
+                    @include inter-400;
+                    line-height: 20px;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    .delivery-price {
+        display: flex;
+        flex-direction: column;
+        gap: 8px 0;
+
+        .sum-delivery {
+            display: flex;
+            gap: 0 40px;
+
+            .section-title {
+                @include inter-500;
+                font-size: 20px;
+                line-height: 22px;
+            }
+
+            .price {
+                @include inter-400;
+                font-size: 20px;
+                line-height: 22px;
+            }
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 18px;
+            @include inter-400;
+        }
+    }
+
+    .finally-forms {
+        .to-pay {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+
+            .section-title {
+                @include inter-500;
+                font-size: 20px;
+                line-height: 22px;
+            }
+
+            .price {
+                @extend .section-title
+            }
+        }
+
+        .personal-data {
+            display: flex;
+            align-items: center;
+            gap: 0 16px;
+
+            .checkbox {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                border: 1px solid rgba(123, 149, 97, 0.5);
+                border-radius: 3px;
+                margin-right: 16px;
+
+                img {
+                    width: 14px;
+                    height: 12px;
+                    display: none;
+                }
+
+                &.active {
+                    border: 1px solid $greenBackground;
+
+                    img {
+                        display: flex;
+                    }
+                }
+
+                &:hover {
+                    border: 1px solid $greenBackground;
+                }
+            }
+
+            label {
+                @include inter-400;
+                font-size: 16px;
+                line-height: 18px;
+            }
+        }
+    }
+
+    button {
+        @include green-button;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 120px;
+
+        &:hover {
+            @include green-button-hover;
+        }
+    }
 }
 </style>
