@@ -12,9 +12,17 @@
             </div>
             <div class="product-desc-box">
                 <div class="counter">
+                    <button class="action-button">
+                        <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
+                    </button>
+                    <div class="count">{{ 1 }}</div>
+                    <button class="action">
+                        <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
+                    </button>
                 </div>
                 <div class="desc">
-
+                    <div class="weight">440 г</div>
+                    <div class="price">320 ₽</div>
                 </div>
             </div>
 
@@ -30,58 +38,116 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-.cart-item {
-  display: flex;
-  background: $lightGreenBackground;
-  border-radius: 16px;
 
-  .img {
-    position: relative;
-    overflow:hidden;
-    width: 196px;
-    height: 136px;
+.cart-item {
+    display: flex;
+    background: $lightGreenBackground;
     border-radius: 16px;
 
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .cart-item-content {
-    padding: 16px 24px 16px 16px;
-    position: relative;
-    width: 400px;
-
-    .product-header {
-
-      .title {
-        @include inter-400;
-        font-size: 16px;
-        line-height: 18px;
-        max-width: 290px;
-        height: 52px;
-      }
-      button {
-        position: absolute;
-        right: 24px;
-        top: 16px;
-        background: transparent;
-        width: 16px;
-        height: 16px;
-        border: none;
-        cursor: pointer;
+    .img {
+        position: relative;
+        overflow: hidden;
+        width: 196px;
+        height: 136px;
+        border-radius: 16px;
 
         img {
-          width: 16px;
-          height: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
         }
-      }
     }
-  }
+
+    .cart-item-content {
+        padding: 16px 24px 16px 16px;
+        position: relative;
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        .product-header {
+
+            .title {
+                @include inter-400;
+                font-size: 16px;
+                line-height: 18px;
+                max-width: 290px;
+                height: 52px;
+            }
+
+            button {
+                position: absolute;
+                right: 24px;
+                top: 16px;
+                background: transparent;
+                width: 16px;
+                height: 16px;
+                border: none;
+                cursor: pointer;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .product-desc-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            .counter {
+                display: flex;
+                align-items: center;
+                gap: 0 15px;
+
+                button {
+                    max-width: 24px;
+                    max-height: 24px;
+                    padding: 6px 8px;
+                    border: 1px solid $greenBackground;
+                    background: $greenBackground;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
+                .count {
+                    @include inter-400;
+                    font-size: 16px;
+                    line-height: 18px;
+                }
+            }
+            .desc {
+                display: flex;
+                align-items: flex-end;
+                flex-direction: column;
+
+                .weight {
+                    @include inter-300;
+                    font-size: 16px;
+                    line-height: 22px;
+                    margin-bottom: 8px;
+                }
+                .price {
+                    @include inter-500;
+                    font-size: 20px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
 }
 </style>

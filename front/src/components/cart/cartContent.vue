@@ -22,7 +22,9 @@ import CartItem from "@/components/cart/cartItem.vue";
 
 export default {
     name: "cartContent",
-    components: {CartItem}
+    components: {
+        CartItem
+    }
 }
 </script>
 
