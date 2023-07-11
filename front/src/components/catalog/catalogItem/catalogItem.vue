@@ -13,24 +13,74 @@
             </div>
         </div>
         <CatalogButton
-                :stopList="catalogItem.isAvailabel"
-                :amount="catalogItem.amount"
+            :catalogItem="catalogItem"
+            @inCart="inCart"
+            @transformAmount="transformAmount"
+        />
+        <catalogItemModal
+            v-show="modalIsActive"
+            @closeModal="closeModal"
+            :catalogItem="itemInModal"
+            @inCart="inCart"
+            @transformAmount="transformAmount"
         />
     </div>
 </template>
 
 <script>
 import CatalogButton from "@/components/catalog/catalogButton";
+import catalogItemModal from "./catalogItemModal";
+import {mapState} from "vuex";
 
 export default {
     name: "catalogItem",
-    components: {CatalogButton},
-    methods: {
-        openModal() {
-            this.$emit('openModal', this.catalogItem)
+    data () {
+        return {
+            modalIsActive: false,
+            itemInModal: {}
         }
     },
-    props: ['catalogItem']
+    methods: {
+        inCart (item) {
+            this.$emit('inCart', {
+                item: this.catalogItem,
+                count: item.count
+            })
+        },
+        transformAmount (item) {
+            this.$emit('transformAmount', {
+                item: this.catalogItem,
+                count: item.count
+            })
+        },
+        closeScroll () {
+            let body = document.querySelector('body')
+
+            if (this.modalIsActive) {
+                body.style.overflow = 'hidden'
+            } else {
+                body.style.overflow = ''
+            }
+        },
+        openModal() {
+            this.itemInModal = this.catalogItem
+            this.modalIsActive = true
+        },
+        closeModal(act) {
+            this.modalIsActive = act
+        }
+    },
+    computed: {
+        ...mapState('cart', ['cart']),
+    },
+    components: {
+        CatalogButton,
+        catalogItemModal
+    },
+    props: ['catalogItem'],
+    updated() {
+        this.closeScroll()
+    }
 }
 </script>
 

@@ -2,7 +2,7 @@
     <div id="cart" class="container">
         <h2 class="title">Корзина</h2>
         <div class="content">
-            <cartContent />
+            <cartContent :cart="cart" />
             <orderFormsBlock />
         </div>
     </div>
@@ -11,10 +11,17 @@
 <script>
 import orderFormsBlock from "@/components/cart/orderFormsBlock.vue";
 import cartContent from "@/components/cart/cartContent.vue";
+import {mapState} from "vuex";
 
 export default {
     name: "cartView",
-    components: {cartContent, orderFormsBlock}
+    components: {
+        cartContent,
+        orderFormsBlock
+    },
+    computed: {
+        ...mapState('cart', ['cart'])
+    }
 }
 </script>
 

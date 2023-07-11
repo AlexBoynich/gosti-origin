@@ -1,11 +1,11 @@
 <template>
     <div class="cart-item">
         <div class="img">
-            <img src="/images/cart/cartItem/cart-item-img.png" alt="cart-item-img">
+            <img :src="cartItem.img" alt="cart-item-img">
         </div>
         <div class="cart-item-content">
             <div class="product-header">
-                <div class="title">Салат с лососем и соусом из огурца</div>
+                <div class="title">{{ cartItem.title }}</div>
                 <button class="delete-item">
                     <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="delete-item">
                 </button>
@@ -15,24 +15,24 @@
                     <button class="action-button">
                         <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
-                    <div class="count">{{ 1 }}</div>
+                    <div class="count">{{ cartItem.count }}</div>
                     <button class="action">
                         <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
                 <div class="desc">
-                    <div class="weight">440 г</div>
-                    <div class="price">320 ₽</div>
+                    <div class="weight">{{ cartItem.weight }}</div>
+                    <div class="price">{{ cartItem.price + '₽' }}</div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "cartItem"
+    name: "cartItem",
+    props: ['cartItem']
 }
 </script>
 

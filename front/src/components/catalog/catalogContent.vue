@@ -22,40 +22,36 @@
                     v-for="(catalogItem, index) in catalogItems"
                     :key="index"
                     :catalogItem="catalogItem"
-                    @openModal="openModal"
+                    @inCart="inCart"
+                    @transformAmount="transformAmount"
             />
         </div>
-        <catalogItemModal
-                v-show="modalIsActive"
-                @closeModal="closeModal"
-                :catalogItem="itemInModal"
-        />
     </div>
 </template>
 
 <script>
 import catalogItem from "@/components/catalog/catalogItem/catalogItem.vue";
-import catalogItemModal from "@/components/catalog/catalogItem/catalogItemModal.vue";
-
+import {mapMutations, mapState} from 'vuex'
 export default {
     name: "catalogContent",
     data() {
         return {
-            modalIsActive: false,
             messageContent: {
                 first: 'Завтраки действуют по будням с 8:00 — 12:00/ по выходным с 8:00 — 16:00',
                 second: 'Бизнес-ланчи действуют по будням с 12:00 — 16:00'
             },
-            itemInModal: {},
             isGood: true,
+            componentCart: [],
         }
     },
     computed: {
+        ...mapState('cart', ['cart']),
         showMessage: function () {
             return this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1;
         },
     },
     methods: {
+        ...mapMutations('cart', ['SET_CART']),
         checkTime (id) {
             let date = new Date();
             let hour = date.getUTCHours() + 7
@@ -76,30 +72,27 @@ export default {
                 }
             }
         },
-        closeScroll () {
-            let body = document.querySelector('body')
-
-            if (this.modalIsActive) {
-                body.style.overflow = 'hidden'
-            } else {
-                body.style.overflow = ''
-            }
+        inCart (item) {
+            let temporaryItem = item.item
+            temporaryItem.count = item.count
+            this.componentCart.push(temporaryItem)
+            this.SET_CART(this.componentCart)
         },
-        openModal(item) {
-            this.itemInModal = item
-            this.modalIsActive = true
-        },
-        closeModal(act) {
-            this.modalIsActive = act
+        transformAmount (item) {
+            console.log(item)
+            let temporaryItem = item.item
+            temporaryItem.count = item.count
+            let arr = this.componentCart.filter(el => el.id !== item.item.id)
+            arr.push(temporaryItem)
+            this.componentCart = arr.filter(el => el.count !== 0)
+            this.SET_CART(this.componentCart)
         }
     },
     components: {
         catalogItem,
-        catalogItemModal
     },
     props: ['activeItems', 'catalogItems'],
     updated() {
-        this.closeScroll()
         this.checkTime(this.activeItems.categoriesIndex)
     }
 }

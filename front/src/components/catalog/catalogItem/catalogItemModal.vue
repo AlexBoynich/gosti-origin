@@ -38,8 +38,9 @@
                     </div>
                 </div>
                 <catalogButton
-                    :stopList="catalogItem.isAvailabel"
-                    :amount="catalogItem.amount"
+                    :catalogItem="catalogItem"
+                    @inCart="inCart"
+                    @transformAmount="transformAmount"
                 />
             </div>
         </div>
@@ -58,12 +59,24 @@ export default {
     methods: {
         closeModal () {
             this.$emit('closeModal', !this.active)
+        },
+        inCart (item) {
+            this.$emit('inCart', {
+                id: this.catalogItem.id,
+                count: item.count
+            })
+        },
+        transformAmount (item) {
+            this.$emit('transformAmount', {
+                id: this.catalogItem.id,
+                count: item.count
+            })
         }
     },
     components: {
         catalogButton
     },
-    props: ['catalogItem']
+    props: ['catalogItem', 'count']
 }
 </script>
 

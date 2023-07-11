@@ -18,6 +18,11 @@ const catalogItems = {
     mutations: {
         SET_CATALOG_ITEMS(state, data) {
             state.catalogItems = data.data
+            for (let i = 0; i < state.catalogItems.length; i++) {
+                if (!state.catalogItems[i].count) {
+                    state.catalogItems[i].count = 0
+                }
+            }
         }
     },
 }

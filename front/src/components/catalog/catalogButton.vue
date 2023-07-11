@@ -1,6 +1,6 @@
 <template>
     <div class="card-button">
-        <template v-if="stopList">
+        <template v-if="catalogItem.isAvailabel">
             <button
                 v-show="!isActive"
                 class="main-button"
@@ -16,14 +16,14 @@
                     <img src="/images/catalog/cardButton/minus.svg" alt="minus">
                 </button>
 
-                <span class="count">{{ count }}</span>
+                <div class="count">{{ counter }}</div>
 
                 <button @click="transformAmount('+')">
                     <img src="/images/catalog/cardButton/plus.svg" alt="plus">
                 </button>
             </button>
         </template>
-        <template v-if="!stopList">
+        <template v-if="!catalogItem.isAvailabel">
             <button
                 class="stop-list main-button"
                 disabled
@@ -39,30 +39,45 @@ export default {
     name: "catalogButton",
     data () {
         return {
-            count: this.amount,
-            isActive: false
+            counter: this.catalogItem.count,
+        }
+    },
+    computed: {
+        isActive: function () {
+            return this.counter > 0
         }
     },
     methods: {
         inCart () {
-            this.count = 1
-            this.isActive = true
-
+            this.counter = 1
+            this.$emit('inCart', {
+                id: this.catalogItem.id,
+                count: 1
+            })
         },
         transformAmount (action) {
             if (action === '-') {
-                if (this.count === 1) {
-                    this.count -= 1
-                    this.isActive = false
+                if (this.counter === 1) {
+                    this.counter -= 1
                 } else {
-                    this.count -= 1
+                    this.counter -= 1
                 }
             } else if (action === '+') {
-                this.count += 1
+                if (this.counter < 99) {
+                    this.counter += 1
+                }
             }
+
+            this.$emit('transformAmount', {
+                id: this.catalogItem.id,
+                count: this.counter
+            })
         },
     },
-    props: ['stopList', 'amount']
+    updated() {
+        this.counter = this.catalogItem.count
+    },
+    props: ['catalogItem'],
 }
 </script>
 
@@ -103,6 +118,11 @@ export default {
         align-items: center;
         justify-content: center;
         gap: 0 24px;
+
+        .count {
+            width: 20px;
+            height: 24px;
+        }
 
         button {
             border: none;
