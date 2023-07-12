@@ -39,6 +39,9 @@ class SubcategoryResource extends Resource
                         ->label('Родительская категория'),
 
                     TextInput::make('title')
+                        ->minLength(1)
+                        ->maxLength(20)
+                        ->string()
                         ->required()
                         ->label('Подкатегория'),
                 ]),

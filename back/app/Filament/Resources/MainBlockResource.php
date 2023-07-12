@@ -24,6 +24,7 @@ use Filament\Tables\Columns\TextColumn;
 class MainBlockResource extends Resource
 {
     use BlockTrait;
+
     protected static ?string $model = Block::class;
     protected static ?string $navigationGroup = NavigationGroupEnum::BLOCKS->value;
 
@@ -38,8 +39,15 @@ class MainBlockResource extends Resource
             ->schema([
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('mainBlock')
-                    ->image()
+                    ->maxSize(10485760)
+                    ->acceptedFileTypes([
+                        'image/jpg',
+                        'image/jpeg',
+                        'image/png',
+                        'image/svg',
+                    ])
                     ->multiple()
+                    ->minFiles(1)
                     ->maxFiles(5)
                     ->enableReordering()
                     ->helperText('Максимум 5 изображений.')

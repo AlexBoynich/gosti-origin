@@ -34,7 +34,10 @@ class CategoryResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make('title')
+                        ->minLength(1)
+                        ->maxLength(20)
                         ->required()
+                        ->string()
                         ->unique(Category::class, 'title', ignoreRecord: true)
                         ->autofocus()
                         ->label('Категория'),

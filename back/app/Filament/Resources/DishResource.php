@@ -41,18 +41,25 @@ class DishResource extends Resource
             ->schema([
                 Forms\Components\Card::make()->schema([
                     TextInput::make('title')
+                        ->minLength(1)
+                        ->maxLength(100)
                         ->string()
                         ->required()
                         ->autofocus()
                         ->label('Наименование'),
 
                     TextInput::make('composition')
+                        ->minLength(1)
+                        ->maxLength(150)
                         ->string()
                         ->required()
                         ->label('Состав'),
 
                     TextInput::make('price')
                         ->default(0)
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->integer()
                         ->required()
                         ->label('Цена'),
@@ -66,6 +73,9 @@ class DishResource extends Resource
                         ->required(),
 
                     TextInput::make('metric_value')
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->label('Вес/объём')
@@ -93,24 +103,36 @@ class DishResource extends Resource
                         ->label('Подкатегория'),
 
                     TextInput::make('calorie')
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
                         ->label('Калорийность'),
 
                     TextInput::make('proteins')
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
                         ->label('Белки'),
 
                     TextInput::make('fats')
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
                         ->label('Жиры'),
 
                     TextInput::make('carbohydrates')
+                        ->maxLength(10)
+                        ->maxValue(9999999999)
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
@@ -131,6 +153,14 @@ class DishResource extends Resource
 
                     SpatieMediaLibraryFileUpload::make('preview')
                         ->collection('dishes')
+                        ->maxSize(10485760)
+                        ->acceptedFileTypes([
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                            'image/svg',
+                        ])
+                        ->maxFiles(1)
                         ->label('Изображение'),
                 ])->inlineLabel(),
             ]);
