@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-mask">
+    <div class="modal-mask" @click="closeOnClickOutside">
         <div class="modal-container">
             <button class="close-modal" @click="closeModal">
                 <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="close-modal">
@@ -7,6 +7,11 @@
             <div class="modal-content">
                 <div class="modal-image">
                     <img :src="catalogItem.img" alt="product-image">
+                    <filterIconsBox
+                        v-if="!this.catalogItem.sugar || !this.catalogItem.lactose || !this.catalogItem.gluten"
+                        :catalogItem="catalogItem"
+                        class="filter-items-box"
+                    />
                 </div>
                 <div class="title">{{ catalogItem.title }}</div>
                 <div class="desc">{{ catalogItem.desc }}</div>
@@ -50,32 +55,40 @@
 
 <script>
 import catalogButton from "../catalogButton";
+import filterIconsBox from "./filterIconsBox";
+
 export default {
     name: "catalogItemModal",
-    data () {
+    data() {
         return {
             active: true
         }
     },
     methods: {
-        closeModal () {
+        closeModal() {
             this.$emit('closeModal', !this.active)
         },
-        inCart (item) {
+        inCart(item) {
             this.$emit('inCart', {
                 id: this.catalogItem.id,
                 count: item.count
             })
         },
-        transformAmount (item) {
+        transformAmount(item) {
             this.$emit('transformAmount', {
                 id: this.catalogItem.id,
                 count: item.count
             })
+        },
+        closeOnClickOutside(e) {
+            if (e.target === document.querySelector('.modal-mask')) {
+                this.closeModal()
+            }
         }
     },
     components: {
-        catalogButton
+        catalogButton,
+        filterIconsBox
     },
     props: ['catalogItem', 'amount']
 }
@@ -83,6 +96,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 .modal-mask {
     display: flex;
     align-items: center;
@@ -118,6 +132,7 @@ export default {
                 height: 100%;
             }
         }
+
         .modal-content {
 
             .modal-image {
@@ -132,12 +147,19 @@ export default {
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    transform: translate(-50%,-50%);
+                    transform: translate(-50%, -50%);
                     object-fit: cover;
                     width: 100%;
                     height: 100%;
                 }
+
+                .filter-items-box {
+                    position: absolute;
+                    bottom: 16px;
+                    right: 16px;
+                }
             }
+
             .title {
                 color: black;
                 @include inter-500;
@@ -151,6 +173,7 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
             .desc {
                 @include inter-400;
                 line-height: 20px;
@@ -162,6 +185,7 @@ export default {
                 text-overflow: ellipsis;
                 margin-bottom: 4px;
             }
+
             .info-box {
                 display: flex;
                 align-items: flex-end;
@@ -179,6 +203,7 @@ export default {
                         color: rgba(0, 0, 0, 0.5);
                         margin-bottom: 4px;
                     }
+
                     .info-table {
                         display: flex;
                         align-items: center;
@@ -206,6 +231,7 @@ export default {
                                 text-align: left;
                                 color: black;
                             }
+
                             .desc {
                                 @include inter-400;
                                 line-height: 20px;
@@ -216,6 +242,7 @@ export default {
                         }
                     }
                 }
+
                 .weight-and-price {
 
                     .weight {
@@ -226,6 +253,7 @@ export default {
                         color: rgba(0, 0, 0, 0.5);
                         margin-bottom: 8px;
                     }
+
                     .price {
                         @include inter-500;
                         font-size: 24px;

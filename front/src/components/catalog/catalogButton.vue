@@ -3,7 +3,7 @@
         <template v-if="catalogItem.isAvailabel">
             <button
                 v-show="!isActive"
-                class="main-button"
+                class="main-button default-button"
                 @click="inCart"
             >
                 Добавить в корзину
@@ -108,14 +108,18 @@ export default {
         background: #BDCAB0;
         cursor: default;
     }
+    &.default-button:hover {
+        background: #C1D4B2;
+        color: black;
+    }
 }
 
 .button-counter {
     border-radius: 16px;
-    background: $greenBackground;
+    background: #C1D4B2;
     border: none;
-    padding: 15px 0;
-    color: white;
+    padding: 13px 0;
+    color: black;
     @include inter-500;
     font-size: 20px;
     line-height: 110%;
@@ -127,9 +131,14 @@ export default {
     justify-content: center;
     gap: 0 24px;
 
+
     .count {
-        width: 20px;
-        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 28px;
+
     }
 
     button {

@@ -10,11 +10,11 @@
         </div>
         <div v-show="categoriesItem.id === activeIndices.categoriesIndex" class="categories-body">
             <subcategoriesItem
-                    v-for="(item, index) in categoriesItem.subcategories"
-                    :key="index"
-                    :subcategoriesItem="item"
-                    :activeIndex="activeIndices.subcategoriesIndex"
-                    @pickSubcategories="pickSubcategories"
+                v-for="(item, index) in categoriesItem.subcategories"
+                :key="index"
+                :subcategoriesItem="item"
+                :activeIndex="activeIndices.subcategoriesIndex"
+                @pickSubcategories="pickSubcategories"
             />
         </div>
     </div>
@@ -44,67 +44,69 @@ export default {
 @import "@/assets/styles/global";
 
 .categories-item {
-  width: 100%;
-  color: black;
-  border-radius: 16px;
-  border: 1px solid $greenBackground;
-  background: #fff;
-  overflow: hidden;
-
-  .categories-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    cursor: pointer;
-    position: relative;
-    padding: 16px 0;
-
-    &.active {
-      padding: 16px 0 12px;
-    }
-
-    .categories-title {
-      text-align: center;
-      @include inter-500;
-      color: #000;
-      font-size: 20px;
-      line-height: 110%;
-      letter-spacing: -0.4px;
-    }
-
-    .toggle-arrow {
-      position: absolute;
-      right: 16px;
-      width: 16px;
-      height: 8px;
-      transition: .3s ease-in-out;
-
-      &.reverse-arrow {
-        transform: rotate(180deg);
-      }
-    }
-  }
-
-  .categories-body {
-    display: flex;
-    flex-direction: column;
-    @include inter-400;
-    line-height: 110%;
-    letter-spacing: -0.36px;
-    text-align: left;
-    gap: 16px 0;
-    margin: 12px 0 40px;
-  }
-
-  &.active {
-    background: #EFF4EB;
-    color: white;
+    color: black;
+    border-radius: 16px;
+    border: 1px solid $greenBackground;
+    background: #fff;
+    overflow: hidden;
 
     .categories-header {
-      background: #EFF4EB;
-      color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        cursor: pointer;
+        position: relative;
+        padding: 16px 0;
+
+        &.active {
+            padding: 16px 0 12px;
+        }
+
+        .categories-title {
+            text-align: center;
+            @include inter-500;
+            color: #000;
+            font-size: 20px;
+            line-height: 110%;
+            letter-spacing: -0.4px;
+        }
+
+        .toggle-arrow {
+            position: absolute;
+            right: 16px;
+            width: 16px;
+            height: 8px;
+            transition: .3s ease-in-out;
+
+            &.reverse-arrow {
+                transform: rotate(180deg);
+            }
+        }
     }
-  }
+
+    .categories-body {
+        display: flex;
+        flex-direction: column;
+        @include inter-400;
+        line-height: 110%;
+        letter-spacing: -0.36px;
+        text-align: left;
+        gap: 16px 0;
+        padding: 12px 0 40px;
+        background: #DFE8D780;
+
+    }
+
+    &.active, &:hover {
+        background: #DFE8D780;
+        color: white;
+
+        .categories-header {
+            background: #DFE8D780;
+            color: white;
+        }
+    }
 }
 </style>
