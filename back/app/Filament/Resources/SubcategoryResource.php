@@ -41,11 +41,6 @@ class SubcategoryResource extends Resource
                     TextInput::make('title')
                         ->required()
                         ->label('Подкатегория'),
-//
-//                    TextInput::make('priority')
-//                        ->integer()
-//                        ->required()
-//                        ->label('Приоритет'),
                 ]),
             ]);
     }
@@ -58,8 +53,6 @@ class SubcategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Подкатегория'),
-//                TextColumn::make('priority')
-//                    ->label('Приоритет'),
             ])
             ->filters([
                 //

@@ -10,10 +10,4 @@ class ListCategories extends ListRecords
 {
     protected static string $resource = CategoryResource::class;
 
-    protected function getActions(): array
-    {
-        return [
-            //
-        ];
-    }
 }
