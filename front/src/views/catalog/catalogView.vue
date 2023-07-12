@@ -1,7 +1,7 @@
 <template>
     <div id="catalog" class="container">
-        <sidebarBlock class="categories" @activeItems="getActiveItems" @pickFilter="getFilter" :filters="filters"/>
-        <catalogContent :activeItems="activeItems" :catalogItems="catalogItems"/>
+        <sidebarBlock class="categories" @activeItems="setActiveItems" @pickFilter="setFilter" :filters="filters"/>
+        <catalogContent :activeItems="activeItems" :catalogItems="catalogItems" @goToCatalog="goToCatalog"/>
     </div>
 </template>
 
@@ -49,12 +49,12 @@ export default {
     },
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
-
+        ...mapState('categories', ['categories'])
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         onTop,
-        getActiveItems (el) {
+        setActiveItems (el) {
             this.activeItems.categoriesTitle = el.categoryTitle
             this.activeItems.categoriesIndex = el.categoriesIndex
             this.activeItems.subcategoriesTitle = el.subcategoryTitle
@@ -78,7 +78,7 @@ export default {
             })
             this.onTop('smooth')
         },
-        getFilter (obj) {
+        setFilter (obj) {
             this.filters[obj.id - 1].isActive = !this.filters[obj.id - 1].isActive
 
             function generateFilterRequest (sugar, gluten, lactose, filtersForRequest) {
@@ -110,6 +110,23 @@ export default {
             })
             this.onTop('smooth')
 
+        },
+        goToCatalog () {
+            this.activeItems.categoriesIndex = 0
+            this.activeItems.categoriesTitle = this.categories[0].title
+            this.activeItems.subcategoriesIndex = 1
+            this.activeItems.subcategoriesTitle = this.categories[0].subcategories[0].title
+
+            for (let i = 0; i < this.filters.length; i++) {
+                this.filters[i].isActive = true
+            }
+            Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
+
+            this.GET_CATALOG_ITEMS({
+                subcategoryId: 1,
+                requestFilter: ''
+            })
+            this.onTop('smooth')
         }
     },
     components: {

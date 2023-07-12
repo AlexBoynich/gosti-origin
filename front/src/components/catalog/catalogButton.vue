@@ -3,7 +3,7 @@
         <template v-if="stopList">
             <button
                 v-show="!isActive"
-                class="main-button"
+                class="main-button default-button"
                 @click="inCart"
             >
                 Добавить в корзину
@@ -32,6 +32,7 @@
             </button>
         </template>
     </div>
+
 </template>
 
 <script>
@@ -58,8 +59,11 @@ export default {
                     this.count -= 1
                 }
             } else if (action === '+') {
-                this.count += 1
+                if (this.count < 99) {
+                    this.count += 1
+                }
             }
+
         },
     },
     props: ['stopList', 'amount']
@@ -86,13 +90,18 @@ export default {
             background: #BDCAB0;
             cursor: default;
         }
+
+        &.default-button:hover {
+            background: #C1D4B2;
+            color: black;
+        }
     }
     .button-counter {
         border-radius: 16px;
-        background: $greenBackground;
+        background: #C1D4B2;
         border: none;
-        padding: 15px 0;
-        color: white;
+        padding: 13px 0;
+        color: black;
         @include inter-500;
         font-size: 20px;
         line-height: 110%;
@@ -118,6 +127,13 @@ export default {
                 width: 24px;
                 height: 24px;
             }
+        }
+        .count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 28px;
         }
     }
 </style>
