@@ -94,15 +94,16 @@ export default {
     letter-spacing: -0.36px;
     text-align: left;
     gap: 16px 0;
-    margin: 12px 0 40px;
+    padding: 12px 0 40px;
+    background: #DFE8D780;
   }
 
-  &.active {
-    background: #EFF4EB;
+  &.active, &:hover {
+    background: #DFE8D780;
     color: white;
 
     .categories-header {
-      background: #EFF4EB;
+      background: #DFE8D780;
       color: white;
     }
   }

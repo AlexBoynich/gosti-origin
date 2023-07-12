@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-mask">
+    <div class="modal-mask" @click="closeOnClickOutside">
         <div class="modal-container">
             <button class="close-modal" @click="closeModal">
                 <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="close-modal">
@@ -7,6 +7,11 @@
             <div class="modal-content">
                 <div class="modal-image">
                     <img :src="catalogItem.img" alt="product-image">
+                    <filterIconsBox
+                        v-if="!this.catalogItem.sugar || !this.catalogItem.lactose || !this.catalogItem.gluten"
+                        :catalogItem="catalogItem"
+                        class="filter-items-box"
+                    />
                 </div>
                 <div class="title">{{ catalogItem.title }}</div>
                 <div class="desc">{{ catalogItem.desc }}</div>
@@ -48,6 +53,7 @@
 
 <script>
 import catalogButton from "../catalogButton";
+import filterIconsBox from "./filterIconsBox";
 export default {
     name: "catalogItemModal",
     data () {
@@ -58,10 +64,16 @@ export default {
     methods: {
         closeModal () {
             this.$emit('closeModal', !this.active)
+        },
+        closeOnClickOutside (e) {
+            if (e.target === document.querySelector('.modal-mask')) {
+                this.closeModal()
+            }
         }
     },
     components: {
-        catalogButton
+        catalogButton,
+        filterIconsBox
     },
     props: ['catalogItem']
 }
@@ -122,6 +134,11 @@ export default {
                     object-fit: cover;
                     width: 100%;
                     height: 100%;
+                }
+                .filter-items-box {
+                    position: absolute;
+                    bottom: 16px;
+                    right: 16px;
                 }
             }
             .title {
