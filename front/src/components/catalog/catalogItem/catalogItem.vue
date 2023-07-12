@@ -15,12 +15,14 @@
         <CatalogButton
             :catalogItem="catalogItem"
             @inCart="inCart"
+            :amount="counter"
             @transformAmount="transformAmount"
         />
         <catalogItemModal
             v-show="modalIsActive"
+            :catalogItem="catalogItem"
+            :amount="counter"
             @closeModal="closeModal"
-            :catalogItem="itemInModal"
             @inCart="inCart"
             @transformAmount="transformAmount"
         />
@@ -30,27 +32,28 @@
 <script>
 import CatalogButton from "@/components/catalog/catalogButton";
 import catalogItemModal from "./catalogItemModal";
-import {mapState} from "vuex";
 
 export default {
     name: "catalogItem",
     data () {
         return {
             modalIsActive: false,
-            itemInModal: {}
+            counter: this.catalogItem.count
         }
     },
     methods: {
-        inCart (item) {
+        inCart () {
+            this.counter = 1
             this.$emit('inCart', {
                 item: this.catalogItem,
-                count: item.count
+                count: this.counter
             })
         },
         transformAmount (item) {
+            this.counter = item.count
             this.$emit('transformAmount', {
                 item: this.catalogItem,
-                count: item.count
+                count: this.counter
             })
         },
         closeScroll () {
@@ -63,15 +66,11 @@ export default {
             }
         },
         openModal() {
-            this.itemInModal = this.catalogItem
             this.modalIsActive = true
         },
         closeModal(act) {
             this.modalIsActive = act
         }
-    },
-    computed: {
-        ...mapState('cart', ['cart']),
     },
     components: {
         CatalogButton,
@@ -79,6 +78,7 @@ export default {
     },
     props: ['catalogItem'],
     updated() {
+        this.counter = this.catalogItem.count
         this.closeScroll()
     }
 }

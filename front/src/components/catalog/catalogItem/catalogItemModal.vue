@@ -39,6 +39,7 @@
                 </div>
                 <catalogButton
                     :catalogItem="catalogItem"
+                    :amount="amount"
                     @inCart="inCart"
                     @transformAmount="transformAmount"
                 />
@@ -76,7 +77,7 @@ export default {
     components: {
         catalogButton
     },
-    props: ['catalogItem', 'count']
+    props: ['catalogItem', 'amount']
 }
 </script>
 

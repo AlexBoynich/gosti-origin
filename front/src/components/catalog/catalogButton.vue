@@ -16,7 +16,7 @@
                     <img src="/images/catalog/cardButton/minus.svg" alt="minus">
                 </button>
 
-                <div class="count">{{ counter }}</div>
+                <div class="count">{{ amount }}</div>
 
                 <button @click="transformAmount('+')">
                     <img src="/images/catalog/cardButton/plus.svg" alt="plus">
@@ -35,27 +35,33 @@
 </template>
 
 <script>
+
+import {mapState} from "vuex";
+
 export default {
     name: "catalogButton",
-    data () {
+    data() {
         return {
-            counter: this.catalogItem.count,
+            counter: this.amount,
         }
     },
     computed: {
+        ...mapState('catalogItems', ['catalogItems']),
+        count: function () {
+            let index = this.catalogItems.findIndex((el) => el.id === this.catalogItem.id)
+            console.log(this.catalogItems[index])
+            return this.catalogItems[index].count
+        },
         isActive: function () {
             return this.counter > 0
         }
     },
     methods: {
-        inCart () {
+        inCart() {
             this.counter = 1
-            this.$emit('inCart', {
-                id: this.catalogItem.id,
-                count: 1
-            })
+            this.$emit('inCart')
         },
-        transformAmount (action) {
+        transformAmount(action) {
             if (action === '-') {
                 if (this.counter === 1) {
                     this.counter -= 1
@@ -75,69 +81,71 @@ export default {
         },
     },
     updated() {
-        this.counter = this.catalogItem.count
+        this.counter = this.amount
     },
-    props: ['catalogItem'],
+    props: ['catalogItem', 'amount'],
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-    .main-button {
-        border-radius: 16px;
-        background: $greenBackground;
-        border: none;
-        padding: 16px 0;
-        color: white;
-        @include inter-500;
-        font-size: 20px;
-        line-height: 110%;
-        letter-spacing: -0.4px;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
 
-        &.stop-list {
-            background: #BDCAB0;
-            cursor: default;
-        }
+.main-button {
+    border-radius: 16px;
+    background: $greenBackground;
+    border: none;
+    padding: 16px 0;
+    color: white;
+    @include inter-500;
+    font-size: 20px;
+    line-height: 110%;
+    letter-spacing: -0.4px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+
+    &.stop-list {
+        background: #BDCAB0;
+        cursor: default;
     }
-    .button-counter {
-        border-radius: 16px;
-        background: $greenBackground;
+}
+
+.button-counter {
+    border-radius: 16px;
+    background: $greenBackground;
+    border: none;
+    padding: 15px 0;
+    color: white;
+    @include inter-500;
+    font-size: 20px;
+    line-height: 110%;
+    letter-spacing: -0.4px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 24px;
+
+    .count {
+        width: 20px;
+        height: 24px;
+    }
+
+    button {
         border: none;
-        padding: 15px 0;
-        color: white;
-        @include inter-500;
-        font-size: 20px;
-        line-height: 110%;
-        letter-spacing: -0.4px;
-        text-align: center;
-        width: 100%;
+        background: transparent;
+        max-width: 24px;
+        max-height: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0 24px;
+        cursor: pointer;
 
-        .count {
-            width: 20px;
+        img {
+            width: 24px;
             height: 24px;
         }
-
-        button {
-            border: none;
-            background: transparent;
-            max-width: 24px;
-            max-height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-
-            img {
-                width: 24px;
-                height: 24px;
-            }
-        }
     }
+}
 </style>

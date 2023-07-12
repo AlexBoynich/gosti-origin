@@ -19,7 +19,7 @@
         </div>
         <div class="catalog-items">
             <catalogItem
-                    v-for="(catalogItem, index) in catalogItems"
+                    v-for="(catalogItem, index) in arrСonsideringСart"
                     :key="index"
                     :catalogItem="catalogItem"
                     @inCart="inCart"
@@ -32,6 +32,7 @@
 <script>
 import catalogItem from "@/components/catalog/catalogItem/catalogItem.vue";
 import {mapMutations, mapState} from 'vuex'
+
 export default {
     name: "catalogContent",
     data() {
@@ -49,6 +50,13 @@ export default {
         showMessage: function () {
             return this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1;
         },
+        arrСonsideringСart: function () {
+            return this.catalogItems.map(item => {
+                const cartItem = this.cart.find(cartItem => cartItem.id === item.id);
+                item.count = cartItem ? cartItem.count : 0;
+                return item;
+            });
+        }
     },
     methods: {
         ...mapMutations('cart', ['SET_CART']),
@@ -73,20 +81,22 @@ export default {
             }
         },
         inCart (item) {
+
             let temporaryItem = item.item
             temporaryItem.count = item.count
+            console.log(temporaryItem)
+
             this.componentCart.push(temporaryItem)
             this.SET_CART(this.componentCart)
         },
         transformAmount (item) {
-            console.log(item)
             let temporaryItem = item.item
             temporaryItem.count = item.count
             let arr = this.componentCart.filter(el => el.id !== item.item.id)
             arr.push(temporaryItem)
             this.componentCart = arr.filter(el => el.count !== 0)
             this.SET_CART(this.componentCart)
-        }
+        },
     },
     components: {
         catalogItem,
@@ -94,7 +104,7 @@ export default {
     props: ['activeItems', 'catalogItems'],
     updated() {
         this.checkTime(this.activeItems.categoriesIndex)
-    }
+    },
 }
 </script>
 
