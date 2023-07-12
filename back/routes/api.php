@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DishController;
 use Illuminate\Http\Request;
@@ -25,3 +26,6 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('api.categ
 
 /**Блюда**/
 Route::get('/dishes', [DishController::class, 'index'])->name('api.dishes');
+
+/**Главный блок**/
+Route::get('/blocks/main', [BlockController::class, 'mainBlock'])->name('api.mainBlock');
