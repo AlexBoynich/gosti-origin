@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Dish extends Model implements HasMedia
 {
@@ -56,6 +57,14 @@ class Dish extends Model implements HasMedia
             ->addMediaConversion('preview')
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
+    }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn(int $value) => $value / 100,
+            set: fn(int $value) => $value * 100
+        );
     }
 
 }

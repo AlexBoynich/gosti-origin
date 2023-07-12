@@ -34,28 +34,13 @@ class CategoryResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make('title')
+                        ->minLength(1)
+                        ->maxLength(20)
                         ->required()
+                        ->string()
                         ->unique(Category::class, 'title', ignoreRecord: true)
                         ->autofocus()
                         ->label('Категория'),
-                    Toggle::make('qwe')
-                        ->afterStateUpdated(null),
-
-
-//                    TextInput::make('priority')
-//                        ->integer()
-//                        ->required()
-//                        ->label('Приоритет'),
-//
-//                    TimePicker::make('available_start')
-//                        ->timezone('Asia/Tomsk')
-//                        ->icon('heroicon-o-clock')
-//                        ->label('Доступно с:'),
-//
-//                    TimePicker::make('available_end')
-//                        ->timezone('Asia/Tomsk')
-//                        ->icon('heroicon-o-clock')
-//                        ->label('До:'),
                 ]),
             ]);
     }
@@ -68,13 +53,6 @@ class CategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Категория'),
-//                TextColumn::make('priority')
-//                    ->label('Приоритет')
-//                    ->sortable(),
-//                TextColumn::make('available_start')
-//                    ->label('Доступно с:'),
-//                TextColumn::make('available_end')
-//                    ->label('Доступно до:')
             ])
             ->filters([
                 //
