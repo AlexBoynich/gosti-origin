@@ -31,7 +31,6 @@
 
 <script>
 import {mapState} from "vuex";
-
 export default {
     name: "cartItem",
     computed: {
@@ -61,7 +60,7 @@ export default {
             console.log(this.cartItem.count)
         }
     },
-    props: ['cartItem'],
+    props: ['cartItem']
 }
 </script>
 

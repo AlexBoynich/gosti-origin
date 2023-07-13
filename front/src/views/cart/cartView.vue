@@ -37,7 +37,6 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-
 #cart {
     margin-top: 174px;
     min-height: 90vh;

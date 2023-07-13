@@ -49,7 +49,6 @@ export default {
         ...mapState('catalogItems', ['catalogItems']),
         count: function () {
             let index = this.catalogItems.findIndex((el) => el.id === this.catalogItem.id)
-            console.log(this.catalogItems[index])
             return this.catalogItems[index].count
         },
         isActive: function () {

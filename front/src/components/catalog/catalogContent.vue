@@ -123,8 +123,6 @@ export default {
         inCart(item) {
             let temporaryItem = item.item
             temporaryItem.count = item.count
-            console.log(temporaryItem)
-
             this.componentCart.push(temporaryItem)
             this.SET_CART(this.componentCart)
         },

@@ -65,7 +65,11 @@
                         >
                             <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                         </div>
-                        <label :for="personalData.id">{{ personalData.label }}</label>
+                        <label :for="personalData.id">
+                            <a href="/documents/consent-to-the-processing-of-personal-data.docx">
+                                {{ personalData.label }}
+                            </a>
+                        </label>
                     </div>
                 </div>
                 <button>Оформить заказ</button>
@@ -248,7 +252,6 @@ export default {
 .order-forms-block {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     max-width: 596px;
     width: 100%;
     gap: 32px 0;
@@ -387,9 +390,13 @@ export default {
             }
 
             label {
-                @include inter-400;
-                font-size: 16px;
-                line-height: 18px;
+                a {
+                    @include inter-400;
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: black;
+                    text-decoration: none;
+                }
             }
         }
     }
