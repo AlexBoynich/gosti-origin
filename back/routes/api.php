@@ -28,4 +28,4 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('api.categ
 Route::get('/dishes', [DishController::class, 'index'])->name('api.dishes');
 
 /**Главный блок**/
-Route::get('/blocks/main', [BlockController::class, 'mainBlock'])->name('api.mainBlock');
+Route::get('/main-block', [BlockController::class, 'mainBlock'])->name('api.mainBlock');
