@@ -129,9 +129,14 @@ export default {
         transformAmount(item) {
             let temporaryItem = item.item
             temporaryItem.count = item.count
-            let arr = this.componentCart.filter(el => el.id !== item.item.id)
+
+            let arr = this.componentCart.filter(el => el.id !== temporaryItem.id)
             arr.push(temporaryItem)
-            this.componentCart = arr.filter(el => el.count !== 0)
+
+            let index = this.componentCart.findIndex(el => el.count === 0)
+            if (index !== -1) {
+                this.componentCart.splice(index, 1);
+            }
             this.SET_CART(this.componentCart)
         },
     },

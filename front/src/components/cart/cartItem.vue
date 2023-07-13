@@ -41,7 +41,6 @@ export default {
         deleteItem () {
             let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
             this.cart.splice(cartIndex, 1)
-
         },
         transformCartItemAmount (act) {
             if (act === '-') {

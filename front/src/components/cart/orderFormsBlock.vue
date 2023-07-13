@@ -28,51 +28,51 @@
         <DateAndTimeForms
             :orderForms="orderForms"
         />
-                <div class="radio-buttons">
-                    <div class="section-title">{{ payMethod.title }}</div>
-                    <div class="radio-container">
-                        <div
-                            v-for="radio in payMethod.radioButtons"
-                            :key="radio.id"
-                            class="radio-box"
-                        >
-                            <div class="radio">
-                                <div v-show="radio.isActive" class="radio-dot"></div>
-                            </div>
-                            <label>{{ radio.label }}</label>
-                        </div>
+        <div class="radio-buttons">
+            <div class="section-title">{{ payMethod.title }}</div>
+            <div class="radio-container">
+                <div
+                    v-for="radio in payMethod.radioButtons"
+                    :key="radio.id"
+                    class="radio-box"
+                >
+                    <div class="radio">
+                        <div v-show="radio.isActive" class="radio-dot"></div>
                     </div>
+                    <label>{{ radio.label }}</label>
                 </div>
-                <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
-                    <div class="sum-delivery">
-                        <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
-                        <div class="price">{{ deliveryPrice }}</div>
-                    </div>
-                    <div class="message">
-                        {{ wayToGet.delivery.deliveryPriceBlock.message }}
-                    </div>
+            </div>
+        </div>
+        <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
+            <div class="sum-delivery">
+                <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
+                <div class="price">{{ deliveryPrice }}</div>
+            </div>
+            <div class="message">
+                {{ wayToGet.delivery.deliveryPriceBlock.message }}
+            </div>
+        </div>
+        <div class="finally-forms">
+            <div class="to-pay">
+                <div class="section-title">{{ toPay.title }}</div>
+                <div class="price">{{ price }}</div>
+            </div>
+            <div class="personal-data">
+                <div
+                    :id="personalData.id"
+                    :class="['checkbox', {'active' : personalData.isActive}]"
+                    @click="pickCheckbox"
+                >
+                    <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                 </div>
-                <div class="finally-forms">
-                    <div class="to-pay">
-                        <div class="section-title">{{ toPay.title }}</div>
-                        <div class="price">{{ price }}</div>
-                    </div>
-                    <div class="personal-data">
-                        <div
-                            :id="personalData.id"
-                            :class="['checkbox', {'active' : personalData.isActive}]"
-                            @click="pickCheckbox"
-                        >
-                            <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
-                        </div>
-                        <label :for="personalData.id">
-                            <a href="/documents/consent-to-the-processing-of-personal-data.docx">
-                                {{ personalData.label }}
-                            </a>
-                        </label>
-                    </div>
-                </div>
-                <button>Оформить заказ</button>
+                <label :for="personalData.id">
+                    <a href="/documents/consent-to-the-processing-of-personal-data.docx">
+                        {{ personalData.label }}
+                    </a>
+                </label>
+            </div>
+        </div>
+        <button>Оформить заказ</button>
     </div>
 </template>
 
@@ -90,12 +90,12 @@ export default {
                 title: 'Способ получения',
                 id: 'wayToGet',
                 radioButtons: [
-                    {id: 'pickup', label: 'самовывоз', isActive: true},
-                    {id: 'delivery', label: 'доставка', isActive: false},
+                    {id: 'pickup', label: 'самовывоз', isActive: false},
+                    {id: 'delivery', label: 'доставка', isActive: true},
                 ],
                 delivery: {
                     title: 'Адрес заказа',
-                    isDelivery: false,
+                    isDelivery: true,
                     forms: [
                         {
                             label: 'Улица*',
@@ -184,7 +184,7 @@ export default {
                 pickup: {
                     title: 'Адрес самовывоза',
                     link: 'г.Томск, ул.Фрунзе, д.90',
-                    isPickup: true
+                    isPickup: false
                 },
             },
             payMethod: {
@@ -405,7 +405,6 @@ export default {
         @include green-button;
         text-align: center;
         width: 100%;
-        margin-bottom: 120px;
 
         &:hover {
             @include green-button-hover;

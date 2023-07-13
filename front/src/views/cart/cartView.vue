@@ -49,6 +49,7 @@ export default {
     .content {
         display: flex;
         justify-content: space-between;
+        padding-bottom: 120px;
     }
     .cart-inactive {
         display: flex;
