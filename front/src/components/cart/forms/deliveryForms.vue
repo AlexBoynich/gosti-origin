@@ -31,9 +31,6 @@
 export default {
     name: "deliveryForms",
     props: ['delivery'],
-    created() {
-        console.log(this.delivery.forms)
-    }
 }
 </script>
 

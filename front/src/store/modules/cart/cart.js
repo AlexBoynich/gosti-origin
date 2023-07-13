@@ -6,6 +6,9 @@ const cart = {
     mutations: {
         SET_CART(state, arr) {
             state.cart = arr
+        },
+        DELETE_CART (state) {
+            state.cart = []
         }
     },
 }
