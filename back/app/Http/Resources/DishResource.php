@@ -18,7 +18,7 @@ class DishResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'price' => $this->price / 100,
+            'price' => $this->price,
             'calories' => $this->calorie,
             'proteins' => "{$this->proteins} г",
             'fats' => "{$this->fats} г",
