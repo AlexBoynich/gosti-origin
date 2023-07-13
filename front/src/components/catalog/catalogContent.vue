@@ -129,10 +129,13 @@ export default {
             let temporaryItem = item.item
             temporaryItem.count = item.count
 
-            let arr = this.componentCart.filter(el => el.id !== temporaryItem.id)
-            arr.push(temporaryItem)
+            this.componentCart = this.cart
+            this.componentCart.push(temporaryItem)
 
-            let index = this.componentCart.findIndex(el => el.count === 0)
+            let index = this.componentCart.findIndex(el => el.id === temporaryItem.id)
+            this.componentCart.splice(index, 1)
+
+            index = this.componentCart.findIndex(el => el.count === 0)
             if (index !== -1) {
                 this.componentCart.splice(index, 1);
             }

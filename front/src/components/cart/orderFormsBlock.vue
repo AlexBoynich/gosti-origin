@@ -241,7 +241,6 @@ export default {
             } else {
                 return 200 + ' ₽'
             }
-
         }
     },
     methods: {
@@ -249,7 +248,12 @@ export default {
             this.personalData.isActive = !this.personalData.isActive
         }
     },
-    components: {DateAndTimeForms, pickupBlock, PersonForms, deliveryForms},
+    components: {
+        DateAndTimeForms,
+        pickupBlock,
+        PersonForms,
+        deliveryForms
+    },
 }
 </script>
 

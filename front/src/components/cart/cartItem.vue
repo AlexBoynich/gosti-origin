@@ -56,7 +56,6 @@ export default {
                     this.cart[cartIndex].count += 1
                 }
             }
-            console.log(this.cartItem.count)
         }
     },
     props: ['cartItem']

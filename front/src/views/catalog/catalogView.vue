@@ -113,10 +113,9 @@ export default {
                     .join('&')
             }
 
-            let requestFilter = generateFilterRequest(this.filters[0].isActive, this.filters[1].isActive, this.filters[2].isActive, this.filtersForRequest)
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
-                requestFilter: requestFilter
+                requestFilter: generateFilterRequest(this.filters[0].isActive, this.filters[1].isActive, this.filters[2].isActive, this.filtersForRequest)
             })
             this.onTop('smooth')
         },
@@ -139,7 +138,6 @@ export default {
             })
             this.onTop('smooth')
         }
-
     },
     components: {
         catalogContent,
