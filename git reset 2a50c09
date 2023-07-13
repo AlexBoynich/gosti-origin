@@ -1,0 +1,56 @@
+[33mbdca2ed[m[33m ([m[1;36mHEAD -> [m[1;32m2318[m[33m, [m[1;31morigin/2318[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m2a50c09[m HEAD@{1}: commit: #2318 feat: добавил функцию "Изменение и удаление товаров в корзине"
+[33mbdca2ed[m[33m ([m[1;36mHEAD -> [m[1;32m2318[m[33m, [m[1;31morigin/2318[m[33m)[m HEAD@{2}: commit (merge): Merge remote-tracking branch 'origin/2318' into 2318
+[33m0ad9fa4[m HEAD@{3}: checkout: moving from main to 2318
+[33m3fa4729[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: merge origin/main: Fast-forward
+[33m453257c[m HEAD@{5}: checkout: moving from 2316 to main
+[33md22b793[m[33m ([m[1;31morigin/2316[m[33m, [m[1;32m2316[m[33m)[m HEAD@{6}: commit: #2316 fix: пофиксил баги
+[33m2fefa21[m HEAD@{7}: checkout: moving from 2318 to 2316
+[33m0ad9fa4[m HEAD@{8}: checkout: moving from 2316 to 2318
+[33m2fefa21[m HEAD@{9}: commit: #2316 feat: реализовал добавление товара в корзину
+[33mfd3e060[m HEAD@{10}: checkout: moving from 3812 to 2316
+[33me33d6bb[m[33m ([m[1;31morigin/3812[m[33m, [m[1;32m3812[m[33m)[m HEAD@{11}: commit: #3812 fix: пофиксил баги
+[33m453257c[m HEAD@{12}: checkout: moving from main to 3812
+[33m453257c[m HEAD@{13}: merge origin/main: Fast-forward
+[33m8038105[m HEAD@{14}: checkout: moving from 2316 to main
+[33mfd3e060[m HEAD@{15}: commit: #2316 test
+[33mffd6b91[m HEAD@{16}: checkout: moving from main to 2316
+[33m8038105[m HEAD@{17}: checkout: moving from 3987 to main
+[33mffd6b91[m HEAD@{18}: commit: #2315 feat: сверстал корзину
+[33mf624ae3[m HEAD@{19}: checkout: moving from main to 3987
+[33m8038105[m HEAD@{20}: merge origin/main: Fast-forward
+[33mc68550a[m HEAD@{21}: checkout: moving from front to main
+[33mc557d16[m HEAD@{22}: commit: #3812 fix: фикс багов со слайдером
+[33m5131242[m HEAD@{23}: commit: #3812 refactor: 1)создал папку utils и создал там файл helpers.js, куда перенес метод onTop, чтобы в других компонентах этот метод было легче вызывать
+[33m6e18e35[m HEAD@{24}: commit: #3812 refactor: согласовал поля с бэком и переименовал
+[33m5e8ccf8[m HEAD@{25}: commit: #3812 fix: исправил баги: 1) с выбором фильтра;
+[33m9d0bb49[m HEAD@{26}: reset: moving to HEAD~
+[33md02607e[m HEAD@{27}: commit: #3812 fix: исправил баги: 1) с выбором фильтра;
+[33m9d0bb49[m HEAD@{28}: merge origin/front: Fast-forward
+[33m944e528[m HEAD@{29}: checkout: moving from general to front
+[33m9d0bb49[m HEAD@{30}: checkout: moving from dev to general
+[33me607ddd[m HEAD@{31}: merge origin/dev: Fast-forward
+[33me7d62b5[m HEAD@{32}: commit: #3925 feat: adding logic for the catalog
+[33m3d5ec80[m HEAD@{33}: reset: moving to HEAD~
+[33m6bcc581[m HEAD@{34}: reset: moving to HEAD~
+[33m89e7b2e[m HEAD@{35}: reset: moving to HEAD~
+[33m2315e7f[m HEAD@{36}: commit: #3925 test: в
+[33m89e7b2e[m HEAD@{37}: commit: #3925 test: catalog
+[33m6bcc581[m HEAD@{38}: merge origin/dev: Fast-forward
+[33m3857515[m HEAD@{39}: commit: #3741 feat: added a function to go to the top of the page when clicking on a link
+[33m7bd49cb[m HEAD@{40}: commit: #3727 fix: fix bugs after testing
+[33m4407035[m HEAD@{41}: commit: #3812 fix: added indents for sidebar Block when scrolling, corrected indents in the catalog message
+[33m47f5239[m HEAD@{42}: commit: #3741 feat: added modal window, counter on cardButton, request stubs for catalogItems
+[33m0c3489e[m HEAD@{43}: commit: #3741 feat: catalog HTML coding
+[33mac51eea[m HEAD@{44}: commit: #3812 feat: added favicon
+[33mfb34106[m HEAD@{45}: merge origin/dev: Fast-forward
+[33m71039c5[m HEAD@{46}: checkout: moving from main to dev
+[33mc68550a[m HEAD@{47}: merge origin/main: Fast-forward
+[33mc64807d[m HEAD@{48}: checkout: moving from dev to main
+[33m71039c5[m HEAD@{49}: checkout: moving from front to dev
+[33m944e528[m HEAD@{50}: commit: #3812 refactor : changed the data in the TableColumn array objects in the block "delivery"
+[33mabd6d00[m HEAD@{51}: commit: #3874 feat : added active state for links in header
+[33m931d982[m HEAD@{52}: commit: #3812 fix: changed path in js module (slidesFromAboutUsBlock)
+[33m40a17d4[m HEAD@{53}: commit: #3812 fix: renamed the folder with lotion files and changed paths in js modules
+[33m5ab8fb1[m HEAD@{54}: checkout: moving from main to front
+[33mc64807d[m HEAD@{55}: clone: from https://gitasap.ru/it/gosti.git

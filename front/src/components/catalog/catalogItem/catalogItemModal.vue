@@ -43,8 +43,10 @@
                     </div>
                 </div>
                 <catalogButton
-                    :stopList="catalogItem.isAvailabel"
-                    :amount="catalogItem.amount"
+                    :catalogItem="catalogItem"
+                    :amount="amount"
+                    @inCart="inCart"
+                    @transformAmount="transformAmount"
                 />
             </div>
         </div>
@@ -54,18 +56,31 @@
 <script>
 import catalogButton from "../catalogButton";
 import filterIconsBox from "./filterIconsBox";
+
 export default {
     name: "catalogItemModal",
-    data () {
+    data() {
         return {
             active: true
         }
     },
     methods: {
-        closeModal () {
+        closeModal() {
             this.$emit('closeModal', !this.active)
         },
-        closeOnClickOutside (e) {
+        inCart() {
+            this.$emit('inCart', {
+                id: this.catalogItem.id,
+                count: 1
+            })
+        },
+        transformAmount(item) {
+            this.$emit('transformAmount', {
+                id: this.catalogItem.id,
+                count: item.count
+            })
+        },
+        closeOnClickOutside(e) {
             if (e.target === document.querySelector('.modal-mask')) {
                 this.closeModal()
             }
@@ -75,12 +90,13 @@ export default {
         catalogButton,
         filterIconsBox
     },
-    props: ['catalogItem']
+    props: ['catalogItem', 'amount']
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 .modal-mask {
     display: flex;
     align-items: center;
@@ -116,6 +132,7 @@ export default {
                 height: 100%;
             }
         }
+
         .modal-content {
 
             .modal-image {
@@ -130,17 +147,19 @@ export default {
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    transform: translate(-50%,-50%);
+                    transform: translate(-50%, -50%);
                     object-fit: cover;
                     width: 100%;
                     height: 100%;
                 }
+
                 .filter-items-box {
                     position: absolute;
                     bottom: 16px;
                     right: 16px;
                 }
             }
+
             .title {
                 color: black;
                 @include inter-500;
@@ -154,6 +173,7 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
             .desc {
                 @include inter-400;
                 line-height: 20px;
@@ -165,6 +185,7 @@ export default {
                 text-overflow: ellipsis;
                 margin-bottom: 4px;
             }
+
             .info-box {
                 display: flex;
                 align-items: flex-end;
@@ -182,6 +203,7 @@ export default {
                         color: rgba(0, 0, 0, 0.5);
                         margin-bottom: 4px;
                     }
+
                     .info-table {
                         display: flex;
                         align-items: center;
@@ -209,6 +231,7 @@ export default {
                                 text-align: left;
                                 color: black;
                             }
+
                             .desc {
                                 @include inter-400;
                                 line-height: 20px;
@@ -219,6 +242,7 @@ export default {
                         }
                     }
                 }
+
                 .weight-and-price {
 
                     .weight {
@@ -229,6 +253,7 @@ export default {
                         color: rgba(0, 0, 0, 0.5);
                         margin-bottom: 8px;
                     }
+
                     .price {
                         @include inter-500;
                         font-size: 24px;

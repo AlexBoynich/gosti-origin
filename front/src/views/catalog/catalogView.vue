@@ -1,7 +1,16 @@
 <template>
     <div id="catalog" class="container">
-        <sidebarBlock class="categories" @activeItems="setActiveItems" @pickFilter="setFilter" :filters="filters"/>
-        <catalogContent :activeItems="activeItems" :catalogItems="catalogItems" @goToCatalog="goToCatalog"/>
+        <sidebarBlock
+            class="categories"
+            @activeItems="setActiveItems"
+            @pickFilter="setFilter"
+            :filters="filters"
+        />
+        <catalogContent
+            :activeItems="activeItems"
+            :catalogItems="catalogItems"
+            @goToCatalog="goToCatalog"
+        />
     </div>
 </template>
 
@@ -13,7 +22,7 @@ import {onTop} from "@/utils/helpers";
 
 export default {
     name: "catalogView",
-    data () {
+    data() {
         return {
             activeItems: {
                 categoriesTitle: '',
@@ -49,12 +58,12 @@ export default {
     },
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
-        ...mapState('categories', ['categories'])
+
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         onTop,
-        setActiveItems (el) {
+        setActiveItems(el) {
             this.activeItems.categoriesTitle = el.categoryTitle
             this.activeItems.categoriesIndex = el.categoriesIndex
             this.activeItems.subcategoriesTitle = el.subcategoryTitle
@@ -78,10 +87,10 @@ export default {
             })
             this.onTop('smooth')
         },
-        setFilter (obj) {
+        setFilter(obj) {
             this.filters[obj.id - 1].isActive = !this.filters[obj.id - 1].isActive
 
-            function generateFilterRequest (sugar, gluten, lactose, filtersForRequest) {
+            function generateFilterRequest(sugar, gluten, lactose, filtersForRequest) {
 
                 if (!sugar) {
                     filtersForRequest.sugar = 0
@@ -103,16 +112,16 @@ export default {
                     .map(key => `${key}=${filtersForRequest[key]}`)
                     .join('&')
             }
+
             let requestFilter = generateFilterRequest(this.filters[0].isActive, this.filters[1].isActive, this.filters[2].isActive, this.filtersForRequest)
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: requestFilter
             })
             this.onTop('smooth')
-
         },
         goToCatalog () {
-            this.activeItems.categoriesIndex = 0
+            /*this.activeItems.categoriesIndex = 0
             this.activeItems.categoriesTitle = this.categories[0].title
             this.activeItems.subcategoriesIndex = 1
             this.activeItems.subcategoriesTitle = this.categories[0].subcategories[0].title
@@ -126,8 +135,9 @@ export default {
                 subcategoryId: 1,
                 requestFilter: ''
             })
-            this.onTop('smooth')
+            this.onTop('smooth')*/
         }
+
     },
     components: {
         catalogContent,
