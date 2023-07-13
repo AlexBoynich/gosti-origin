@@ -8,23 +8,40 @@
                 </button>
             </div>
             <div class="product-counter">
-                3 товара
+                {{ cartCounter }}
             </div>
         </div>
         <div class="cart-content-body">
-            <CartItem />
+            <CartItem
+                v-for="(item, index) in cart"
+                :key="index"
+                :cartItem="item"
+            />
         </div>
     </div>
 </template>
 
 <script>
 import CartItem from "@/components/cart/cartItem.vue";
-
 export default {
     name: "cartContent",
     components: {
         CartItem
-    }
+    },
+    computed: {
+        cartCounter: function () {
+            let word
+            if (this.cart.length > 4 && this.cart.length  < 21) {
+                word = this.cart.length + ' товаров'
+            } else if (this.cart.length % 10 === 1) {
+                word = this.cart.length + ' товар'
+            } else if (this.cart.length % 10 > 1 && this.cart.length % 10 < 5) {
+                word = this.cart.length + ' товара'
+            }
+            return word
+        },
+    },
+    props: ['cart']
 }
 </script>
 
@@ -65,7 +82,9 @@ export default {
     }
   }
   .cart-content-body {
-
+      display: flex;
+      flex-direction: column;
+      gap: 24px 0;
   }
 }
 </style>

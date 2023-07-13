@@ -16,28 +16,78 @@
                     <div class="weight">{{ catalogItem.weight }}</div>
                 </div>
             </div>
-
         </div>
         <CatalogButton
-            :stopList="catalogItem.isAvailabel"
-            :amount="catalogItem.amount"
+            :catalogItem="catalogItem"
+            @inCart="inCart"
+            :amount="counter"
+            @transformAmount="transformAmount"
+        />
+        <catalogItemModal
+            v-show="modalIsActive"
+            :catalogItem="catalogItem"
+            :amount="counter"
+            @closeModal="closeModal"
+            @inCart="inCart"
+            @transformAmount="transformAmount"
         />
     </div>
 </template>
 
 <script>
 import CatalogButton from "@/components/catalog/catalogButton";
+import catalogItemModal from "./catalogItemModal";
 import filterIconsBox from "./filterIconsBox";
 
 export default {
     name: "catalogItem",
-    components: {filterIconsBox, CatalogButton},
-    methods: {
-        openModal() {
-            this.$emit('openModal', this.catalogItem)
+    data() {
+        return {
+            modalIsActive: false,
+            counter: this.catalogItem.count
         }
     },
-    props: ['catalogItem']
+    methods: {
+        inCart() {
+            this.counter = 1
+            this.$emit('inCart', {
+                item: this.catalogItem,
+                count: this.counter
+            })
+        },
+        transformAmount(item) {
+            this.counter = item.count
+            this.$emit('transformAmount', {
+                item: this.catalogItem,
+                count: this.counter
+            })
+        },
+        closeScroll() {
+            let body = document.querySelector('body')
+
+            if (this.modalIsActive) {
+                body.style.overflow = 'hidden'
+            } else {
+                body.style.overflow = ''
+            }
+        },
+        openModal() {
+            this.modalIsActive = true
+        },
+        closeModal(act) {
+            this.modalIsActive = act
+        }
+    },
+    components: {
+        CatalogButton,
+        catalogItemModal,
+        filterIconsBox
+    },
+    props: ['catalogItem'],
+    updated() {
+        this.counter = this.catalogItem.count
+        this.closeScroll()
+    }
 }
 </script>
 
@@ -69,6 +119,12 @@ export default {
                 object-fit: cover;
                 width: 100%;
                 height: 100%;
+            }
+
+            .filter-items-box {
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
             }
         }
 
@@ -111,12 +167,6 @@ export default {
                     letter-spacing: -0.4px;
                 }
             }
-        }
-
-        .filter-items-box {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
         }
     }
 

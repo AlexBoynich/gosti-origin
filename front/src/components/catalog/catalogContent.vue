@@ -4,13 +4,22 @@
             v-show="showMessage"
             :class="['message', {'bad' : !isGood}]"
         >
-            <div class="txt" v-show="activeItems.categoriesIndex === 0 && catalogItems.length > 0">
+            <div
+                v-show="activeItems.categoriesIndex === 0 && catalogItems.length > 0"
+                class="txt"
+            >
                 {{ messageContent.breakfast }}
             </div>
-            <div class="txt" v-show="activeItems.categoriesIndex === 1 && catalogItems.length > 0">
+            <div
+                v-show="activeItems.categoriesIndex === 1 && catalogItems.length > 0"
+                class="txt"
+            >
                 {{ messageContent.businessLunch }}
             </div>
-            <div class="txt" v-show="catalogItems.length === 0">
+            <div
+                v-show="catalogItems.length === 0"
+                class="txt"
+            >
                 {{ messageContent.noDishes }}
             </div>
         </div>
@@ -27,59 +36,61 @@
         >
             {{ activeItems.subcategoriesTitle }}
         </div>
-
-        <div v-show="catalogItems.length === 0" class="go-to-catalog" @click="goToCatalog">
+        <div
+            v-show="catalogItems.length === 0"
+            class="go-to-catalog"
+            @click="goToCatalog"
+        >
             <button>
                 Перейти в каталог
             </button>
         </div>
-
-
         <div class="catalog-items">
             <catalogItem
-                v-for="(catalogItem, index) in catalogItems"
+                v-for="(catalogItem, index) in arrСonsideringСart"
                 :key="index"
                 :catalogItem="catalogItem"
-                @openModal="openModal"
+                @inCart="inCart"
+                @transformAmount="transformAmount"
             />
         </div>
-        <catalogItemModal
-            v-show="modalIsActive"
-            @closeModal="closeModal"
-            :catalogItem="itemInModal"
-        />
     </div>
 </template>
 
 <script>
 import catalogItem from "@/components/catalog/catalogItem/catalogItem.vue";
-import catalogItemModal from "@/components/catalog/catalogItem/catalogItemModal.vue";
+import {mapMutations, mapState} from 'vuex'
 
 export default {
     name: "catalogContent",
     data() {
         return {
-            modalIsActive: false,
             messageContent: {
                 breakfast: 'Завтраки действуют по будням с 8:00 — 12:00/ по выходным с 8:00 — 16:00',
                 businessLunch: 'Бизнес-ланчи действуют по будням с 12:00 — 16:00',
                 noDishes: 'К сожалению, по вашему запросу ничего не найдено'
             },
-            itemInModal: {},
             isGood: true,
+            componentCart: [],
         }
     },
     computed: {
+        ...mapState('cart', ['cart']),
         showMessage: function () {
             if (this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1) {
                 return true
             } else return this.catalogItems.length === 0;
         },
+        arrСonsideringСart: function () {
+            return this.catalogItems.map(item => {
+                const cartItem = this.cart.find(cartItem => cartItem.id === item.id);
+                item.count = cartItem ? cartItem.count : 0;
+                return item;
+            });
+        }
     },
     methods: {
-        goToCatalog() {
-            this.$emit('goToCatalog')
-        },
+        ...mapMutations('cart', ['SET_CART']),
         checkTime(id) {
             let date = new Date();
             let hour = date.getUTCHours() + 7
@@ -100,42 +111,42 @@ export default {
                 }
             }
             this.checkDishes();
-
         },
-        closeScroll() {
-            let body = document.querySelector('body')
-
-            if (this.modalIsActive) {
-                body.style.overflow = 'hidden'
-            } else {
-                body.style.overflow = ''
-            }
-        },
-        openModal(item) {
-            this.itemInModal = item
-            this.modalIsActive = true
-        },
-        closeModal(act) {
-            this.modalIsActive = act
+        goToCatalog() {
+            this.$emit('goToCatalog')
         },
         checkDishes() {
             if (this.catalogItems.length === 0) {
                 this.isGood = false
             }
-        }
+        },
+        inCart(item) {
+            let temporaryItem = item.item
+            temporaryItem.count = item.count
+            console.log(temporaryItem)
+
+            this.componentCart.push(temporaryItem)
+            this.SET_CART(this.componentCart)
+        },
+        transformAmount(item) {
+            let temporaryItem = item.item
+            temporaryItem.count = item.count
+            let arr = this.componentCart.filter(el => el.id !== item.item.id)
+            arr.push(temporaryItem)
+            this.componentCart = arr.filter(el => el.count !== 0)
+            this.SET_CART(this.componentCart)
+        },
     },
     components: {
         catalogItem,
-        catalogItemModal
     },
     props: ['activeItems', 'catalogItems'],
-    updated() {
-        this.closeScroll()
-        this.checkTime(this.activeItems.categoriesIndex)
-    },
     created() {
         this.checkTime(this.activeItems.categoriesIndex)
-    }
+    },
+    updated() {
+        this.checkTime(this.activeItems.categoriesIndex)
+    },
 }
 </script>
 
@@ -179,6 +190,7 @@ export default {
         }
     }
 
+
     .subcategories-title {
         color: #000;
         @include inter-400;
@@ -208,5 +220,6 @@ export default {
         min-width: 918px;
         width: 100%;
     }
+
 }
 </style>

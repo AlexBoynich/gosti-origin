@@ -6,6 +6,7 @@ import leftPartFooterItems from "./modules/footer/leftPartFooterItems";
 import footerSocials from "./modules/footer/footerSocials";
 import categories from "./modules/catalog/categories";
 import catalogItems from "./modules/catalog/catalogItems";
+import cart from "./modules/cart/cart";
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         leftPartFooterItems,
         footerSocials,
         categories,
-        catalogItems
+        catalogItems,
+        cart
     }
 })

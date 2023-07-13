@@ -49,7 +49,7 @@
 <script>
 export default {
     name: "filterIconsBox",
-    data () {
+    data() {
         return {
             sugar: false,
             gluten: false,
@@ -57,16 +57,16 @@ export default {
         }
     },
     methods: {
-        hintOnHover (el) {
+        hintOnHover(el) {
             if (el === 's') {
                 this.sugar = true
-            } else if (el === 'g'){
+            } else if (el === 'g') {
                 this.gluten = true
             } else {
                 this.lactose = true
             }
         },
-        closeHint () {
+        closeHint() {
             this.sugar = false
             this.gluten = false
             this.lactose = false
@@ -78,45 +78,47 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-    .filter-items-box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid #CECECE26;
-        background: linear-gradient(0deg, rgba(206, 206, 206, 0.15), rgba(206, 206, 206, 0.15)),
-        linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
-        border-radius: 42px;
-        padding: 6px 19px;
-        gap: 6px;
-        position: relative;
 
-        .filter-icon {
+.filter-items-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #CECECE26;
+    background: linear-gradient(0deg, rgba(206, 206, 206, 0.15), rgba(206, 206, 206, 0.15)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+    border-radius: 42px;
+    padding: 6px 19px;
+    gap: 6px;
+    position: relative;
+
+    .filter-icon {
+        width: 22px;
+        height: 22px;
+
+        img {
             width: 22px;
             height: 22px;
+        }
 
-            img {
-                width: 22px;
-                height: 22px;
-            }
-            .message {
-                position: absolute;
-                left: -97px;
-                top: -62px;
-                padding: 16px 0;
-                width: 109px;
-                height: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: black;
-                @include inter-400;
-                font-size: 16px;
-                line-height: 18px;
-                background: linear-gradient(0deg, rgba(206, 206, 206, 0.15), rgba(206, 206, 206, 0.15)),
-                linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
-                border: 1px solid #CECECE26;
-                border-radius: 16px;
-            }
+        .message {
+            position: absolute;
+            left: -97px;
+            top: -62px;
+            padding: 16px 0;
+            width: 109px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            @include inter-400;
+            font-size: 16px;
+            line-height: 18px;
+            background: linear-gradient(0deg, rgba(206, 206, 206, 0.15), rgba(206, 206, 206, 0.15)),
+            linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+            border: 1px solid #CECECE26;
+            border-radius: 16px;
         }
     }
+}
 </style>
