@@ -68,10 +68,10 @@ export default {
         closeModal() {
             this.$emit('closeModal', !this.active)
         },
-        inCart(item) {
+        inCart() {
             this.$emit('inCart', {
                 id: this.catalogItem.id,
-                count: item.count
+                count: 1
             })
         },
         transformAmount(item) {

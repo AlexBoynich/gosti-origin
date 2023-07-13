@@ -84,7 +84,7 @@ export default {
         arrСonsideringСart: function () {
             return this.catalogItems.map(item => {
                 const cartItem = this.cart.find(cartItem => cartItem.id === item.id);
-                item.count = cartItem ? cartItem.count : 0;
+                this.$set(item, 'count', cartItem ? cartItem.count : 0);
                 return item;
             });
         }

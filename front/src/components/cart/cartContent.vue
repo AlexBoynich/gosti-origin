@@ -3,15 +3,15 @@
         <div class="cart-content-header">
             <div class="title-and-del">
                 <div class="your-cart">Ваш заказ</div>
-                <button class="delete-cart">
+                <button v-show="cartIsActive" class="delete-cart">
                     Очистить корзину
                 </button>
             </div>
-            <div class="product-counter">
+            <div v-show="cartIsActive" class="product-counter">
                 {{ cartCounter }}
             </div>
         </div>
-        <div class="cart-content-body">
+        <div v-show="cartIsActive" class="cart-content-body">
             <CartItem
                 v-for="(item, index) in cart"
                 :key="index"
@@ -40,8 +40,9 @@ export default {
             }
             return word
         },
+
     },
-    props: ['cart']
+    props: ['cart', 'cartIsActive']
 }
 </script>
 
@@ -50,7 +51,6 @@ export default {
 .cart-content {
   max-width: 596px;
   width: 100%;
-  min-height: 100vh;
 
   .cart-content-header {
     display: flex;

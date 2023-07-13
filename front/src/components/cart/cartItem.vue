@@ -6,17 +6,17 @@
         <div class="cart-item-content">
             <div class="product-header">
                 <div class="title">{{ cartItem.title }}</div>
-                <button class="delete-item">
+                <button class="delete-item" @click="deleteItem">
                     <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="delete-item">
                 </button>
             </div>
             <div class="product-desc-box">
                 <div class="counter">
-                    <button class="action-button">
+                    <button class="action-button" @click="transformCartItemAmount('-')">
                         <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
                     <div class="count">{{ cartItem.count }}</div>
-                    <button class="action">
+                    <button class="action-button" @click="transformCartItemAmount('+')">
                         <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
@@ -30,9 +30,38 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
     name: "cartItem",
-    props: ['cartItem']
+    computed: {
+        ...mapState('cart', ['cart']),
+        ...mapState('catalogItems', ['catalogItems']),
+    },
+    methods: {
+        deleteItem () {
+            let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
+            this.cart.splice(cartIndex, 1)
+
+        },
+        transformCartItemAmount (act) {
+            if (act === '-') {
+                if (this.cartItem.count === 1) {
+                    this.deleteItem()
+                } else {
+                    let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
+                    this.cart[cartIndex].count -= 1
+                }
+            } else {
+                if (this.cartItem.count < 99) {
+                    let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
+                    this.cart[cartIndex].count += 1
+                }
+            }
+            console.log(this.cartItem.count)
+        }
+    },
+    props: ['cartItem'],
 }
 </script>
 
@@ -41,7 +70,7 @@ export default {
 
 .cart-item {
     display: flex;
-    background: $lightGreenBackground;
+    background: #EFF4EB;
     border-radius: 16px;
 
     .img {
@@ -128,6 +157,11 @@ export default {
                     @include inter-400;
                     font-size: 16px;
                     line-height: 18px;
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
             .desc {

@@ -109,7 +109,6 @@ export default {
             height: 359px;
             border-radius: 16px;
             margin-bottom: 24px;
-            cursor: pointer;
 
             img {
                 position: absolute;
