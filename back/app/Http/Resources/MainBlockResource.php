@@ -26,12 +26,12 @@ class MainBlockResource extends JsonResource
 
     private function getImages(): array
     {
-        $imageCollection = $this->getMedia('mainBlock');
+        $imageCollection = $this->getMedia('mainBlock')->sortBy('order_column');
+
         $imageArray = [];
         foreach ($imageCollection as $image) {
             $imageArray[$image->order_column] = $image->getUrl();
         }
-        sort($imageArray);
         return $imageArray;
     }
 }
