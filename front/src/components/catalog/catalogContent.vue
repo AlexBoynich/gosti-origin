@@ -36,15 +36,14 @@
         >
             {{ activeItems.subcategoriesTitle }}
         </div>
-        <div
+        <button
             v-show="catalogItems.length === 0"
             class="go-to-catalog"
             @click="goToCatalog"
         >
-            <button>
-                Перейти в каталог
-            </button>
-        </div>
+            Перейти в каталог
+        </button>
+
         <div class="catalog-items">
             <catalogItem
                 v-for="(catalogItem, index) in arrСonsideringСart"
@@ -203,16 +202,13 @@ export default {
     }
 
     .go-to-catalog {
+        @include green-button;
+        padding: 16px 64px;
+        margin-top: 24px;
 
-        button {
-            @include green-button;
-            padding: 16px 64px;
-            margin-top: 24px;
-        }
         &:hover {
-            button {
-                @include green-button-hover;
-            }
+            @include green-button-hover;
+
         }
     }
 

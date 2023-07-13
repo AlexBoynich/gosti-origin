@@ -58,7 +58,7 @@ export default {
     },
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
-
+        ...mapState('categories', ['categories'])
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
@@ -121,7 +121,7 @@ export default {
             this.onTop('smooth')
         },
         goToCatalog () {
-            /*this.activeItems.categoriesIndex = 0
+            this.activeItems.categoriesIndex = 0
             this.activeItems.categoriesTitle = this.categories[0].title
             this.activeItems.subcategoriesIndex = 1
             this.activeItems.subcategoriesTitle = this.categories[0].subcategories[0].title
@@ -131,18 +131,20 @@ export default {
             }
             Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
 
+            this.$emit('goToCatalog',)
+
             this.GET_CATALOG_ITEMS({
                 subcategoryId: 1,
                 requestFilter: ''
             })
-            this.onTop('smooth')*/
+            this.onTop('smooth')
         }
 
     },
     components: {
         catalogContent,
         sidebarBlock
-    },
+    }
 }
 </script>
 
