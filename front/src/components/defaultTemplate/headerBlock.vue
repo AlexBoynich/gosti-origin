@@ -41,7 +41,11 @@
                         <p v-if="navItem.title" @click="onTop('auto')">
                             {{ navItem.title }}
                         </p>
-                        <img v-else :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
+                        <div v-else class="cart-icon">
+                            <img :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
+                            <div v-show="cart.length > 0" class="cart-counter">{{ cart.length }}</div>
+                        </div>
+
                     </router-link>
 
                     <a
@@ -61,6 +65,7 @@
 
 <script>
 import {onTop} from '@/utils/helpers.js'
+import {mapState} from "vuex";
 export default {
     name: "headerBlock",
     data() {
@@ -86,6 +91,9 @@ export default {
             isHover: false,
             isCatalog: false
         }
+    },
+    computed: {
+        ...mapState('cart', ['cart'])
     },
     methods: {
         onTop
@@ -189,7 +197,8 @@ header {
                     }
                 }
 
-                &:last-child {
+                .cart-icon {
+                    position: relative;
                     width: 35px;
                     height: 36px;
                     margin-left: 16px;
@@ -198,6 +207,22 @@ header {
                     img {
                       width: 35px;
                       height: 36px;
+                    }
+                    .cart-counter {
+                        position: absolute;
+                        right: -8px;
+                        top: 0;
+                        width: 25px;
+                        height: 25px;
+                        background: $greenBackground;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        @include inter-400;
+                        font-size: 16px;
+                        line-height: 16px;
                     }
                 }
             }

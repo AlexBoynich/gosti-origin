@@ -18,7 +18,7 @@
                         v-else
                         class="select"
                     >
-                        <div>dsd</div>
+                        <div>13:00-14:00</div>
                         <img
                             v-if="form.img"
                             :class="['form-icon', form.img.class]"
@@ -26,7 +26,6 @@
                             alt="form-icon"
                         >
                     </div>
-
                 </div>
             </form>
         </div>

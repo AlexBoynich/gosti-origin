@@ -1,6 +1,6 @@
 <template>
     <div class="card-button">
-        <template v-if="stopList">
+        <template v-if="catalogItem.isAvailabel">
             <button
                 v-show="!isActive"
                 class="main-button default-button"
@@ -16,14 +16,14 @@
                     <img src="/images/catalog/cardButton/minus.svg" alt="minus">
                 </button>
 
-                <span class="count">{{ count }}</span>
+                <div class="count">{{ amount }}</div>
 
                 <button @click="transformAmount('+')">
                     <img src="/images/catalog/cardButton/plus.svg" alt="plus">
                 </button>
             </button>
         </template>
-        <template v-if="!stopList">
+        <template v-if="!catalogItem.isAvailabel">
             <button
                 class="stop-list main-button"
                 disabled
@@ -32,108 +32,128 @@
             </button>
         </template>
     </div>
-
 </template>
 
 <script>
+
+import {mapState} from "vuex";
+
 export default {
     name: "catalogButton",
-    data () {
+    data() {
         return {
-            count: this.amount,
-            isActive: false
+            counter: this.amount,
+        }
+    },
+    computed: {
+        ...mapState('catalogItems', ['catalogItems']),
+        count: function () {
+            let index = this.catalogItems.findIndex((el) => el.id === this.catalogItem.id)
+            return this.catalogItems[index].count
+        },
+        isActive: function () {
+            return this.counter > 0
         }
     },
     methods: {
-        inCart () {
-            this.count = 1
-            this.isActive = true
-
+        inCart() {
+            this.counter = 1
+            this.$emit('inCart')
         },
-        transformAmount (action) {
+        transformAmount(action) {
             if (action === '-') {
-                if (this.count === 1) {
-                    this.count -= 1
-                    this.isActive = false
+                if (this.counter === 1) {
+                    this.counter -= 1
                 } else {
-                    this.count -= 1
+                    this.counter -= 1
                 }
             } else if (action === '+') {
-                if (this.count < 99) {
-                    this.count += 1
+                if (this.counter < 99) {
+                    this.counter += 1
                 }
             }
 
+            this.$emit('transformAmount', {
+                id: this.catalogItem.id,
+                count: this.counter
+            })
         },
     },
-    props: ['stopList', 'amount']
+    updated() {
+        this.counter = this.amount
+    },
+    props: ['catalogItem', 'amount'],
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-    .main-button {
-        border-radius: 16px;
-        background: $greenBackground;
-        border: none;
-        padding: 16px 0;
-        color: white;
-        @include inter-500;
-        font-size: 20px;
-        line-height: 110%;
-        letter-spacing: -0.4px;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
 
-        &.stop-list {
-            background: #BDCAB0;
-            cursor: default;
-        }
+.main-button {
+    border-radius: 16px;
+    background: $greenBackground;
+    border: none;
+    padding: 16px 0;
+    color: white;
+    @include inter-500;
+    font-size: 20px;
+    line-height: 110%;
+    letter-spacing: -0.4px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
 
-        &.default-button:hover {
-            background: #C1D4B2;
-            color: black;
-        }
+    &.stop-list {
+        background: #BDCAB0;
+        cursor: default;
     }
-    .button-counter {
-        border-radius: 16px;
+    &.default-button:hover {
         background: #C1D4B2;
-        border: none;
-        padding: 13px 0;
         color: black;
-        @include inter-500;
-        font-size: 20px;
-        line-height: 110%;
-        letter-spacing: -0.4px;
-        text-align: center;
-        width: 100%;
+    }
+}
+
+.button-counter {
+    border-radius: 16px;
+    background: #C1D4B2;
+    border: none;
+    padding: 13px 0;
+    color: black;
+    @include inter-500;
+    font-size: 20px;
+    line-height: 110%;
+    letter-spacing: -0.4px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 24px;
+
+
+    .count {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0 24px;
+        width: 22px;
+        height: 28px;
 
-        button {
-            border: none;
-            background: transparent;
-            max-width: 24px;
-            max-height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+    }
 
-            img {
-                width: 24px;
-                height: 24px;
-            }
-        }
-        .count {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 28px;
+    button {
+        border: none;
+        background: transparent;
+        max-width: 24px;
+        max-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        img {
+            width: 24px;
+            height: 24px;
         }
     }
+}
 </style>
