@@ -55,7 +55,7 @@
         <div class="finally-forms">
             <div class="to-pay">
                 <div class="section-title">{{ toPay.title }}</div>
-                <div class="price">{{ price }}</div>
+                <div class="price">{{ price + ' ₽' }} </div>
             </div>
             <div class="personal-data">
                 <div
@@ -81,6 +81,7 @@ import deliveryForms from "./forms/deliveryForms";
 import PersonForms from "./forms/personForms";
 import pickupBlock from "./forms/pickupBlock";
 import DateAndTimeForms from "./forms/dateAndTimeForms";
+import {mapState} from "vuex";
 
 export default {
     name: "orderFormsBlock",
@@ -230,11 +231,17 @@ export default {
         }
     },
     computed: {
+        ...mapState('cart', ['cart']),
         price: function () {
-            return 800 + ' ₽'
+            return this.cart.reduce((acc, item) => acc + item.price, 0)
         },
         deliveryPrice: function () {
-            return 200 + ' ₽'
+            if (this.price >= 1500) {
+                return 0 + ' ₽'
+            } else {
+                return 200 + ' ₽'
+            }
+
         }
     },
     methods: {
