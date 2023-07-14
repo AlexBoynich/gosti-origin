@@ -3,7 +3,11 @@
         <div class="cart-content-header">
             <div class="title-and-del">
                 <div class="your-cart">Ваш заказ</div>
-                <button v-show="cartIsActive" class="delete-cart">
+                <button
+                    v-show="cartIsActive"
+                    class="delete-cart"
+                    @click="deleteCart"
+                >
                     Очистить корзину
                 </button>
             </div>
@@ -23,12 +27,10 @@
 
 <script>
 import CartItem from "@/components/cart/cartItem.vue";
+import {mapMutations} from "vuex";
 
 export default {
     name: "cartContent",
-    components: {
-        CartItem
-    },
     computed: {
         cartCounter: function () {
             let word
@@ -41,6 +43,15 @@ export default {
             }
             return word
         },
+    },
+    methods: {
+        ...mapMutations('cart', ['DELETE_CART']),
+        deleteCart () {
+            this.DELETE_CART()
+        }
+    },
+    components: {
+        CartItem
     },
     props: ['cart', 'cartIsActive']
 }
