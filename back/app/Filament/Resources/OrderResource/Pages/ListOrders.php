@@ -15,4 +15,14 @@ class ListOrders extends ListRecords
     {
         return fn (Model $record): string => OrderResource::getUrl('view', ['record' => $record]);
     }
+
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
 }

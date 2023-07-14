@@ -16,4 +16,14 @@ class ListSubcategories extends ListRecords
             //
         ];
     }
+
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'asc';
+    }
 }
