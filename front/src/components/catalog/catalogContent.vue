@@ -36,15 +36,14 @@
         >
             {{ activeItems.subcategoriesTitle }}
         </div>
-        <div
+        <button
             v-show="catalogItems.length === 0"
             class="go-to-catalog"
             @click="goToCatalog"
         >
-            <button>
-                Перейти в каталог
-            </button>
-        </div>
+            Перейти в каталог
+        </button>
+
         <div class="catalog-items">
             <catalogItem
                 v-for="(catalogItem, index) in arrСonsideringСart"
@@ -130,10 +129,13 @@ export default {
             let temporaryItem = item.item
             temporaryItem.count = item.count
 
-            let arr = this.componentCart.filter(el => el.id !== temporaryItem.id)
-            arr.push(temporaryItem)
+            this.componentCart = this.cart
+            this.componentCart.push(temporaryItem)
 
-            let index = this.componentCart.findIndex(el => el.count === 0)
+            let index = this.componentCart.findIndex(el => el.id === temporaryItem.id)
+            this.componentCart.splice(index, 1)
+
+            index = this.componentCart.findIndex(el => el.count === 0)
             if (index !== -1) {
                 this.componentCart.splice(index, 1);
             }
@@ -203,16 +205,13 @@ export default {
     }
 
     .go-to-catalog {
+        @include green-button;
+        padding: 16px 64px;
+        margin-top: 24px;
 
-        button {
-            @include green-button;
-            padding: 16px 64px;
-            margin-top: 24px;
-        }
         &:hover {
-            button {
-                @include green-button-hover;
-            }
+            @include green-button-hover;
+
         }
     }
 

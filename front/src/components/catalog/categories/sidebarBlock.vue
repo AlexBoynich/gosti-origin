@@ -49,6 +49,7 @@ export default {
         ...mapState('categories', ['categories']),
     },
     methods: {
+        ...mapActions('categories', ['GET_CATEGORIES']),
         toggleCategory(id) {
             if (this.activeIndices.categoriesIndex === id) {
                 this.activeIndices.categoriesIndex = null
@@ -84,9 +85,11 @@ export default {
                     subcategoriesIndex: subcategory.id
                 })
             }
-
         },
-        ...mapActions('categories', ['GET_CATEGORIES'])
+        goToCatalog() {
+            this.activeIndices.categoriesIndex = 1
+            this.activeIndices.subcategoriesIndex = 1
+        }
     },
     components: {
         FiltersItem,
@@ -95,10 +98,14 @@ export default {
     props: ['filters'],
     created() {
         this.GET_CATEGORIES();
+        this.$parent.$on('goToCatalog', this.goToCatalog);
     },
-    beforeUpdate() {
+    updated() {
         this.activeItems()
-    }
+    },
+    beforeDestroy() {
+        this.$parent.$off('goToCatalog', this.goToCatalog);
+    },
 }
 </script>
 

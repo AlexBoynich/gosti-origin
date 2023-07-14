@@ -6,7 +6,7 @@
         <div class="cart-item-content">
             <div class="product-header">
                 <div class="title">{{ cartItem.title }}</div>
-                <button class="delete-item" @click="deleteItem">
+                <button class="delete-item" @click="openModal">
                     <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="delete-item">
                 </button>
             </div>
@@ -26,13 +26,25 @@
                 </div>
             </div>
         </div>
+        <DeleteItemModal
+            v-show="modalIsActive"
+            @closeModal="closeModal"
+            @choice="choice"
+        />
     </div>
 </template>
 
 <script>
 import {mapState} from "vuex";
+import DeleteItemModal from "./deleteItemModal/deleteItemModal";
 export default {
     name: "cartItem",
+    components: {DeleteItemModal},
+    data () {
+        return {
+            modalIsActive: false
+        }
+    },
     computed: {
         ...mapState('cart', ['cart']),
         ...mapState('catalogItems', ['catalogItems']),
@@ -42,10 +54,23 @@ export default {
             let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
             this.cart.splice(cartIndex, 1)
         },
+        openModal () {
+            this.modalIsActive = true
+        },
+        choice (act) {
+            console.log(act)
+            if (act === true) {
+                this.deleteItem()
+            }
+            this.closeModal(false)
+        },
+        closeModal (state) {
+            this.modalIsActive = state
+        },
         transformCartItemAmount (act) {
             if (act === '-') {
                 if (this.cartItem.count === 1) {
-                    this.deleteItem()
+                    this.openModal()
                 } else {
                     let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
                     this.cart[cartIndex].count -= 1
@@ -56,7 +81,6 @@ export default {
                     this.cart[cartIndex].count += 1
                 }
             }
-            console.log(this.cartItem.count)
         }
     },
     props: ['cartItem']
