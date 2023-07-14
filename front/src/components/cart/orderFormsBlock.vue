@@ -1,7 +1,7 @@
 <template>
     <div class="order-forms-block">
         <div class="title">Оформление заказа</div>
-        <PersonForms/>
+        <PersonForms />
         <div class="radio-buttons">
             <div class="section-title">{{ wayToGet.title }}</div>
             <div class="radio-container">
@@ -9,6 +9,7 @@
                     v-for="radio in wayToGet.radioButtons"
                     :key="radio.id"
                     class="radio-box"
+                    @click="activeWayToGetButton(radio.id)"
                 >
                     <div class="radio">
                         <div v-show="radio.isActive" class="radio-dot"></div>
@@ -23,11 +24,8 @@
         />
         <deliveryForms
             v-else
-            :delivery="wayToGet.delivery"
         />
-        <DateAndTimeForms
-            :orderForms="orderForms"
-        />
+        <DateAndTimeForms />
         <div class="radio-buttons">
             <div class="section-title">{{ payMethod.title }}</div>
             <div class="radio-container">
@@ -35,6 +33,7 @@
                     v-for="radio in payMethod.radioButtons"
                     :key="radio.id"
                     class="radio-box"
+                    @click="activePayMethod(radio.id)"
                 >
                     <div class="radio">
                         <div v-show="radio.isActive" class="radio-dot"></div>
@@ -46,7 +45,7 @@
         <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
             <div class="sum-delivery">
                 <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
-                <div class="price">{{ deliveryPrice }}</div>
+                <div class="price">{{ deliveryPrice + ' ₽' }}</div>
             </div>
             <div class="message">
                 {{ wayToGet.delivery.deliveryPriceBlock.message }}
@@ -61,7 +60,7 @@
                 <div
                     :id="personalData.id"
                     :class="['checkbox', {'active' : personalData.isActive}]"
-                    @click="pickCheckbox"
+                    @click="toggleCheckbox"
                 >
                     <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                 </div>
@@ -72,7 +71,7 @@
                 </label>
             </div>
         </div>
-        <button>Оформить заказ</button>
+        <button @click="checkForms">Оформить заказ</button>
     </div>
 </template>
 
@@ -95,92 +94,11 @@ export default {
                     {id: 'delivery', label: 'доставка', isActive: true},
                 ],
                 delivery: {
-                    title: 'Адрес заказа',
-                    isDelivery: true,
-                    forms: [
-                        {
-                            label: 'Улица*',
-                            placeholder: 'г.Томск, ул.Секретная',
-                            class: 'full',
-                            type: 'text',
-                            id: 'street',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Дом*',
-                            placeholder: '16/4',
-                            class: 'small',
-                            type: 'text',
-                            id: 'house',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Квартира/офис',
-                            placeholder: '50',
-                            class: 'small',
-                            type: 'text',
-                            id: 'apartment',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Подъезд',
-                            placeholder: '2',
-                            class: 'small no-margin',
-                            type: 'text',
-                            id: 'entrance',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Этаж',
-                            placeholder: '2',
-                            class: 'small',
-                            type: 'text',
-                            id: 'floor',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Домофон',
-                            placeholder: '50',
-                            class: 'small no-margin',
-                            type: 'text',
-                            id: 'intercomNumber',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        }
-                    ],
                     deliveryPriceBlock: {
                         title: 'Сумма доставки',
                         message: '*бесплатная доставка от 1500 рублей'
                     },
+                    isDelivery: true,
                 },
                 pickup: {
                     title: 'Адрес самовывоза',
@@ -196,30 +114,7 @@ export default {
                     {id: 'payByCash', label: 'наличными при получении', isActive: false},
                 ]
             },
-            orderForms: {
-                title: 'Дата и время',
-                forms: [
-                    {
-                        label: 'Дата',
-                        placeholder: '24.07.2023',
-                        class: 'small',
-                        type: 'text',
-                        id: 'date'
-                    },
-                    {
-                        label: 'Время',
-                        placeholder: '13:00-14:00',
-                        class: 'small',
-                        type: 'select',
-                        id: 'time',
-                        img: {
-                            name: 'select',
-                            src: '/images/cart/form/select-arrow.svg',
-                            class: 'arrow'
-                        },
-                    }
-                ]
-            },
+
             toPay: {
                 title: 'К оплате:',
             },
@@ -233,18 +128,55 @@ export default {
     computed: {
         ...mapState('cart', ['cart']),
         price: function () {
-            return this.cart.reduce((acc, item) => acc + item.price, 0)
+            let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            if (totalPrice + this.deliveryPrice < 1500) {
+                return (this.cart.reduce((acc, item) => acc + item.price, 0)) + 200
+            } else {
+                return this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            }
+
         },
         deliveryPrice: function () {
-            if (this.price >= 1500) {
-                return 0 + ' ₽'
+            let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            if (totalPrice >= 1500) {
+                return 0
             } else {
-                return 200 + ' ₽'
+                return 200
             }
         }
     },
     methods: {
         pickCheckbox() {
+            this.personalData.isActive = !this.personalData.isActive
+        },
+        activeWayToGetButton (id) {
+            if (id === 'pickup') {
+                this.wayToGet.radioButtons[0].isActive = true
+                this.wayToGet.radioButtons[1].isActive = false
+
+                this.wayToGet.pickup.isPickup = true
+                this.wayToGet.delivery.isDelivery = false
+            } else {
+                this.wayToGet.radioButtons[0].isActive = false
+                this.wayToGet.radioButtons[1].isActive = true
+
+                this.wayToGet.pickup.isPickup = false
+                this.wayToGet.delivery.isDelivery = true
+            }
+        },
+        activePayMethod (id) {
+            if (id === 'payByCard') {
+                this.payMethod.radioButtons[0].isActive = true
+                this.payMethod.radioButtons[1].isActive = false
+            } else {
+                this.payMethod.radioButtons[0].isActive = false
+                this.payMethod.radioButtons[1].isActive = true
+            }
+        },
+        checkForms () {
+            this.$emit('checkForms')
+        },
+        toggleCheckbox () {
             this.personalData.isActive = !this.personalData.isActive
         }
     },
@@ -254,6 +186,9 @@ export default {
         PersonForms,
         deliveryForms
     },
+    updated() {
+
+    }
 }
 </script>
 
