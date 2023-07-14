@@ -57,6 +57,8 @@ class SubcategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->label('Подкатегория'),
+                TextColumn::make('category.title')
+                    ->label('Категория'),
             ])
             ->filters([
                 //
