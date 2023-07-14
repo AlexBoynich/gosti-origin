@@ -32,4 +32,14 @@ class ListMainBlocks extends ListRecords
         $target = Target::query()->firstWhere(['title' => 'главный']);
         return Block::query()->where('target_id', $target->id);
     }
+
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'asc';
+    }
 }

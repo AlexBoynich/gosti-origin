@@ -27,6 +27,7 @@ class CategoryResource extends Resource
     protected static ?string $label = 'Категория';
     protected static ?string $pluralLabel = 'Категории';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
