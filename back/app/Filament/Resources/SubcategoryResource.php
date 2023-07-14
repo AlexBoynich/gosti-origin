@@ -25,6 +25,7 @@ class SubcategoryResource extends Resource
     protected static ?string $label = 'Подкатегория';
     protected static ?string $pluralLabel = 'Подкатегории';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

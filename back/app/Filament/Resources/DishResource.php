@@ -34,6 +34,7 @@ class DishResource extends Resource
 
     protected static ?string $label = 'Блюдо';
     protected static ?string $pluralLabel = 'Блюда';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

@@ -32,6 +32,7 @@ class MainBlockResource extends Resource
     protected static ?string $pluralLabel = 'Главный';
     protected static ?string $slug = 'main-block';
     protected static ?string $navigationIcon = 'heroicon-o-photograph';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
