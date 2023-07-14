@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            return CategoryResource::collection(Category::all());
+            return CategoryResource::collection(Category::query()->orderBy('id')->get());
         } catch (\Exception $exception) {
             Log::critical($exception->getMessage());
             return response([
