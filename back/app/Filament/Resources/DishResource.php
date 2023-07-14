@@ -60,7 +60,7 @@ class DishResource extends Resource
                         ->default(0)
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->integer()
                         ->required()
                         ->label('Цена'),
@@ -76,7 +76,7 @@ class DishResource extends Resource
                     TextInput::make('metric_value')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->label('Вес/объём')
@@ -106,7 +106,7 @@ class DishResource extends Resource
                     TextInput::make('calorie')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
@@ -115,7 +115,7 @@ class DishResource extends Resource
                     TextInput::make('proteins')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
@@ -124,7 +124,7 @@ class DishResource extends Resource
                     TextInput::make('fats')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
@@ -133,7 +133,7 @@ class DishResource extends Resource
                     TextInput::make('carbohydrates')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
+                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->default(0)
                         ->integer()
                         ->required()
@@ -184,8 +184,28 @@ class DishResource extends Resource
                     ->label('Категория'),
                 ToggleColumn::make('is_available')
                     ->label('Доступно'),
+                TextColumn::make('created_at')
+                    ->visible(false)
             ])
             ->filters([
+                Filter::make('created_at')
+                    ->form([
+                        Forms\Components\Fieldset::make()->schema([
+                            Forms\Components\DatePicker::make('created_from')->label('С:'),
+                            Forms\Components\DatePicker::make('created_until')->label('До:'),
+                        ])->columns(1)->label('Дата создания'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
                 SelectFilter::make('subcategory')->form(
                     [
                         Forms\Components\Fieldset::make()->schema([
