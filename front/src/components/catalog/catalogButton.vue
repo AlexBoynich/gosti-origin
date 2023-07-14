@@ -47,6 +47,7 @@ export default {
     },
     computed: {
         ...mapState('catalogItems', ['catalogItems']),
+        ...mapState('cart', ['cart']),
         count: function () {
             let index = this.catalogItems.findIndex((el) => el.id === this.catalogItem.id)
             return this.catalogItems[index].count
@@ -68,7 +69,7 @@ export default {
                     this.counter -= 1
                 }
             } else if (action === '+') {
-                if (this.counter < 99) {
+                if (this.cart.reduce((acc, item) => acc + item.count, 0) < 99) {
                     this.counter += 1
                 }
             }

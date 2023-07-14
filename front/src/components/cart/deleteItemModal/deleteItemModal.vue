@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-mask">
+    <div class="modal-mask" @click="closeOnClickOutside">
         <div class="modal-container">
             <button class="close-modal" @click="closeModal">
                 <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="close-modal">
@@ -28,6 +28,11 @@ export default {
                 this.$emit('choice', false)
             } else {
                 this.$emit('choice', true)
+            }
+        },
+        closeOnClickOutside(e) {
+            if (e.target === document.querySelector('.modal-mask')) {
+                this.closeModal()
             }
         }
     }

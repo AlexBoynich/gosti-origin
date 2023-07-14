@@ -29,7 +29,7 @@ export default {
     computed: {
         ...mapState('cart', ['cart']),
         cartIsActive: function () {
-            return this.cart.length > 0;
+            return this.cart.length >= 1;
         }
     }
 }
