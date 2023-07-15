@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
 import slidesFromMainBlock from "./modules/mainBlock/slidesFromMainBlock";
 import slidesFromAboutUsBlock from "./modules/aboutUs/slidesFromAboutUsBlock";
 import leftPartFooterItems from "./modules/footer/leftPartFooterItems";
@@ -11,6 +12,7 @@ import cart from "./modules/cart/cart";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    plugins: [createPersistedState()],
     modules: {
         slidesFromMainBlock,
         slidesFromAboutUsBlock,
