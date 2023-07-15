@@ -1,7 +1,9 @@
 <template>
     <div class="order-forms-block">
         <div class="title">Оформление заказа</div>
-        <PersonForms />
+        <PersonForms
+            @notNull="personNotNull"
+        />
         <div class="radio-buttons">
             <div class="section-title">{{ wayToGet.title }}</div>
             <div class="radio-container">
@@ -24,8 +26,11 @@
         />
         <deliveryForms
             v-else
+            @formValidate="deliveryNotNull"
         />
-        <DateAndTimeForms />
+        <DateAndTimeForms
+            @notNull="dateAndTimeNotNull"
+        />
         <div class="radio-buttons">
             <div class="section-title">{{ payMethod.title }}</div>
             <div class="radio-container">
@@ -54,7 +59,7 @@
         <div class="finally-forms">
             <div class="to-pay">
                 <div class="section-title">{{ toPay.title }}</div>
-                <div class="price">{{ price + ' ₽' }} </div>
+                <div class="price">{{ price + ' ₽' }}</div>
             </div>
             <div class="personal-data">
                 <div
@@ -114,7 +119,6 @@ export default {
                     {id: 'payByCash', label: 'наличными при получении', isActive: false},
                 ]
             },
-
             toPay: {
                 title: 'К оплате:',
             },
@@ -122,7 +126,34 @@ export default {
                 label: 'даю согласие на обработку персональных данных',
                 id: 'personalData',
                 isActive: false
-            }
+            },
+            order: {
+                personal: {
+                    fullName: '',
+                    phoneNumber: '',
+                    email: '',
+                    message: '',
+                    personalFormIsEmpty: true,
+                },
+                wayToGet: {
+                    content: 'доставка',
+                    delivery: {
+                        formIsEmpty: true,
+                        street: '',
+                        house: '',
+                        apartment: '',
+                        entrance: '',
+                        floor: '',
+                        intercomNumber: '',
+                    }
+                },
+                dateAndTime: {
+                    formIsEmpty: false,
+                    date: '',
+                    timeSlot: ''
+                },
+                payMethod: 'картой при получении'
+            },
         }
     },
     computed: {
@@ -143,51 +174,125 @@ export default {
             } else {
                 return 200
             }
+        },
+        formIsEmpty: function () {
+            return this.order.personal.personalFormIsEmpty || this.wayToGetError || this.order.dateAndTime.formIsEmpty;
+        },
+        wayToGetError: function () {
+            if (this.order.wayToGet.content === 'доставка') {
+                return this.order.wayToGet.delivery.formIsEmpty
+            } else {
+                return false
+            }
+        },
+        dataForModal: function () {
+            let data = [
+                {title: 'Адрес', content: ''},
+                {title: 'ФИО', content: this.order.personal.fullName},
+                {title: 'Телефон', content: this.order.personal.phoneNumber},
+                {title: 'Дата и время', content: this.order.dateAndTime.date + ' c ' + this.order.dateAndTime.timeSlot},
+                {title: 'Способ оплаты', content: this.order.payMethod},
+                {title: 'К оплате:', content: ''}
+            ]
+            if (this.order.wayToGet.content === 'доставка') {
+                data[0].content = this.order.wayToGet.delivery.street + ', д.' + this.order.wayToGet.delivery.house
+            } else {
+                data[0].content = 'г.Томск, пр.Фрунзе, д.90'
+            }
+            data[data.length - 1].content = this.price + ' ₽'
+
+            return data
         }
     },
     methods: {
-        pickCheckbox() {
-            this.personalData.isActive = !this.personalData.isActive
-        },
-        activeWayToGetButton (id) {
+        activeWayToGetButton(id) {
             if (id === 'pickup') {
                 this.wayToGet.radioButtons[0].isActive = true
                 this.wayToGet.radioButtons[1].isActive = false
 
                 this.wayToGet.pickup.isPickup = true
                 this.wayToGet.delivery.isDelivery = false
+
+                this.order.wayToGet.content = 'самовывоз'
             } else {
                 this.wayToGet.radioButtons[0].isActive = false
                 this.wayToGet.radioButtons[1].isActive = true
 
                 this.wayToGet.pickup.isPickup = false
                 this.wayToGet.delivery.isDelivery = true
+
+                this.order.wayToGet.content = 'доставка'
             }
         },
-        activePayMethod (id) {
+        activePayMethod(id) {
             if (id === 'payByCard') {
                 this.payMethod.radioButtons[0].isActive = true
                 this.payMethod.radioButtons[1].isActive = false
+
+                this.order.payMethod = 'картой при получении'
             } else {
                 this.payMethod.radioButtons[0].isActive = false
                 this.payMethod.radioButtons[1].isActive = true
+
+                this.order.payMethod = 'наличными при получении'
             }
         },
-        checkForms () {
-            this.$emit('checkForms')
-        },
-        toggleCheckbox () {
+        toggleCheckbox() {
             this.personalData.isActive = !this.personalData.isActive
-        }
+        },
+        checkForms() {
+            this.$emit('checkForms')
+
+            if (!this.formIsEmpty && this.personalData.isActive) {
+                this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
+                this.readyModalIsActive = true
+                this.$emit('resultAction', {
+                    readyModal: true,
+                    errorModal: false,
+                    data: this.dataForModal
+                })
+            } else {
+                this.$emit('resultAction', {
+                    readyModal: false,
+                    errorModal: true
+                })
+            }
+        },
+        personNotNull(obj) {
+            this.order.personal.personalFormIsEmpty = obj.act;
+            this.order.personal.fullName = obj.nameContent
+            this.order.personal.phoneNumber = obj.telContent
+            this.order.personal.email = obj.emailContent
+            this.order.personal.message = obj.messageContent
+
+            if (this.order.personal.fullName === "" || this.order.personal.phoneNumber === "") {
+                this.order.personal.personalFormIsEmpty = true
+            }
+        },
+        deliveryNotNull(obj) {
+            this.order.wayToGet.delivery.formIsEmpty = obj.act;
+            this.order.wayToGet.delivery.street = obj.street
+            this.order.wayToGet.delivery.house = obj.house
+            this.order.wayToGet.delivery.apartment = obj.apartment
+            this.order.wayToGet.delivery.entrance = obj.entrance
+            this.order.wayToGet.delivery.floor = obj.floor
+            this.order.wayToGet.delivery.intercomNumber = obj.intercomNumber
+
+            if (obj.street === "" || obj.house === "") {
+                this.order.wayToGet.delivery.formIsEmpty = true;
+            }
+        },
+        dateAndTimeNotNull(obj) {
+            this.order.dateAndTime.formIsEmpty = obj.act
+            this.order.dateAndTime.date = obj.date
+            this.order.dateAndTime.timeSlot = obj.time
+        },
     },
     components: {
         DateAndTimeForms,
         pickupBlock,
         PersonForms,
         deliveryForms
-    },
-    updated() {
-
     }
 }
 </script>

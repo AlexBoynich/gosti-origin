@@ -136,7 +136,8 @@ export default {
                             "19:30-20:30",
                             "20:30-21:30"
                         ],
-                        selected: ''
+                        selected: '',
+                        isError: false
                     }
                 ]
             },
@@ -147,7 +148,15 @@ export default {
     computed: {
         currentDate: function () {
             const currentDate = new Date();
-            const day = currentDate.getDate().toString().padStart(2, '0');
+            let hour = currentDate.getUTCHours() + 7
+            let day
+            if (hour >= 19) {
+                const nextDay = new Date(currentDate);
+                nextDay.setDate(currentDate.getDate() + 1);
+                day = nextDay.getDate().toString().padStart(2, '0');
+            } else {
+                day = currentDate.getDate().toString().padStart(2, '0');
+            }
             const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const year = currentDate.getFullYear().toString();
             return day + '.' + month + '.' + year
@@ -170,6 +179,12 @@ export default {
             } else if (content.length !== 10) {
                 dateForm.errorText = 'Эта дата не может быть выбрана'
                 dateForm.isError = true
+            } else if (month > 12) {
+                dateForm.errorText = 'Эта дата не может быть выбрана'
+                dateForm.isError = true
+            } else if (day > 31) {
+                dateForm.errorText = 'Эта дата не может быть выбрана'
+                dateForm.isError = true
             } else if (day < currentDay && month <= currentMonth) {
                 dateForm.errorText = 'Эта дата не может быть выбрана'
                 dateForm.isError = true
@@ -186,9 +201,22 @@ export default {
         notNull() {
             let date = this.orderForms.forms[0]
             date.isError = date.formContent === '';
+            this.formValidate(date.id, date.formContent)
 
             if (date.isError) {
                 date.errorText = 'поле является обязательным для заполнения'
+
+                this.$emit('notNull', {
+                    act: true,
+                    date: date.formContent,
+                    time: this.orderForms.forms[1].selected
+                })
+            } else {
+                this.$emit('notNull', {
+                    act: false,
+                    date: date.formContent,
+                    time: this.orderForms.forms[1].selected
+                })
             }
         },
         currentSlot (item) {
@@ -201,9 +229,8 @@ export default {
             if (this.currentDate === this.orderForms.forms[0].formContent) {
                 let date = new Date();
                 let hour = date.getUTCHours() + 7
-                if (hour >= 24) {
-                    hour -= 24
-                }
+
+
                 this.slots = this.orderForms.forms[1].currentTimeSlots
                 let index = this.orderForms.forms[1].currentTimeSlots.findIndex((el) => {
                     let currentTime

@@ -5,12 +5,9 @@
                 <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="close-modal">
             </button>
             <div class="modal-content">
-                <div class="title">Удалить?</div>
-                <div class="desc">Вы уверены, что хотите удалить товар из корзины?</div>
-                <div class="buttons">
-                    <button @click="choice('del')">Ок</button>
-                    <button @click="choice('cancel')">Отмена</button>
-                </div>
+                <div class="title">Что-то пошло не так</div>
+                <div class="desc">Попробуйте еще раз!</div>
+                <button @click="closeModal">Хорошо</button>
             </div>
         </div>
     </div>
@@ -18,20 +15,13 @@
 
 <script>
 export default {
-    name: "deleteItemModal",
+    name: "errorModal",
     methods: {
         closeModal() {
-            this.$emit('closeModal', false)
-        },
-        choice (action) {
-            if (action === 'cancel') {
-                this.$emit('choice', false)
-            } else {
-                this.$emit('choice', true)
-            }
+            this.$emit('closeModal')
         },
         closeOnClickOutside(e) {
-            if (e.target === document.querySelector('.modal-mask')) {
+            if (e.target.classList.contains('modal-mask')) {
                 this.closeModal()
             }
         }
@@ -91,28 +81,25 @@ export default {
                 line-height: 35px;
                 margin-bottom: 32px;
             }
+
             .desc {
                 @include inter-400;
                 font-size: 24px;
                 line-height: 26px;
                 margin-bottom: 64px;
             }
-            .buttons {
-                display: flex;
-                align-items: center;
-                gap: 0 56px;
 
-                button {
-                    @include green-button;
-                    width: 277px;
-                    height: 58px;
-                    text-align: center;
+            button {
+                @include green-button;
+                width: 277px;
+                height: 58px;
+                text-align: center;
 
-                    &:hover {
-                        @include green-button-hover;
-                    }
+                &:hover {
+                    @include green-button-hover;
                 }
             }
+
         }
     }
 }

@@ -81,7 +81,7 @@ export default {
             })
         },
         closeOnClickOutside(e) {
-            if (e.target === document.querySelector('.modal-mask')) {
+            if (e.target.classList.contains('modal-mask')) {
                 this.closeModal()
             }
         }

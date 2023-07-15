@@ -32,7 +32,7 @@
 
 <script>
 import CartItem from "@/components/cart/cartItem.vue";
-import DeleteItemModal from "./deleteItemModal/deleteItemModal";
+import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
 import {mapMutations} from "vuex";
 
 export default {

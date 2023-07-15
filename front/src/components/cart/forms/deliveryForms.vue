@@ -135,9 +135,36 @@ export default {
         formValidate() {
             let street = this.delivery.forms[0]
             let house = this.delivery.forms[1]
+            let apartment = this.delivery.forms[2]
+            let entrance = this.delivery.forms[3]
+            let floor = this.delivery.forms[4]
+            let intercomNumber = this.delivery.forms[5]
 
             house.isError = house.formContent === '';
             street.isError = street.formContent === '';
+
+            if (house.isError || street.isError) {
+                this.$emit('formValidate', {
+                    act: true,
+                    street: street.formContent,
+                    house: house.formContent,
+                    apartment: apartment.formContent,
+                    entrance: entrance.formContent,
+                    floor: floor.formContent,
+                    intercomNumber: intercomNumber.formContent,
+
+                })
+            } else {
+                this.$emit('formValidate', {
+                    act: false,
+                    street: street.formContent,
+                    house: house.formContent,
+                    apartment: apartment.formContent,
+                    entrance: entrance.formContent,
+                    floor: floor.formContent,
+                    intercomNumber: intercomNumber.formContent,
+                })
+            }
         },
     },
     created() {

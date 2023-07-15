@@ -36,7 +36,7 @@
 
 <script>
 import {mapState} from "vuex";
-import DeleteItemModal from "./deleteItemModal/deleteItemModal";
+import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
 export default {
     name: "cartItem",
     components: {DeleteItemModal},

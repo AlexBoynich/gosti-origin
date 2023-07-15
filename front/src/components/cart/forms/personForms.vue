@@ -173,13 +173,32 @@ export default {
         notNull () {
             let name = this.personForms.forms[0]
             let tel = this.personForms.forms[1]
+            let email = this.personForms.forms[2]
+            let message = this.personForms.forms[3]
 
-            name.isError = name.formContent === '';
-            tel.isError = tel.formContent === '';
+            if (name.formContent === '') {
+                name.isError = true
+            }
+            if (tel.formContent === '') {
+                tel.isError = true
+            }
 
-            if (name.isError) {
-                name.errorText = 'поле является обязательным для заполнения'
-                tel.errorText = 'поле является обязательным для заполнения'
+            if (name.isError || tel.isError || email.isError) {
+                this.$emit('notNull', {
+                    act: true,
+                    nameContent: name.formContent,
+                    telContent: tel.formContent,
+                    emailContent: email.formContent,
+                    messageContent: message.formContent,
+                })
+            } else {
+                this.$emit('notNull', {
+                    act: false,
+                    nameContent: name.formContent,
+                    telContent: tel.formContent,
+                    emailContent: email.formContent,
+                    messageContent: message.formContent,
+                })
             }
         }
     },
