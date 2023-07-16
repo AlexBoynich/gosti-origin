@@ -66,6 +66,7 @@
 <script>
 import {onTop} from '@/utils/helpers.js'
 import {mapState} from "vuex";
+
 export default {
     name: "headerBlock",
     data() {
@@ -197,34 +198,40 @@ header {
                     }
                 }
 
-                .cart-icon {
-                    position: relative;
-                    width: 35px;
-                    height: 36px;
-                    margin-left: 16px;
+                &:last-child {
                     padding: 0;
 
-                    img {
-                      width: 35px;
-                      height: 36px;
-                    }
-                    .cart-counter {
-                        position: absolute;
-                        right: -8px;
-                        top: 0;
-                        width: 25px;
-                        height: 25px;
-                        background: $greenBackground;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: white;
-                        @include inter-400;
-                        font-size: 16px;
-                        line-height: 16px;
+                    .cart-icon {
+                        position: relative;
+                        width: 35px;
+                        height: 36px;
+                        margin-left: 5px;
+                        padding: 0;
+
+                        img {
+                            width: 35px;
+                            height: 36px;
+                        }
+
+                        .cart-counter {
+                            position: absolute;
+                            right: -8px;
+                            top: 0;
+                            width: 25px;
+                            height: 25px;
+                            background: $greenBackground;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            @include inter-400;
+                            font-size: 16px;
+                            line-height: 16px;
+                        }
                     }
                 }
+
             }
         }
     }

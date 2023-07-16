@@ -25,7 +25,7 @@
                         href="tel:+73822509990"
                         class="phone"
                     >
-                        8 (382) 250 - 99 - 90
+                       {{ phoneNumber }}
                     </a>
                 </div>
             </div>
@@ -34,10 +34,16 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
     name: "readyOrderModal",
+    computed: {
+        ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
+        phoneNumber: function () {
+            return this.leftPartFooterItems[0].descItems[1].desc
+        }
+    },
     methods: {
         ...mapMutations('cart', ['DELETE_CART']),
         closeModal() {
