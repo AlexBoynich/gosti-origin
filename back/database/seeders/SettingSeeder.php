@@ -19,7 +19,7 @@ class SettingSeeder extends Seeder
                 'key' => 'Пороговая стоимость',
             ],
             [
-                'value' => '1000',
+                'value' => '1500',
                 'description' => 'Пороговая сумма заказа для расчёта стоимости доставки'
             ]
         );

@@ -18,12 +18,12 @@ class ObtainingMethodSeeder extends Seeder
                 'title' => 'Доставка',
             ],
             [
-                'price' => '150'
+                'price' => '200'
             ]
         );
         ObtainingMethod::query()->firstOrCreate(
             [
-                'title' => 'Самомывоз',
+                'title' => 'Самовывоз',
             ],
             [
                 'price' => '0'
