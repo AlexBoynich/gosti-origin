@@ -80,7 +80,6 @@ export default {
             }
             Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
 
-
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: ''

@@ -21,7 +21,7 @@
                         <input
                             v-else-if="form.mask"
                             :type="form.type"
-                            :class="['default-form', form.class]"
+                            :class="['default-form', form.class, {'error' : form.isError}]"
                             :placeholder="form.placeholder"
                             :required="form.required"
                             :maxlength="form.maxLength"
@@ -36,7 +36,7 @@
                         <input
                             v-else
                             :type="form.type"
-                            :class="['default-form', form.class]"
+                            :class="['default-form', form.class, {'error' : form.isError}]"
                             :placeholder="form.placeholder"
                             :required="form.required"
                             v-model="form.formContent"
@@ -309,6 +309,10 @@ export default {
                             height: 96px;
                             resize: none;
                         }
+
+                      &.error {
+                        border: 1px solid #C94040;
+                      }
                     }
 
                     &.full {

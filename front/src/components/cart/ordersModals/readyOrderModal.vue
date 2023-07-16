@@ -113,7 +113,7 @@ export default {
 
                 .order-item {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     justify-content: space-between;
 
                     .item-title {
@@ -125,6 +125,8 @@ export default {
                         @include inter-400;
                         font-size: 20px;
                         line-height: 22px;
+                        max-width: 240px;
+                        word-wrap: break-word;
                     }
                 }
 

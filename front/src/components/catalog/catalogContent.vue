@@ -43,7 +43,6 @@
         >
             Перейти в каталог
         </button>
-
         <div class="catalog-items">
             <catalogItem
                 v-for="(catalogItem, index) in arrСonsideringСart"
@@ -110,6 +109,7 @@ export default {
                 }
             }
             this.checkDishes();
+            return this.isGood
         },
         goToCatalog() {
             this.$emit('goToCatalog')
@@ -151,9 +151,10 @@ export default {
     props: ['activeItems', 'catalogItems'],
     created() {
         this.checkTime(this.activeItems.categoriesIndex)
+        this.$parent.$on('setActiveItems', this.checkTime(this.activeItems.categoriesIndex));
     },
-    updated() {
-        this.checkTime(this.activeItems.categoriesIndex)
+    beforeDestroy() {
+        this.$parent.$off('setActiveItems', this.checkTime(this.activeItems.categoriesIndex));
     }
 }
 </script>

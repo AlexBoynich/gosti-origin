@@ -3,32 +3,32 @@
         <div class="section-title">{{ orderForms.title }}</div>
         <div class="forms">
             <form
-                v-for="(form, index) in orderForms.forms"
-                :key="index"
+                    v-for="(form, index) in orderForms.forms"
+                    :key="index"
             >
                 <div :class="['form', form.class]">
                     <label :for="form.id">{{ form.label }}</label>
                     <div class="date" v-if="form.type === 'text'">
                         <input
-                            :type="form.type"
-                            :class="['default-form', form.class]"
-                            :placeholder="form.placeholder"
-                            :required="form.required"
-                            v-model="form.formContent"
-                            v-mask="form.mask"
-                            @change="formValidate(
+                                :type="form.type"
+                                :class="['default-form', form.class, {'error' : form.isError}]"
+                                :placeholder="form.placeholder"
+                                :required="form.required"
+                                v-model="form.formContent"
+                                v-mask="form.mask"
+                                @change="formValidate(
                                 form.id,
                                 form.formContent
                             );
                             timeSlots()"
                         >
                         <img
-                            v-if="form.isError"
-                            :class="['form-icon', form.img.class]"
-                            :src="form.img.src"
-                            alt="form-icon"
-                            @mouseover="form.viewError = true"
-                            @mouseleave="form.viewError = false"
+                                v-if="form.isError"
+                                :class="['form-icon', form.img.class]"
+                                :src="form.img.src"
+                                alt="form-icon"
+                                @mouseover="form.viewError = true"
+                                @mouseleave="form.viewError = false"
                         >
                         <div v-show="form.viewError" class="message">
                             <div class="txt">
@@ -37,33 +37,33 @@
                         </div>
                     </div>
                     <div
-                        v-else
-                        class="select"
-                        @click="openSlots"
+                            v-else
+                            class="select"
+                            @click="openSlots"
                     >
                         <div>{{ form.selected }}</div>
                         <div
-                            v-show="slotsIsOpened"
-                            class="select-content"
+                                v-show="slotsIsOpened"
+                                class="select-content"
                         >
                             <div
-                                v-for="(item, index) in slots"
-                                :key="index"
-                                class="option"
+                                    v-for="(item, index) in slots"
+                                    :key="index"
+                                    class="option"
                             >
                                 <div
-                                    @click="currentSlot(item)"
-                                    :class="{'active' : item === form.selected}"
+                                        @click="currentSlot(item)"
+                                        :class="{'active' : item === form.selected}"
                                 >
                                     {{ item }}
                                 </div>
                             </div>
                         </div>
                         <img
-                            v-if="form.img"
-                            :class="['form-icon', form.img.class, {'active' : slotsIsOpened}]"
-                            :src="form.img.src"
-                            alt="form-icon"
+                                v-if="form.img"
+                                :class="['form-icon', form.img.class, {'active' : slotsIsOpened}]"
+                                :src="form.img.src"
+                                alt="form-icon"
                         >
                     </div>
                 </div>
@@ -188,13 +188,13 @@ export default {
             } else if (day < currentDay && month <= currentMonth) {
                 dateForm.errorText = 'Эта дата не может быть выбрана'
                 dateForm.isError = true
-            } else if(month < currentMonth && year <= currentYear){
+            } else if (month < currentMonth) {
                 dateForm.errorText = 'Эта дата не может быть выбрана'
                 dateForm.isError = true
-            } else if(year > currentYear) {
+            } else if (year !== currentYear) {
                 dateForm.errorText = 'Эта дата не может быть выбрана'
                 dateForm.isError = true
-            }else {
+            } else {
                 dateForm.errorText = 'поле является обязательным для заполнения'
             }
         },
@@ -219,13 +219,13 @@ export default {
                 })
             }
         },
-        currentSlot (item) {
+        currentSlot(item) {
             this.orderForms.forms[1].selected = item
         },
-        openSlots () {
+        openSlots() {
             this.slotsIsOpened = !this.slotsIsOpened
         },
-        timeSlots () {
+        timeSlots() {
             if (this.currentDate === this.orderForms.forms[0].formContent) {
                 let date = new Date();
                 let hour = date.getUTCHours() + 7
@@ -269,165 +269,171 @@ export default {
 @import "@/assets/styles/global";
 
 .title {
-    @include inter-500;
+  @include inter-500;
 }
 
 .form-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  .section-title {
+    @include inter-500;
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .forms {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    gap: 16px 0;
 
-    .section-title {
-        @include inter-500;
-        font-size: 20px;
-        line-height: 22px;
-        margin-bottom: 16px;
-    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
 
-    .forms {
+      .form {
         display: flex;
-        flex-wrap: wrap;
-        gap: 16px 0;
+        flex-direction: column;
+        position: relative;
 
-        form {
-            display: flex;
-            flex-wrap: wrap;
-
-            .form {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-
-                label {
-                    @include inter-400;
-                    margin-bottom: 8px;
-                    line-height: 20px;
-                }
-
-                .date {
-
-                    .form-icon.error {
-                        position: absolute;
-                        right: 16px;
-                        bottom: 12px;
-                        cursor: pointer;
-                        background-color: $lightRedBackground;
-                        -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-                        mask-image: url('@/../public/images/cart/form/error-icon.svg');
-
-                        &:hover {
-                            background-color: $redBackground;
-                            -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-                            mask-image: url('@/../public/images/cart/form/error-icon.svg');
-                        }
-                    }
-
-                    .message {
-                        position: absolute;
-                        background-color: rgba(243, 218, 218, 0.9);
-                        right: -128px;
-                        bottom: 40px;
-                        padding: 25px 32px;
-                        border-radius: 16px;
-                        width: 302px;
-
-                        .txt {
-                            max-width: 238px;
-                            @include inter-400;
-                            font-size: 16px;
-                            line-height: 18px;
-                        }
-                    }
-                }
-
-                .default-form {
-                    border-radius: 16px;
-                    border: 1px solid #7B9561;
-                    outline: none;
-                    padding: 13px 24px;
-                    @include inter-300;
-                    font-size: 16px;
-                    line-height: 16px;
-
-                    &.small {
-                        width: 100%;
-                    }
-                }
-
-                &.small {
-                    width: 172px;
-                    margin-right: 39px;
-
-                    &.no-margin {
-                        margin-right: 0;
-                    }
-                }
-
-                .select {
-                    border-radius: 16px;
-                    border: 1px solid #7B9561;
-                    padding: 13px 24px;
-                    @include inter-300;
-                    font-size: 16px;
-                    line-height: 16px;
-                    color: #000;
-                    cursor: pointer;
-                    position: relative;
-
-                    .select-content {
-                        position: absolute;
-                        max-height: 191px;
-                        width: 172px;
-                        padding: 0 24px 13px;
-                        overflow: scroll;
-                        gap: 4px 0;
-                        top: 29px;
-                        left: -1px;
-                        background: white;
-                        border: solid 1px $greenBackground;
-                        border-top: solid 0 transparent;
-                        border-radius: 0 0 16px 16px;
-                        cursor: default;
-                        z-index: 1;
-
-                        scrollbar-width: none;
-                        -ms-overflow-style: none;
-
-                        &::-webkit-scrollbar {
-                            display: none;
-                        }
-
-
-                        .option {
-                            @include inter-300;
-                            font-size: 16px;
-                            line-height: 22px;
-                            cursor: pointer;
-                            color: rgba(0, 0, 0, 0.5);
-
-                            &:first-child {
-                                margin-top: 3px;
-                            }
-                            & div.active {
-                                color: black;
-                            }
-                        }
-                    }
-                    .form-icon.arrow {
-                        position: absolute;
-                        right: 16px;
-                        bottom: 16px;
-                        width: 12px;
-                        height: 6px;
-                        transition: .3s ease-in-out;
-
-                        &.active {
-                            transform: rotate(180deg);
-                        }
-                    }
-                }
-            }
+        label {
+          @include inter-400;
+          margin-bottom: 8px;
+          line-height: 20px;
         }
+
+        .date {
+
+          .form-icon.error {
+            position: absolute;
+            right: 16px;
+            bottom: 12px;
+            cursor: pointer;
+            background-color: $lightRedBackground;
+            -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
+            mask-image: url('@/../public/images/cart/form/error-icon.svg');
+
+            &:hover {
+              background-color: $redBackground;
+              -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
+              mask-image: url('@/../public/images/cart/form/error-icon.svg');
+            }
+          }
+
+          .message {
+            position: absolute;
+            background-color: rgba(243, 218, 218, 0.9);
+            right: -128px;
+            bottom: 40px;
+            padding: 25px 32px;
+            border-radius: 16px;
+            width: 302px;
+
+            .txt {
+              max-width: 238px;
+              @include inter-400;
+              font-size: 16px;
+              line-height: 18px;
+            }
+          }
+        }
+
+        .default-form {
+          border-radius: 16px;
+          border: 1px solid #7B9561;
+          outline: none;
+          padding: 13px 24px;
+          @include inter-300;
+          font-size: 16px;
+          line-height: 16px;
+
+          &.small {
+            width: 100%;
+          }
+
+          &.error {
+            border: 1px solid #C94040;
+          }
+        }
+
+        &.small {
+          width: 172px;
+          margin-right: 39px;
+
+          &.no-margin {
+            margin-right: 0;
+          }
+        }
+
+        .select {
+          border-radius: 16px;
+          border: 1px solid #7B9561;
+          padding: 12.5px 24px;
+          @include inter-300;
+          font-size: 16px;
+          line-height: 21px;
+          color: #000;
+          cursor: pointer;
+          position: relative;
+
+          .select-content {
+            position: absolute;
+            max-height: 191px;
+            width: 172px;
+            padding: 0 24px 13px;
+            overflow: scroll;
+            gap: 4px 0;
+            top: 29px;
+            left: -1px;
+            background: white;
+            border: solid 1px $greenBackground;
+            border-top: solid 0 transparent;
+            border-radius: 0 0 16px 16px;
+            cursor: default;
+            z-index: 1;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+
+            .option {
+              @include inter-300;
+              font-size: 16px;
+              line-height: 22px;
+              cursor: pointer;
+              color: rgba(0, 0, 0, 0.5);
+
+              &:first-child {
+                margin-top: 3px;
+              }
+
+              & div.active {
+                color: black;
+              }
+            }
+          }
+
+          .form-icon.arrow {
+            position: absolute;
+            right: 16px;
+            bottom: 20px;
+            width: 12px;
+            height: 6px;
+            transition: .3s ease-in-out;
+
+            &.active {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
     }
+  }
 }
 </style>
