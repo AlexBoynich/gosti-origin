@@ -165,6 +165,7 @@ class DishResource extends Resource
                             'image/svg',
                         ])
                         ->maxFiles(1)
+                        ->required()
                         ->label('Изображение'),
                 ])->inlineLabel(),
             ]);
