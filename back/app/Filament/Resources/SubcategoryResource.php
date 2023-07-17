@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -61,7 +62,8 @@ class SubcategoryResource extends Resource
                     ->label('Категория'),
             ])
             ->filters([
-                //
+                SelectFilter::make('parentCategory')
+                    ->relationship('category', 'title')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
