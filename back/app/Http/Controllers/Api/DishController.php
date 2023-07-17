@@ -21,7 +21,7 @@ class DishController extends Controller
             $filter = app()->make(DishFilter::class, ['queryParams' => array_filter($data, function ($value) {
                 return !(is_null($value) or '' === $value);
             })]);
-            return DishResource::collection(Dish::filter($filter)->orderBy('id')->get());
+            return DishResource::collection(Dish::filter($filter)->orderByDesc('id')->get());
         } catch (\Exception $exception) {
             Log::critical($exception->getMessage());
             return response([
