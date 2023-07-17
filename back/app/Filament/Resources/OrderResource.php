@@ -40,8 +40,6 @@ class OrderResource extends Resource
                         ->label('Стоимость'),
                     TextInput::make('receipt_time')
                         ->label('Время доставки'),
-                    Toggle::make('can_earlier')
-                        ->label('Можно ли раньше'),
                 ]),
             ]);
     }
@@ -57,9 +55,6 @@ class OrderResource extends Resource
                     ->label('Стоимость'),
                 TextColumn::make('receipt_time')
                     ->label('Время доставки'),
-                IconColumn::make('can_earlier')
-                    ->boolean()
-                    ->label('Можно ли раньше'),
             ])
             ->filters([
                 //
