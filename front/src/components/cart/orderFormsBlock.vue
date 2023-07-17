@@ -1,7 +1,9 @@
 <template>
     <div class="order-forms-block">
         <div class="title">Оформление заказа</div>
-        <PersonForms/>
+        <PersonForms
+            @notNull="personNotNull"
+        />
         <div class="radio-buttons">
             <div class="section-title">{{ wayToGet.title }}</div>
             <div class="radio-container">
@@ -9,6 +11,7 @@
                     v-for="radio in wayToGet.radioButtons"
                     :key="radio.id"
                     class="radio-box"
+                    @click="activeWayToGetButton(radio.id)"
                 >
                     <div class="radio">
                         <div v-show="radio.isActive" class="radio-dot"></div>
@@ -23,10 +26,10 @@
         />
         <deliveryForms
             v-else
-            :delivery="wayToGet.delivery"
+            @formValidate="deliveryNotNull"
         />
         <DateAndTimeForms
-            :orderForms="orderForms"
+            @notNull="dateAndTimeNotNull"
         />
         <div class="radio-buttons">
             <div class="section-title">{{ payMethod.title }}</div>
@@ -35,6 +38,7 @@
                     v-for="radio in payMethod.radioButtons"
                     :key="radio.id"
                     class="radio-box"
+                    @click="activePayMethod(radio.id)"
                 >
                     <div class="radio">
                         <div v-show="radio.isActive" class="radio-dot"></div>
@@ -46,7 +50,7 @@
         <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
             <div class="sum-delivery">
                 <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
-                <div class="price">{{ deliveryPrice }}</div>
+                <div class="price">{{ deliveryPrice + ' ₽' }}</div>
             </div>
             <div class="message">
                 {{ wayToGet.delivery.deliveryPriceBlock.message }}
@@ -55,13 +59,13 @@
         <div class="finally-forms">
             <div class="to-pay">
                 <div class="section-title">{{ toPay.title }}</div>
-                <div class="price">{{ price + ' ₽' }} </div>
+                <div class="price">{{ price + ' ₽' }}</div>
             </div>
             <div class="personal-data">
                 <div
                     :id="personalData.id"
                     :class="['checkbox', {'active' : personalData.isActive}]"
-                    @click="pickCheckbox"
+                    @click="toggleCheckbox"
                 >
                     <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                 </div>
@@ -72,7 +76,7 @@
                 </label>
             </div>
         </div>
-        <button>Оформить заказ</button>
+        <button @click="checkForms">Оформить заказ</button>
     </div>
 </template>
 
@@ -95,92 +99,11 @@ export default {
                     {id: 'delivery', label: 'доставка', isActive: true},
                 ],
                 delivery: {
-                    title: 'Адрес заказа',
-                    isDelivery: true,
-                    forms: [
-                        {
-                            label: 'Улица*',
-                            placeholder: 'г.Томск, ул.Секретная',
-                            class: 'full',
-                            type: 'text',
-                            id: 'street',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Дом*',
-                            placeholder: '16/4',
-                            class: 'small',
-                            type: 'text',
-                            id: 'house',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Квартира/офис',
-                            placeholder: '50',
-                            class: 'small',
-                            type: 'text',
-                            id: 'apartment',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Подъезд',
-                            placeholder: '2',
-                            class: 'small no-margin',
-                            type: 'text',
-                            id: 'entrance',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Этаж',
-                            placeholder: '2',
-                            class: 'small',
-                            type: 'text',
-                            id: 'floor',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        },
-                        {
-                            label: 'Домофон',
-                            placeholder: '50',
-                            class: 'small no-margin',
-                            type: 'text',
-                            id: 'intercomNumber',
-                            img: {
-                                name: 'error',
-                                src: '/images/cart/form/error-icon.svg',
-                                class: 'error'
-                            },
-                            isError: false
-                        }
-                    ],
                     deliveryPriceBlock: {
                         title: 'Сумма доставки',
                         message: '*бесплатная доставка от 1500 рублей'
                     },
+                    isDelivery: true,
                 },
                 pickup: {
                     title: 'Адрес самовывоза',
@@ -196,30 +119,6 @@ export default {
                     {id: 'payByCash', label: 'наличными при получении', isActive: false},
                 ]
             },
-            orderForms: {
-                title: 'Дата и время',
-                forms: [
-                    {
-                        label: 'Дата',
-                        placeholder: '24.07.2023',
-                        class: 'small',
-                        type: 'text',
-                        id: 'date'
-                    },
-                    {
-                        label: 'Время',
-                        placeholder: '13:00-14:00',
-                        class: 'small',
-                        type: 'select',
-                        id: 'time',
-                        img: {
-                            name: 'select',
-                            src: '/images/cart/form/select-arrow.svg',
-                            class: 'arrow'
-                        },
-                    }
-                ]
-            },
             toPay: {
                 title: 'К оплате:',
             },
@@ -227,33 +126,174 @@ export default {
                 label: 'даю согласие на обработку персональных данных',
                 id: 'personalData',
                 isActive: false
-            }
+            },
+            order: {
+                personal: {
+                    fullName: '',
+                    phoneNumber: '',
+                    email: '',
+                    message: '',
+                    personalFormIsEmpty: true,
+                },
+                wayToGet: {
+                    content: 'доставка',
+                    delivery: {
+                        formIsEmpty: true,
+                        street: '',
+                        house: '',
+                        apartment: '',
+                        entrance: '',
+                        floor: '',
+                        intercomNumber: '',
+                    }
+                },
+                dateAndTime: {
+                    formIsEmpty: false,
+                    date: '',
+                    timeSlot: ''
+                },
+                payMethod: 'картой при получении'
+            },
         }
     },
     computed: {
         ...mapState('cart', ['cart']),
         price: function () {
-            return this.cart.reduce((acc, item) => acc + item.price, 0)
+            let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            if (totalPrice + this.deliveryPrice < 1500) {
+                return (this.cart.reduce((acc, item) => acc + item.price, 0)) + 200
+            } else {
+                return this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            }
+
         },
         deliveryPrice: function () {
-            if (this.price >= 1500) {
-                return 0 + ' ₽'
+            let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
+            if (totalPrice >= 1500) {
+                return 0
             } else {
-                return 200 + ' ₽'
+                return 200
             }
+        },
+        formIsEmpty: function () {
+            return this.order.personal.personalFormIsEmpty || this.wayToGetError || this.order.dateAndTime.formIsEmpty;
+        },
+        wayToGetError: function () {
+            if (this.order.wayToGet.content === 'доставка') {
+                return this.order.wayToGet.delivery.formIsEmpty
+            } else {
+                return false
+            }
+        },
+        dataForModal: function () {
+            let data = [
+                {title: 'Адрес', content: ''},
+                {title: 'ФИО', content: this.order.personal.fullName},
+                {title: 'Телефон', content: this.order.personal.phoneNumber},
+                {title: 'Дата и время', content: this.order.dateAndTime.date + ' c ' + this.order.dateAndTime.timeSlot},
+                {title: 'Способ оплаты', content: this.order.payMethod},
+                {title: 'К оплате:', content: ''}
+            ]
+            if (this.order.wayToGet.content === 'доставка') {
+                data[0].content = this.order.wayToGet.delivery.street + ', д.' + this.order.wayToGet.delivery.house
+            } else {
+                data[0].content = 'г.Томск, пр.Фрунзе, д.90'
+            }
+            data[data.length - 1].content = this.price + ' ₽'
+
+            return data
         }
     },
     methods: {
-        pickCheckbox() {
+        activeWayToGetButton(id) {
+            if (id === 'pickup') {
+                this.wayToGet.radioButtons[0].isActive = true
+                this.wayToGet.radioButtons[1].isActive = false
+
+                this.wayToGet.pickup.isPickup = true
+                this.wayToGet.delivery.isDelivery = false
+
+                this.order.wayToGet.content = 'самовывоз'
+            } else {
+                this.wayToGet.radioButtons[0].isActive = false
+                this.wayToGet.radioButtons[1].isActive = true
+
+                this.wayToGet.pickup.isPickup = false
+                this.wayToGet.delivery.isDelivery = true
+
+                this.order.wayToGet.content = 'доставка'
+            }
+        },
+        activePayMethod(id) {
+            if (id === 'payByCard') {
+                this.payMethod.radioButtons[0].isActive = true
+                this.payMethod.radioButtons[1].isActive = false
+
+                this.order.payMethod = 'картой при получении'
+            } else {
+                this.payMethod.radioButtons[0].isActive = false
+                this.payMethod.radioButtons[1].isActive = true
+
+                this.order.payMethod = 'наличными при получении'
+            }
+        },
+        toggleCheckbox() {
             this.personalData.isActive = !this.personalData.isActive
-        }
+        },
+        checkForms() {
+            this.$emit('checkForms')
+
+            if (!this.formIsEmpty && this.personalData.isActive) {
+                this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
+                this.readyModalIsActive = true
+                this.$emit('resultAction', {
+                    readyModal: true,
+                    errorModal: false,
+                    data: this.dataForModal
+                })
+            } else {
+                this.$emit('resultAction', {
+                    readyModal: false,
+                    errorModal: true
+                })
+            }
+        },
+        personNotNull(obj) {
+            this.order.personal.personalFormIsEmpty = obj.act;
+            this.order.personal.fullName = obj.nameContent
+            this.order.personal.phoneNumber = obj.telContent
+            this.order.personal.email = obj.emailContent
+            this.order.personal.message = obj.messageContent
+
+            if (this.order.personal.fullName === "" || this.order.personal.phoneNumber === "") {
+                this.order.personal.personalFormIsEmpty = true
+            }
+        },
+        deliveryNotNull(obj) {
+            this.order.wayToGet.delivery.formIsEmpty = obj.act;
+            this.order.wayToGet.delivery.street = obj.street
+            this.order.wayToGet.delivery.house = obj.house
+            this.order.wayToGet.delivery.apartment = obj.apartment
+            this.order.wayToGet.delivery.entrance = obj.entrance
+            this.order.wayToGet.delivery.floor = obj.floor
+            this.order.wayToGet.delivery.intercomNumber = obj.intercomNumber
+
+            if (obj.street === "" || obj.house === "") {
+                this.order.wayToGet.delivery.formIsEmpty = true;
+            }
+        },
+        dateAndTimeNotNull(obj) {
+            this.order.dateAndTime.formIsEmpty = obj.act
+            this.order.dateAndTime.date = obj.date
+            this.order.dateAndTime.timeSlot = obj.time
+        },
     },
     components: {
         DateAndTimeForms,
         pickupBlock,
         PersonForms,
         deliveryForms
-    },
+    }
 }
 </script>
 

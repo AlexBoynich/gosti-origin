@@ -120,12 +120,15 @@ export default {
             }
         },
         inCart(item) {
-            let temporaryItem = item.item
-            temporaryItem.count = item.count
-            this.componentCart.push(temporaryItem)
-            this.SET_CART(this.componentCart)
+            if (this.cart.reduce((acc, item) => acc + item.count, 0) < 99) {
+                let temporaryItem = item.item
+                temporaryItem.count = item.count
+                this.componentCart.push(temporaryItem)
+                this.SET_CART(this.componentCart)
+            }
         },
         transformAmount(item) {
+
             let temporaryItem = item.item
             temporaryItem.count = item.count
 
@@ -151,7 +154,7 @@ export default {
     },
     updated() {
         this.checkTime(this.activeItems.categoriesIndex)
-    },
+    }
 }
 </script>
 

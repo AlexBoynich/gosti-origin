@@ -1,19 +1,28 @@
 <template>
     <div class="pickup-forms">
         <div class="section-title">{{ pickup.title }}</div>
-        <a href="#footer" class="link">{{ pickup.link }}</a>
+        <div class="link" @click="scrollToFooter">{{ pickup.link }}</div>
     </div>
 </template>
 
 <script>
 export default {
     name: "pickupBlock",
+    methods: {
+        scrollToFooter() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })
+        }
+    },
     props: ['pickup']
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 .pickup-forms {
     display: flex;
     gap: 0 40px;
@@ -31,6 +40,7 @@ export default {
         color: black;
         padding-bottom: 4px;
         border-bottom: 1px dashed #000;
+        cursor: pointer;
     }
 }
 </style>

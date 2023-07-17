@@ -22,7 +22,7 @@
                 </div>
                 <div class="desc">
                     <div class="weight">{{ cartItem.weight }}</div>
-                    <div class="price">{{ cartItem.price + '₽' }}</div>
+                    <div class="price">{{ cartItem.price * cartItem.count + '₽' }}</div>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
 
 <script>
 import {mapState} from "vuex";
-import DeleteItemModal from "./deleteItemModal/deleteItemModal";
+import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
 export default {
     name: "cartItem",
     components: {DeleteItemModal},
@@ -76,9 +76,11 @@ export default {
                     this.cart[cartIndex].count -= 1
                 }
             } else {
-                if (this.cartItem.count < 99) {
-                    let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
-                    this.cart[cartIndex].count += 1
+                if (this.cart.reduce((acc, item) => acc + item.count, 0) < 99) {
+                    if (this.cartItem.count < 99) {
+                        let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
+                        this.cart[cartIndex].count += 1
+                    }
                 }
             }
         }

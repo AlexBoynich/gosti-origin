@@ -3,7 +3,7 @@
         <h2 class="title">Корзина</h2>
         <div class="content">
             <cartContent :cart="cart" :cartIsActive="cartIsActive"/>
-            <orderFormsBlock v-show="cartIsActive"/>
+            <orderFormsBlock v-show="cartIsActive" @resultAction="resultAction"/>
         </div>
         <div v-show="!cartIsActive" class="cart-inactive">
             <div class="message-title">Вы ничего не добавили</div>
@@ -12,26 +12,71 @@
                 <button>Перейти в каталог</button>
             </router-link>
         </div>
+        <ErrorModal
+            v-show="errorModalIsActive"
+            @closeModal="closeModal"
+        />
+        <ReadyOrderModal
+            v-if="readyModalIsActive"
+            @closeModal="closeModal"
+            :dataForModal="dataForModal"
+        />
     </div>
 </template>
 
 <script>
 import orderFormsBlock from "@/components/cart/orderFormsBlock.vue";
 import cartContent from "@/components/cart/cartContent.vue";
+import ErrorModal from "@/components/cart/ordersModals/errorModal.vue";
+import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue";
 import {mapState} from "vuex";
 
 export default {
     name: "cartView",
-    components: {
-        cartContent,
-        orderFormsBlock
+    data () {
+        return {
+            errorModalIsActive: false,
+            readyModalIsActive: false,
+            dataForModal: []
+        }
     },
     computed: {
         ...mapState('cart', ['cart']),
         cartIsActive: function () {
-            return this.cart.length > 0;
+            return this.cart.length >= 1;
+        },
+    },
+    methods: {
+        resultAction (obj) {
+            if (obj.readyModal) {
+                this.readyModalIsActive = true
+                this.dataForModal = obj.data
+            } else if (obj.errorModal) {
+                this.errorModalIsActive = true
+            }
+            this.blockScroll()
+        },
+        closeModal() {
+            this.errorModalIsActive = false
+            this.readyModalIsActive = false
+            this.blockScroll()
+        },
+        blockScroll() {
+            let body = document.querySelector('body')
+
+            if (this.errorModalIsActive || this.readyModalIsActive) {
+                body.style.overflow = 'hidden'
+            } else {
+                body.style.overflow = ''
+            }
         }
-    }
+    },
+    components: {
+        cartContent,
+        orderFormsBlock,
+        ReadyOrderModal,
+        ErrorModal
+    },
 }
 </script>
 

@@ -6,7 +6,7 @@
                 <button
                     v-show="cartIsActive"
                     class="delete-cart"
-                    @click="deleteCart"
+                    @click="openModal"
                 >
                     Очистить корзину
                 </button>
@@ -15,6 +15,11 @@
                 {{ cartCounter }}
             </div>
         </div>
+        <DeleteItemModal
+            v-show="modalIsActive"
+            @closeModal="closeModal"
+            @choice="choice"
+        />
         <div v-show="cartIsActive" class="cart-content-body">
             <CartItem
                 v-for="(item, index) in cart"
@@ -27,19 +32,38 @@
 
 <script>
 import CartItem from "@/components/cart/cartItem.vue";
+import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
 import {mapMutations} from "vuex";
 
 export default {
     name: "cartContent",
+    data () {
+        return {
+            modalIsActive: false
+        }
+    },
     computed: {
         cartCounter: function () {
+            let temporaryСart = this.cart
+            let count = temporaryСart.reduce((acc, item) => acc + item.count, 0)
             let word
-            if (this.cart.length > 4 && this.cart.length < 21) {
-                word = this.cart.length + ' товаров'
-            } else if (this.cart.length % 10 === 1) {
-                word = this.cart.length + ' товар'
-            } else if (this.cart.length % 10 > 1 && this.cart.length % 10 < 5) {
-                word = this.cart.length + ' товара'
+            if (count > 20) {
+                let secondNumber = count % 10;
+                if (secondNumber === 1) {
+                    word = count + " товар";
+                } else if (secondNumber >= 2 && secondNumber <= 4) {
+                    word = count + " товара";
+                } else {
+                    word = count + " товаров";
+                }
+            } else {
+                if (count === 1) {
+                    word = count + " товар";
+                } else if (count >= 2 && count <= 4) {
+                    word = count + " товара";
+                } else {
+                    word = count + " товаров";
+                }
             }
             return word
         },
@@ -48,10 +72,23 @@ export default {
         ...mapMutations('cart', ['DELETE_CART']),
         deleteCart () {
             this.DELETE_CART()
-        }
+        },
+        openModal () {
+            this.modalIsActive = true
+        },
+        choice (act) {
+            if (act === true) {
+                this.deleteCart()
+            }
+            this.closeModal(false)
+        },
+        closeModal (state) {
+            this.modalIsActive = state
+        },
     },
     components: {
-        CartItem
+        CartItem,
+        DeleteItemModal
     },
     props: ['cart', 'cartIsActive']
 }
