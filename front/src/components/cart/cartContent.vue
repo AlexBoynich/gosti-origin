@@ -20,7 +20,7 @@
             @closeModal="closeModal"
             @choice="choice"
         />
-        <div v-show="cartIsActive" class="cart-content-body">
+        <div v-show="cartIsActive" :class="['cart-content-body', {'higher' : isDelivery}]">
             <CartItem
                 v-for="(item, index) in cart"
                 :key="index"
@@ -66,7 +66,7 @@ export default {
                 }
             }
             return word
-        },
+        }
     },
     methods: {
         ...mapMutations('cart', ['DELETE_CART']),
@@ -90,7 +90,7 @@ export default {
         CartItem,
         DeleteItemModal
     },
-    props: ['cart', 'cartIsActive']
+    props: ['cart', 'cartIsActive', 'isDelivery']
 }
 </script>
 
@@ -138,7 +138,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 24px 0;
-        max-height: /*853*/ 1215px;
+        max-height: 853px;
         overflow: scroll;
 
         scrollbar-width: none;
@@ -146,6 +146,10 @@ export default {
 
         &::-webkit-scrollbar {
             display: none;
+        }
+
+        &.higher {
+            max-height: 1215px;
         }
     }
 }

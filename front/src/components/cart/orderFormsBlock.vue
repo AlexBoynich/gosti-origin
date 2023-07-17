@@ -214,6 +214,8 @@ export default {
                 this.wayToGet.delivery.isDelivery = false
 
                 this.order.wayToGet.content = 'самовывоз'
+
+                this.$emit('activeWayToGetButton', false)
             } else {
                 this.wayToGet.radioButtons[0].isActive = false
                 this.wayToGet.radioButtons[1].isActive = true
@@ -222,6 +224,8 @@ export default {
                 this.wayToGet.delivery.isDelivery = true
 
                 this.order.wayToGet.content = 'доставка'
+
+                this.$emit('activeWayToGetButton', true)
             }
         },
         activePayMethod(id) {
