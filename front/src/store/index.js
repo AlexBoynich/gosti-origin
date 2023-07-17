@@ -8,6 +8,7 @@ import footerSocials from "./modules/footer/footerSocials";
 import categories from "./modules/catalog/categories";
 import catalogItems from "./modules/catalog/catalogItems";
 import cart from "./modules/cart/cart";
+import catering from "./modules/catering/catering";
 
 Vue.use(Vuex)
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         footerSocials,
         categories,
         catalogItems,
-        cart
+        cart,
+        catering
     }
 })

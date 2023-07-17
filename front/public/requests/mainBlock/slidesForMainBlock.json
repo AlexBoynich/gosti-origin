@@ -1,8 +1,8 @@
 {
-    "slides": [
-        {"img": "/images/homePage/mainBlock/main-slider-slide.png"},
-        {"img": "/images/homePage/mainBlock/main-slider-slide.png"},
-        {"img": "/images/homePage/mainBlock/main-slider-slide.png"},
-        {"img": "/images/homePage/mainBlock/main-slider-slide.png"}
+    "data": [
+        "/images/homePage/mainBlock/main-slider-slide.png",
+        "/images/homePage/mainBlock/main-slider-slide.png",
+        "/images/homePage/mainBlock/main-slider-slide.png",
+        "/images/homePage/mainBlock/main-slider-slide.png"
     ]
 }

@@ -17,7 +17,7 @@ const slidesFromMainBlock = {
     },
     mutations: {
         SET_MAIN_SLIDES(state, data) {
-            state.mainBlockSlides = data.slides
+            state.mainBlockSlides = data.data
         }
     },
 }
