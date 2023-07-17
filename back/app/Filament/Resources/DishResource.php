@@ -189,8 +189,10 @@ class DishResource extends Resource
                     ->form([
                         Forms\Components\Fieldset::make()->schema([
                             Forms\Components\DatePicker::make('created_from')
+                                ->label('')
                                 ->placeholder('С:'),
                             Forms\Components\DatePicker::make('created_until')
+                                ->label('')
                                 ->placeholder('До:'),
                         ])->columns(1)->label('Дата создания'),
                     ])
