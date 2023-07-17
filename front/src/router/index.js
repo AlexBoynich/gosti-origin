@@ -25,6 +25,11 @@ const routes = [
         name: 'Гости • Корзина',
         component: () => import( '../views/cart/cartView.vue')
     },
+    {
+        path: '*',
+        name: 'Гости • 404',
+        component: () => import( '../views/404/PageNotFound.vue')
+    },
 ]
 
 const router = new VueRouter({
