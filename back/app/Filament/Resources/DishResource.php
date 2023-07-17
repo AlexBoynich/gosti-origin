@@ -23,8 +23,6 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
-use Livewire\Component as Livewire;
 
 
 class DishResource extends Resource
@@ -71,7 +69,7 @@ class DishResource extends Resource
                         ->options(Metric::all()->pluck('title', 'id'))
                         ->reactive()
                         ->default(3)
-                        ->afterStateUpdated(function ($state ,callable $set) {
+                        ->afterStateUpdated(function ($state, callable $set) {
                             if (is_null($state)) {
                                 $set('metric_value', null);
                             }
@@ -87,22 +85,17 @@ class DishResource extends Resource
 
                     Select::make('category_id')
                         ->options(function (callable $get) {
-                            if (is_null($get('category_id'))) {
-                                return Category::all()->pluck('title', 'id');
-                            }
-                            return Category::query()->find($get('category_id'))->pluck('title', 'id');
+                            return Category::all()->pluck('title', 'id');
                         })
-                        ->afterStateUpdated(fn(callable $set) => $set('subcategory_id', null))
                         ->reactive()
                         ->label('Категория')
                         ->required(),
 
                     Select::make('subcategory_id')
                         ->options(function (callable $get) {
-                            $category = Category::query()->find($get('category_id'));
-                            return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
+                           $categoryId = $get('category_id');
+                           return empty($get('category_id')) ? [] : Category::find($categoryId)->subcategories->pluck('title', 'id');
                         })
-                        ->reactive()
                         ->required()
                         ->label('Подкатегория'),
 
