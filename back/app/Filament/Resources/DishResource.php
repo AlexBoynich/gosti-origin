@@ -188,8 +188,10 @@ class DishResource extends Resource
                 Filter::make('created_at')
                     ->form([
                         Forms\Components\Fieldset::make()->schema([
-                            Forms\Components\DatePicker::make('created_from')->label('С:'),
-                            Forms\Components\DatePicker::make('created_until')->label('До:'),
+                            Forms\Components\DatePicker::make('created_from')
+                                ->placeholder('С:'),
+                            Forms\Components\DatePicker::make('created_until')
+                                ->placeholder('До:'),
                         ])->columns(1)->label('Дата создания'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
