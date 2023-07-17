@@ -27,6 +27,6 @@ class ListDishes extends ListRecords
 
     protected function getDefaultTableSortDirection(): ?string
     {
-        return 'asc';
+        return 'desc';
     }
 }
