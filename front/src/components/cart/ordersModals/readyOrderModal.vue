@@ -11,7 +11,7 @@
                 </div>
                 <div class="order-desc-box">
                     <div class="order-item"
-                        v-for="(item, index) in dataForModal"
+                         v-for="(item, index) in dataForModal"
                          :key="index"
                     >
                         <div class="item-title">{{ item.title }}</div>
@@ -25,7 +25,7 @@
                         :href="leftPartFooterItems[0].descItems[1].href"
                         class="phone"
                     >
-                       {{ phoneNumber }}
+                        {{ phoneNumber }}
                     </a>
                 </div>
             </div>
@@ -127,6 +127,7 @@ export default {
                         font-size: 20px;
                         line-height: 22px;
                     }
+
                     .item-desc {
                         @include inter-400;
                         font-size: 20px;
@@ -149,6 +150,7 @@ export default {
                     @include green-button-hover;
                 }
             }
+
             .text-message {
                 @include inter-400;
                 font-size: 16px;

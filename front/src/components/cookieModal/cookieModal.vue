@@ -5,7 +5,8 @@
                 <img src="/images/catalog/catalogItem/modal/close-modal.svg" alt="close-modal">
             </button>
             <div class="modal-content">
-                Наш сайт использует файлы cookie, чтобы улучшить работу сайта, повысить его эффективность и удобство. Продолжая использовать наш сайт, вы соглашаетесь на использование файлов cookie.
+                Наш сайт использует файлы cookie, чтобы улучшить работу сайта, повысить его эффективность и удобство.
+                Продолжая использовать наш сайт, вы соглашаетесь на использование файлов cookie.
             </div>
         </div>
     </div>
@@ -15,7 +16,7 @@
 export default {
     name: "cookieModal",
     methods: {
-        closeModal () {
+        closeModal() {
             this.$emit('closeModal')
         }
     }
@@ -35,8 +36,8 @@ export default {
     .cookie-modal {
         width: 100%;
         padding: 42px 64px;
-        border: 1px solid $greenBackground;
-        background: #EFF4EB;
+        border: 1px solid $olive;
+        background: $paleYellow;
         position: relative;
         border-radius: 16px;
 

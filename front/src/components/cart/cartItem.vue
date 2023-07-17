@@ -36,7 +36,7 @@
 
 <script>
 import {mapState} from "vuex";
-import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
+import DeleteItemModal from "./ordersModals/deleteItemModal";
 export default {
     name: "cartItem",
     components: {DeleteItemModal},
@@ -54,17 +54,17 @@ export default {
             let cartIndex = this.cart.findIndex((el) => el.id === this.cartItem.id)
             this.cart.splice(cartIndex, 1)
         },
-        openModal () {
+        openModal() {
             this.modalIsActive = true
         },
-        choice (act) {
+        choice(act) {
             console.log(act)
             if (act === true) {
                 this.deleteItem()
             }
             this.closeModal(false)
         },
-        closeModal (state) {
+        closeModal(state) {
             this.modalIsActive = state
         },
         transformCartItemAmount (act) {
@@ -164,8 +164,8 @@ export default {
                     max-width: 24px;
                     max-height: 24px;
                     padding: 6px 8px;
-                    border: 1px solid $greenBackground;
-                    background: $greenBackground;
+                    border: 1px solid $olive;
+                    background: $olive;
                     border-radius: 4px;
                     cursor: pointer;
                     display: flex;

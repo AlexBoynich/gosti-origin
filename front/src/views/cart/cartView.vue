@@ -41,7 +41,7 @@ import {mapState} from "vuex";
 
 export default {
     name: "cartView",
-    data () {
+    data() {
         return {
             errorValidation: false,
             readyModalIsActive: false,
@@ -56,7 +56,7 @@ export default {
         },
     },
     methods: {
-        resultAction (obj) {
+        resultAction(obj) {
             if (obj.readyModal) {
                 this.readyModalIsActive = true
                 this.dataForModal = obj.data
@@ -79,7 +79,7 @@ export default {
                 body.style.overflow = ''
             }
         },
-        activeWayTo (bool) {
+        activeWayTo(bool) {
             this.isDelivery = bool === true;
         }
     },
@@ -94,6 +94,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 #cart {
     margin-top: 174px;
     min-height: 90vh;
@@ -108,6 +109,7 @@ export default {
         justify-content: space-between;
         padding-bottom: 120px;
     }
+
     .cart-inactive {
         display: flex;
         flex-direction: column;
@@ -121,12 +123,14 @@ export default {
             line-height: 35px;
             margin-bottom: 32px;
         }
+
         .message-desc {
             @include inter-400;
             font-size: 24px;
             line-height: 26px;
             margin-bottom: 72px;
         }
+
         .to-catalog {
 
             button {

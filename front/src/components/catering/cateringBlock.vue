@@ -20,7 +20,7 @@
 
 <script>
 import {mapActions, mapState} from "vuex";
-import MainSlider from "../../views/catering/sliderWrapper";
+import MainSlider from "./sliderWrapper";
 
 export default {
     name: "cateringBlock",
@@ -50,12 +50,13 @@ export default {
         @include h2;
         margin-bottom: 16px;
     }
+
     .message {
         border-radius: 16px;
         padding: 40px 93px 40px 88px;
         margin-bottom: 72px;
         background: #DFE8D7;
-        border-left: solid 5px $greenBackground;
+        border-left: solid 5px $olive;
 
         .txt {
             @include inter-400;

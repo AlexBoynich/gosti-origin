@@ -102,7 +102,7 @@ export default {
                         placeholder: '+7 (ХХХ) ХХХ - ХХ - ХХ',
                         required: true,
                         mask: '+7 (###) ###-##-##',
-                        pattern: new RegExp (/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/),
+                        pattern: new RegExp(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/),
                         maxLength: 18,
                         class: 'medium no-margin',
                         type: 'text',
@@ -170,7 +170,7 @@ export default {
                 form.isError = true
             }
         },
-        notNull () {
+        notNull() {
             let name = this.personForms.forms[0]
             let tel = this.personForms.forms[1]
             let email = this.personForms.forms[2]
@@ -257,19 +257,16 @@ export default {
                         right: 16px;
                         bottom: 12px;
                         cursor: pointer;
-                        background-color: $lightRedBackground;
-                        -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-                        mask-image: url('@/../public/images/cart/form/error-icon.svg');
+                        @include form-icon;
 
                         &:hover {
-                            background-color: $redBackground;
-                            -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-                            mask-image: url('@/../public/images/cart/form/error-icon.svg');
+                            @include form-icon-hover;
                         }
                     }
+
                     .message {
                         position: absolute;
-                        background-color: rgba(243, 218, 218, 0.9);
+                        background-color: $lightGrayishRed;
                         right: 16px;
                         bottom: 40px;
                         padding: 25px 32px;
@@ -285,13 +282,7 @@ export default {
                     }
 
                     .default-form {
-                        border-radius: 16px;
-                        border: 1px solid #7B9561;
-                        outline: none;
-                        padding: 13px 24px;
-                        @include inter-300;
-                        font-size: 16px;
-                        line-height: 16px;
+                        @include default-form;
 
                         &.full {
                             width: 100%;
@@ -310,9 +301,13 @@ export default {
                             resize: none;
                         }
 
-                      &.error {
-                        border: 1px solid #C94040;
-                      }
+                        &.error {
+                            @include default-form-error;
+                        }
+
+                        &:hover {
+                            @include default-form-hover;
+                        }
                     }
 
                     &.full {

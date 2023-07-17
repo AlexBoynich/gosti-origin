@@ -39,10 +39,11 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+
 export default {
-    name: "mainSlider",
+    name: "sliderWrapper",
     computed: {
         oneSlide() {
             return this.slides.length > 1
@@ -77,7 +78,7 @@ export default {
         },
     },
     methods: {
-        openSecondSlider () {
+        openSecondSlider() {
             console.log(1)
         }
     },
@@ -90,7 +91,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/assets/styles/global";
+@import "../../assets/styles/global";
+
 .slider-box {
     max-width: 1240px;
     width: 100%;
@@ -108,7 +110,7 @@ export default {
 
         .slide {
             position: relative;
-            overflow:hidden;
+            overflow: hidden;
             width: 100%;
             height: 1071px;
             border-radius: 16px;
@@ -117,20 +119,21 @@ export default {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%,-50%);
+                transform: translate(-50%, -50%);
                 object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
         }
     }
+
     .arrows-box {
         display: flex;
         align-items: center;
         margin: 32px auto 120px;
         width: 280px;
         height: 48px;
-        color: $greenBackground;
+        color: $olive;
 
 
         .arrows {
@@ -140,7 +143,7 @@ export default {
             background: transparent;
             width: 108px;
             height: 48px;
-            color: $greenBackground;
+            color: $olive;
 
             &.arrow_prev {
                 transform: rotate(180deg);

@@ -23,7 +23,7 @@ export default {
         closeModal() {
             this.$emit('closeModal', false)
         },
-        choice (action) {
+        choice(action) {
             if (action === 'cancel') {
                 this.$emit('choice', false)
             } else {
@@ -91,12 +91,14 @@ export default {
                 line-height: 35px;
                 margin-bottom: 32px;
             }
+
             .desc {
                 @include inter-400;
                 font-size: 24px;
                 line-height: 26px;
                 margin-bottom: 64px;
             }
+
             .buttons {
                 display: flex;
                 align-items: center;

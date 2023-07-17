@@ -13,7 +13,7 @@
 export default {
     name: "PageNotFound",
     methods: {
-        onMainPage () {
+        onMainPage() {
             this.$router.push('/')
         },
         goBack() {
@@ -41,8 +41,8 @@ export default {
         text-align: center;
         margin-bottom: 48px;
     }
+
     .desc {
-        //styleName: inter;
         @include inter-400;
         font-size: 32px;
         line-height: 35px;
@@ -50,6 +50,7 @@ export default {
         text-align: center;
         margin-bottom: 64px;
     }
+
     .buttons {
         max-width: 480px;
         width: 100%;

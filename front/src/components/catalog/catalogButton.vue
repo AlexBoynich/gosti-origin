@@ -92,7 +92,7 @@ export default {
 
 .main-button {
     border-radius: 16px;
-    background: $greenBackground;
+    background: $olive;
     border: none;
     padding: 16px 0;
     color: white;
@@ -105,18 +105,19 @@ export default {
     width: 100%;
 
     &.stop-list {
-        background: #BDCAB0;
+        background: $lightGrayishGreen;
         cursor: default;
     }
+
     &.default-button:hover {
-        background: #C1D4B2;
+        background: $lightGreenishGreen;
         color: black;
     }
 }
 
 .button-counter {
     border-radius: 16px;
-    background: #C1D4B2;
+    background: $lightGreenishGreen;
     border: none;
     padding: 13px 0;
     color: black;

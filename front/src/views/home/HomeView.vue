@@ -4,9 +4,9 @@
             v-if="cookieModal"
             @closeModal="closeModal"
         />
-        <mainBlock />
+        <mainBlock/>
         <aboutUsBlock id="about-us-block"/>
-        <deliveryBlock />
+        <deliveryBlock/>
     </div>
 </template>
 
@@ -19,13 +19,13 @@ import CookieModal from "../../components/cookieModal/cookieModal";
 
 export default {
     name: 'HomeView',
-    data () {
+    data() {
         return {
             cookieModal: true
         }
     },
     methods: {
-        closeModal () {
+        closeModal() {
             this.cookieModal = false
         }
     },
@@ -47,7 +47,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-    .about-us-block {
-        margin-top: -5px;
-    }
+.about-us-block {
+    margin-top: -5px;
+}
 </style>

@@ -2,17 +2,17 @@
     <div class="slider-box">
         <div class="slider-wrapper">
             <swiper
-                    class="swiper"
-                    :options="swiperOption"
-                    :slides="slides"
+                class="swiper"
+                :options="swiperOption"
+                :slides="slides"
             >
                 <swiper-slide
-                        v-for="(slide, index) in slides"
-                        :key="index"
+                    v-for="(slide, index) in slides"
+                    :key="index"
                 >
                     <aboutUsSlide
-                            value="slide"
-                            :slide="slide"
+                        value="slide"
+                        :slide="slide"
                     />
                 </swiper-slide>
             </swiper>
@@ -20,14 +20,14 @@
         </div>
         <div class="arrows-box">
             <button
-                    v-if="slides.length > 1"
-                    class="arrows arrow_prev about-us"
+                v-if="slides.length > 1"
+                class="arrows arrow_prev about-us"
             >
                 <img src="/images/homePage/aboutUs/about-us-button-next.svg" alt="arrow"/>
             </button>
             <button
-                    v-if="slides.length > 1"
-                    class="arrows arrow_next about-us"
+                v-if="slides.length > 1"
+                class="arrows arrow_next about-us"
             >
                 <img src="/images/homePage/aboutUs/about-us-button-next.svg" alt="arrow"/>
             </button>
@@ -37,7 +37,7 @@
 
 <script>
 
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import '@/assets/styles/slider.scss'
 import aboutUsSlide from "@/components/aboutUs/aboutUsSlide.vue";
@@ -87,6 +87,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 .slider-box {
     max-width: 1240px;
     width: 100%;
@@ -105,6 +106,7 @@ export default {
             height: 800px;
         }
     }
+
     .arrows-box {
         display: flex;
         align-items: center;
@@ -113,17 +115,21 @@ export default {
         margin-left: auto;
         width: 280px;
         height: 48px;
-        color: $greenBackground;
-
 
         .arrows {
             z-index: 2;
             cursor: pointer;
             border: none;
-            background: transparent;
-            width: 108px;
-            height: 48px;
-            color: $greenBackground;
+
+            &.arrow_prev, &.arrow_next {
+                width: 84px;
+                height: 24px;
+                @include slider-arrow;
+
+                &:hover {
+                    @include slider-arrow-hover;
+                }
+            }
 
             &.arrow_prev {
                 transform: rotate(180deg);

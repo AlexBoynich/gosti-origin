@@ -28,9 +28,10 @@
 
 <script>
 import {onTop} from '@/utils/helpers.js'
+
 export default {
     name: "deliveryBlock",
-    data () {
+    data() {
         return {
             delivery: {
                 title: 'Доставка',
@@ -53,68 +54,73 @@ export default {
 @import "@/assets/styles/global";
 
 .delivery-block {
-  padding: 92px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    padding: 92px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  .left-part {
-    width: 596px;
-    height: 656px;
-    border-radius: 16px;
-  }
-  .right-part {
-    max-width: 596px;
-
-    .title {
-      @include h3;
-      padding-bottom: 8px;
-      border-bottom: solid 1px rgba(123, 149, 97, 0.35);
-      display: inline-block;
-      margin-bottom: 32px;
-      line-height: 53px;
-      padding-right: 25px;
+    .left-part {
+        width: 596px;
+        height: 656px;
+        border-radius: 16px;
     }
-    .desc {
-      @include inter-400;
-      margin-bottom: 16px;
-      max-width: 468px;
-    }
-    .delivery-table {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      gap: 0 49px;
 
-      .table-column {
-        display: flex;
-        flex-direction: column;
-        gap: 52px 0;
-        @include inter-500;
+    .right-part {
+        max-width: 596px;
 
-
-        &:first-child {
-          @include inter-400;
-          font-size: 24px;
-          line-height: 26px;
-          color: rgba(0, 0, 0, 0.55);
+        .title {
+            @include h3;
+            padding-bottom: 8px;
+            border-bottom: solid 1px rgba(123, 149, 97, 0.35);
+            display: inline-block;
+            margin-bottom: 32px;
+            line-height: 53px;
+            padding-right: 25px;
         }
-        &:nth-child(2) {
-          padding: 28px 49px;
-          border-right: solid 1px rgba(123, 149, 97, 0.36);
-          border-left: solid 1px rgba(123, 149, 97, 0.36);
 
+        .desc {
+            @include inter-400;
+            margin-bottom: 16px;
+            max-width: 468px;
         }
-      }
-    }
-    .delivery-button {
-      @include green-button;
 
-      &:hover, &:active {
-        @include green-button-hover;
-      }
+        .delivery-table {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            gap: 0 49px;
+
+            .table-column {
+                display: flex;
+                flex-direction: column;
+                gap: 52px 0;
+                @include inter-500;
+
+
+                &:first-child {
+                    @include inter-400;
+                    font-size: 24px;
+                    line-height: 26px;
+                    color: rgba(0, 0, 0, 0.55);
+                }
+
+                &:nth-child(2) {
+                    padding: 28px 49px;
+                    border-right: solid 1px rgba(123, 149, 97, 0.36);
+                    border-left: solid 1px rgba(123, 149, 97, 0.36);
+
+                }
+            }
+        }
+
+        .delivery-button {
+            @include green-button;
+
+            &:hover, &:active {
+                @include green-button-hover;
+            }
+        }
     }
-  }
 }
 </style>

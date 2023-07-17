@@ -2,14 +2,14 @@
     <div class="slider-box">
         <div class="arrow-box">
             <button
-                    v-if="slides.length > 1"
-                    :class="['arrows arrow_prev main']"
+                v-if="slides.length > 1"
+                :class="['arrows arrow_prev main']"
             >
                 <img src="/images/homePage/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
             <button
-                    v-if="slides.length > 1"
-                    :class="['arrows arrow_next main']"
+                v-if="slides.length > 1"
+                :class="['arrows arrow_next main']"
             >
                 <img src="/images/homePage/mainBlock/slider-button-next.svg" alt="arrow"/>
             </button>
@@ -17,17 +17,17 @@
         <div class="slider-wrapper">
 
             <swiper
-                    class="swiper"
-                    :options="swiperOption"
-                    :slides="slides"
+                class="swiper"
+                :options="swiperOption"
+                :slides="slides"
             >
                 <swiper-slide
-                        v-for="(slide, index) in slides"
-                        :key="index"
+                    v-for="(slide, index) in slides"
+                    :key="index"
                 >
                     <img
-                            :src="slide"
-                            alt="slide"
+                        :src="slide"
+                        alt="slide"
                     />
                 </swiper-slide>
             </swiper>
@@ -40,7 +40,7 @@
 
 <script>
 
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import '@/assets/styles/slider.scss'
 
@@ -93,6 +93,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
+
 .slider-box {
     width: 100%;
 
@@ -100,10 +101,10 @@ export default {
         position: absolute;
         max-width: 1240px;
         width: 100%;
-        left:0;
-        right:0;
-        top:0;
-        bottom:0;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         margin: auto;
 
         .arrows {
@@ -113,7 +114,7 @@ export default {
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border: none;
+            border: 1px solid #CECECE4D;
             background: rgba(255, 255, 255, 0.3);
             padding: 28px;
             border-radius: 42px;
@@ -127,12 +128,14 @@ export default {
             &.arrow_next {
                 right: 0;
             }
+
             img {
                 width: 15px;
                 height: 15px;
             }
         }
     }
+
     .slider-wrapper {
         display: flex;
         align-items: center;

@@ -1,6 +1,6 @@
 <template>
     <div v-if="oneSlide" class="main-block">
-        <SliderWrapper :slides="mainBlockSlides" />
+        <SliderWrapper :slides="mainBlockSlides"/>
     </div>
 </template>
 

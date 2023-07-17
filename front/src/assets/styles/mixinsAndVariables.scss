@@ -1,8 +1,11 @@
-$greenBackground: #7B9561;
-$lightGreenBackground: #C1D4B2;
-$darkGreenBackground: #3E5532;
-$redBackground: #C94040;
-$lightRedBackground: #F3DADA;
+$olive : #7B9561;
+$darkGreen: #3E5532;
+$madderLake : #C94040;
+$lightGrayishRed: #F3DADA;
+$paleGreen: #DFE8D7;
+$paleYellow: #EFF4EB;
+$lightGrayishGreen: #BDCAB0;
+$lightGreenishGreen: #C1D4B2;
 
 @mixin header-link {
     font-family: 'Inter', sans-serif;
@@ -61,7 +64,7 @@ $lightRedBackground: #F3DADA;
 }
 @mixin green-button {
     color: white;
-    background: $greenBackground;
+    background: $olive;
     border-radius: 16px;
     padding: 16px 24px;
     @include inter-500;
@@ -71,6 +74,41 @@ $lightRedBackground: #F3DADA;
     cursor: pointer;
 }
 @mixin green-button-hover {
-    background: $lightGreenBackground;
+    background: $lightGreenishGreen;
     color: black;
+}
+@mixin slider-arrow {
+    color: rgba(123, 149, 97, 0.5);
+    -webkit-mask-image: url('@/../public/images/homePage/aboutUs/about-us-button-next.svg');
+    mask-image: url('@/../public/images/homePage/aboutUs/about-us-button-next.svg');
+}
+@mixin slider-arrow-hover {
+    background-color: $olive;
+    -webkit-mask-image: url('@/../public/images/homePage/aboutUs/about-us-button-next.svg');
+    mask-image: url('@/../public/images/homePage/aboutUs/about-us-button-next.svg');
+}
+@mixin form-icon {
+    background-color: $lightGrayishRed;
+    -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
+    mask-image: url('@/../public/images/cart/form/error-icon.svg');
+}
+@mixin form-icon-hover {
+    background-color: $madderLake;
+    -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
+    mask-image: url('@/../public/images/cart/form/error-icon.svg');
+}
+@mixin default-form {
+    border-radius: 16px;
+    border: 1px solid rgba(123, 149, 97, 0.5);
+    outline: none;
+    padding: 13px 24px;
+    @include inter-300;
+    font-size: 16px;
+    line-height: 16px;
+}
+@mixin default-form-error {
+    border: 1px solid $madderLake;
+}
+@mixin default-form-hover {
+    border: 1px solid $olive;
 }

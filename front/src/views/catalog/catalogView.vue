@@ -118,7 +118,7 @@ export default {
             })
             this.onTop('smooth')
         },
-        goToCatalog () {
+        goToCatalog() {
             this.activeItems.categoriesIndex = 0
             this.activeItems.categoriesTitle = this.categories[0].title
             this.activeItems.subcategoriesIndex = 1
