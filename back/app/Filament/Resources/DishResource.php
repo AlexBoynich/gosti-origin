@@ -23,6 +23,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use Livewire\Component as Livewire;
 
 
 class DishResource extends Resource
@@ -66,21 +68,22 @@ class DishResource extends Resource
                         ->label('Цена'),
 
                     Select::make('metric_id')
-                        ->options(Metric::all()
-                            ->pluck('title', 'id')
-                        )
-                        ->placeholder('Выбрать')
-                        ->label('Ед. измерения')
-                        ->required(),
+                        ->options(Metric::all()->pluck('title', 'id'))
+                        ->reactive()
+                        ->default(3)
+                        ->afterStateUpdated(function ($state ,callable $set) {
+                            if (is_null($state)) {
+                                $set('metric_value', null);
+                            }
+                        })
+                        ->label('Ед. измерения'),
 
                     TextInput::make('metric_value')
                         ->maxLength(10)
                         ->maxValue(9999999999)
                         ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
                         ->integer()
-                        ->label('Вес/объём')
-                        ->required(),
+                        ->label('Вес/объём'),
 
                     Select::make('category_id')
                         ->options(function (callable $get) {
@@ -275,6 +278,5 @@ class DishResource extends Resource
             'edit' => Pages\EditDish::route('/{record}/edit'),
         ];
     }
-
 }
 
