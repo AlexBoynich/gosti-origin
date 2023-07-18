@@ -70,7 +70,7 @@
                     <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                 </div>
                 <label :for="personalData.id">
-                    <a href="/documents/consent-to-the-processing-of-personal-data.docx">
+                    <a href="/documents/consent-to-the-processing-of-personal-data.pdf">
                         {{ personalData.label }}
                     </a>
                 </label>

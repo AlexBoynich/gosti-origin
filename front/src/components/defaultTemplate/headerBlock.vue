@@ -43,7 +43,7 @@
                         </p>
                         <div v-else class="cart-icon">
                             <img :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
-                            <div v-show="cart.length > 0" class="cart-counter">{{ cart.length }}</div>
+                            <div v-show="cart.length > 0" class="cart-counter">{{ productCounter }}</div>
                         </div>
 
                     </router-link>
@@ -94,7 +94,10 @@ export default {
         }
     },
     computed: {
-        ...mapState('cart', ['cart'])
+        ...mapState('cart', ['cart']),
+        productCounter: function () {
+            return this.cart.reduce((acc, item) => acc + item.count, 0)
+        }
     },
     methods: {
         onTop
