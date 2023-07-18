@@ -22,7 +22,7 @@
                 <div class="text-message">
                     Если вы хотите изменить или отменить заказ позвоните по номеру
                     <a
-                        href="tel:+73822509990"
+                        :href="leftPartFooterItems[0].descItems[1].href"
                         class="phone"
                     >
                        {{ phoneNumber }}

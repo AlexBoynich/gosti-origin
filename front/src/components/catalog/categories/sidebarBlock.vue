@@ -1,7 +1,7 @@
 <template>
     <div class="categories-block container">
         <aside>
-            <div class="title">Каталог</div>
+            <h2 class="title">Каталог</h2>
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
