@@ -339,7 +339,7 @@ export default {
                     width: 20px;
                     height: 20px;
                     border-radius: 50%;
-                    border: solid 1px $greenBackground;
+                    border: solid 1px $olive;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -349,7 +349,7 @@ export default {
                         width: 8px;
                         height: 8px;
                         border-radius: 50%;
-                        background: $greenBackground;
+                        background: $olive;
                     }
                 }
 
@@ -432,7 +432,7 @@ export default {
                 }
 
                 &.active {
-                    border: 1px solid $greenBackground;
+                    border: 1px solid $olive;
 
                     img {
                         display: flex;
@@ -440,7 +440,7 @@ export default {
                 }
 
                 &:hover {
-                    border: 1px solid $greenBackground;
+                    border: 1px solid $olive;
                 }
             }
 

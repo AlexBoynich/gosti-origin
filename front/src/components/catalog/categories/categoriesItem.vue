@@ -47,7 +47,7 @@ export default {
     width: 100%;
     color: black;
     border-radius: 16px;
-    border: 1px solid $greenBackground;
+    border: 1px solid $olive;
     background: #fff;
     overflow: hidden;
 
@@ -95,16 +95,16 @@ export default {
         text-align: left;
         gap: 16px 0;
         padding: 12px 0 40px;
-        background: #DFE8D780;
+        background: $paleGreen;
 
     }
 
     &.active, &:hover {
-        background: #DFE8D780;
+        background: $paleGreen;
         color: white;
 
         .categories-header {
-            background: #DFE8D780;
+            background: $paleGreen;
             color: white;
         }
     }

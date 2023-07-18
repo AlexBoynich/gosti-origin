@@ -19,46 +19,49 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
-    .about-us-slide {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
 
-        .left-part {
+.about-us-slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            .slide-title {
-                @include h3;
-                padding-bottom: 8px;
-                border-bottom: solid 1px rgba(123, 149, 97, 0.8);
-                display: inline-block;
-                margin-bottom: 32px;
-                padding-right: 25px;
+    .left-part {
 
-            }
-            .slide-desc {
-                @include inter-400;
-                display: flex;
-                flex-direction: column;
-                max-width: 460px;
-                gap: 16px 0;
-            }
+        .slide-title {
+            @include h3;
+            padding-bottom: 8px;
+            border-bottom: solid 1px rgba(123, 149, 97, 0.8);
+            display: inline-block;
+            margin-bottom: 32px;
+            padding-right: 25px;
+
         }
-        .right-part {
-            position: relative;
-            overflow:hidden;
-            width: 596px;
-            height: 656px;
-            border-radius: 16px;
 
-            img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-            }
+        .slide-desc {
+            @include inter-400;
+            display: flex;
+            flex-direction: column;
+            max-width: 460px;
+            gap: 16px 0;
         }
     }
+
+    .right-part {
+        position: relative;
+        overflow: hidden;
+        width: 596px;
+        height: 656px;
+        border-radius: 16px;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
 </style>

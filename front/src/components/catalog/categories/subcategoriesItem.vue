@@ -1,10 +1,10 @@
 <template>
     <a
-            :class="['subcategories-item',
+        :class="['subcategories-item',
             {'active' : this.subcategoriesItem.id === this.activeIndex}]"
-            :href="subcategoriesItem.link"
-            @click.prevent="pickSubcategories"
-            @click="onTop('smooth')"
+        :href="subcategoriesItem.link"
+        @click.prevent="pickSubcategories"
+        @click="onTop('smooth')"
     >
         {{ subcategoriesItem.title }}
     </a>
@@ -12,11 +12,12 @@
 
 <script>
 import {onTop} from '@/utils/helpers.js'
+
 export default {
     name: "subcategoriesItem",
     methods: {
         onTop,
-        pickSubcategories () {
+        pickSubcategories() {
             this.$emit('pickSubcategories', {
                 id: this.subcategoriesItem.id,
                 title: this.subcategoriesItem.title
@@ -39,7 +40,7 @@ export default {
     opacity: .5;
 
     &.active {
-      opacity: 1;
+        opacity: 1;
     }
 
     &:hover {

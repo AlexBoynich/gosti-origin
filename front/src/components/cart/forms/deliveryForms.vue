@@ -4,31 +4,31 @@
             <div class="section-title">{{ delivery.title }}</div>
             <div class="forms">
                 <form
-                        v-for="form in delivery.forms"
-                        :key="form.id"
+                    v-for="form in delivery.forms"
+                    :key="form.id"
                 >
                     <div :class="['form', form.class]">
                         <label :for="form.id">{{ form.label }}</label>
                         <input
-                                :type="form.type"
-                                :class="['default-form', form.class, {'error' : form.isError}]"
-                                :placeholder="form.placeholder"
-                                :maxlength="form.maxLength"
-                                :required="form.required"
-                                v-model="form.formContent"
-                                @change="formValidate(
+                            :type="form.type"
+                            :class="['default-form', form.class, {'error' : form.isError}]"
+                            :placeholder="form.placeholder"
+                            :maxlength="form.maxLength"
+                            :required="form.required"
+                            v-model="form.formContent"
+                            @change="formValidate(
                                 form.id,
                                 form.pattern,
                                 form.formContent
                             )"
                         >
                         <img
-                                v-if="form.isError"
-                                :class="['form-icon', form.img.class]"
-                                :src="form.img.src"
-                                alt="form-icon"
-                                @mouseover="form.viewError = true"
-                                @mouseleave="form.viewError = false"
+                            v-if="form.isError"
+                            :class="['form-icon', form.img.class]"
+                            :src="form.img.src"
+                            alt="form-icon"
+                            @mouseover="form.viewError = true"
+                            @mouseleave="form.viewError = false"
                         >
                         <div v-show="form.viewError" class="message">
                             <div class="txt">
@@ -180,112 +180,106 @@ export default {
 @import "@/assets/styles/global";
 
 .delivery-forms {
-  .title {
-    @include inter-500;
-  }
-
-  .form-item {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    .section-title {
-      @include inter-500;
-      font-size: 20px;
-      line-height: 22px;
-      margin-bottom: 16px;
+    .title {
+        @include inter-500;
     }
 
-    .forms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 0;
-
-      form {
+    .form-item {
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
 
-        .form {
-          display: flex;
-          flex-direction: column;
-          position: relative;
-
-          label {
-            @include inter-400;
-            margin-bottom: 8px;
-            line-height: 20px;
-          }
-
-          .form-icon.error {
-            position: absolute;
-            right: 16px;
-            bottom: 12px;
-            cursor: pointer;
-            background-color: $lightRedBackground;
-            -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-            mask-image: url('@/../public/images/cart/form/error-icon.svg');
-
-            &:hover {
-              background-color: $redBackground;
-              -webkit-mask-image: url('@/../public/images/cart/form/error-icon.svg');
-              mask-image: url('@/../public/images/cart/form/error-icon.svg');
-            }
-          }
-
-          .message {
-            position: absolute;
-            background-color: rgba(243, 218, 218, 0.9);
-            right: 16px;
-            bottom: 40px;
-            padding: 25px 32px;
-            border-radius: 16px;
-            width: 302px;
-
-            .txt {
-              max-width: 238px;
-              @include inter-400;
-              font-size: 16px;
-              line-height: 18px;
-            }
-          }
-
-          .default-form {
-            border-radius: 16px;
-            border: 1px solid #7B9561;
-            outline: none;
-            padding: 13px 24px;
-            @include inter-300;
-            font-size: 16px;
-            line-height: 16px;
-
-            &.full {
-              width: 100%;
-            }
-
-            &.small {
-              width: 100%;
-            }
-
-            &.error {
-              border: 1px solid #C94040;
-            }
-          }
-
-          &.full {
-            width: 596px;
-          }
-
-          &.small {
-            width: 172px;
-            margin-right: 39px;
-
-            &.no-margin {
-              margin-right: 0;
-            }
-          }
+        .section-title {
+            @include inter-500;
+            font-size: 20px;
+            line-height: 22px;
+            margin-bottom: 16px;
         }
-      }
+
+        .forms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 0;
+
+            form {
+                display: flex;
+                flex-wrap: wrap;
+
+                .form {
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+
+                    label {
+                        @include inter-400;
+                        margin-bottom: 8px;
+                        line-height: 20px;
+                    }
+
+                    .form-icon.error {
+                        position: absolute;
+                        right: 16px;
+                        bottom: 12px;
+                        cursor: pointer;
+                        @include form-icon;
+
+                        &:hover {
+                            @include form-icon-hover;
+                        }
+                    }
+
+                    .message {
+                        position: absolute;
+                        background-color: $lightGrayishRed;
+                        right: 16px;
+                        bottom: 40px;
+                        padding: 25px 32px;
+                        border-radius: 16px;
+                        width: 302px;
+
+                        .txt {
+                            max-width: 238px;
+                            @include inter-400;
+                            font-size: 16px;
+                            line-height: 18px;
+                        }
+                    }
+
+                    .default-form {
+                        @include default-form;
+
+                        &.full {
+                            width: 100%;
+                        }
+
+                        &.small {
+                            width: 100%;
+                        }
+
+                        &.error {
+                            @include default-form-error
+                        }
+
+                        &:hover {
+                            @include default-form-hover;
+                        }
+                    }
+
+                    &.full {
+                        width: 596px;
+                    }
+
+                    &.small {
+                        width: 172px;
+                        margin-right: 39px;
+
+                        &.no-margin {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 </style>

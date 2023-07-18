@@ -5,22 +5,22 @@
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
-                            v-for="category in categories"
-                            :key="category.id"
-                            :categoriesItem="category"
-                            :activeIndices="activeIndices"
-                            @toggleCategory="toggleCategory"
-                            @pickSubcategories="activeItems"
+                        v-for="category in categories"
+                        :key="category.id"
+                        :categoriesItem="category"
+                        :activeIndices="activeIndices"
+                        @toggleCategory="toggleCategory"
+                        @pickSubcategories="activeItems"
                     />
                 </div>
                 <div class="filters-box">
                     <div class="title">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
-                                v-for="filter in filters"
-                                :key="filter.id"
-                                :filtersItem="filter"
-                                @pickFilter="pickFilter"
+                            v-for="filter in filters"
+                            :key="filter.id"
+                            :filtersItem="filter"
+                            @pickFilter="pickFilter"
                         />
                     </div>
                 </div>
@@ -113,45 +113,45 @@ export default {
 @import "@/assets/styles/global";
 
 aside {
-  max-width: 274px;
-  width: 100%;
-  height: 100%;
+    max-width: 274px;
+    width: 100%;
+    height: 100%;
 
-  .title {
-    @include h2;
-    margin-bottom: 16px;
-  }
-
-  .content {
-    position: sticky;
-    top: 130px;
-    padding-bottom: 40px;
-
-    .categories {
-      display: flex;
-      flex-direction: column;
-      gap: 24px 0;
-      margin-bottom: 48px;
+    .title {
+        @include h2;
+        margin-bottom: 16px;
     }
 
-    .filters-box {
+    .content {
+        position: sticky;
+        top: 130px;
+        padding-bottom: 40px;
 
-      .title {
-        color: #000;
-        @include inter-500;
-        font-size: 20px;
-        line-height: 110%;
-        letter-spacing: -0.4px;
-        margin-bottom: 24px;
-      }
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 24px 0;
+            margin-bottom: 48px;
+        }
 
-      .filters {
-        display: flex;
-        flex-direction: column;
-        gap: 16px 0;
-      }
+        .filters-box {
+
+            .title {
+                color: #000;
+                @include inter-500;
+                font-size: 20px;
+                line-height: 110%;
+                letter-spacing: -0.4px;
+                margin-bottom: 24px;
+            }
+
+            .filters {
+                display: flex;
+                flex-direction: column;
+                gap: 16px 0;
+            }
+        }
     }
-  }
 }
 
 </style>

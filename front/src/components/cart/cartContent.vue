@@ -32,12 +32,12 @@
 
 <script>
 import CartItem from "@/components/cart/cartItem.vue";
-import DeleteItemModal from "./ordersModals/deleteItemModal/deleteItemModal";
+import DeleteItemModal from "./ordersModals/deleteItemModal";
 import {mapMutations} from "vuex";
 
 export default {
     name: "cartContent",
-    data () {
+    data() {
         return {
             modalIsActive: false
         }
@@ -70,19 +70,19 @@ export default {
     },
     methods: {
         ...mapMutations('cart', ['DELETE_CART']),
-        deleteCart () {
+        deleteCart() {
             this.DELETE_CART()
         },
-        openModal () {
+        openModal() {
             this.modalIsActive = true
         },
-        choice (act) {
+        choice(act) {
             if (act === true) {
                 this.deleteCart()
             }
             this.closeModal(false)
         },
-        closeModal (state) {
+        closeModal(state) {
             this.modalIsActive = state
         },
     },
@@ -140,7 +140,6 @@ export default {
         gap: 24px 0;
         max-height: 853px;
         overflow: scroll;
-
         scrollbar-width: none;
         -ms-overflow-style: none;
 

@@ -170,7 +170,7 @@ export default {
         padding: 40px 93px;
         margin-bottom: 24px;
         background: #DFE8D7;
-        border-left: solid 5px $greenBackground;
+        border-left: solid 5px $olive;
 
         .txt {
             @include inter-400;
@@ -181,8 +181,8 @@ export default {
         }
 
         &.bad {
-            background: $lightRedBackground;
-            border-left: 5px solid $redBackground;
+            background: $lightGrayishRed;
+            border-left: 5px solid $madderLake;
         }
     }
 

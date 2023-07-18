@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
-    <headerBlock />
-    <router-view/>
-    <footerBlock />
-  </div>
+    <div id="app">
+        <headerBlock/>
+        <router-view/>
+        <footerBlock/>
+    </div>
 </template>
 
 
@@ -13,11 +13,11 @@ import headerBlock from "@/components/defaultTemplate/headerBlock";
 import footerBlock from "@/components/defaultTemplate/footerBlock";
 
 export default {
-  name: 'App',
-  components: {
-    headerBlock,
-    footerBlock
-  },
+    name: 'App',
+    components: {
+        headerBlock,
+        footerBlock
+    },
 }
 </script>
 

@@ -5,14 +5,14 @@
                 <div class="left-part">
                     <div class="left-part-top">
                         <div class="left-part-top-items"
-                            v-for="(item, index) in leftPartFooterItems"
+                             v-for="(item, index) in leftPartFooterItems"
                              :key="index"
                         >
                             <div class="title">{{ item.title }}</div>
                             <div class="desc-box">
                                 <div class="desc-item"
-                                    v-for="(descItem, i) in item.descItems"
-                                    :key="i"
+                                     v-for="(descItem, i) in item.descItems"
+                                     :key="i"
                                 >
                                     <img :src="descItem.img" alt="desc-item">
                                     <a
@@ -29,10 +29,10 @@
                     </div>
                     <div class="left-part-bottom">
                         <a
-                           v-for="(item, index) in footerSocials"
-                           :key="index"
-                           :href="item.link"
-                           target="_blank"
+                            v-for="(item, index) in footerSocials"
+                            :key="index"
+                            :href="item.link"
+                            target="_blank"
                         >
                             <img
                                 :src="item.img"
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="right-part">
-                    <footerMap />
+                    <footerMap/>
                 </div>
             </div>
             <div class="hr"></div>
@@ -59,6 +59,7 @@
 <script>
 import footerMap from "@/components/map/footerMap";
 import {mapActions, mapState} from "vuex";
+
 export default {
     name: "footerBlock",
     components: {
@@ -108,6 +109,7 @@ footer {
                         @include comforta-500;
                         margin-bottom: 16px;
                     }
+
                     .desc-box {
                         display: flex;
                         flex-direction: column;
@@ -134,6 +136,7 @@ footer {
                     }
                 }
             }
+
             .left-part-bottom {
                 display: flex;
                 align-items: center;
@@ -141,11 +144,13 @@ footer {
             }
         }
     }
+
     .hr {
         width: 100%;
         height: 0.5px;
         background: black;
     }
+
     .footer-bottom {
         padding: 16px 0;
         display: flex;

@@ -194,7 +194,7 @@ header {
                     border-bottom: 2px solid transparent;
 
                     &:active, &:hover {
-                        border-bottom: 2px solid $greenBackground;
+                        border-bottom: 2px solid $olive;
                     }
                 }
 
@@ -219,7 +219,7 @@ header {
                             top: 0;
                             width: 25px;
                             height: 25px;
-                            background: $greenBackground;
+                            background: $olive;
                             border-radius: 50%;
                             display: flex;
                             align-items: center;
