@@ -66,40 +66,36 @@ class DishResource extends Resource
                         ->label('Цена'),
 
                     Select::make('metric_id')
-                        ->options(Metric::all()
-                            ->pluck('title', 'id')
-                        )
-                        ->placeholder('Выбрать')
-                        ->label('Ед. измерения')
-                        ->required(),
+                        ->options(Metric::all()->pluck('title', 'id'))
+                        ->reactive()
+                        ->default(3)
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            if (is_null($state)) {
+                                $set('metric_value', null);
+                            }
+                        })
+                        ->label('Ед. измерения'),
 
                     TextInput::make('metric_value')
                         ->maxLength(10)
                         ->maxValue(9999999999)
                         ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
                         ->integer()
-                        ->label('Вес/объём')
-                        ->required(),
+                        ->label('Вес/объём'),
 
                     Select::make('category_id')
                         ->options(function (callable $get) {
-                            if (is_null($get('category_id'))) {
-                                return Category::all()->pluck('title', 'id');
-                            }
-                            return Category::query()->find($get('category_id'))->pluck('title', 'id');
+                            return Category::all()->pluck('title', 'id');
                         })
-                        ->afterStateUpdated(fn(callable $set) => $set('subcategory_id', null))
                         ->reactive()
                         ->label('Категория')
                         ->required(),
 
                     Select::make('subcategory_id')
                         ->options(function (callable $get) {
-                            $category = Category::query()->find($get('category_id'));
-                            return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
+                           $categoryId = $get('category_id');
+                           return empty($get('category_id')) ? [] : Category::find($categoryId)->subcategories->pluck('title', 'id');
                         })
-                        ->reactive()
                         ->required()
                         ->label('Подкатегория'),
 
@@ -162,6 +158,7 @@ class DishResource extends Resource
                             'image/svg',
                         ])
                         ->maxFiles(1)
+                        ->required()
                         ->label('Изображение'),
                 ])->inlineLabel(),
             ]);
@@ -191,8 +188,12 @@ class DishResource extends Resource
                 Filter::make('created_at')
                     ->form([
                         Forms\Components\Fieldset::make()->schema([
-                            Forms\Components\DatePicker::make('created_from')->label('С:'),
-                            Forms\Components\DatePicker::make('created_until')->label('До:'),
+                            Forms\Components\DatePicker::make('created_from')
+                                ->label('')
+                                ->placeholder('С:'),
+                            Forms\Components\DatePicker::make('created_until')
+                                ->label('')
+                                ->placeholder('До:'),
                         ])->columns(1)->label('Дата создания'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
@@ -275,6 +276,5 @@ class DishResource extends Resource
             'edit' => Pages\EditDish::route('/{record}/edit'),
         ];
     }
-
 }
 
