@@ -195,7 +195,11 @@ export default {
                 {title: 'К оплате:', content: ''}
             ]
             if (this.order.wayToGet.content === 'доставка') {
-                data[0].content = this.order.wayToGet.delivery.street + ', д.' + this.order.wayToGet.delivery.house
+                data[0].content = this.order.wayToGet.delivery.street + ', д.' + this.order.wayToGet.delivery.house +
+                    (this.order.wayToGet.delivery.apartment ? ', кв. ' + this.order.wayToGet.delivery.apartment : "") +
+                    (this.order.wayToGet.delivery.entrance ? ', кв. ' + this.order.wayToGet.delivery.entrance : "") +
+                    (this.order.wayToGet.delivery.floor ? ', кв. ' + this.order.wayToGet.delivery.floor : "") +
+                    (this.order.wayToGet.delivery.intercomNumber ? ', кв. ' + this.order.wayToGet.delivery.intercomNumber : "")
             } else {
                 data[0].content = 'г.Томск, пр.Фрунзе, д.90'
             }
