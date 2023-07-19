@@ -59,6 +59,8 @@ export default {
         resultAction(obj) {
             if (obj.readyModal) {
                 this.readyModalIsActive = true
+                obj.data[0].content =obj.data[0].content.replace(/(,[^,]*,)/g, "$1<br>")
+
                 this.dataForModal = obj.data
             } else if (obj.errorModal) {
                 this.errorValidation = true

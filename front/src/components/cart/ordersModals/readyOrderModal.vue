@@ -15,7 +15,7 @@
                          :key="index"
                     >
                         <div class="item-title">{{ item.title }}</div>
-                        <div class="item-desc">{{ item.content }}</div>
+                        <div class="item-desc" v-html="item.content"></div>
                     </div>
                 </div>
                 <button @click="closeModal">Ок</button>
@@ -35,6 +35,7 @@
 
 <script>
 import {mapMutations, mapState} from "vuex";
+import {onTop} from "@/utils/helpers";
 
 export default {
     name: "readyOrderModal",
@@ -45,10 +46,12 @@ export default {
         }
     },
     methods: {
+        onTop,
         ...mapMutations('cart', ['DELETE_CART']),
         closeModal() {
             this.$emit('closeModal')
             this.DELETE_CART()
+            this.onTop('smooth')
         }
     },
     props: ['dataForModal']
@@ -133,7 +136,9 @@ export default {
                         font-size: 20px;
                         line-height: 22px;
                         max-width: 240px;
+                        width: 100%;
                         word-wrap: break-word;
+                        text-align: left;
                     }
                 }
 
