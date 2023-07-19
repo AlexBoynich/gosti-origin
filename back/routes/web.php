@@ -1,7 +1,7 @@
 <?php
 
+use App\Filament\File\FileUploadHandler;
 use Illuminate\Support\Facades\Route;
-use Livewire\Controllers\FileUploadHandler;
 
 /*
 |--------------------------------------------------------------------------
