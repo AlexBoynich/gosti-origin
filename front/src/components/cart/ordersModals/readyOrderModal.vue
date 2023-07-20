@@ -34,8 +34,7 @@
 </template>
 
 <script>
-import {mapMutations, mapState} from "vuex";
-import {onTop} from "@/utils/helpers";
+import {mapState} from "vuex";
 
 export default {
     name: "readyOrderModal",
@@ -46,12 +45,8 @@ export default {
         }
     },
     methods: {
-        onTop,
-        ...mapMutations('cart', ['DELETE_CART']),
         closeModal() {
             this.$emit('closeModal')
-            this.DELETE_CART()
-            this.onTop('smooth')
         }
     },
     props: ['dataForModal']

@@ -85,7 +85,9 @@ import deliveryForms from "./forms/deliveryForms";
 import PersonForms from "./forms/personForms";
 import pickupBlock from "./forms/pickupBlock";
 import DateAndTimeForms from "./forms/dateAndTimeForms";
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
+import {onTop} from "@/utils/helpers";
+
 
 export default {
     name: "orderFormsBlock",
@@ -136,7 +138,7 @@ export default {
                     personalFormIsEmpty: true,
                 },
                 wayToGet: {
-                    content: 'доставка',
+                    content: 'Доставка',
                     delivery: {
                         formIsEmpty: true,
                         street: '',
@@ -152,7 +154,7 @@ export default {
                     date: '',
                     timeSlot: ''
                 },
-                payMethod: 'картой при получении'
+                payMethod: 'картой при получении',
             },
         }
     },
@@ -165,7 +167,6 @@ export default {
             } else {
                 return this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
             }
-
         },
         deliveryPrice: function () {
             let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
@@ -194,21 +195,57 @@ export default {
                 {title: 'Способ оплаты', content: this.order.payMethod},
                 {title: 'К оплате:', content: ''}
             ]
-            if (this.order.wayToGet.content === 'доставка') {
+            if (this.order.wayToGet.content === 'Доставка') {
                 data[0].content = this.order.wayToGet.delivery.street + ', д.' + this.order.wayToGet.delivery.house +
                     (this.order.wayToGet.delivery.apartment ? ', кв. ' + this.order.wayToGet.delivery.apartment : "") +
-                    (this.order.wayToGet.delivery.entrance ? ', кв. ' + this.order.wayToGet.delivery.entrance : "") +
-                    (this.order.wayToGet.delivery.floor ? ', кв. ' + this.order.wayToGet.delivery.floor : "") +
-                    (this.order.wayToGet.delivery.intercomNumber ? ', кв. ' + this.order.wayToGet.delivery.intercomNumber : "")
+                    (this.order.wayToGet.delivery.entrance ? ', п. ' + this.order.wayToGet.delivery.entrance : "") +
+                    (this.order.wayToGet.delivery.floor ? ', эт. ' + this.order.wayToGet.delivery.floor : "") +
+                    (this.order.wayToGet.delivery.intercomNumber ? ', д. ' + this.order.wayToGet.delivery.intercomNumber : "")
             } else {
                 data[0].content = 'г.Томск, пр.Фрунзе, д.90'
             }
             data[data.length - 1].content = this.price + ' ₽'
 
             return data
+        },
+        dataForRequest: function () {
+            let objForRequest = {}
+            objForRequest.name = this.order.personal.fullName
+            objForRequest.phone = this.order.personal.phoneNumber
+            objForRequest.email = this.order.personal.email
+            objForRequest.comment = this.order.personal.message
+            objForRequest.obtainingMethod = this.order.wayToGet.content
+            if (objForRequest.obtainingMethod === 'Доставка') {
+                objForRequest.street = this.order.wayToGet.delivery.street
+                objForRequest.house = this.order.wayToGet.delivery.house
+                objForRequest.flat = this.order.wayToGet.delivery.apartment
+                objForRequest.entrance = this.order.wayToGet.delivery.entrance
+                objForRequest.floor = this.order.wayToGet.delivery.floor
+                objForRequest.intercom = this.order.wayToGet.delivery.intercomNumber
+            } else {
+                objForRequest.street = 'г.Томск, пр.Фрунзе'
+                objForRequest.house = '90'
+            }
+            objForRequest.receiptDate = this.order.dateAndTime.date
+            objForRequest.receiptTime = this.order.dateAndTime.timeSlot
+
+            if (this.order.payMethod === 'картой при получении'){
+                objForRequest.paymentMethod = 'Картой'
+            } else {
+                objForRequest.paymentMethod = 'Наличный'
+            }
+
+
+            objForRequest.deliveryPrice = this.deliveryPrice
+            objForRequest.cost = this.price - this.deliveryPrice
+            objForRequest.dishes = this.cart.map(item => ({ id: item.id, count: item.count }))
+
+            return objForRequest
         }
     },
     methods: {
+        onTop,
+        ...mapMutations('cart', ['DELETE_CART']),
         activeWayToGetButton(id) {
             if (id === 'pickup') {
                 this.wayToGet.radioButtons[0].isActive = true
@@ -217,7 +254,7 @@ export default {
                 this.wayToGet.pickup.isPickup = true
                 this.wayToGet.delivery.isDelivery = false
 
-                this.order.wayToGet.content = 'самовывоз'
+                this.order.wayToGet.content = 'Самовывоз'
 
                 this.$emit('activeWayToGetButton', false)
             } else {
@@ -227,7 +264,7 @@ export default {
                 this.wayToGet.pickup.isPickup = false
                 this.wayToGet.delivery.isDelivery = true
 
-                this.order.wayToGet.content = 'доставка'
+                this.order.wayToGet.content = 'Доставка'
 
                 this.$emit('activeWayToGetButton', true)
             }
@@ -257,8 +294,11 @@ export default {
                 this.$emit('resultAction', {
                     readyModal: true,
                     errorModal: false,
-                    data: this.dataForModal
+                    data: this.dataForModal,
+                    forRequest: this.dataForRequest
                 })
+                this.DELETE_CART()
+                this.onTop('smooth')
             } else {
                 this.$emit('resultAction', {
                     readyModal: false,
