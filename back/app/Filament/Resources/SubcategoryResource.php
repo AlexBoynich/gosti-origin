@@ -64,6 +64,7 @@ class SubcategoryResource extends Resource
             ->filters([
                 SelectFilter::make('parentCategory')
                     ->relationship('category', 'title')
+                    ->label('Категория')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
