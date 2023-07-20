@@ -38,6 +38,7 @@ import cartContent from "@/components/cart/cartContent.vue";
 import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue";
 import validationError from "@/components/cart/ordersModals/validationError";
 import {mapState} from "vuex";
+import axios from "axios";
 
 export default {
     name: "cartView",
@@ -60,8 +61,17 @@ export default {
             if (obj.readyModal) {
                 this.readyModalIsActive = true
                 obj.data[0].content =obj.data[0].content.replace(/(,[^,]*,)/g, "$1<br>")
-
                 this.dataForModal = obj.data
+
+                console.log(obj.forRequest)
+                axios.post('https://gosti-dev.tomsk-it.ru/api/orders', obj.forRequest)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
             } else if (obj.errorModal) {
                 this.errorValidation = true
             }

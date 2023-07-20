@@ -2,7 +2,7 @@
     <div class="catalog-content">
         <div
             v-show="showMessage"
-            :class="['message', {'bad' : !isGood}]"
+            :class="['message', {'bad' : !isGood || catalogItems.length === 0}]"
         >
             <div
                 v-show="activeItems.categoriesIndex === 0 && catalogItems.length > 0"
@@ -108,16 +108,10 @@ export default {
                     this.isGood = hour >= 12 && hour < 16;
                 }
             }
-            this.checkDishes();
             return this.isGood
         },
         goToCatalog() {
             this.$emit('goToCatalog')
-        },
-        checkDishes() {
-            if (this.catalogItems.length === 0) {
-                this.isGood = false
-            }
         },
         inCart(item) {
             if (this.cart.reduce((acc, item) => acc + item.count, 0) < 99) {
@@ -143,19 +137,15 @@ export default {
                 this.componentCart.splice(index, 1);
             }
             this.SET_CART(this.componentCart)
-        },
+        }
     },
     components: {
         catalogItem,
     },
     props: ['activeItems', 'catalogItems'],
-    created() {
-        this.checkTime(this.activeItems.categoriesIndex)
-        this.$parent.$on('setActiveItems', this.checkTime(this.activeItems.categoriesIndex));
-    },
-    beforeDestroy() {
-        this.$parent.$off('setActiveItems', this.checkTime(this.activeItems.categoriesIndex));
-    }
+    /*created() {
+        this.checkTime(0, this.catalogItems)
+    }*/
 }
 </script>
 
