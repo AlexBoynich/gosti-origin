@@ -9,6 +9,7 @@
         <catalogContent
             :activeItems="activeItems"
             :catalogItems="catalogItems"
+            ref="catalogContent"
             @goToCatalog="goToCatalog"
         />
     </div>
@@ -63,7 +64,7 @@ export default {
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
         onTop,
-        setActiveItems(el) {
+         setActiveItems(el) {
             this.activeItems.categoriesTitle = el.categoryTitle
             this.activeItems.categoriesIndex = el.categoriesIndex
             this.activeItems.subcategoriesTitle = el.subcategoryTitle
@@ -80,10 +81,14 @@ export default {
             }
             Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
 
+
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: ''
             })
+
+            this.$refs.catalogContent.checkTime(this.activeItems.categoriesIndex);
+
             this.onTop('smooth')
         },
         setFilter(obj) {
@@ -136,7 +141,7 @@ export default {
                 requestFilter: ''
             })
             this.onTop('smooth')
-        }
+        },
     },
     components: {
         catalogContent,
