@@ -93,7 +93,7 @@ return [
         'numeric' => 'Поле :attribute не должно быть больше :max.',
         'string' => 'Поле :attribute не должно быть больше :max символ(а/ов).',
     ],
-    'max_digits' => 'The :attribute field must not have more than :max digits.',
+    'max_digits' => 'Поле :attribute не должно содержать больше :max цифр(ы).',
     'mimes' => 'The :attribute field must be a file of type: :values.',
     'mimetypes' => 'The :attribute field must be a file of type: :values.',
     'min' => [
@@ -102,7 +102,7 @@ return [
         'numeric' => 'Поле :attribute должно быть больше :min.',
         'string' => 'Поле :attribute должно быть больше :min символ(а/ов).',
     ],
-    'min_digits' => 'The :attribute field must have at least :min digits.',
+    'min_digits' => 'Поле :attribute не должно быть меньше :min цифр(ы).',
     'missing' => 'The :attribute field must be missing.',
     'missing_if' => 'The :attribute field must be missing when :other is :value.',
     'missing_unless' => 'The :attribute field must be missing unless :other is :value.',

@@ -10,6 +10,7 @@ use App\Models\Dish;
 use App\Models\Metric;
 use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -49,18 +50,17 @@ class DishResource extends Resource
                         ->autofocus()
                         ->label('Наименование'),
 
-                    TextInput::make('composition')
+                    RichEditor::make('composition')
+                        ->string()
                         ->minLength(1)
                         ->maxLength(150)
-                        ->string()
-                        ->required()
-                        ->label('Состав'),
+                        ->label('Состав')
+                        ->toolbarButtons([
+                            //
+                        ]),
 
                     TextInput::make('price')
-                        ->default(0)
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->integer()
                         ->required()
                         ->label('Цена'),
@@ -79,7 +79,6 @@ class DishResource extends Resource
                     TextInput::make('metric_value')
                         ->maxLength(10)
                         ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
                         ->integer()
                         ->label('Вес/объём'),
 
@@ -101,38 +100,18 @@ class DishResource extends Resource
 
                     TextInput::make('calorie')
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
-                        ->integer()
-                        ->required()
                         ->label('Калорийность'),
 
                     TextInput::make('proteins')
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
-                        ->integer()
-                        ->required()
                         ->label('Белки'),
 
                     TextInput::make('fats')
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
-                        ->integer()
-                        ->required()
                         ->label('Жиры'),
 
                     TextInput::make('carbohydrates')
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->mask(fn(TextInput\Mask $mask) => $mask->pattern('[0000000000]'))
-                        ->default(0)
-                        ->integer()
-                        ->required()
                         ->label('Углеводы'),
 
                     Checkbox::make('is_available')
