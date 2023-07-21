@@ -92,8 +92,8 @@ class DishResource extends Resource
 
                     Select::make('subcategory_id')
                         ->options(function (callable $get) {
-                           $categoryId = $get('category_id');
-                           return empty($get('category_id')) ? [] : Category::find($categoryId)->subcategories->pluck('title', 'id');
+                            $categoryId = $get('category_id');
+                            return empty($get('category_id')) ? [] : Category::find($categoryId)->subcategories->pluck('title', 'id');
                         })
                         ->required()
                         ->label('Подкатегория'),
@@ -192,12 +192,14 @@ class DishResource extends Resource
                             Select::make('category')
                                 ->options(Category::all()->pluck('title', 'id'))
                                 ->afterStateUpdated(null)
-                                ->disablePlaceholderSelection()
                                 ->label('Категория'),
                             Select::make('subcategory')
                                 ->options(function (callable $get) {
-                                    $category = Category::query()->find($get('category'));
-                                    return is_null($category) ? [] : $category->subcategories->pluck('title', 'id');
+                                    if (empty($category = $get('category'))) {
+                                        return [];
+                                    }
+                                    $selectedCategory = Category::query()->find($category);
+                                    return $selectedCategory->subcategories->pluck('title', 'id');
                                 })
                                 ->reactive()
                                 ->label('Подкатегория')
