@@ -20,7 +20,7 @@ class CategoryController extends Controller
             return response([
                 'success' => false,
                 'message' => ErrorEnum::UNKNOWN->value,
-            ]);
+            ])->setStatusCode(500);
         }
     }
 }

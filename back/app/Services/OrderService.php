@@ -45,7 +45,7 @@ class OrderService
             return response([
                 'success' => false,
                 'message' => ErrorEnum::UNKNOWN->value,
-            ]);
+            ])->setStatusCode(500);
         }
 
     }
