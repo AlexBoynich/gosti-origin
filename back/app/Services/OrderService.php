@@ -14,7 +14,6 @@ use App\Models\ObtainingMethodOrder;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Setting;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class OrderService
@@ -38,7 +37,7 @@ class OrderService
 
             return response([
                 'success' => true,
-                'message' => 'Заказ успешно принят',
+                'orderId' => $order->id,
             ]);
         } catch (\Exception $exception) {
             \DB::rollBack();
@@ -72,7 +71,7 @@ class OrderService
         $customer = Customer::create($data);
 
         $paymentMethod = PaymentMethod::query()->firstWhere('title', $data['paymentMethod']);
-        $receiptTime = Carbon::createFromFormat('Y-m-d H:i:s', $data['receiptDate'] . ' ' . $data['receiptTime']);
+        $receiptTime = "{$data['receiptDate']} с {$data['receiptTime']}";
         $dishes = $data['dishes'];
 
         return Order::create([

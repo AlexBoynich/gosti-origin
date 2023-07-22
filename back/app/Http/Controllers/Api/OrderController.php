@@ -10,8 +10,6 @@ class OrderController extends Controller
 {
     public function store(OrderRequest $request, OrderService $orderService)
     {
-        $orderService->storeOrderInfo($request);
+        return $orderService->storeOrderInfo($request);
     }
-
-
 }

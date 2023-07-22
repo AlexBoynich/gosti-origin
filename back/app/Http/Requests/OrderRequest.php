@@ -25,14 +25,12 @@ class OrderRequest extends FormRequest
             'paymentMethod' => ['required', new Enum(PaymentMethodEnum::class)],
             'receiptDate' => ['required'],
             'receiptTime' => ['required'],
-            'deliveryPrice' => ['numeric', 'required'],
             'street' => ['max:255', 'required'],
             'house' => ['max:255', 'required'],
             'flat' => ['max:255', 'nullable'],
             'entrance' => ['max:255'],
             'floor' => ['max:255', 'nullable'],
             'intercom' => ['max:255', 'nullable'],
-            'cost' => ['numeric', 'required'],
             'dishes' => ['array']
         ];
     }
