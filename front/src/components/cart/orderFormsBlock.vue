@@ -70,7 +70,7 @@
                     <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
                 </div>
                 <label :for="personalData.id">
-                    <a href="/documents/consent-to-the-processing-of-personal-data.pdf">
+                    <a href="/documents/consent-to-the-processing-of-personal-data.pdf" target="_blank">
                         {{ personalData.label }}
                     </a>
                 </label>
@@ -234,7 +234,6 @@ export default {
             } else {
                 objForRequest.paymentMethod = 'Наличный'
             }
-
 
             objForRequest.deliveryPrice = this.deliveryPrice
             objForRequest.cost = this.price - this.deliveryPrice
@@ -400,7 +399,6 @@ export default {
                 label {
                     @include inter-400;
                     line-height: 20px;
-                    font-size: 20px;
                 }
             }
         }
@@ -467,7 +465,6 @@ export default {
                 height: 20px;
                 border: 1px solid rgba(123, 149, 97, 0.5);
                 border-radius: 3px;
-                margin-right: 16px;
 
                 img {
                     width: 14px;

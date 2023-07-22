@@ -93,7 +93,7 @@ export default {
 
             button {
                 @include green-button;
-                width: 277px;
+                width: 227px;
                 height: 58px;
                 text-align: center;
 

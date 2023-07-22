@@ -81,7 +81,7 @@ export default {
                         placeholder: 'Иванов Иван Иванович',
                         mask: false,
                         required: true,
-                        maxLength: 200,
+                        maxLength: 255,
                         class: 'full',
                         type: 'text',
                         id: 'fullName',
@@ -136,7 +136,7 @@ export default {
                         pattern: new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$"),
                         isError: false,
                         viewError: false,
-                        errorText: 'почта должна содержать @'
+                        errorText: 'почта должна содержать @, точку и домен'
                     },
                     {
                         placeholder: 'Комментарий',
@@ -169,6 +169,9 @@ export default {
                 }
                 form.isError = true
             }
+            if (this.personForms.forms[2].formContent === '') {
+                this.personForms.forms[2].isError = false
+            }
         },
         notNull() {
             let name = this.personForms.forms[0]
@@ -181,6 +184,9 @@ export default {
             }
             if (tel.formContent === '') {
                 tel.isError = true
+            }
+            if (email.formContent === '') {
+                email.isError = false
             }
 
             if (name.isError || tel.isError || email.isError) {

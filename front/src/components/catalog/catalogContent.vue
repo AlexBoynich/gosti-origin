@@ -88,7 +88,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations('cart', ['SET_CART']),
+        ...mapMutations('cart', ['SET_CART', 'ADD_IN_CART']),
         checkTime(id) {
             let date = new Date();
             let hour = date.getUTCHours() + 7
@@ -117,12 +117,10 @@ export default {
             if (this.cart.reduce((acc, item) => acc + item.count, 0) < 99) {
                 let temporaryItem = item.item
                 temporaryItem.count = item.count
-                this.componentCart.push(temporaryItem)
-                this.SET_CART(this.componentCart)
+                this.ADD_IN_CART(temporaryItem)
             }
         },
         transformAmount(item) {
-
             let temporaryItem = item.item
             temporaryItem.count = item.count
 
