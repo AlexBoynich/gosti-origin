@@ -4,6 +4,9 @@ const cart = {
         cart: []
     },
     mutations: {
+        ADD_IN_CART(state, el) {
+            state.cart.push(el)
+        },
         SET_CART(state, arr) {
             state.cart = arr
         },

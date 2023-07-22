@@ -60,7 +60,7 @@ export default {
         resultAction(obj) {
             if (obj.readyModal) {
                 this.readyModalIsActive = true
-                obj.data[0].content =obj.data[0].content.replace(/(,[^,]*,)/g, "$1<br>")
+
                 this.dataForModal = obj.data
 
                 console.log(obj.forRequest)
@@ -127,7 +127,7 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: 48px;
+        margin-top: -72px;
 
         .message-title {
             @include inter-400;
@@ -147,6 +147,7 @@ export default {
 
             button {
                 @include green-button;
+                padding: 16px 64px;
 
                 &:hover {
                     @include green-button-hover;

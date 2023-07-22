@@ -150,7 +150,7 @@ export default {
             const currentDate = new Date();
             let hour = currentDate.getUTCHours() + 7
             let day
-            if (hour >= 19) {
+            if (hour >= 19 && hour < 24) {
                 const nextDay = new Date(currentDate);
                 nextDay.setDate(currentDate.getDate() + 1);
                 day = nextDay.getDate().toString().padStart(2, '0');
@@ -184,6 +184,15 @@ export default {
             } else if (year !== currentYear) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
+            } else if (month < currentMonth) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
+            } else if (day < currentDay && month <= currentMonth) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
+            } else if (month > currentMonth && day > 3) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
             } else if (month > 12) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
@@ -200,8 +209,10 @@ export default {
                         dateForm.isError = true
                     }
                 } else {
-                    dateForm.errorText = incorrectlyEnteredDate
-                    dateForm.isError = true
+                    if (day > 28) {
+                        dateForm.errorText = incorrectlyEnteredDate
+                        dateForm.isError = true
+                    }
                 }
             } else if (currentMonth == '04' || currentMonth == '06' || currentMonth == '09' ||
                 currentMonth == '11') {
@@ -209,13 +220,7 @@ export default {
                     dateForm.errorText = incorrectlyEnteredDate
                     dateForm.isError = true
                 }
-            } else if (day < currentDay && month <= currentMonth) {
-                dateForm.errorText = incorrectlyEnteredDate
-                dateForm.isError = true
-            } else if (month < currentMonth) {
-                dateForm.errorText = incorrectlyEnteredDate
-                dateForm.isError = true
-            } else {
+            }  else {
                 dateForm.errorText = ObligatoryField
             }
         },
