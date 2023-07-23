@@ -36,13 +36,11 @@ class EditDish extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if (is_null($data['metric_id'])){
-            unset($data['metric_value']);
-        } elseif (!is_null($data['metric_id']) && is_null($data['metric_value'])) {
+        if (!empty($data['metric_value']) && empty($data['metric_id'])) {
             Notification::make()
-                ->warning()
+                ->danger()
                 ->title('Ошибка')
-                ->body("Если что-то выбрано в поле 'Ед. измерения', необходимо добавить значение в поле 'Вес/объём'")
+                ->body("Поле 'Ед. измерения' обязательно, если в поле 'Вес/объём' указано какое-либо значение ")
                 ->seconds(5)
                 ->send();
             $this->halt();
