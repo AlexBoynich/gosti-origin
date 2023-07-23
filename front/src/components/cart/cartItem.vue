@@ -58,7 +58,6 @@ export default {
             this.modalIsActive = true
         },
         choice(act) {
-            console.log(act)
             if (act === true) {
                 this.deleteItem()
             }

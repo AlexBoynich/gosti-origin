@@ -140,10 +140,7 @@ export default {
     components: {
         catalogItem,
     },
-    props: ['activeItems', 'catalogItems'],
-    /*created() {
-        this.checkTime(0, this.catalogItems)
-    }*/
+    props: ['activeItems', 'catalogItems']
 }
 </script>
 
