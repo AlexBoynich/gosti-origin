@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="title">
                     Спасибо! <br>
-                    Номер вашего заказа 152.
+                    Номер вашего заказа {{ orderId }}.
                 </div>
                 <div class="order-desc-box">
                     <div class="order-item"
@@ -49,7 +49,7 @@ export default {
             this.$emit('closeModal')
         }
     },
-    props: ['dataForModal']
+    props: ['dataForModal', 'orderId']
 }
 </script>
 

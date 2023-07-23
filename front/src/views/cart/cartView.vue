@@ -28,6 +28,11 @@
             v-if="readyModalIsActive"
             @closeModal="closeModal"
             :dataForModal="dataForModal"
+            :orderId="orderId"
+        />
+        <ErrorModal
+            v-if="errorAfterRequest"
+            @closeModal="closeModal"
         />
     </div>
 </template>
@@ -39,15 +44,18 @@ import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue"
 import validationError from "@/components/cart/ordersModals/validationError";
 import {mapState} from "vuex";
 import axios from "axios";
+import ErrorModal from "../../components/cart/ordersModals/errorModal";
 
 export default {
     name: "cartView",
     data() {
         return {
             errorValidation: false,
+            errorAfterRequest: false,
             readyModalIsActive: false,
             dataForModal: [],
-            isDelivery: true
+            isDelivery: true,
+            orderId: null
         }
     },
     computed: {
@@ -59,19 +67,18 @@ export default {
     methods: {
         resultAction(obj) {
             if (obj.readyModal) {
-                this.readyModalIsActive = true
-
                 this.dataForModal = obj.data
 
                 console.log(obj.forRequest)
                 axios.post('https://gosti-dev.tomsk-it.ru/api/orders', obj.forRequest)
                     .then(response => {
-                        console.log(response)
+                        this.orderId = response.data.orderId
+                        this.readyModalIsActive = true
                     })
                     .catch(error => {
                         console.log(error)
+                        this.errorAfterRequest = true
                     });
-
             } else if (obj.errorModal) {
                 this.errorValidation = true
             }
@@ -80,12 +87,13 @@ export default {
         closeModal() {
             this.errorValidation = false
             this.readyModalIsActive = false
+            this.errorAfterRequest = false
             this.blockScroll()
         },
         blockScroll() {
             let body = document.querySelector('body')
 
-            if (this.errorValidation || this.readyModalIsActive) {
+            if (this.errorValidation || this.readyModalIsActive || this.errorAfterRequest) {
                 body.style.overflow = 'hidden'
             } else {
                 body.style.overflow = ''
@@ -96,6 +104,7 @@ export default {
         }
     },
     components: {
+        ErrorModal,
         cartContent,
         orderFormsBlock,
         validationError,
