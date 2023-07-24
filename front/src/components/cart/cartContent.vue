@@ -77,7 +77,7 @@ export default {
             this.modalIsActive = true
         },
         choice(act) {
-            if (act === true) {
+            if (act) {
                 this.deleteCart()
             }
             this.closeModal(false)
