@@ -94,7 +94,8 @@ export default {
 @import "../../assets/styles/global";
 
 .slider-box {
-    max-width: 1240px;
+    max-width: 827px;
+    margin: 0 auto;
     width: 100%;
 
     .slider-wrapper {
@@ -106,24 +107,13 @@ export default {
     .swiper {
         display: flex;
         width: 100%;
-        height: 1100px;
+        height: 100%;
 
         .slide {
             position: relative;
-            overflow: hidden;
             width: 100%;
-            height: 1071px;
+            height: 100%;
             border-radius: 16px;
-
-            img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-            }
         }
     }
 
