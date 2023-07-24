@@ -27,7 +27,7 @@ class DishResource extends JsonResource
             'sugar' => $this->sugar,
             'lactose' => $this->lactose,
             'gluten' => $this->gluten,
-            'weight' => "{$this->metric_value} {$this->metric->title}",
+            'weight' => $this->getWeight(),
             'img' => $this->getFirstMediaUrl('dishes'),
             'isAvailabel' => $this->checkAvailable(),
         ];
@@ -51,7 +51,7 @@ class DishResource extends JsonResource
 
         if (!$this->isSetTimeLimit($start, $end)) return false;
 
-        return $this->isTimeInRange($time,$start, $end);
+        return $this->isTimeInRange($time, $start, $end);
     }
 
     private function isSetTimeLimit($start, $end): bool
@@ -75,5 +75,13 @@ class DishResource extends JsonResource
         } else {
             return $timeObj->between($startObj, $endObj);
         }
+    }
+
+    private function getWeight(): string|null
+    {
+        if (is_null($this->metric_value)) {
+            return null;
+        }
+        return "{$this->metric_value} {$this->metric->title}";
     }
 }
