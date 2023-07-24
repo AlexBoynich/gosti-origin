@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ObtainingMethodEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -34,11 +35,23 @@ class Order extends Model
         return $this->hasOne(ObtainingMethodOrder::class);
     }
 
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
     protected function cost(): Attribute
     {
         return Attribute::make(
             get: fn(int $value) => $value / 100,
             set: fn(int $value) => $value * 100
         );
+    }
+
+    public function deliveryPrice(): int
+    {
+        $thresholdCost = Setting::query()->where('section', 'main')->where('key', 'Пороговая стоимость')->first()->value;
+        $deliveryPrice = ObtainingMethod::query()->firstWhere('title', ObtainingMethodEnum::DELIVERY->value)->price;
+        return $this->cost >= $thresholdCost ? 0 : $deliveryPrice;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\ErrorEnum;
 use App\Enums\ObtainingMethodEnum;
+use App\Events\OrderCreated;
 use App\Http\Requests\OrderRequest;
 use App\Models\Address;
 use App\Models\Cart;
@@ -34,6 +35,8 @@ class OrderService
             $this->addDishToOrder($dishes, $order);
 
             \DB::commit();
+
+            OrderCreated::dispatch($order);
 
             return response([
                 'success' => true,
