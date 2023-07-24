@@ -9,7 +9,6 @@
                 >
                     {{ phoneNumber }}
                 </a>
-                .
             </div>
         </div>
         <div class="catering-sliders">
