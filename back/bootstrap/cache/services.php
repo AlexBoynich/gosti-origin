@@ -32,20 +32,21 @@
     28 => 'Filament\\Support\\SupportServiceProvider',
     29 => 'Filament\\Tables\\TablesServiceProvider',
     30 => 'Intervention\\Image\\ImageServiceProvider',
-    31 => 'Laravel\\Sail\\SailServiceProvider',
-    32 => 'Laravel\\Sanctum\\SanctumServiceProvider',
-    33 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    34 => 'Livewire\\LivewireServiceProvider',
-    35 => 'Carbon\\Laravel\\ServiceProvider',
-    36 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    37 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    38 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    39 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    40 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
-    41 => 'App\\Providers\\AppServiceProvider',
-    42 => 'App\\Providers\\AuthServiceProvider',
-    43 => 'App\\Providers\\EventServiceProvider',
-    44 => 'App\\Providers\\RouteServiceProvider',
+    31 => 'Telegram\\Bot\\Laravel\\TelegramServiceProvider',
+    32 => 'Laravel\\Sail\\SailServiceProvider',
+    33 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    34 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    35 => 'Livewire\\LivewireServiceProvider',
+    36 => 'Carbon\\Laravel\\ServiceProvider',
+    37 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    38 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    39 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    40 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    41 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+    42 => 'App\\Providers\\AppServiceProvider',
+    43 => 'App\\Providers\\AuthServiceProvider',
+    44 => 'App\\Providers\\EventServiceProvider',
+    45 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -217,6 +218,10 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Telegram\\Bot\\BotsManager' => 'Telegram\\Bot\\Laravel\\TelegramServiceProvider',
+    'Telegram\\Bot\\Api' => 'Telegram\\Bot\\Laravel\\TelegramServiceProvider',
+    'telegram' => 'Telegram\\Bot\\Laravel\\TelegramServiceProvider',
+    'telegram.bot' => 'Telegram\\Bot\\Laravel\\TelegramServiceProvider',
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
@@ -257,6 +262,9 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Telegram\\Bot\\Laravel\\TelegramServiceProvider' => 
     array (
     ),
     'Laravel\\Sail\\SailServiceProvider' => 
