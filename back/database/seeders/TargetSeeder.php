@@ -18,15 +18,5 @@ class TargetSeeder extends Seeder
                 'title' => 'главный'
             ]
         );
-        Target::query()->firstOrCreate(
-            [
-                'title' => 'о нас'
-            ]
-        );
-        Target::query()->firstOrCreate(
-            [
-                'title' => 'доставка'
-            ]
-        );
     }
 }

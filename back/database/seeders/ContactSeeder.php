@@ -13,7 +13,6 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-
         Contact::query()->firstOrCreate(
             [
                 'phone' => '8(3822)50-99-90',
@@ -22,7 +21,7 @@ class ContactSeeder extends Seeder
                 'email' => 'gosti.cafe@mail.ru',
                 'vk' => 'https://vk.com/cafegostitomsk',
                 'whatsapp' => 'https://wa.me/79138209990',
-                'gis' => 'https://yandex.ru/maps/org/gosti/228700453605/?ll=84.969567%2C56.476587&z=16.77',
+                'gis' => 'https://go.2gis.com/svx9u',
                 'address' => 'Томск, просп. Фрунзе, 90',
             ]
         );

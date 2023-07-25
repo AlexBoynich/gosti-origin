@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
     {
         User::query()->firstOrCreate(
             [
-                'name' => 'admin',
-                'email' => 'usov.als579@yandex.ru',
+                'name' => 'Администратор',
+                'email' => 'gosti_cafe@mail.ru',
             ],
             [
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('MMsis010616'),
                 'is_admin' => true,
             ]
         );
