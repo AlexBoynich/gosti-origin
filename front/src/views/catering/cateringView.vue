@@ -21,7 +21,6 @@ export default {
 @import "@/assets/styles/global.scss";
 
 .container {
-    min-height: 100vh;
-    padding-top: 174px;
+    margin-top: 174px;
 }
 </style>
