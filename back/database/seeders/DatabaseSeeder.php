@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Contact;
-use App\Models\Metric;
-use App\Models\Subcategory;
-use App\Models\Target;
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        DB::table('obtaining_method_orders')->truncate();
+        DB::table('addresses')->truncate();
+        DB::table('carts')->truncate();
+        DB::table('orders')->truncate();
+        DB::table('customers')->truncate();
+        DB::table('dishes')->truncate();
+
+        DB::table('blocks')->truncate();
+        DB::table('contacts')->truncate();
+        DB::table('settings')->truncate();
+        DB::table('users')->truncate();
+
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
@@ -25,8 +32,6 @@ class DatabaseSeeder extends Seeder
             MetricSeeder::class,
             ObtainingMethodSeeder::class,
             SettingSeeder::class,
-            ScheduleSeeder::class,
-            DishSeeder::class,
             ContactSeeder::class,
             TargetSeeder::class,
             BlockSeeder::class,

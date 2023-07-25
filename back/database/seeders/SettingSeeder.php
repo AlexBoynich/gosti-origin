@@ -23,27 +23,5 @@ class SettingSeeder extends Seeder
                 'description' => 'Пороговая сумма заказа для расчёта стоимости доставки'
             ]
         );
-
-        Setting::query()->firstOrCreate(
-            [
-                'section' => 'files',
-                'key' => 'Конфиденциальность',
-            ],
-            [
-                'value' => null,
-                'description' => 'Политика конфиденциальности'
-            ]
-        );
-
-        Setting::query()->firstOrCreate(
-            [
-                'section' => 'files',
-                'key' => 'Кейтеринг',
-            ],
-            [
-                'value' => null,
-                'description' => 'Кейтеринг'
-            ]
-        );
     }
 }

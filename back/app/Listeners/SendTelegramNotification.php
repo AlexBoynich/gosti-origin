@@ -89,7 +89,8 @@ class SendTelegramNotification
         foreach ($cart as $key => $position) {
             $dish = Dish::query()->find($position->dish_id);
             $order = $key + 1;
-            $dishesList .= "{$order}. {$dish->title} - {$position->count} шт. - {$dish->price} р.\n";
+            $price = $position->count * $dish->price;
+            $dishesList .= "{$order}. {$dish->title} - {$position->count} шт. - {$price} р.\n";
         }
         return $dishesList;
     }
