@@ -14,7 +14,7 @@
                     />
                 </div>
                 <div class="title">{{ catalogItem.title }}</div>
-                <div class="desc">{{ catalogItem.desc }}</div>
+                <div class="desc" v-html="catalogItem.desc"></div>
                 <div class="info-box">
                     <div class="info-about-product-weight">
                         <div class="in-hundred-gram">в 100 граммах</div>
