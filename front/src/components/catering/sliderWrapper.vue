@@ -59,10 +59,6 @@ export default {
                     nextEl: '.arrow_next.catering',
                     prevEl: '.arrow_prev.catering',
                 },
-                autoplay: {
-                    delay: 10000,
-                    disableOnInteraction: false
-                },
                 on: {
                     init() {
                         this.el.addEventListener('mousedown', () => {
@@ -76,11 +72,6 @@ export default {
                 }
             }
         },
-    },
-    methods: {
-        openSecondSlider() {
-            console.log(1)
-        }
     },
     components: {
         SwiperSlide,
@@ -107,7 +98,7 @@ export default {
     .swiper {
         display: flex;
         width: 100%;
-        height: 100%;
+        height: 1550px;
 
         .slide {
             position: relative;
