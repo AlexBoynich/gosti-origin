@@ -14,7 +14,6 @@
                         <img
                             :src="slide"
                             alt="slide"
-                            @click="openSecondSlider"
                         />
                     </div>
                 </swiper-slide>
