@@ -64,10 +64,13 @@
             <div class="personal-data">
                 <div
                     :id="personalData.id"
-                    :class="['checkbox', {'active' : personalData.isActive}]"
+                    :class="['checkbox', {'active' : personalData.isActive, 'error' : personalData.error}]"
                     @click="toggleCheckbox"
                 >
-                    <img src="/images/catalog/filters/active-icon.svg" alt="active-icon">
+                    <img
+                        src="/images/catalog/filters/active-icon.svg"
+                        alt="active-icon"
+                    >
                 </div>
                 <label :for="personalData.id">
                     <a href="/documents/consent-to-the-processing-of-personal-data.pdf" target="_blank">
@@ -127,7 +130,8 @@ export default {
             personalData: {
                 label: 'даю согласие на обработку персональных данных',
                 id: 'personalData',
-                isActive: false
+                isActive: null,
+                error: null
             },
             order: {
                 personal: {
@@ -284,20 +288,42 @@ export default {
         toggleCheckbox() {
             this.personalData.isActive = !this.personalData.isActive
         },
-        checkForms() {
+        checkForms: function () {
             this.$emit('checkForms')
+            this.personalData.error = !this.personalData.isActive;
 
-            if (!this.formIsEmpty && this.personalData.isActive) {
-                this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
-                this.readyModalIsActive = true
-                this.$emit('resultAction', {
-                    readyModal: true,
-                    errorModal: false,
-                    data: this.dataForModal,
-                    forRequest: this.dataForRequest
-                })
-                this.DELETE_CART()
-                this.onTop('smooth')
+            if (!this.order.personal.personalFormIsEmpty  && !this.personalData.error) {
+                if (this.order.wayToGet.content === 'Доставка') {
+                    if (!this.order.wayToGet.delivery.formIsEmpty) {
+                        this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
+                        this.readyModalIsActive = true
+                        this.$emit('resultAction', {
+                            readyModal: true,
+                            errorModal: false,
+                            data: this.dataForModal,
+                            forRequest: this.dataForRequest
+                        })
+                        this.DELETE_CART()
+                        this.onTop('smooth')
+                    } else {
+                        this.$emit('resultAction', {
+                            readyModal: false,
+                            errorModal: true
+                        })
+                    }
+                } else {
+                    this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
+                    this.readyModalIsActive = true
+                    this.$emit('resultAction', {
+                        readyModal: true,
+                        errorModal: false,
+                        data: this.dataForModal,
+                        forRequest: this.dataForRequest
+                    })
+                    this.DELETE_CART()
+                    this.onTop('smooth')
+                }
+
             } else {
                 this.$emit('resultAction', {
                     readyModal: false,
@@ -472,6 +498,9 @@ export default {
                     display: none;
                 }
 
+                &.error {
+                    border: 1px solid $madderLake;
+                }
                 &.active {
                     border: 1px solid $olive;
 
@@ -483,6 +512,7 @@ export default {
                 &:hover {
                     border: 1px solid $olive;
                 }
+
             }
 
             label {
