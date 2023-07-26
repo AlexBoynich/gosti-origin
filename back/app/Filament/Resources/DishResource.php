@@ -60,8 +60,13 @@ class DishResource extends Resource
                         ]),
 
                     TextInput::make('price')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->integer()
+                            ->thousandsSeparator(' ')
+                            ->positive()
+                        )
                         ->maxLength(10)
-                        ->integer()
                         ->required()
                         ->label('Цена'),
 
@@ -77,9 +82,13 @@ class DishResource extends Resource
                         ->label('Ед. измерения'),
 
                     TextInput::make('metric_value')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->integer()
+                            ->thousandsSeparator(' ')
+                            ->positive()
+                        )
                         ->maxLength(10)
-                        ->maxValue(9999999999)
-                        ->integer()
                         ->label('Вес/объём'),
 
                     Select::make('category_id')
@@ -99,18 +108,54 @@ class DishResource extends Resource
                         ->label('Подкатегория'),
 
                     TextInput::make('calorie')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->decimalPlaces(2)
+                            ->decimalSeparator('.')
+                            ->mapToDecimalSeparator([','])
+                            ->thousandsSeparator(' ')
+                            ->normalizeZeros()
+                            ->positive()
+                        )
                         ->maxLength(10)
                         ->label('Калорийность'),
 
                     TextInput::make('proteins')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->decimalPlaces(2)
+                            ->decimalSeparator('.')
+                            ->mapToDecimalSeparator([','])
+                            ->thousandsSeparator(' ')
+                            ->normalizeZeros()
+                            ->positive()
+                        )
                         ->maxLength(10)
                         ->label('Белки'),
 
                     TextInput::make('fats')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->decimalPlaces(2)
+                            ->decimalSeparator('.')
+                            ->mapToDecimalSeparator([','])
+                            ->thousandsSeparator(' ')
+                            ->normalizeZeros()
+                            ->positive()
+                        )
                         ->maxLength(10)
                         ->label('Жиры'),
 
                     TextInput::make('carbohydrates')
+                        ->mask(fn(TextInput\Mask $mask) => $mask
+                            ->numeric()
+                            ->decimalPlaces(2)
+                            ->decimalSeparator('.')
+                            ->mapToDecimalSeparator([','])
+                            ->thousandsSeparator(' ')
+                            ->normalizeZeros()
+                            ->positive()
+                        )
                         ->maxLength(10)
                         ->label('Углеводы'),
 
