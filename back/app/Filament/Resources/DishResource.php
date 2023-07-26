@@ -186,12 +186,15 @@ class DishResource extends Resource
                                 fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
+
                 SelectFilter::make('subcategory')->form(
                     [
                         Forms\Components\Fieldset::make()->schema([
                             Select::make('category')
-                                ->options(Category::all()->pluck('title', 'id'))
-                                ->afterStateUpdated(null)
+                                ->options(function () {
+                                    return Category::all()->pluck('title', 'id');
+                                })
+                                ->afterStateUpdated(fn(callable $set) => $set('subcategory', null))
                                 ->label('Категория'),
                             Select::make('subcategory')
                                 ->options(function (callable $get) {
@@ -203,15 +206,26 @@ class DishResource extends Resource
                                 })
                                 ->reactive()
                                 ->label('Подкатегория')
-                        ])->columns(1)->label('Подкатегория'),
+                        ])->columns(1)->label('Категории'),
                     ]
                 )
                     ->query(function (Builder $query, $data) {
-                        return $query->when(
-                            $data['subcategory'],
-                            fn(Builder $query, $subcategory) => $query->where('subcategory_id', $subcategory)
-                        );
+                        return $query
+                            ->when(
+                                $data['category'],
+                                function (Builder $query, $category) {
+                                    $category = Category::query()->firstWhere('id', $category);
+                                    $subcategoriesId = $category->subcategories->pluck('id');
+                                    return $query->whereIn('subcategory_id', $subcategoriesId);
+                                }
+                            )
+                            ->when(
+                                $data['subcategory'],
+                                fn(Builder $query, $subcategory) => $query->where('subcategory_id', $subcategory)
+                            );
+
                     }),
+
                 Filter::make('is_available')
                     ->query(fn(Builder $query) => $query->where('is_available', false))
                     ->toggle()
