@@ -132,7 +132,7 @@ export default {
             flex-direction: column;
 
             .title {
-                max-height: 56px;
+                height: 56px;
                 max-width: 100%;
                 overflow: hidden;
                 text-overflow: ellipsis;
