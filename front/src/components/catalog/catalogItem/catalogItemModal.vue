@@ -39,7 +39,7 @@
                     </div>
                     <div class="weight-and-price">
                         <div class="weight">{{ catalogItem.weight }}</div>
-                        <div class="price">{{ catalogItem.price + '.-' }}</div>
+                        <div class="price">{{ catalogItem.price + ' ₽' }}</div>
                     </div>
                 </div>
                 <catalogButton
