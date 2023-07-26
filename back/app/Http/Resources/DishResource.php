@@ -20,14 +20,14 @@ class DishResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price,
             'calories' => $this->calorie,
-            'proteins' => "{$this->proteins} г",
-            'fats' => "{$this->fats} г",
-            'carbohydrates' => "{$this->carbohydrates} г",
+            'proteins' => $this->getValue($this->proteins, 'г'),
+            'fats' => $this->getValue($this->fats, 'г'),
+            'carbohydrates' => $this->getValue($this->carbohydrates, 'г'),
             'desc' => $this->composition,
             'sugar' => $this->sugar,
             'lactose' => $this->lactose,
             'gluten' => $this->gluten,
-            'weight' => $this->getWeight(),
+            'weight' => $this->getValue($this->metric_value, $this->metric?->title),
             'img' => $this->getFirstMediaUrl('dishes'),
             'isAvailabel' => $this->checkAvailable(),
         ];
@@ -77,11 +77,11 @@ class DishResource extends JsonResource
         }
     }
 
-    private function getWeight(): string|null
+    public function getValue($value, $suffix): ?string
     {
-        if (is_null($this->metric_value)) {
+        if (is_null($value)) {
             return null;
         }
-        return "{$this->metric_value} {$this->metric->title}";
+        return "{$value} {$suffix}";
     }
 }
