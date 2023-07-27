@@ -24,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
+        config([
+            'filament.favicon' => asset('cp/favicon.ico')
+        ]);
+
     }
 }
