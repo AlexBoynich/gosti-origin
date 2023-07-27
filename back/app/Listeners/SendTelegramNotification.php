@@ -7,7 +7,9 @@ use App\Events\OrderCreated;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Dish;
+use App\Models\ObtainingMethod;
 use App\Models\Order;
+use App\Models\Setting;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
 class SendTelegramNotification
@@ -54,7 +56,7 @@ class SendTelegramNotification
         $message .= "\n {$this->getDishes($order)}";
 
         $message .=  $order->pivot->obtainingMethod->title == ObtainingMethodEnum::DELIVERY->value ?
-            "\n<b>Стоимость доставки:</b> {$order->deliveryPrice()} р." : "";
+            "\n<b>Стоимость доставки:</b> {$this->getDeliveryPrice($order)} р." : "";
 
         $message .= "\n<b>Итого к оплате:</b> {$order->cost} р.";
 
@@ -93,5 +95,21 @@ class SendTelegramNotification
             $dishesList .= "{$order}. {$dish->title} - {$position->count} шт. - {$price} р.\n";
         }
         return $dishesList;
+    }
+
+    private function getDeliveryPrice(Order $order): int
+    {
+        $deliveryPrice = $order->pivot->obtainingMethod->price;
+        $cart = $order->cart;
+        $sum = 0;
+
+        foreach ($cart as $key => $position) {
+            $dish = Dish::query()->find($position->dish_id);
+            $sum += $position->count * $dish->price;
+        }
+
+        $thresholdCost = Setting::query()->where('section', 'main')->where('key', 'Пороговая стоимость')->first()->value;
+
+        return $sum >= $thresholdCost ? 0 : $deliveryPrice;
     }
 }
