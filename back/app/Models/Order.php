@@ -47,11 +47,4 @@ class Order extends Model
             set: fn(int $value) => $value * 100
         );
     }
-
-    public function deliveryPrice(): int
-    {
-        $thresholdCost = Setting::query()->where('section', 'main')->where('key', 'Пороговая стоимость')->first()->value;
-        $deliveryPrice = ObtainingMethod::query()->firstWhere('title', ObtainingMethodEnum::DELIVERY->value)->price;
-        return $this->cost >= $thresholdCost ? 0 : $deliveryPrice;
-    }
 }
