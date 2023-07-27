@@ -17,21 +17,25 @@
                 <div class="desc" v-html="catalogItem.desc"></div>
                 <div class="info-box">
                     <div class="info-about-product-weight">
-                        <div class="in-hundred-gram">в 100 граммах</div>
+                        <div v-if="catalogItem.calories && catalogItem.proteins && catalogItem.fats && catalogItem.carbohydrates"
+                             class="in-hundred-gram"
+                        >
+                            в 100 граммах
+                        </div>
                         <div class="info-table">
-                            <div class="table-column">
+                            <div v-if="catalogItem.calories" class="table-column">
                                 <div class="count">{{ catalogItem.calories }}</div>
                                 <div class="desc">Ккал</div>
                             </div>
-                            <div class="table-column">
+                            <div v-if="catalogItem.proteins" class="table-column">
                                 <div class="count">{{ catalogItem.proteins }}</div>
                                 <div class="desc">Белки</div>
                             </div>
-                            <div class="table-column">
+                            <div v-if="catalogItem.fats" class="table-column">
                                 <div class="count">{{ catalogItem.fats }}</div>
                                 <div class="desc">Жиры</div>
                             </div>
-                            <div class="table-column">
+                            <div v-if="catalogItem.carbohydrates" class="table-column">
                                 <div class="count">{{ catalogItem.carbohydrates }}</div>
                                 <div class="desc">Углеводы</div>
                             </div>

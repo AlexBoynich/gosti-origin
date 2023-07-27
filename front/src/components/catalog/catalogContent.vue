@@ -64,7 +64,7 @@ export default {
     data() {
         return {
             messageContent: {
-                breakfast: 'Завтраки действуют по будням с 8:00 — 12:00/ по выходным с 8:00 — 16:00',
+                breakfast: 'Завтраки действуют по будням с 8:00 — 12:00 / по выходным с 8:00 — 16:00',
                 businessLunch: 'Бизнес-ланчи действуют по будням с 12:00 — 16:00',
                 noDishes: 'К сожалению, по вашему запросу ничего не найдено'
             },
@@ -152,7 +152,7 @@ export default {
 
     .message {
         border-radius: 16px;
-        padding: 40px 93px;
+        padding: 40px 93px 40px 91px;
         margin-bottom: 24px;
         background: #DFE8D7;
         border-left: solid 5px $olive;
