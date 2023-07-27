@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('obtaining_methods')
+            ->where('title', 'Доставка')
+            ->update([
+                'price' => '200'
+            ]);
+
     }
 }
