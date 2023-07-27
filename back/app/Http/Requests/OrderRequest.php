@@ -17,7 +17,7 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:200', 'required'],
+            'name' => ['string', 'max:200', 'required', 'not_regex:/[0-9]/'],
             'phone' => ['max:18', 'required'],
             'email' => ['email', 'nullable', 'max:255'],
             'comment' => ['string', 'max:1000', 'nullable'],
