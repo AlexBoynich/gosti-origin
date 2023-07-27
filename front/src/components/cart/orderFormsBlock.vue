@@ -254,14 +254,6 @@ export default {
     methods: {
         onTop,
         ...mapMutations('cart', ['DELETE_CART']),
-        updateTotalPrice (cart) {
-            let totalPrice = cart.reduce((acc, item) => acc + item.price * item.count, 0)
-            if (totalPrice + this.deliveryPrice < 1500) {
-                return (cart.reduce((acc, item) => acc + item.price, 0)) + 200
-            } else {
-                return cart.reduce((acc, item) => acc + item.price * item.count, 0)
-            }
-        },
         activeWayToGetButton(id) {
             if (id === 'pickup') {
                 this.wayToGet.radioButtons[0].isActive = true
@@ -379,9 +371,6 @@ export default {
         pickupBlock,
         PersonForms,
         deliveryForms
-    },
-    updated() {
-        console.log(this.price)
     }
 }
 </script>
