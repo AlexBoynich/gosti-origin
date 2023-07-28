@@ -40,7 +40,7 @@ class MainBlockResource extends Resource
             ->schema([
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('mainBlock')
-                    ->maxSize(10485760)
+                    ->maxSize(1024)
                     ->acceptedFileTypes([
                         'image/jpg',
                         'image/jpeg',

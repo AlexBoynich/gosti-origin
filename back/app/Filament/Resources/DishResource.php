@@ -174,7 +174,7 @@ class DishResource extends Resource
 
                     SpatieMediaLibraryFileUpload::make('preview')
                         ->collection('dishes')
-                        ->maxSize(10485760)
+                        ->maxSize(1024)
                         ->acceptedFileTypes([
                             'image/jpg',
                             'image/jpeg',
