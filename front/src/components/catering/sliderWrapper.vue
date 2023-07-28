@@ -121,14 +121,20 @@ export default {
             cursor: pointer;
             border: none;
             background: transparent;
-            width: 108px;
-            height: 48px;
-            color: $olive;
 
             &.arrow_prev {
                 transform: rotate(180deg);
                 margin-right: 64px;
                 margin-top: -4px;
+            }
+            &.arrow_prev, &.arrow_next {
+                @include slider-arrow;
+                width: 84px;
+                height: 24px;
+
+                &:hover {
+                    @include slider-arrow-hover;
+                }
             }
         }
     }
