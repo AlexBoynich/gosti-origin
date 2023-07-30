@@ -62,20 +62,26 @@ import {mapActions, mapState} from "vuex";
 
 export default {
     name: "footerBlock",
+    data () {
+        return {
+            footerSocials: [
+                { img: "images/footer/footer-social-vk.png", link: "https://vk.com/cafegostitomsk" },
+                { img: "images/footer/footer-social-wa.png", link: "https://wa.me/79138209990" },
+                { img: "images/footer/footer-social-2g.png", link: "https://2gis.ru/tomsk/firm/70000001029574004" }
+            ]
+        }
+    },
     components: {
         footerMap
     },
     computed: {
         ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
-        ...mapState('footerSocials', ['footerSocials'])
     },
     methods: {
         ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
-        ...mapActions('footerSocials', ['GET_FOOTER_SOCIALS'])
     },
     created() {
         this.GET_LEFT_PART_FOOTER_ITEMS()
-        this.GET_FOOTER_SOCIALS()
     }
 }
 </script>
