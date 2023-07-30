@@ -23,7 +23,7 @@ class OrderRequest extends FormRequest
             'comment' => ['string', 'max:1000', 'nullable'],
             'obtainingMethod' => ['required', new Enum(ObtainingMethodEnum::class)],
             'paymentMethod' => ['required', new Enum(PaymentMethodEnum::class)],
-            'receiptDate' => ['required'],
+            'receiptDate' => ['required', 'after_or_equal:today'],
             'receiptTime' => ['required'],
             'street' => ['max:255', 'required'],
             'house' => ['max:255', 'required'],
