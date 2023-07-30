@@ -70,7 +70,7 @@ export default {
                 this.dataForModal = obj.data
 
                 console.log(obj.forRequest)
-                axios.post('https://gosti-dev.tomsk-it.ru/api/orders', obj.forRequest)
+                axios.post('/api/orders', obj.forRequest)
                     .then(response => {
                         this.orderId = response.data.orderId
                         this.readyModalIsActive = true
