@@ -98,6 +98,7 @@ export default {
     display: flex;
     flex-direction: column;
     max-width: 439px;
+    cursor: pointer;
 
     .item-clickable {
         position: relative;
