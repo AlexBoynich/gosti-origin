@@ -55,6 +55,7 @@ class OrderResource extends Resource
                     ->label('Стоимость'),
                 TextColumn::make('receipt_time')
                     ->label('Время доставки'),
+                TextColumn::make('customer.phone')->label('Телефон'),
             ])
             ->filters([
                 //
