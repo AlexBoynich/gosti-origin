@@ -152,7 +152,7 @@ export default {
 
     .message {
         border-radius: 16px;
-        padding: 40px 93px 40px 91px;
+        padding: 40px 90px 40px 93px;
         margin-bottom: 24px;
         background: #DFE8D7;
         border-left: solid 5px $olive;

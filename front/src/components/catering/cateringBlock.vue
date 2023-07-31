@@ -18,24 +18,25 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import {mapState} from "vuex";
 import MainSlider from "./sliderWrapper";
 
 export default {
     name: "cateringBlock",
+    data () {
+        return {
+            cateringSlides: [
+                '/images/catering/keit-page-1.png',
+                '/images/catering/keit-page-2.png'
+            ]
+        }
+    },
     components: {MainSlider},
     computed: {
         ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
-        ...mapState('catering', ['cateringSlides']),
         phoneNumber: function () {
             return this.leftPartFooterItems[0].descItems[1].desc
         }
-    },
-    methods: {
-        ...mapActions('catering', ['GET_CATERING'])
-    },
-    created() {
-        this.GET_CATERING()
     }
 }
 </script>
