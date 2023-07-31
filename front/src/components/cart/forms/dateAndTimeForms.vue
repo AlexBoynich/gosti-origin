@@ -150,15 +150,23 @@ export default {
             const currentDate = new Date();
             let hour = currentDate.getUTCHours() + 7
             let day
+            let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            let year = currentDate.getFullYear().toString();
             if (hour >= 19 && hour < 24) {
-                const nextDay = new Date(currentDate);
+                let nextDay = new Date(currentDate);
                 nextDay.setDate(currentDate.getDate() + 1);
                 day = nextDay.getDate().toString().padStart(2, '0');
+                if (day === '01') {
+                    month = (Number(month) + 1).toString().padStart(2, '0')
+                    if (month === '13') {
+                        month = '01'
+                        year = (Number(year) + 1)
+                    }
+                }
             } else {
                 day = currentDate.getDate().toString().padStart(2, '0');
             }
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-            const year = currentDate.getFullYear().toString();
+
             return day + '.' + month + '.' + year
         }
     },
