@@ -164,12 +164,15 @@ class DishResource extends Resource
                         ->label('Доступно для заказа'),
 
                     Checkbox::make('sugar')
+                        ->default(true)
                         ->label('С сахаром'),
 
                     Checkbox::make('lactose')
+                        ->default(true)
                         ->label('С лактозой'),
 
                     Checkbox::make('gluten')
+                        ->default(true)
                         ->label('С глютеном'),
 
                     SpatieMediaLibraryFileUpload::make('preview')
