@@ -8,11 +8,17 @@ export default {
     methods: {
         init() {
             let ymaps = window.ymaps;
-            ymaps.ready(function () {
-                new ymaps.Map("map", {
-                    center: [56.476587, 84.969568],
+            ymaps.ready(function () {        
+                let map = new ymaps.Map("map", {
+                    center: [56.476493, 84.969236],            
                     zoom: 17,
-                });
+                });        
+                let mark = new ymaps.Placemark(
+                    [56.476493, 84.969236],
+                    {},
+                    {iconColor: '#7B9561'}
+                )
+                map.geoObjects.add(mark);
             });
         }
     },
