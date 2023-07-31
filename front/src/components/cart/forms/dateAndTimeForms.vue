@@ -142,7 +142,7 @@ export default {
                 ]
             },
             slotsIsOpened: false,
-            slots: []
+            slots: [],
         }
     },
     computed: {
@@ -158,6 +158,7 @@ export default {
                 day = nextDay.getDate().toString().padStart(2, '0');
                 if (day === '01') {
                     month = (Number(month) + 1).toString().padStart(2, '0')
+
                     if (month === '13') {
                         month = '01'
                         year = (Number(year) + 1)
@@ -180,13 +181,22 @@ export default {
             const currentDay = currentDate.getDate().toString().padStart(2, '0');
             const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const currentYear = currentDate.getFullYear().toString();
+            let hour = currentDate.getUTCHours() + 7
+
+
             const ObligatoryField = 'поле является обязательным для заполнения'
             const incorrectlyEnteredDate = 'Эта дата не может быть выбрана'
 
-            if (content.length === 0) {
+            if (hour >= 19 && hour < 24 && day === currentDay) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
+            } else if (content.length === 0) {
                 dateForm.errorText = ObligatoryField
                 dateForm.isError = true
             } else if (content.length !== 10) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
+            } else if (day === '00') {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
             } else if (year !== currentYear) {
@@ -228,7 +238,12 @@ export default {
                     dateForm.errorText = incorrectlyEnteredDate
                     dateForm.isError = true
                 }
-            }  else {
+            } else if (currentDay) {
+                dateForm.errorText = incorrectlyEnteredDate
+                dateForm.isError = true
+            } else if (hour >= 19 && day === currentDay) {
+                console.log(1)
+            } else {
                 dateForm.errorText = ObligatoryField
             }
         },
@@ -264,21 +279,25 @@ export default {
                 let date = new Date();
                 let hour = date.getUTCHours() + 7
 
-
-                this.slots = this.orderForms.forms[1].currentTimeSlots
-                let index = this.orderForms.forms[1].currentTimeSlots.findIndex((el) => {
-                    let currentTime
-                    if (el[0] === 0) {
-                        currentTime = el[1]
-                    } else {
-                        currentTime = el[0] + el[1]
+                if (hour < 8 || hour >= 19) {
+                    this.orderForms.forms[1].selected = this.orderForms.forms[1].futureTimeSlots[0]
+                    this.slots = this.orderForms.forms[1].futureTimeSlots
+                } else {
+                    this.slots = this.orderForms.forms[1].currentTimeSlots
+                    let index = this.orderForms.forms[1].currentTimeSlots.findIndex((el) => {
+                        let currentTime
+                        if (el[0] === 0) {
+                            currentTime = el[1]
+                        } else {
+                            currentTime = el[0] + el[1]
+                        }
+                        return currentTime > hour + 1
+                    })
+                    if (index > 0) {
+                        this.slots.splice(0, index)
                     }
-                    return currentTime > hour + 1
-                })
-                if (index > 0) {
-                    this.slots.splice(0, index)
+                    this.orderForms.forms[1].selected = this.orderForms.forms[1].currentTimeSlots[0]
                 }
-                this.orderForms.forms[1].selected = this.orderForms.forms[1].currentTimeSlots[0]
             } else {
                 this.orderForms.forms[1].selected = this.orderForms.forms[1].futureTimeSlots[0]
                 this.slots = this.orderForms.forms[1].futureTimeSlots
