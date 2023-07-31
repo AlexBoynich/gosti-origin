@@ -73,8 +73,11 @@
                     >
                 </div>
                 <label :for="personalData.id">
-                    <a href="/documents/consent-to-the-processing-of-personal-data.pdf" target="_blank">
-                        {{ personalData.label }}
+                    <a
+                        href="/documents/consent-to-the-processing-of-personal-data.pdf"
+                        target="_blank"
+                    >
+                        даю <span>{{personalData.link}}</span>
                     </a>
                 </label>
             </div>
@@ -128,7 +131,7 @@ export default {
                 title: 'К оплате:',
             },
             personalData: {
-                label: 'даю согласие на обработку персональных данных',
+                link: 'согласие на обработку персональных данных',
                 id: 'personalData',
                 isActive: null,
                 error: null
@@ -238,7 +241,7 @@ export default {
             objForRequest.receiptDate = this.order.dateAndTime.date
             objForRequest.receiptTime = this.order.dateAndTime.timeSlot
 
-            if (this.order.payMethod === 'картой при получении'){
+            if (this.order.payMethod === 'картой при получении') {
                 objForRequest.paymentMethod = 'Картой'
             } else {
                 objForRequest.paymentMethod = 'Наличный'
@@ -246,7 +249,7 @@ export default {
 
             objForRequest.deliveryPrice = this.deliveryPrice
             objForRequest.cost = this.price - this.deliveryPrice
-            objForRequest.dishes = this.cart.map(item => ({ id: item.id, count: item.count }))
+            objForRequest.dishes = this.cart.map(item => ({id: item.id, count: item.count}))
 
             return objForRequest
         }
@@ -297,7 +300,7 @@ export default {
             this.$emit('checkForms')
             this.personalData.error = !this.personalData.isActive;
 
-            if (!this.order.personal.personalFormIsEmpty  && !this.personalData.error) {
+            if (!this.order.personal.personalFormIsEmpty && !this.personalData.error) {
                 if (this.order.wayToGet.content === 'Доставка') {
                     if (!this.order.wayToGet.delivery.formIsEmpty) {
                         this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'
@@ -506,6 +509,7 @@ export default {
                 &.error {
                     border: 1px solid $madderLake;
                 }
+
                 &.active {
                     border: 1px solid $olive;
 
@@ -527,7 +531,18 @@ export default {
                     line-height: 18px;
                     color: black;
                     text-decoration: none;
+
+                    span {
+                        border-bottom: 1px solid transparent;
+                    }
+
+                    &:hover {
+                        span {
+                            border-bottom: 1px solid black;
+                        }
+                    }
                 }
+
             }
         }
     }
