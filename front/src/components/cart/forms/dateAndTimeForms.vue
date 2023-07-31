@@ -190,7 +190,7 @@ export default {
             } else if (day < currentDay && month <= currentMonth) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
-            } else if (month > currentMonth && day > 3) {
+            } else if (month > currentMonth && day > 7) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
             } else if (month > 12) {
