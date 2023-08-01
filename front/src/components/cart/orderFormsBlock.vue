@@ -300,7 +300,7 @@ export default {
             this.$emit('checkForms')
             this.personalData.error = !this.personalData.isActive;
 
-            if (!this.order.personal.personalFormIsEmpty && !this.personalData.error) {
+            if (!this.order.personal.personalFormIsEmpty && !this.personalData.error && !this.order.dateAndTime.formIsEmpty) {
                 if (this.order.wayToGet.content === 'Доставка') {
                     if (!this.order.wayToGet.delivery.formIsEmpty) {
                         this.dataForModal[this.dataForModal.length - 1].content = this.price + ' ₽'

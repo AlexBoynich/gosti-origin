@@ -241,8 +241,6 @@ export default {
             } else if (currentDay) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
-            } else if (hour >= 19 && day === currentDay) {
-                console.log(1)
             } else {
                 dateForm.errorText = ObligatoryField
             }
