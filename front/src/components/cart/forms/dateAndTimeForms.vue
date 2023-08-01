@@ -135,13 +135,16 @@ export default {
     computed: {
         currentDate: function () {
             const currentDate = new Date();
+            let minutes = currentDate.getUTCMinutes()
             let hour = currentDate.getUTCHours() + 7
             let day
             let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             let year = currentDate.getFullYear().toString();
-            if (hour >= 19 && hour < 24) {
+
+            if (hour >= 19 && minutes > 30 && hour < 24) {
                 let nextDay = new Date(currentDate);
                 nextDay.setDate(currentDate.getDate() + 1);
+
                 day = nextDay.getDate().toString().padStart(2, '0');
                 if (day === '01') {
                     month = (Number(month) + 1).toString().padStart(2, '0')
@@ -153,6 +156,7 @@ export default {
                 }
             } else {
                 day = currentDate.getDate().toString().padStart(2, '0');
+                console.log(day)
             }
 
             return day + '.' + month + '.' + year
@@ -169,12 +173,13 @@ export default {
             const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const currentYear = currentDate.getFullYear().toString();
             let hour = currentDate.getUTCHours() + 7
+            let minutes = currentDate.getUTCMinutes()
 
 
             const ObligatoryField = 'поле является обязательным для заполнения'
             const incorrectlyEnteredDate = 'Эта дата не может быть выбрана'
 
-            if (hour >= 19 && hour < 24 && day === currentDay) {
+            if (hour >= 19 && minutes > 31 && hour < 24 && day === currentDay) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
             } else if (content.length === 0) {
@@ -265,14 +270,14 @@ export default {
                 let hour = date.getUTCHours() + 7
                 let minutes = date.getUTCMinutes()
 
-                if (hour < 8 || hour === 19 && minutes >= 30 || hour > 19) {
+                if (hour < 8 || hour === 19 && minutes > 31 || hour > 19) {
                     this.orderForms.forms[1].selected = this.orderForms.forms[1].futureTimeSlots[0]
                     this.slots = this.orderForms.forms[1].futureTimeSlots
                 } else {
                     let currentTime = (date.getUTCHours() + 7) + ':' + (date.getUTCMinutes())
                     let endTime = '21:30'
                     let interval = 60 * 60 * 1000;
-
+                    this.slots = []
                     let startTime = new Date();
                     startTime.setHours(parseInt(currentTime.split(":")[0]) + 1);
                     startTime.setMinutes(parseInt(currentTime.split(":")[1]));
