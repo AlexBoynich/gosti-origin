@@ -179,7 +179,7 @@ export default {
             const ObligatoryField = 'поле является обязательным для заполнения'
             const incorrectlyEnteredDate = 'Эта дата не может быть выбрана'
 
-            if (hour >= 19 && minutes > 31 && hour < 24 && day === currentDay) {
+            if (hour >= 19 && minutes > 31 && hour < 24 && day === currentDay && month === currentMonth) {
                 dateForm.errorText = incorrectlyEnteredDate
                 dateForm.isError = true
             } else if (content.length === 0) {
