@@ -109,19 +109,6 @@ export default {
                             src: '/images/cart/form/select-arrow.svg',
                             class: 'arrow'
                         },
-                        currentTimeSlots: [
-                            "10:00-11:00",
-                            "11:00-12:00",
-                            "12:00-13:00",
-                            "13:00-14:00",
-                            "14:00-15:00",
-                            "15:00-16:00",
-                            "16:00-17:00",
-                            "17:00-18:00",
-                            "18:00-19:00",
-                            "19:00-20:00",
-                            "20:00-21:00"
-                        ],
                         futureTimeSlots: [
                             "9:30-10:30",
                             "10:30-11:30",
@@ -274,27 +261,32 @@ export default {
         },
         timeSlots() {
             if (this.currentDate === this.orderForms.forms[0].formContent) {
-                let date = new Date();
+                let date = new Date()
                 let hour = date.getUTCHours() + 7
+                let minutes = date.getUTCMinutes()
 
-                if (hour < 8 || hour >= 19) {
+                if (hour < 8 || hour === 19 && minutes >= 30 || hour > 19) {
                     this.orderForms.forms[1].selected = this.orderForms.forms[1].futureTimeSlots[0]
                     this.slots = this.orderForms.forms[1].futureTimeSlots
                 } else {
-                    this.slots = this.orderForms.forms[1].currentTimeSlots
-                    let index = this.orderForms.forms[1].currentTimeSlots.findIndex((el) => {
-                        let currentTime
-                        if (el[0] === 0) {
-                            currentTime = el[1]
-                        } else {
-                            currentTime = el[0] + el[1]
+                    let currentTime = (date.getUTCHours() + 7) + ':' + (date.getUTCMinutes())
+                    let endTime = '21:30'
+                    let interval = 60 * 60 * 1000;
+
+                    let startTime = new Date();
+                    startTime.setHours(parseInt(currentTime.split(":")[0]) + 1);
+                    startTime.setMinutes(parseInt(currentTime.split(":")[1]));
+                    let endTimeObj = new Date();
+                    endTimeObj.setHours(parseInt(endTime.split(":")[0]));
+                    endTimeObj.setMinutes(parseInt(endTime.split(":")[1]));
+                    for (let time = startTime.getTime(); time < endTimeObj.getTime(); time += interval) {
+                        let start = new Date(time);
+                        let end = new Date(time + interval);
+                        if (end.getTime() <= endTimeObj.getTime()) {
+                            this.slots.push(start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + '-' + end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
                         }
-                        return currentTime > hour + 1
-                    })
-                    if (index > 0) {
-                        this.slots.splice(0, index)
                     }
-                    this.orderForms.forms[1].selected = this.orderForms.forms[1].currentTimeSlots[0]
+                    this.orderForms.forms[1].selected = this.slots[0]
                 }
             } else {
                 this.orderForms.forms[1].selected = this.orderForms.forms[1].futureTimeSlots[0]
