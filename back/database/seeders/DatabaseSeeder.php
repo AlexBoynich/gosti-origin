@@ -17,17 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->truncate();
-        User::query()->firstOrCreate([
-            'name' => 'Администратор',
-            'email' => 'gosti_cafe@mail.ru',
-        ],[
-            'password' => Hash::make('MMsis010616'),
-            'is_admin' => true,
-        ]);
-
-        Metric::firstOrCreate([
-            'title' => 'шт'
-        ]);
+        //
     }
 }
