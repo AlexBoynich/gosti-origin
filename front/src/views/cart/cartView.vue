@@ -43,7 +43,7 @@ import cartContent from "@/components/cart/cartContent.vue";
 import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue";
 import validationError from "@/components/cart/ordersModals/validationError";
 import {mapState} from "vuex";
-import axios from "axios";
+// import axios from "axios";
 import ErrorModal from "../../components/cart/ordersModals/errorModal";
 
 export default {
@@ -66,6 +66,7 @@ export default {
     },
     methods: {
         resultAction(obj) {
+            console.log(obj)
             // if (obj.readyModal) {
             //     this.dataForModal = obj.data
 
