@@ -66,21 +66,21 @@ export default {
     },
     methods: {
         resultAction(obj) {
-            if (obj.readyModal) {
-                this.dataForModal = obj.data
+            // if (obj.readyModal) {
+            //     this.dataForModal = obj.data
 
-                axios.post('/api/orders', obj.forRequest)
-                    .then(response => {
-                        this.orderId = response.data.orderId
-                        this.readyModalIsActive = true
-                    })
-                    .catch(() => {
-                        this.errorAfterRequest = true
-                    });
-            } else if (obj.errorModal) {
-                this.errorValidation = true
-            }
-            this.blockScroll()
+            //     axios.post('/api/orders', obj.forRequest)
+            //         .then(response => {
+            //             this.orderId = response.data.orderId
+            //             this.readyModalIsActive = true
+            //         })
+            //         .catch(() => {
+            //             this.errorAfterRequest = true
+            //         });
+            // } else if (obj.errorModal) {
+            //     this.errorValidation = true
+            // }
+            // this.blockScroll()
         },
         closeModal() {
             this.errorValidation = false
