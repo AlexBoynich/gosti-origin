@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate';
-
 import slidesFromMainBlock from "./modules/mainBlock/slidesFromMainBlock";
 import leftPartFooterItems from "./modules/footer/leftPartFooterItems";
 import categories from "./modules/catalog/categories";
