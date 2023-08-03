@@ -2,12 +2,19 @@
 
 namespace App\Http\Resources;
 
+use App\Services\DishServices;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Carbon;
 
 class DishResource extends JsonResource
 {
+    private DishServices $service;
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+        $this->service = app()->make(DishServices::class);
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -29,52 +36,8 @@ class DishResource extends JsonResource
             'gluten' => $this->gluten,
             'weight' => $this->getValue($this->metric_value, $this->metric?->title),
             'img' => $this->getFirstMediaUrl('dishes'),
-            'isAvailabel' => $this->checkAvailable(),
+            'isAvailabel' => $this->service->checkAvailable($this->id),
         ];
-    }
-
-    private function checkAvailable(): bool
-    {
-        if (!$this->is_available) return false;
-
-        $date = Carbon::now(7);
-        $day = $date->dayOfWeekIso;
-        $time = $date->toTimeString();
-
-        if ($day == 6 || $day == 7) {
-            $start = $this->category()->weekend_available_start;
-            $end = $this->category()->weekend_available_end;
-        } else {
-            $start = $this->category()->weekday_available_start;
-            $end = $this->category()->weekday_available_end;
-        }
-
-        if (!$this->isSetTimeLimit($start, $end)) return false;
-
-        return $this->isTimeInRange($time, $start, $end);
-    }
-
-    private function isSetTimeLimit($start, $end): bool
-    {
-        if (is_null($start) || is_null($end)) {
-            return false;
-        }
-        return true;
-    }
-
-    private function isTimeInRange($time, $startTime, $endTime)
-    {
-        $timeObj = Carbon::createFromFormat('H:i:s', $time);
-        $startObj = Carbon::createFromFormat('H:i:s', $startTime);
-        $endObj = Carbon::createFromFormat('H:i:s', $endTime);
-
-        if ($startObj->greaterThan($endObj)) {
-            $midnight = Carbon::createFromFormat('H:i:s', '23:59:59');
-            return ($timeObj->between($startObj, $midnight))
-                || ($timeObj->between(Carbon::createFromFormat('H:i:s', '00:00:00'), $endObj));
-        } else {
-            return $timeObj->between($startObj, $endObj);
-        }
     }
 
     public function getValue($value, $suffix): ?string

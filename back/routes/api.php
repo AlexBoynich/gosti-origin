@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CheckDishController;
+use App\Http\Controllers\Api\CheckDishesController;
 use App\Http\Controllers\Api\DishController;
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
@@ -33,3 +35,6 @@ Route::get('/main-block', [BlockController::class, 'mainBlock'])->name('api.main
 
 /**Получение заказа**/
 Route::post('/orders', [OrderController::class, 'store'])->name('api.store');
+
+/**Проверка доступно ли блюдо**/
+Route::get('/check-dishes', [CheckDishController::class, 'checkDishes'])->name('api.checkDishes');
