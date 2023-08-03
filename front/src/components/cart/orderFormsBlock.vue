@@ -82,7 +82,7 @@
                 </label>
             </div>
         </div>
-        <button @click="checkForms">Оформить заказ</button>
+        <button @click="checkForms" disabled>Оформить заказ</button>
     </div>
 </template>
 
