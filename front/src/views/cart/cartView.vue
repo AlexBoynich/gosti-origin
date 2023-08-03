@@ -34,6 +34,13 @@
             v-if="errorAfterRequest"
             @closeModal="closeModal"
         />
+        <transition name="fade">
+            <div v-show="cartItemIsDelete" class="deletion-message">
+                <div class="txt">
+                    Недоступные позиции были удалены из корзины
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -42,8 +49,8 @@ import orderFormsBlock from "@/components/cart/orderFormsBlock.vue";
 import cartContent from "@/components/cart/cartContent.vue";
 import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue";
 import validationError from "@/components/cart/ordersModals/validationError";
-import {mapState} from "vuex";
-import axios from "axios";
+import {mapActions, mapState} from "vuex";
+/*import axios from "axios";*/
 import ErrorModal from "../../components/cart/ordersModals/errorModal";
 
 export default {
@@ -59,14 +66,15 @@ export default {
         }
     },
     computed: {
-        ...mapState('cart', ['cart']),
+        ...mapState('cart', ['cart', 'cartItemIsDelete']),
         cartIsActive: function () {
             return this.cart.length >= 1;
         },
     },
     methods: {
+        ...mapActions('cart', ['GET_DISHES']),
         resultAction(obj) {
-            if (obj.readyModal) {
+            /*if (obj.readyModal) {
                 this.dataForModal = obj.data
 
                 axios.post('/api/orders', obj.forRequest)
@@ -80,7 +88,8 @@ export default {
             } else if (obj.errorModal) {
                 this.errorValidation = true
             }
-            this.blockScroll()
+            this.blockScroll()*/
+            console.log(obj)
         },
         closeModal() {
             this.errorValidation = false
@@ -99,6 +108,12 @@ export default {
         },
         activeWayTo(bool) {
             this.isDelivery = bool === true;
+        },
+        updateCart () {
+            if (this.cart.length > 0) {
+                let arrForBack = this.cart.map((el) => el.id)
+                this.GET_DISHES(arrForBack)
+            }
         }
     },
     components: {
@@ -108,6 +123,9 @@ export default {
         validationError,
         ReadyOrderModal
     },
+    created() {
+        this.updateCart()
+    }
 }
 </script>
 
@@ -122,13 +140,11 @@ export default {
         @include h2;
         margin-bottom: 24px;
     }
-
     .content {
         display: flex;
         justify-content: space-between;
         padding-bottom: 120px;
     }
-
     .cart-inactive {
         display: flex;
         flex-direction: column;
@@ -162,5 +178,35 @@ export default {
             }
         }
     }
+    .deletion-message {
+        max-width: 800px;
+        border-radius: 16px;
+        padding: 20px 60px 20px 63px;
+        margin-bottom: 24px;
+        background: $lightGrayishRed;
+        border-left: 5px solid $madderLake;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        transition: .3s ease-in-out;
+
+        .txt {
+            @include inter-400;
+            color: #000;
+            font-size: 20px;
+            line-height: 140%;
+            letter-spacing: -0.4px;
+        }
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.5s;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
 }
+
 </style>

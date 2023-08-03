@@ -156,7 +156,6 @@ export default {
                 }
             } else {
                 day = currentDate.getDate().toString().padStart(2, '0');
-                console.log(day)
             }
 
             return day + '.' + month + '.' + year
