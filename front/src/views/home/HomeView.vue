@@ -7,10 +7,6 @@
         <mainBlock/>
         <aboutUsBlock id="about-us-block"/>
         <deliveryBlock/>
-        <EngineeringWorks
-            v-if="engineeringWorks"
-            @closeModal="closeModal"
-        />
     </div>
 </template>
 
@@ -20,24 +16,20 @@ import mainBlock from "@/components/mainBlock/mainBlock.vue";
 import aboutUsBlock from "@/components/aboutUs/aboutUsBlock.vue";
 import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 import CookieModal from "../../components/cookieModal/cookieModal";
-import EngineeringWorks from "../../components/engineeringWorks/engineeringWorks";
 
 export default {
     name: 'HomeView',
     data() {
         return {
             cookieModal: true,
-            engineeringWorks: true
         }
     },
     methods: {
         closeModal() {
             this.cookieModal = false
-            this.engineeringWorks = false
         }
     },
     components: {
-        EngineeringWorks,
         CookieModal,
         deliveryBlock,
         aboutUsBlock,

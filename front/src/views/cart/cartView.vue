@@ -50,7 +50,7 @@ import cartContent from "@/components/cart/cartContent.vue";
 import ReadyOrderModal from "@/components/cart/ordersModals/readyOrderModal.vue";
 import validationError from "@/components/cart/ordersModals/validationError";
 import {mapActions, mapState} from "vuex";
-/*import axios from "axios";*/
+import axios from "axios";
 import ErrorModal from "../../components/cart/ordersModals/errorModal";
 
 export default {
@@ -74,9 +74,8 @@ export default {
     methods: {
         ...mapActions('cart', ['GET_DISHES']),
         resultAction(obj) {
-            /*if (obj.readyModal) {
+            if (obj.readyModal) {
                 this.dataForModal = obj.data
-
                 axios.post('/api/orders', obj.forRequest)
                     .then(response => {
                         this.orderId = response.data.orderId
@@ -88,8 +87,7 @@ export default {
             } else if (obj.errorModal) {
                 this.errorValidation = true
             }
-            this.blockScroll()*/
-            console.log(obj)
+            this.blockScroll()
         },
         closeModal() {
             this.errorValidation = false
