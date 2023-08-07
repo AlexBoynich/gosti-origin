@@ -41,7 +41,6 @@ const cart = {
                 }
                 state.cartItemIsDelete = true
                 setTimeout(() => {
-                    console.log('нада false')
                     state.cartItemIsDelete = false
                 }, 5000)
             }
