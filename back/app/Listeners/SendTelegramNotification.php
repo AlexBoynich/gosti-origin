@@ -29,7 +29,7 @@ class SendTelegramNotification
     {
         $order = $event->order;
         Telegram::sendMessage([
-            'chat_id' => '-1001824548287',
+            'chat_id' => '-1001633480225',
             'parse_mode' => 'HTML',
             'text' => $this->configureMessage($order),
         ]);
