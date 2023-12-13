@@ -82,7 +82,10 @@ export default {
     },
     created() {
         this.GET_LEFT_PART_FOOTER_ITEMS()
-    }
+    },
+  mounted() {
+    this.GET_LEFT_PART_FOOTER_ITEMS()
+  }
 }
 </script>
 
@@ -99,7 +102,7 @@ footer {
         justify-content: space-between;
 
         .left-part {
-            max-width: 530px;
+            max-width: 630px;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
