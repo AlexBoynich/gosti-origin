@@ -68,8 +68,25 @@ export default {
                 { img: "images/footer/footer-social-vk.png", link: "https://vk.com/cafegostitomsk" },
                 { img: "images/footer/footer-social-wa.png", link: "https://wa.me/79138209990" },
                 { img: "images/footer/footer-social-2g.png", link: "https://2gis.ru/tomsk/firm/70000001029574004" }
-            ]
+            ],
+        leftPartFooterItems: [
+        {
+          title: "Контакты",
+          descItems: [
+            { img: "/images/footer/footer-left-part-map-icon.svg", desc: "г.Томск, пр.Фрунзе 90" },
+            { img: "/images/footer/footer-left-part-phone-icon.svg", desc: "8(3822)50-99-90", "href": "tel:+73822509990", "isClickable": true },
+            { img: "/images/footer/footer-left-part-mail-icon.svg", desc: "gosti_cafe@mail.ru", "href": "mailto:gosti_cafe@mail.ru", "isClickable": true }
+          ]
+        },
+        {
+          title: "Время работы",
+          descItems: [
+            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "Вс - Чт 08.00 - 22.00" },
+            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "Пт - Сб 08.00 - 23.00" }
+          ]
         }
+      ]
+      }
     },
     components: {
         footerMap
@@ -83,9 +100,6 @@ export default {
     created() {
         this.GET_LEFT_PART_FOOTER_ITEMS()
     },
-  mounted() {
-    this.GET_LEFT_PART_FOOTER_ITEMS()
-  }
 }
 </script>
 
@@ -102,7 +116,7 @@ footer {
         justify-content: space-between;
 
         .left-part {
-            max-width: 630px;
+            max-width: 530px;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
