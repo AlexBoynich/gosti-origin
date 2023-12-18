@@ -17,9 +17,6 @@ const leftPartFooterItems = {
     },
     mutations: {
         SET_LEFT_PART_FOOTER_ITEMS(state, data) {
-            data.leftPartFooterItems[1].descItems.push({img: '/images/footer/footer-left-part-time-icon.svg', desc: 'Воскресенье 08.00 - 22.00'})
-            console.log( data.leftPartFooterItems[1].descItems)
-
             state.leftPartFooterItems = data.leftPartFooterItems
         }
     },
