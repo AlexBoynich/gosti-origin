@@ -19,11 +19,10 @@
                                         v-if="descItem.isClickable"
                                         :href="descItem.href"
                                         class="desc"
-                                        
                                     >
-                                        <span v-html="descItem.desc"></span>
+                                        {{ descItem.desc }}
                                     </a>
-                                    <div v-else class="desc"><span v-html="descItem.desc"></span></div>
+                                    <div v-else class="desc">{{ descItem.desc }}</div>
                                 </div>
                             </div>
                         </div>
@@ -80,12 +79,10 @@ export default {
           ]
         },
         {
-          title: "Режим работы в праздники",
+          title: "Время работы",
           descItems: [
-            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "31 декабря - 08.00 - 18.00" },
-            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "1 января - выходной" },
-            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "2 января - 8 января <br> 10.00 - 23.00" },
-            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "с 9 января в обычном режиме" }
+            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "Вс - Чт 08.00 - 22.00" },
+            { img: "/images/footer/footer-left-part-time-icon.svg", desc: "Пт - Сб 08.00 - 23.00" }
           ]
         }
       ]
