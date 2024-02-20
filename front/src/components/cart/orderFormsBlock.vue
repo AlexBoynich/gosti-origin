@@ -34,7 +34,7 @@
         <div class="radio-buttons">
             <div class="section-title">{{ payMethod.title }}</div>
             <div class="radio-container">
-                <div
+                <!-- <div
                     v-for="radio in payMethod.radioButtons"
                     :key="radio.id"
                     class="radio-box"
@@ -44,6 +44,9 @@
                         <div v-show="radio.isActive" class="radio-dot"></div>
                     </div>
                     <label>{{ radio.label }}</label>
+                </div> -->
+                <div class="paymentMethod">
+                    С вами свяжется менеджер для уточнения способа оплаты
                 </div>
             </div>
         </div>
@@ -407,7 +410,11 @@ export default {
         .radio-container {
             display: flex;
             gap: 0 64px;
-
+            .paymentMethod {
+                font-size: 16px;
+                line-height: 18px;
+                @include inter-400;
+            }
             .radio-box {
                 display: flex;
                 gap: 0 8px;
