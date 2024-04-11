@@ -1,5 +1,5 @@
 <template>
-    <div id="map" style="width: 644px; height: 427px"></div>
+    <div id="map" ></div>
 </template>
 
 <script>
@@ -32,6 +32,12 @@ export default {
     #map {
         border-radius: 16px;
         overflow: hidden;
+        width: 628px;
+        height: 427px;
+        @media (max-width: 800px) {
+            width: 328px;
+            height: 258px;
+        }
     }
 
 </style>

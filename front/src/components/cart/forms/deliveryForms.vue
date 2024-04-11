@@ -53,7 +53,7 @@ export default {
                 forms: [
                     {
                         label: 'Улица*',
-                        placeholder: 'г.Томск, ул.Секретная',
+                        placeholder: 'ул.Секретная',
                         class: 'full',
                         type: 'text',
                         id: 'street',
@@ -200,10 +200,16 @@ export default {
             display: flex;
             flex-wrap: wrap;
             gap: 16px 0;
+            @include mobile {
+                gap: 16px;
+            }
 
             form {
                 display: flex;
                 flex-wrap: wrap;
+                @include mobile {
+                    width: auto;
+                }
 
                 .form {
                     display: flex;
@@ -267,11 +273,18 @@ export default {
 
                     &.full {
                         width: 596px;
+                        @include mobile {
+                            width: 91vw;
+                        }
                     }
 
                     &.small {
                         width: 172px;
                         margin-right: 39px;
+                        @include mobile {
+                            margin-right: 0;
+                            width: 43vw;
+                        }
 
                         &.no-margin {
                             margin-right: 0;

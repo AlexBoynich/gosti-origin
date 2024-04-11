@@ -50,15 +50,6 @@
                 </div>
             </div>
         </div>
-        <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
-            <div class="sum-delivery">
-                <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
-                <div class="price">{{ deliveryPrice + ' ₽' }}</div>
-            </div>
-            <div class="message">
-                {{ wayToGet.delivery.deliveryPriceBlock.message }}
-            </div>
-        </div>
         <div class="finally-forms">
             <div class="to-pay">
                 <div class="section-title">{{ toPay.title }}</div>
@@ -86,6 +77,18 @@
             </div>
         </div>
         <button @click="checkForms">Оформить заказ</button>
+        <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
+            <div class="sum-delivery">
+                <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
+                <div class="price">{{ deliveryPrice + ' ₽' }}</div>
+            </div>
+            <div class="message">
+                {{ wayToGet.delivery.deliveryPriceBlock.message }}
+            </div>
+            <div class="message">
+                {{ wayToGet.delivery.deliveryPriceBlock.text }}
+            </div>
+        </div>
     </div>
 </template>
 
@@ -111,8 +114,9 @@ export default {
                 ],
                 delivery: {
                     deliveryPriceBlock: {
-                        title: 'Сумма доставки',
-                        message: '*бесплатная доставка от 1500 рублей'
+                        title: 'Сумма доставки от',
+                        message: '*бесплатная доставка от 1500 рублей', 
+                        text: 'В ближайшее время с вами свяжется менеджер для подтверждения заказа, а также назовет точную сумму оплаты с учетом стоимости доставки'
                     },
                     isDelivery: true,
                 },
@@ -188,7 +192,7 @@ export default {
             if (totalPrice >= 1500) {
                 return 0
             } else {
-                return 200
+                return 300
             }
         },
         formIsEmpty: function () {

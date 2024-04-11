@@ -49,6 +49,13 @@ export default {
     .title {
         @include h2;
         margin-bottom: 16px;
+        @include mobile {
+            margin-bottom: 28px;
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 22px;
+            text-align: left;
+        }
     }
 
     .message {
@@ -57,6 +64,10 @@ export default {
         margin-bottom: 72px;
         background: #DFE8D7;
         border-left: solid 5px $olive;
+        @include mobile {
+            padding: 18px 20px;
+            margin-bottom: 40px;
+        }
 
         .txt {
             @include inter-400;
@@ -64,6 +75,9 @@ export default {
             font-size: 20px;
             line-height: 140%;
             letter-spacing: -0.4px;
+            @include mobile {  
+                text-align: center;
+            }
 
             .phone {
                 text-decoration: none;

@@ -35,10 +35,10 @@ export default {
         return {
             delivery: {
                 title: 'Доставка',
-                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
+                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу.',
                 tableColumns: [
                     {tableItems: ['Заказ', 'Доставка']},
-                    {tableItems: ['До 1500 ₽', '200 ₽']},
+                    {tableItems: ['До 1500 ₽', 'от 300 р']},
                     {tableItems: ['От 1500 ₽', 'Бесплатно']},
                 ]
             }
@@ -54,7 +54,7 @@ export default {
 @import "@/assets/styles/global";
 
 .delivery-block {
-    padding: 92px 0;
+    padding: 174px 0 92px;
     display: flex;
     align-items: center;
     justify-content: space-between;

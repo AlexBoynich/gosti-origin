@@ -98,12 +98,23 @@ export default {
         display: flex;
         width: 100%;
         height: 1550px;
+        @include mobile {
+            height: max-content;
+        }
 
         .slide {
             position: relative;
             width: 100%;
             height: 100%;
             border-radius: 16px;
+            @include mobile {
+                height: auto;
+            }
+            img {
+                @include mobile {
+                    max-width: 100%;
+                }
+            }
         }
     }
 
@@ -114,6 +125,10 @@ export default {
         width: 280px;
         height: 48px;
         color: $olive;
+        @include mobile {
+            margin: 40px auto;
+            justify-content: center;
+        }
 
 
         .arrows {

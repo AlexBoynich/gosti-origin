@@ -335,6 +335,9 @@ export default {
         display: flex;
         flex-wrap: wrap;
         gap: 16px 0;
+        @include mobile {
+            gap: 16px;
+        }
 
         form {
             display: flex;
@@ -402,6 +405,10 @@ export default {
                 &.small {
                     width: 172px;
                     margin-right: 39px;
+                    @include mobile {
+                        width: 43vw;
+                        margin-right: 0;
+                    }
 
                     &.no-margin {
                         margin-right: 0;
@@ -436,6 +443,9 @@ export default {
                         z-index: 1;
                         scrollbar-width: none;
                         -ms-overflow-style: none;
+                        @include mobile {
+                            width: 43vw;
+                        }
 
                         &::-webkit-scrollbar {
                             display: none;

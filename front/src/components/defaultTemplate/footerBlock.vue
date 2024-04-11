@@ -58,7 +58,7 @@
 
 <script>
 import footerMap from "@/components/map/footerMap";
-import {mapActions, mapState} from "vuex";
+// import {mapActions, mapState} from "vuex";
 
 export default {
     name: "footerBlock",
@@ -91,15 +91,15 @@ export default {
     components: {
         footerMap
     },
-    computed: {
-        ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
-    },
-    methods: {
-        ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
-    },
-    created() {
-        this.GET_LEFT_PART_FOOTER_ITEMS()
-    },
+    // computed: {
+    //     ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
+    // },
+    // methods: {
+    //     ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
+    // },
+    // created() {
+    //     this.GET_LEFT_PART_FOOTER_ITEMS()
+    // },
 }
 </script>
 
@@ -114,17 +114,38 @@ footer {
         padding: 48px 0;
         display: flex;
         justify-content: space-between;
+        
+        @include mobile {
+            flex-direction: column;
+            padding: 0;
+            
+            .right-part {
+                order: -1;
+                padding-bottom: 30px;
+        }
+        }
+        
 
         .left-part {
             max-width: 530px;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
+            @include mobile {
+                gap: 33px 0;
+            }
 
             .left-part-top {
                 display: flex;
                 justify-content: space-between;
                 gap: 0 40px;
+                @include mobile {
+                    gap: 33px 0;
+                }
+
+                @include mobile {
+                    flex-direction: column;
+                }
 
                 .left-part-top-items {
 
@@ -172,12 +193,19 @@ footer {
         width: 100%;
         height: 0.5px;
         background: black;
+        @include mobile {
+            height: 1px;
+            margin: 32px 0 16px;
+        }
     }
 
     .footer-bottom {
         padding: 16px 0;
         display: flex;
         justify-content: center;
+        @include mobile {
+            justify-content: start;
+        }
 
         .footer-link {
             @include inter-400;

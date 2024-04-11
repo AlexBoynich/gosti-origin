@@ -1,5 +1,51 @@
 <template>
     <header>
+        <div 
+        class="burger-menu-layout"
+        v-show="isBurgerShow"
+        @click="toggleBurgerMenu"
+        >
+            <div 
+            class='burger-menu'
+            @click.prevent="toggleBurgerMenu"            
+            >
+            <div class="burger-menu_top-part">
+                <img src="/images/header/header-logo-white.svg" alt="Логотип Гости">
+                <img src="/images/header/header-cart-white.svg" alt="Корзина">
+            </div>
+            <nav class="right-part">
+                <template v-for="(navItem, index) in itemsMobile">
+
+                    <router-link
+                        v-if="!navItem.onAnotherSite"
+                        :key="index"
+                        :class="['nav-item', {'text' : navItem.isText}]"
+                        :to="navItem.link"
+                    >
+                        <p v-if="navItem.title" @click="onTop('auto')">
+                            {{ navItem.title }}
+                        </p>
+                        <div v-else class="cart-icon">
+                            <img :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
+                            <div v-show="cart.length > 0" class="cart-counter">{{ productCounter }}</div>
+                        </div>
+
+                    </router-link>
+
+                    <a
+                        v-else
+                        :key="index"
+                        :href="navItem.link"
+                        :class="['nav-item', {'text' : navItem.isText}]"
+                        target="_blank"
+                    >
+                        {{ navItem.title }}
+                    </a>
+                </template>
+            </nav>
+
+            </div>
+        </div>
         <div class="container header-content">
             <div class="left-part">
                 <router-link to="/">
@@ -20,12 +66,12 @@
                         :class="['navItem', 'from-main-in-catalog', {'in-catalog' : isCatalog}]"
                         to="/catalog"
                     >
-                        <div class="burger-menu">
+                        <!-- <div class="burger-menu">
                             <div :class="['line', 'line1', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
                             <div :class="['line', 'line2', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
                             <div :class="['line', 'line3', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
-                        </div>
-                        <p :class="{'in-catalog' : isCatalog}">Каталог</p>
+                        </div> -->
+                        <p :class="{'in-catalog' : isCatalog}">Доставка</p>
                     </router-link>
                 </div>
             </div>
@@ -58,6 +104,12 @@
                         {{ navItem.title }}
                     </a>
                 </template>
+                <img 
+                src="images/header/header-burger.svg" 
+                alt="header-burger"
+                :class="['header-burger',]"
+                @click="toggleBurgerMenu"
+                >
             </nav>
         </div>
     </header>
@@ -89,8 +141,27 @@ export default {
                     alt: 'header-cart'
                 },
             ],
+            itemsMobile: [
+                {
+                    title: 'Кейтеринг',
+                    link: '/catering',
+                    isText: true
+                },
+                {
+                    title: 'Вакансии',
+                    link: 'https://hr-torta.ru/',
+                    onAnotherSite: true,
+                    isText: true
+                },
+                {
+                    title: 'Каталог',
+                    link: '/catalog',
+                    isText: true
+                },
+            ],
             isHover: false,
-            isCatalog: false
+            isCatalog: false,
+            isBurgerShow: false,
         }
     },
     computed: {
@@ -100,7 +171,10 @@ export default {
         }
     },
     methods: {
-        onTop
+        onTop,
+        toggleBurgerMenu() {
+            this.isBurgerShow = !this.isBurgerShow
+        }
     },
     watch: {
         '$route.path'() {
@@ -119,12 +193,39 @@ header {
     z-index: 11;
     width: 100%;
     background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
+    @include mobile {
+        background: linear-gradient(180deg, #FFFFFF 64.04%, rgba(255, 255, 255, 0) 100%);
+    }
+    .burger-menu-layout {
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+    }
+
+    .burger-menu {
+            @include desktop {
+                display: none;
+            }
+            @include mobile {
+                width: 100%;
+                height: 35vh;
+                background: #7B9561;
+                position: absolute;
+                border-radius: 0 0 20px 20px;
+                z-index: 10;
+            }
+            .burger-menu_top-part {
+                padding: 40px 16px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
 
     .header-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 27px 0;
+        padding: 46px 16px;
 
         .left-part {
             display: flex;
@@ -145,6 +246,9 @@ header {
                     align-items: center;
                     justify-content: center;
                     @include green-button;
+                    @include mobile {
+                        display: none;
+                    }
 
                     .burger-menu {
                         width: 24px;
@@ -186,6 +290,18 @@ header {
             display: flex;
             align-items: center;
             gap: 0 48px;
+            @include mobile {
+                gap: 0 20px;
+            }
+
+            .header-burger {
+                @include desktop {
+                    display: none;
+                }
+                @include mobile {
+                    cursor: pointer;
+                }
+            }
 
             .nav-item {
                 @include header-link;
@@ -195,6 +311,9 @@ header {
                 &.text {
                     padding: 8px 24px;
                     border-bottom: 2px solid transparent;
+                    @include mobile {
+                        display: none;
+                    }
 
                     &:active, &:hover {
                         border-bottom: 2px solid $olive;

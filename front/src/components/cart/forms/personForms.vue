@@ -221,6 +221,7 @@ export default {
 @import "@/assets/styles/global";
 
 .person-forms {
+    max-width: 100%;
 
     .title {
         @include inter-500;
@@ -242,6 +243,9 @@ export default {
             display: flex;
             flex-wrap: wrap;
             gap: 16px 0;
+            @include mobile {
+                flex-direction: column;
+            }
 
             form {
                 display: flex;
@@ -299,6 +303,9 @@ export default {
 
                             &.no-margin {
                                 margin-right: 16px;
+                                @include mobile {
+                                    margin-right: 0;
+                                }
                             }
                         }
 
@@ -318,18 +325,30 @@ export default {
 
                     &.full {
                         width: 596px;
+                        @include mobile {
+                            width: 100%;
+                        }
                     }
 
                     &.medium {
                         width: 290px;
+                        @include mobile {
+                            width: 100%;
+                        }
 
                         &.no-margin {
                             margin-right: 16px;
+                            @include mobile {
+                                margin-right: 0;
+                            }
                         }
                     }
 
                     &.textarea {
                         width: 596px;
+                        @include mobile {
+                            width: 100%;
+                        }
                     }
                 }
             }

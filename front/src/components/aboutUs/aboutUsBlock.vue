@@ -63,6 +63,10 @@ export default {
     background: rgba(123, 149, 97, 0.52);
     position: relative;
 
+    @include mobile {
+        padding: 60px 0;
+    }
+
     .slider {
         z-index: 2;
     }

@@ -112,3 +112,13 @@ $lightGreenishGreen: #C1D4B2;
 @mixin default-form-hover {
     border: 1px solid $olive;
 }
+@mixin mobile {
+    @media (max-width: 800px) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: 801px) {
+        @content;
+    }
+}

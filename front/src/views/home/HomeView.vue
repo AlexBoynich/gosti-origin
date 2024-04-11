@@ -6,7 +6,6 @@
         />
         <mainBlock/>
         <aboutUsBlock id="about-us-block"/>
-        <deliveryBlock/>
     </div>
 </template>
 
@@ -14,7 +13,6 @@
 
 import mainBlock from "@/components/mainBlock/mainBlock.vue";
 import aboutUsBlock from "@/components/aboutUs/aboutUsBlock.vue";
-import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 import CookieModal from "../../components/cookieModal/cookieModal";
 
 export default {
@@ -31,7 +29,6 @@ export default {
     },
     components: {
         CookieModal,
-        deliveryBlock,
         aboutUsBlock,
         mainBlock
     },

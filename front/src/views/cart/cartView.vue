@@ -8,7 +8,7 @@
                 :isDelivery="isDelivery"
             />
             <orderFormsBlock
-                v-show="cartIsActive"
+                v-show="true"
                 @resultAction="resultAction"
                 @activeWayToGetButton="activeWayTo"
             />
@@ -142,6 +142,9 @@ export default {
         display: flex;
         justify-content: space-between;
         padding-bottom: 120px;
+        @include mobile {
+            flex-direction: column;
+        }
     }
     .cart-inactive {
         display: flex;

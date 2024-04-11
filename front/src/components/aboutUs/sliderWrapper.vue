@@ -115,6 +115,10 @@ export default {
         margin-left: auto;
         width: 280px;
         height: 48px;
+        @include mobile {
+            margin: 40px auto;
+            justify-content: center;
+        }
 
         .arrows {
             z-index: 2;

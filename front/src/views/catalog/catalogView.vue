@@ -1,5 +1,7 @@
 <template>
-    <div id="catalog" class="container">
+    <div>       
+         <deliveryBlock/>
+        <div id="catalog" class="container">
         <sidebarBlock
             class="categories"
             @activeItems="setActiveItems"
@@ -13,11 +15,13 @@
             @goToCatalog="goToCatalog"
         />
     </div>
+    </div>
 </template>
 
 <script>
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
+import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 import {mapActions, mapState} from "vuex";
 import {onTop} from "@/utils/helpers";
 
@@ -145,7 +149,8 @@ export default {
     },
     components: {
         catalogContent,
-        sidebarBlock
+        sidebarBlock,
+        deliveryBlock
     }
 }
 </script>
@@ -156,7 +161,6 @@ export default {
 #catalog {
     display: flex;
     min-height: 100vh;
-    padding-top: 174px;
 
     .categories {
         max-width: 274px;

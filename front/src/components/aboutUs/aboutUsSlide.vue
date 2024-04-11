@@ -24,6 +24,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+
+    }
 
     .left-part {
 
@@ -34,6 +38,7 @@ export default {
             display: inline-block;
             margin-bottom: 32px;
             padding-right: 25px;
+            padding-top: 5px;
 
         }
 
@@ -52,6 +57,12 @@ export default {
         width: 596px;
         height: 656px;
         border-radius: 16px;
+        
+        @include mobile {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 328/294;
+        }
 
         img {
             position: absolute;

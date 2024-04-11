@@ -8,7 +8,7 @@ const leftPartFooterItems = {
     actions: {
         async GET_LEFT_PART_FOOTER_ITEMS({ commit }) {
             axios
-                .get('/requests/footer/leftPartFooterItems.json')
+                .get('https://gosti-cafe.ru/requests/footer/leftPartFooterItems.json')
                 .then(response => {
                     let data = response.data
                     commit('SET_LEFT_PART_FOOTER_ITEMS', data)
