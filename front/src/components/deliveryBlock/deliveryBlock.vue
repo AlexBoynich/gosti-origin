@@ -17,6 +17,14 @@
                     </div>
                 </div>
             </div>
+            <div class="delivery-table-mobile">
+                <div class="table-item-mobile"
+                     v-for="(item, index) in delivery.tableItemsMobile"
+                     :key="index"
+                >
+                    {{ item }}
+                </div>
+            </div>
             <router-link to="/catalog">
                 <button class="delivery-button" @click="onTop('auto')">
                     Перейти в каталог
@@ -40,6 +48,14 @@ export default {
                     {tableItems: ['Заказ', 'Доставка']},
                     {tableItems: ['До 1500 ₽', 'от 300 р']},
                     {tableItems: ['От 1500 ₽', 'Бесплатно']},
+                ],
+                tableItemsMobile: [
+                'Заказ',
+                'Доставка',
+                'До 1500 ₽',
+                'от 300 р',
+                'От 1500 ₽',
+                'Бесплатно'
                 ]
             }
         }
@@ -58,15 +74,26 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+    }
 
     .left-part {
         width: 596px;
         height: 656px;
         border-radius: 16px;
+        @include mobile {
+            width: 100%;
+            aspect-ratio: 328/360;
+            height: auto;
+        }
     }
 
     .right-part {
         max-width: 596px;
+        @include mobile {
+            width: 100%
+        }
 
         .title {
             @include h3;
@@ -84,12 +111,40 @@ export default {
             max-width: 468px;
         }
 
+        .delivery-table-mobile {
+            display: none;
+            
+            @include mobile {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                gap: 34px 54px;
+                margin: 40px 0;
+            }
+            
+            &:nth-child(2) {
+                color: #0000008C;
+            }
+
+            .table-item-mobile {
+                font-family: 'Inter', sans-serif;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 22px;
+                text-align: left;
+
+            }
+        }
+    
         .delivery-table {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 32px;
             gap: 0 49px;
+            @include mobile {
+                display: none;
+            }
 
             .table-column {
                 display: flex;

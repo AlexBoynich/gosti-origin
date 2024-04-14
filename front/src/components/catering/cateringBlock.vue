@@ -9,10 +9,18 @@
                 >
                     {{ phoneNumber }}
                 </a>
+                {{ width }}
             </div>
         </div>
         <div class="catering-sliders">
-            <MainSlider :slides="cateringSlides"/>
+            <MainSlider 
+            :slides="cateringSlidesMobile"
+            v-if="width<=800"
+            />
+            <MainSlider 
+            :slides="cateringSlides"
+            v-if="width>800"
+            />
         </div>
     </div>
 </template>
@@ -28,7 +36,12 @@ export default {
             cateringSlides: [
                 '/images/catering/keit-page-1.png',
                 '/images/catering/keit-page-2.png'
-            ]
+            ],
+            cateringSlidesMobile: [
+                '/images/catering/keit-page-mobile-1.svg',
+                '/images/catering/keit-page-mobile-2.svg'
+            ],
+            width: 0
         }
     },
     components: {MainSlider},
@@ -37,7 +50,13 @@ export default {
         phoneNumber: function () {
             return this.leftPartFooterItems[0].descItems[1].desc
         }
-    }
+    },
+    created() {
+        const onResize = () => this.width = window.innerWidth;
+        onResize();
+        window.addEventListener('resize', onResize);
+        this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
+    },
 }
 </script>
 

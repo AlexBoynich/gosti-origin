@@ -28,7 +28,7 @@
                 class="stop-list main-button"
                 disabled
             >
-                Недоступно к заказу
+                Недоступно<span class="invisibleOnMobile"> к заказу</span>
             </button>
         </template>
     </div>
@@ -103,6 +103,12 @@ export default {
     text-align: center;
     cursor: pointer;
     width: 100%;
+
+    .invisibleOnMobile {
+       @include mobile { 
+            display: none;
+       }
+    }
 
     &.stop-list {
         background: $lightGrayishGreen;

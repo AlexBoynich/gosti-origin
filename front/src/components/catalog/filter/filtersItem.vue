@@ -32,6 +32,10 @@ export default {
     align-items: center;
     padding: 2px 0;
 
+    @include mobile {
+        margin-right: 16px;
+    }
+
     .checkbox {
         display: flex;
         align-items: center;
@@ -68,6 +72,10 @@ export default {
         line-height: 110%;
         letter-spacing: -0.36px;
         margin-right: 8px;
+
+        @include mobile {
+            white-space: nowrap;
+        }
     }
 
     img {

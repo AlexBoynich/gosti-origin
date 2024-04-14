@@ -20,17 +20,22 @@
     </div>
 </template>
 
+
 <script>
 import subcategoriesItem from "@/components/catalog/categories/subcategoriesItem";
+import { mapActions } from "vuex";
 
 export default {
     name: "categoriesItem",
     methods: {
+        ...mapActions(['CHANGE_SHOW_CATALOG']),
+
         toggleCategory() {
             this.$emit('toggleCategory', this.categoriesItem.id)
         },
         pickSubcategories(subcategory) {
             this.$emit('pickSubcategories', subcategory)
+            this.CHANGE_SHOW_CATALOG(false)
         }
     },
     props: ['categoriesItem', 'activeIndices'],

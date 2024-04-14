@@ -10,8 +10,22 @@
             @click.prevent="toggleBurgerMenu"            
             >
             <div class="burger-menu_top-part">
-                <img src="/images/header/header-logo-white.svg" alt="Логотип Гости">
-                <img src="/images/header/header-cart-white.svg" alt="Корзина">
+                <router-link to="/">
+                    <img
+                        src="/images/header/header-logo-white.svg"
+                        alt="Логотип Гости"
+                        class="logo"
+                        @click="clickOnMenuItem('smooth')"
+                    >
+                </router-link>
+                <router-link to="/cart">
+                    <img 
+                        src="/images/header/header-cart-white.svg" 
+                        alt="Корзина"
+                        class="cart-icon"
+                        @click="clickOnMenuItem('smooth')"
+                        >
+                </router-link>
             </div>
             <nav class="right-part">
                 <template v-for="(navItem, index) in itemsMobile">
@@ -22,7 +36,7 @@
                         :class="['nav-item', {'text' : navItem.isText}]"
                         :to="navItem.link"
                     >
-                        <p v-if="navItem.title" @click="onTop('auto')">
+                        <p v-if="navItem.title" @click="clickOnMenuItem('auto')">
                             {{ navItem.title }}
                         </p>
                         <div v-else class="cart-icon">
@@ -174,6 +188,10 @@ export default {
         onTop,
         toggleBurgerMenu() {
             this.isBurgerShow = !this.isBurgerShow
+        },
+        clickOnMenuItem(height) {
+            this.isBurgerShow = false;
+            this.onTop(height)
         }
     },
     watch: {
@@ -191,7 +209,7 @@ header {
     position: fixed;
     top: 0;
     z-index: 11;
-    width: 100%;
+    width: 100vw;
     background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
     @include mobile {
         background: linear-gradient(180deg, #FFFFFF 64.04%, rgba(255, 255, 255, 0) 100%);
@@ -219,6 +237,19 @@ header {
                 display: flex;
                 justify-content: space-between;
             }
+            .right-part {
+                @include mobile {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 17px;
+                    a.nav-item {
+                        @include inter-400-burger-item;
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #FFFFFF;
+                    }
+                }
+                }
         }
 
     .header-content {
@@ -307,6 +338,9 @@ header {
                 @include header-link;
                 color: black;
                 padding: 16px 24px;
+                @include mobile {
+                    padding: 0;
+                }
 
                 &.text {
                     padding: 8px 24px;

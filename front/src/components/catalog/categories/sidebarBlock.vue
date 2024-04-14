@@ -1,11 +1,30 @@
 <template>
     <div class="categories-block container">
         <aside>
-            <h2 class="title">Каталог</h2>
+            <h2 v-show="showOnMobile()" class="title">Каталог</h2>
+            
+            <div 
+                class="titleMobile" 
+                @click="CHANGE_SHOW_CATALOG(true)"
+                v-show="!showOnMobile()" 
+            >
+                <img src="/images/catalog/sidebar/arrow-left.png" alt="">
+                <h2 
+                    class="title"
+                    >Каталог
+                </h2>
+            </div>
+            
+            <div class="breadcrumbsMobile">
+                {{ activeItemsForSidebar.categoriesTitle }} - {{ activeItemsForSidebar.subcategoriesTitle }}
+            </div>
+
+
             <div class="content">
                 <div class="categories">
                     <CategoriesItem
                         v-for="category in categories"
+                        v-show="showOnMobile()"
                         :key="category.id"
                         :categoriesItem="category"
                         :activeIndices="activeIndices"
@@ -14,7 +33,7 @@
                     />
                 </div>
                 <div class="filters-box">
-                    <div class="title">Фильтр</div>
+                    <div class="title invisibleOnMobile">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
                             v-for="filter in filters"
@@ -32,7 +51,7 @@
 <script>
 import CategoriesItem from "@/components/catalog/categories/categoriesItem";
 import FiltersItem from "@/components/catalog/filter/filtersItem";
-import {mapActions, mapState} from "vuex";
+import {mapActions, mapState, mapGetters} from "vuex";
 
 export default {
     name: "sidebarBlock",
@@ -42,14 +61,18 @@ export default {
             activeIndices: {
                 categoriesIndex: 1,
                 subcategoriesIndex: 1
-            }
+            },
+            width: 0,
         }
     },
     computed: {
         ...mapState('categories', ['categories']),
+        ...mapGetters(['GET_SHOW_CATALOG'])
     },
     methods: {
         ...mapActions('categories', ['GET_CATEGORIES']),
+        ...mapActions(['CHANGE_SHOW_CATALOG']),
+
         toggleCategory(id) {
             if (this.activeIndices.categoriesIndex === id) {
                 this.activeIndices.categoriesIndex = null
@@ -58,6 +81,13 @@ export default {
                 this.activeIndices.categoriesIndex = id
                 this.categories[id - 1].isActive = true
             }
+        },
+        showOnMobile() {
+            console.log(this.width, this.GET_SHOW_CATALOG)
+            if (this.width < 800 && this.GET_SHOW_CATALOG !== true) {
+                return false
+            }
+            else return true
         },
         pickFilter(id) {
             this.$emit('pickFilter', {
@@ -95,10 +125,15 @@ export default {
         FiltersItem,
         CategoriesItem
     },
-    props: ['filters'],
+    props: ['filters', 'activeItemsForSidebar'],
     created() {
         this.GET_CATEGORIES();
         this.$parent.$on('goToCatalog', this.goToCatalog);
+
+        const onResize = () => this.width = window.innerWidth;
+        onResize();
+        window.addEventListener('resize', onResize);
+        this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
     },
     updated() {
         this.activeItems()
@@ -117,15 +152,46 @@ aside {
     width: 100%;
     height: 100%;
 
+    .breadcrumbsMobile {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 19.8px;
+        text-align: left;
+        color: #000000;
+        margin-top: 16px;
+
+        @include desktop {
+            display: none;
+        }
+    }
+    
+    @include mobile {
+        max-width: 100%;
+    }
+
     .title {
         @include h2;
         margin-bottom: 16px;
+    }
+    .titleMobile {
+        display: flex;
+        gap: 16px;
+
+        img {
+            width: 20px;
+            height: 17px;
+        }
     }
 
     .content {
         position: sticky;
         top: 130px;
         padding-bottom: 40px;
+        
+        @include mobile {
+            width: 100%;
+        }
 
         .categories {
             display: flex;
@@ -135,6 +201,12 @@ aside {
         }
 
         .filters-box {
+
+            .invisibleOnMobile {
+                @include mobile {
+                    display: none;
+                }
+            }
 
             .title {
                 color: #000;
@@ -149,6 +221,11 @@ aside {
                 display: flex;
                 flex-direction: column;
                 gap: 16px 0;
+                
+                @include mobile {
+                    flex-direction: row;
+                    overflow: scroll;
+                }
             }
         }
     }

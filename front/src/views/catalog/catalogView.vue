@@ -7,6 +7,7 @@
             @activeItems="setActiveItems"
             @pickFilter="setFilter"
             :filters="filters"
+            :activeItemsForSidebar="activeItems"
         />
         <catalogContent
             :activeItems="activeItems"
@@ -22,7 +23,7 @@
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
 import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
-import {mapActions, mapState} from "vuex";
+import {mapActions, mapState, mapGetters  } from "vuex";
 import {onTop} from "@/utils/helpers";
 
 export default {
@@ -35,6 +36,7 @@ export default {
                 subcategoriesTitle: '',
                 subcategoriesIndex: 1
             },
+            width: 0,
             filters: [
                 {
                     isActive: true,
@@ -62,8 +64,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['GET_SHOW_CATALOG']),
         ...mapState('catalogItems', ['catalogItems']),
-        ...mapState('categories', ['categories'])
+        ...mapState('categories', ['categories']),
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
@@ -151,6 +154,15 @@ export default {
         catalogContent,
         sidebarBlock,
         deliveryBlock
+    },
+    created() {
+        const onResize = () => this.width = window.innerWidth;
+        onResize();
+        window.addEventListener('resize', onResize);
+        this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
+    },
+    mounted() {
+        this.GET_SHOW_CATALOG
     }
 }
 </script>
@@ -161,10 +173,20 @@ export default {
 #catalog {
     display: flex;
     min-height: 100vh;
+    @include mobile {
+        flex-direction: column;
+    }
 
     .categories {
         max-width: 274px;
         margin-right: 48px;
+
+        @include mobile {
+            margin-right: 0;
+            padding: 0;
+            max-width: 100%;
+            width: 100%;
+        }
     }
 }
 </style>

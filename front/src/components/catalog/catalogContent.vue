@@ -70,6 +70,7 @@ export default {
             },
             isGood: true,
             componentCart: [],
+            width: 0,
         }
     },
     computed: {
@@ -140,7 +141,14 @@ export default {
     components: {
         catalogItem,
     },
-    props: ['activeItems', 'catalogItems']
+    props: ['activeItems', 'catalogItems'],
+    
+    created() {
+        const onResize = () => this.width = window.innerWidth;
+        onResize();
+        window.addEventListener('resize', onResize);
+        this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
+    },
 }
 </script>
 
@@ -149,6 +157,10 @@ export default {
 
 .catalog-content {
     padding-bottom: 120px;
+    
+    @include mobile {
+        padding-bottom: 60px;
+    }
 
     .message {
         border-radius: 16px;
@@ -157,12 +169,25 @@ export default {
         background: #DFE8D7;
         border-left: solid 5px $olive;
 
+        @include mobile {
+            padding: 30px 16px;
+        }
+
+
         .txt {
             @include inter-400;
             color: #000;
             font-size: 20px;
             line-height: 140%;
             letter-spacing: -0.4px;
+
+            @include mobile {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.3px;
+                text-align: center;
+
+            }
         }
 
         &.bad {
@@ -182,6 +207,10 @@ export default {
         &.no-message {
             margin-top: 95px;
         }
+
+        @include mobile {
+            display: none;
+        }
     }
 
 
@@ -190,7 +219,11 @@ export default {
         @include inter-400;
         line-height: 110%;
         letter-spacing: -0.36px;
-        margin-bottom: 16px
+        margin-bottom: 16px;
+
+        @include mobile {
+            display: none;
+        }
     }
 
     .go-to-catalog {
@@ -210,6 +243,10 @@ export default {
         gap: 48px 40px;
         min-width: 918px;
         width: 100%;
+        @include mobile {
+            min-width: auto;
+            gap: 30px 16px;
+        }
     }
 
 }

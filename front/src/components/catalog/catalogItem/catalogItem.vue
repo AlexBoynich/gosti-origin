@@ -99,6 +99,11 @@ export default {
     flex-direction: column;
     max-width: 439px;
     cursor: pointer;
+    
+    @include mobile {
+        width: 47%;
+        min-width: 156px;
+    }
 
     .item-clickable {
         position: relative;
@@ -110,6 +115,12 @@ export default {
             height: 359px;
             border-radius: 16px;
             margin-bottom: 24px;
+            
+            @include mobile {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
 
             img {
                 position: absolute;
@@ -143,6 +154,14 @@ export default {
                 line-height: 140%;
                 letter-spacing: -0.4px;
                 margin-bottom: 24px;
+                @include mobile {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 18.2px;
+                    text-align: left;
+                    margin-bottom: 60px;
+
+                }
             }
 
             .price-and-weight {
@@ -157,6 +176,13 @@ export default {
                     font-size: 24px;
                     line-height: 110%;
                     letter-spacing: -0.48px;
+                    @include mobile {
+                        font-size: 22px;
+                        font-weight: 500;
+                        line-height: 19.8px;
+                        text-align: left;
+
+                    }
                 }
 
                 .weight {
@@ -165,6 +191,13 @@ export default {
                     font-size: 20px;
                     line-height: 110%;
                     letter-spacing: -0.4px;
+                    @include mobile {
+                        font-size: 18px;
+                        font-weight: 400;
+                        line-height: 19.8px;
+                        text-align: left;
+
+                    }
                 }
             }
         }

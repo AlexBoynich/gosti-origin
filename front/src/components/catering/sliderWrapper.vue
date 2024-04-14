@@ -112,7 +112,8 @@ export default {
             }
             img {
                 @include mobile {
-                    max-width: 100%;
+                    max-width: 800px;
+                    width: 100%;
                 }
             }
         }
@@ -128,6 +129,7 @@ export default {
         @include mobile {
             margin: 40px auto;
             justify-content: center;
+            gap: 0 36px;
         }
 
 
@@ -141,6 +143,10 @@ export default {
                 transform: rotate(180deg);
                 margin-right: 64px;
                 margin-top: -4px;
+                @include mobile {
+                    margin-right: 0;
+                    margin-top: 0;
+                }
             }
             &.arrow_prev, &.arrow_next {
                 @include slider-arrow;

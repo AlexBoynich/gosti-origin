@@ -8,14 +8,14 @@
                 :isDelivery="isDelivery"
             />
             <orderFormsBlock
-                v-show="true"
+                v-show="cartIsActive"
                 @resultAction="resultAction"
                 @activeWayToGetButton="activeWayTo"
             />
         </div>
         <div v-show="!cartIsActive" class="cart-inactive">
             <div class="message-title">Вы ничего не добавили</div>
-            <div class="message-desc">Бесплатная доставка от 1500 рублей</div>
+            <div class="message-desc">Бесплатная доставка <br>от 1500 рублей</div>
             <router-link to="/catalog" class="to-catalog">
                 <button>Перейти в каталог</button>
             </router-link>
@@ -133,6 +133,9 @@ export default {
 #cart {
     margin-top: 174px;
     min-height: 90vh;
+    @include mobile {
+        min-height: auto;
+    }
 
     h2 {
         @include h2;
@@ -158,6 +161,9 @@ export default {
             font-size: 32px;
             line-height: 35px;
             margin-bottom: 32px;
+            @include mobile {
+                margin-bottom: 18px;
+            }
         }
 
         .message-desc {
@@ -165,6 +171,11 @@ export default {
             font-size: 24px;
             line-height: 26px;
             margin-bottom: 72px;
+            @include mobile {
+                margin-bottom: 40px;
+                text-align: center !important;
+                font-size: 18px !important;
+            }
         }
 
         .to-catalog {

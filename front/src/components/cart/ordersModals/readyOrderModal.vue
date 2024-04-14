@@ -75,6 +75,9 @@ export default {
         background: white;
         padding: 32px 61px 64px;
         position: relative;
+        @include mobile {
+            padding: 40px 16px;
+        }
 
         .close-modal {
             cursor: pointer;
@@ -98,6 +101,9 @@ export default {
             justify-content: center;
             flex-direction: column;
             margin-top: 88px;
+            @include mobile {
+                margin-top: 0
+            }
 
             .title {
                 @include inter-500;
@@ -152,7 +158,7 @@ export default {
             }
 
             .text-message {
-                @include inter-400;
+                @include inter-400-cart;
                 font-size: 16px;
                 line-height: 18px;
                 text-align: center;
@@ -160,7 +166,7 @@ export default {
 
                 .phone {
                     text-decoration: none;
-                    @include inter-400;
+                    @include inter-400-cart;
                     font-size: 16px;
                     line-height: 18px;
                     color: black;

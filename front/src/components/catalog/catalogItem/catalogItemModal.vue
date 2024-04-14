@@ -121,6 +121,15 @@ export default {
         padding: 72px 61px 31px;
         position: relative;
 
+        @include mobile {
+            width: 100%;
+            height: auto;
+            margin: 16px;
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-bottom: 30px;
+        }
+
         .close-modal {
             cursor: pointer;
             background: transparent;
@@ -146,6 +155,12 @@ export default {
                 height: 372px;
                 border-radius: 16px;
                 margin-bottom: 16px;
+
+                @include mobile {
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 1/1;
+                }
 
                 img {
                     position: absolute;
