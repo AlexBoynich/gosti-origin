@@ -9,7 +9,6 @@
                 >
                     {{ phoneNumber }}
                 </a>
-                {{ width }}
             </div>
         </div>
         <div class="catering-sliders">
@@ -61,7 +60,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/assets/styles/global";
+
+@import "@/assets/styles/global";
 
 .container {
 
@@ -96,6 +96,11 @@ export default {
             letter-spacing: -0.4px;
             @include mobile {  
                 text-align: center;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.3px;
+                text-align: center;
+
             }
 
             .phone {
