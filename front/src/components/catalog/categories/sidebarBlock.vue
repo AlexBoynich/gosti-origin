@@ -8,14 +8,17 @@
                 @click="CHANGE_SHOW_CATALOG(true)"
                 v-show="!showOnMobile()" 
             >
-                <img src="/images/catalog/sidebar/arrow-left.png" alt="">
+                <img src="/images/catalog/sidebar/arrow-left.png" alt="" >
                 <h2 
                     class="title"
                     >Каталог
                 </h2>
             </div>
             
-            <div class="breadcrumbsMobile">
+            <div 
+            class="breadcrumbsMobile"
+            v-show="!GET_SHOW_CATALOG"
+            >
                 {{ activeItemsForSidebar.categoriesTitle }} - {{ activeItemsForSidebar.subcategoriesTitle }}
             </div>
 
@@ -32,7 +35,10 @@
                         @pickSubcategories="activeItems"
                     />
                 </div>
-                <div class="filters-box">
+                <div 
+                class="filters-box"
+                v-show="!GET_SHOW_CATALOG"
+                >
                     <div class="title invisibleOnMobile">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
@@ -59,8 +65,8 @@ export default {
         return {
             title: 'Каталог',
             activeIndices: {
-                categoriesIndex: 1,
-                subcategoriesIndex: 1
+                categoriesIndex: 0,
+                subcategoriesIndex: 0
             },
             width: 0,
         }
@@ -83,7 +89,6 @@ export default {
             }
         },
         showOnMobile() {
-            console.log(this.width, this.GET_SHOW_CATALOG)
             if (this.width < 800 && this.GET_SHOW_CATALOG !== true) {
                 return false
             }
@@ -135,7 +140,7 @@ export default {
         window.addEventListener('resize', onResize);
         this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
     },
-    updated() {
+    mounted() {
         this.activeItems()
     },
     beforeDestroy() {
@@ -173,6 +178,9 @@ aside {
     .title {
         @include h2;
         margin-bottom: 16px;
+        @include mobile {
+            margin-bottom: 50px;
+        }
     }
     .titleMobile {
         display: flex;
@@ -191,6 +199,7 @@ aside {
         
         @include mobile {
             width: 100%;
+            margin-top: 16px;
         }
 
         .categories {

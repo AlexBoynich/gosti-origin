@@ -127,7 +127,7 @@ export default {
         height: 48px;
         color: $olive;
         @include mobile {
-            margin: 40px auto;
+            margin: 40px auto 0;
             justify-content: center;
             gap: 0 36px;
         }

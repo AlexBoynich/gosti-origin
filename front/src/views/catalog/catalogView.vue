@@ -1,6 +1,5 @@
 <template>
     <div>       
-         <deliveryBlock/>
         <div id="catalog" class="container">
         <sidebarBlock
             class="categories"
@@ -22,7 +21,6 @@
 <script>
 import sidebarBlock from "../../components/catalog/categories/sidebarBlock";
 import catalogContent from "../../components/catalog/catalogContent";
-import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 import {mapActions, mapState, mapGetters  } from "vuex";
 import {onTop} from "@/utils/helpers";
 
@@ -88,7 +86,6 @@ export default {
             }
             Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
 
-
             this.GET_CATALOG_ITEMS({
                 subcategoryId: this.activeItems.subcategoriesIndex,
                 requestFilter: ''
@@ -142,7 +139,6 @@ export default {
             Object.keys(this.filtersForRequest).forEach(key => delete this.filtersForRequest[key])
 
             this.$emit('goToCatalog',)
-
             this.GET_CATALOG_ITEMS({
                 subcategoryId: 1,
                 requestFilter: ''
@@ -153,7 +149,6 @@ export default {
     components: {
         catalogContent,
         sidebarBlock,
-        deliveryBlock
     },
     created() {
         const onResize = () => this.width = window.innerWidth;
@@ -161,9 +156,6 @@ export default {
         window.addEventListener('resize', onResize);
         this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
     },
-    mounted() {
-        this.GET_SHOW_CATALOG
-    }
 }
 </script>
 
@@ -173,8 +165,11 @@ export default {
 #catalog {
     display: flex;
     min-height: 100vh;
+    margin-top: 174px;
     @include mobile {
         flex-direction: column;
+        margin-top: 100px;
+        min-height: auto;
     }
 
     .categories {

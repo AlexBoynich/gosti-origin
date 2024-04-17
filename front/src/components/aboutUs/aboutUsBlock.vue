@@ -77,6 +77,12 @@ export default {
         bottom: -44px;
         width: 810px;
         height: 408px;
+        @include mobile {
+            width: 100%;
+            height: auto;
+            bottom: 0;
+            left: 0;
+        }
     }
 }
 </style>

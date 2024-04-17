@@ -3,11 +3,10 @@
         <div 
         class="burger-menu-layout"
         v-show="isBurgerShow"
-        @click="toggleBurgerMenu"
+        @click.self="toggleBurgerMenu"
         >
             <div 
-            class='burger-menu'
-            @click.prevent="toggleBurgerMenu"            
+            class='burger-menu'          
             >
             <div class="burger-menu_top-part">
                 <router-link to="/">
@@ -18,14 +17,23 @@
                         @click="clickOnMenuItem('smooth')"
                     >
                 </router-link>
-                <router-link to="/cart">
-                    <img 
-                        src="/images/header/header-cart-white.svg" 
-                        alt="Корзина"
-                        class="cart-icon"
-                        @click="clickOnMenuItem('smooth')"
-                        >
-                </router-link>
+                <div class="burger-menu_right-part">
+                    <router-link to="/cart">
+                        <img 
+                            src="/images/header/header-cart-white.svg" 
+                            alt="Корзина"
+                            class="cart-icon"
+                            @click="clickOnMenuItem('smooth')"
+                            >
+                    </router-link>
+                    <div 
+                    class="close-burger-menu"
+                    @click="clickOnMenuItem('smooth')"
+                    >
+
+                    </div>
+
+                </div>
             </div>
             <nav class="right-part">
                 <template v-for="(navItem, index) in itemsMobile">
@@ -226,7 +234,7 @@ header {
             }
             @include mobile {
                 width: 100%;
-                height: 35vh;
+                padding-bottom: 20px;
                 background: #7B9561;
                 position: absolute;
                 border-radius: 0 0 20px 20px;
@@ -236,6 +244,11 @@ header {
                 padding: 40px 16px;
                 display: flex;
                 justify-content: space-between;
+                .burger-menu_right-part{
+                    display: flex;
+                    gap: 0 20px;
+                    align-items: center;
+                }
             }
             .right-part {
                 @include mobile {
@@ -249,6 +262,27 @@ header {
                         color: #FFFFFF;
                     }
                 }
+                }
+                .close-burger-menu{
+                    width: 30px;
+                    height: 30px;
+                    background-color: #7B9561;
+                    position: relative;
+                    cursor: pointer;
+                    &::before, &::after{
+                        content: '';
+                        background-color: #FFFFFF;
+                        position: absolute;
+                        width: 100%;
+                        height: 2px;
+                        top: 13px;
+                    }
+                    &::before{
+                        rotate: 45deg;
+                    }
+                    &::after{
+                        rotate: -45deg;
+                    }
                 }
         }
 

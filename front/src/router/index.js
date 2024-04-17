@@ -42,6 +42,15 @@ const routes = [
         component: () => import( '../views/cart/cartView.vue')
     },
     {
+        path: '/delivery',
+        name: 'delivery',
+        meta: {
+            title: 'Гости • Корзина',
+            description: 'Доставка и самовывоз любимых блюд'
+        },
+        component: () => import( '../views/delivery/deliveryView.vue')
+    },
+    {
         path: '*',
         name: '404',
         meta: {

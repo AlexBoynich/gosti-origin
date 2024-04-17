@@ -48,6 +48,9 @@ export default {
             flex-direction: column;
             max-width: 460px;
             gap: 16px 0;
+            @include mobile {
+                margin-bottom: 58px;
+            }
         }
     }
 

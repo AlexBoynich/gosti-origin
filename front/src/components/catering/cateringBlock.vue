@@ -19,7 +19,7 @@
             />
             <MainSlider 
             :slides="cateringSlides"
-            v-if="width>800"
+            v-else
             />
         </div>
     </div>

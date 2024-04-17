@@ -1,5 +1,8 @@
 <template>
-    <div class="catalog-content">
+    <div 
+    class="catalog-content"
+    v-show="showOnMobile()"
+    >
         <div
             v-show="showMessage"
             :class="['message', {'bad' : !isGood || catalogItems.length === 0}]"
@@ -57,7 +60,7 @@
 
 <script>
 import catalogItem from "@/components/catalog/catalogItem/catalogItem.vue";
-import {mapMutations, mapState} from 'vuex'
+import {mapMutations, mapState, mapGetters} from 'vuex'
 
 export default {
     name: "catalogContent",
@@ -75,6 +78,7 @@ export default {
     },
     computed: {
         ...mapState('cart', ['cart']),
+        ...mapGetters(['GET_SHOW_CATALOG']),
         showMessage: function () {
             if (this.activeItems.categoriesIndex === 0 || this.activeItems.categoriesIndex === 1) {
                 return true
@@ -136,6 +140,12 @@ export default {
                 this.componentCart.splice(index, 1);
             }
             this.SET_CART(this.componentCart)
+        },
+        showOnMobile() {
+            if (this.width < 800 && this.GET_SHOW_CATALOG === true) {
+                return false
+            }
+            else return true
         }
     },
     components: {

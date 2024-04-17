@@ -58,7 +58,7 @@
 
 <script>
 import footerMap from "@/components/map/footerMap";
-// import {mapActions, mapState} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
     name: "footerBlock",
@@ -94,12 +94,12 @@ export default {
     // computed: {
     //     ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
     // },
-    // methods: {
-    //     ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
-    // },
-    // created() {
-    //     this.GET_LEFT_PART_FOOTER_ITEMS()
-    // },
+    methods: {
+        ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
+    },
+    created() {
+        this.GET_LEFT_PART_FOOTER_ITEMS()
+    },
 }
 </script>
 
