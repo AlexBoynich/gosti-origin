@@ -164,6 +164,12 @@ export default {
                 },
             ],
             itemsMobile: [
+                
+                {
+                    title: 'Каталог',
+                    link: '/catalog',
+                    isText: true
+                },
                 {
                     title: 'Кейтеринг',
                     link: '/catering',
@@ -176,10 +182,11 @@ export default {
                     isText: true
                 },
                 {
-                    title: 'Каталог',
-                    link: '/catalog',
+                    title: 'Доставка',
+                    link: '/delivery',
                     isText: true
                 },
+                
             ],
             isHover: false,
             isCatalog: false,
@@ -234,7 +241,7 @@ header {
             }
             @include mobile {
                 width: 100%;
-                padding-bottom: 20px;
+                padding-bottom: 50px;
                 background: #7B9561;
                 position: absolute;
                 border-radius: 0 0 20px 20px;

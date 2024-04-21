@@ -63,6 +63,9 @@ export default {
     },
     computed: {
         ...mapGetters(['GET_SHOW_CATALOG']),
+        ...mapGetters(['GET_SUGAR']),
+        ...mapGetters(['GET_GLUTEN']),
+        ...mapGetters(['GET_LACTOSE']),
         ...mapState('catalogItems', ['catalogItems']),
         ...mapState('categories', ['categories']),
     },
@@ -102,16 +105,19 @@ export default {
 
                 if (!sugar) {
                     filtersForRequest.sugar = 0
+                    console.log(sugar, 'SUGAR')
                 } else {
                     delete filtersForRequest.sugar
                 }
                 if (!gluten) {
                     filtersForRequest.gluten = 0
+                    console.log(gluten, 'GLUTEN')
                 } else {
                     delete filtersForRequest.gluten
                 }
                 if (!lactose) {
                     filtersForRequest.lactose = 0
+                    console.log(lactose, 'LACTOSE')
                 } else {
                     delete filtersForRequest.lactose
                 }
@@ -155,7 +161,13 @@ export default {
         onResize();
         window.addEventListener('resize', onResize);
         this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
+        
     },
+    // mounted() {
+    //     this.filters[0].isActive = this.GET_SUGAR
+    //     this.filters[1].isActive = this.GET_GLUTEN
+    //     this.filters[2].isActive = this.GET_LACTOSE
+    // }
 }
 </script>
 

@@ -7,6 +7,7 @@ const catalogItems = {
     },
     actions: {
         async GET_CATALOG_ITEMS({ commit }, payload) {
+            console.log(payload)
             axios
                 .get('https://gosti-cafe.ru/api/dishes?subcategory=' + payload.subcategoryId + '&' + payload.requestFilter)
                 .then(response => {

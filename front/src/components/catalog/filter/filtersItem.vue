@@ -13,11 +13,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: "filtersItem",
     methods: {
+        ...mapActions(['CHANGE_FILTER']),
         pickFilter() {
             this.$emit('pickFilter', this.filtersItem.id)
+            console.log(this.filtersItem.id-1)
+            this.CHANGE_FILTER(this.filtersItem.id-1)
         }
     },
     props: ['filtersItem']

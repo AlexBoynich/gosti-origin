@@ -39,6 +39,13 @@ export default {
             margin-bottom: 32px;
             padding-right: 25px;
             padding-top: 5px;
+            @include mobile {
+                font-size: 30px;
+                font-weight: 500;
+                line-height: 22px;
+                text-align: left;
+
+            }
 
         }
 
@@ -50,6 +57,11 @@ export default {
             gap: 16px 0;
             @include mobile {
                 margin-bottom: 58px;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.3px;
+                text-align: left;
+
             }
         }
     }

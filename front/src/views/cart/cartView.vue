@@ -130,6 +130,10 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+.container{
+    padding-top: 0;
+}
+
 #cart {
     margin-top: 174px;
     min-height: 90vh;

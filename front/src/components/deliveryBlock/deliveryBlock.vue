@@ -69,6 +69,10 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+.container{
+    margin-top: 100px !important;
+}
+
 .delivery-block {
     padding: 174px 0 92px;
     display: flex;
@@ -103,12 +107,27 @@ export default {
             margin-bottom: 32px;
             line-height: 53px;
             padding-right: 25px;
+            @include mobile {
+                font-size: 30px;
+                font-weight: 500;
+                line-height: 22px;
+                text-align: left;
+                padding-top: 28px;
+
+            }
         }
 
         .desc {
             @include inter-400;
             margin-bottom: 16px;
             max-width: 468px;
+            @include mobile {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.3px;
+                text-align: left;
+
+            }
         }
 
         .delivery-table-mobile {

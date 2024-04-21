@@ -58,6 +58,9 @@ export default {
 <style scoped lang="scss">
 @import "src/assets/styles/global";
 
+.container{
+    padding: 0 16px;
+}
 .about-us-block {
     padding: 96px 0;
     background: rgba(123, 149, 97, 0.52);

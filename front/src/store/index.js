@@ -7,6 +7,7 @@ import categories from "./modules/catalog/categories";
 import catalogItems from "./modules/catalog/catalogItems";
 import cart from "./modules/cart/cart";
 import showCatalog from './modules/catalog/showCatalog';
+import filters from './modules/filters/filters';
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         categories,
         catalogItems,
         cart,
-        showCatalog
+        showCatalog,
+        filters
     }
 })
