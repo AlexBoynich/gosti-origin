@@ -54,7 +54,7 @@ export default {
             return {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
-                allowTouchMove: false,
+                allowTouchMove: true,
                 loop: this.oneSlide,
                 pagination: {
                     el: '.swiper-pagination.main',

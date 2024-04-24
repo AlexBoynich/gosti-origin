@@ -182,6 +182,7 @@ export default {
         flex-direction: column;
         margin-top: 100px;
         min-height: auto;
+        background-color: #DFE8D7;
     }
 
     .categories {

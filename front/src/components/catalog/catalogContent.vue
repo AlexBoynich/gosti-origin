@@ -169,7 +169,7 @@ export default {
     padding-bottom: 120px;
     
     @include mobile {
-        padding-bottom: 60px;
+        padding-bottom: 0;
     }
 
     .message {
@@ -181,6 +181,7 @@ export default {
 
         @include mobile {
             padding: 30px 16px;
+            margin-top: 30px;
         }
 
 

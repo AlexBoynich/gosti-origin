@@ -329,6 +329,9 @@ export default {
         font-size: 20px;
         line-height: 22px;
         margin-bottom: 16px;
+        @include mobile{
+            display: none;
+        }
     }
 
     .forms {

@@ -10,7 +10,7 @@
             >
                 <img src="/images/catalog/sidebar/arrow-left.png" alt="" >
                 <h2 
-                    class="title"
+                    :class="['title',{'margin-0' : !showOnMobile()}]"
                     >Каталог
                 </h2>
             </div>
@@ -24,7 +24,7 @@
 
 
             <div class="content">
-                <div class="categories">
+                <div :class="['categories', {'margin-0' : !showOnMobile()}]">
                     <CategoriesItem
                         v-for="category in categories"
                         v-show="showOnMobile()"
@@ -152,6 +152,11 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+
+.margin-0{
+     margin: 0 !important;
+}
+
 aside {
     max-width: 274px;
     width: 100%;
@@ -185,6 +190,7 @@ aside {
     .titleMobile {
         display: flex;
         gap: 16px;
+        padding-top: 15px;
 
         img {
             width: 20px;
@@ -200,6 +206,7 @@ aside {
         @include mobile {
             width: 100%;
             margin-top: 16px;
+            padding-bottom: 0;
         }
 
         .categories {

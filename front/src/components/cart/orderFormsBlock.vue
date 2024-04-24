@@ -403,6 +403,9 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 0 64px;
+        @include mobile {
+            display: none;
+        }
 
         .section-title {
             @include inter-500;
@@ -453,10 +456,22 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 8px 0;
+        @include mobile {
+            gap: 20px 0;
+        }
 
         .sum-delivery {
             display: flex;
             gap: 0 40px;
+            @include mobile {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 23.4px;
+                text-align: left;
+                gap: 0 5px;
+                align-items: center;
+
+            }
 
             .section-title {
                 @include inter-500;
@@ -475,6 +490,13 @@ export default {
             font-size: 16px;
             line-height: 18px;
             @include inter-400;
+            @include mobile {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 23.4px;
+                text-align: left;
+
+            }
         }
     }
 

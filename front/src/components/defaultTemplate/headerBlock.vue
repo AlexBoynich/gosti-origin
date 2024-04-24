@@ -221,7 +221,7 @@ export default {
 @import "@/assets/styles/global";
 
 header {
-    position: fixed;
+    position: absolute;
     top: 0;
     z-index: 11;
     width: 100vw;
@@ -298,6 +298,9 @@ header {
         align-items: center;
         justify-content: space-between;
         padding: 46px 16px;
+        @include mobile {
+            padding: 46px 16px 32px;
+        }
 
         .left-part {
             display: flex;
