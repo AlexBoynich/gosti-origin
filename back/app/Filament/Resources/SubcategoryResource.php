@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\NavigationGroupEnum;
 use App\Filament\Resources\SubcategoryResource\Pages;
 use App\Filament\Resources\SubcategoryResource\RelationManagers;
+use App\Models\Dish;
 use App\Models\Subcategory;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -22,6 +23,8 @@ class SubcategoryResource extends Resource
 {
     protected static ?string $model = Subcategory::class;
     protected static ?string $navigationGroup = NavigationGroupEnum::DISHES->value;
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $label = 'Подкатегория';
     protected static ?string $pluralLabel = 'Подкатегории';
@@ -67,10 +70,34 @@ class SubcategoryResource extends Resource
                     ->label('Категория')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                //
+                Tables\Actions\Action::make('subcatergory')
+                    ->label(function (Subcategory $record) {
+                        $availableDishesCount = Dish::where([
+                            'subcategory_id' => $record->id,
+                            'is_available' => true
+                        ])->count();
+                        return $availableDishesCount ? 'Добавить в стоплист' : 'Убрать из стоплиста';
+                    })
+                    ->hidden(function(Subcategory $record) {
+                        return !Dish::where('subcategory_id', $record->id)->count();
+                    })
+                    ->color('warning')
+                    ->action(function (Subcategory $record) {
+                        $dishes = Dish::where('subcategory_id', $record->id)->get();
+
+                        $dishesNotInStoplist = $dishes->where('is_available', true);
+                        $isAvailable = !(count($dishesNotInStoplist) > 0);
+
+                        foreach ($dishes as $dish) {
+                            $dish->update([
+                                'is_available' => $isAvailable
+                            ]);
+                        }
+                    }),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ]);
     }
 
@@ -85,6 +112,7 @@ class SubcategoryResource extends Resource
     {
         return [
             'index' => Pages\ListSubcategories::route('/'),
+            'create' => Pages\CreateSubcategory::route('/create'),
             'edit' => Pages\EditSubcategory::route('/{record}/edit'),
         ];
     }
