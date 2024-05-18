@@ -8,7 +8,7 @@ const slidesFromMainBlock = {
     actions: {
         async GET_MAIN_SLIDES({ commit }) {
             axios
-                .get('https://gosti-cafe.ru/api/main-block')
+                .get('/api/main-block')
                 .then(response => {
                     const data = response.data
                     commit('SET_MAIN_SLIDES', data)

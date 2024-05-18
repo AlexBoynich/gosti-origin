@@ -9,7 +9,7 @@ const catalogItems = {
         async GET_CATALOG_ITEMS({ commit }, payload) {
             console.log(payload)
             axios
-                .get('https://gosti-cafe.ru/api/dishes?subcategory=' + payload.subcategoryId + '&' + payload.requestFilter)
+                .get('/api/dishes?subcategory=' + payload.subcategoryId + '&' + payload.requestFilter)
                 .then(response => {
                     const data = response.data
                     commit('SET_CATALOG_ITEMS', data)
