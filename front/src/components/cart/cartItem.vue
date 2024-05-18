@@ -21,11 +21,11 @@
             </div>
             <div class="product-desc-box">
                 <div class="counter">
-                    <button class="action-button" @click="transformCartItemAmount('-')">
+                    <button class="action-button minus" @click="transformCartItemAmount('-')">
                         <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
                     <div class="count">{{ cartItem.count }}</div>
-                    <button class="action-button" @click="transformCartItemAmount('+')">
+                    <button class="action-button plus" @click="transformCartItemAmount('+')">
                         <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
@@ -117,9 +117,8 @@ export default {
         border-radius: 16px;
         @include mobile {
             min-width: 78px;
-            width: 78px;
             min-height: 78px;
-            height: 78px;
+            height: 113px;
         }
         .counter-mobile{
             display: none;
@@ -163,6 +162,11 @@ export default {
             object-fit: cover;
             width: 100%;
             height: 100%;
+            @include mobile {
+                position: relative;
+                width: 78px;
+                height: 78px;
+            }
         }
     }
 
@@ -202,10 +206,26 @@ export default {
                 height: 16px;
                 border: none;
                 cursor: pointer;
+                @include mobile {
+                    right: 0;
+                    top: 0;
+                }
 
-                img {
+                .minus, .plus {
                     width: 16px;
                     height: 16px;
+                }
+                .minus{
+                    @include mobile {
+                        width: 8px;
+                        height: 1px;
+                    }
+                }
+                .plus{
+                    @include mobile {
+                        width: 8px;
+                        height: 8px;
+                    }
                 }
             }
         }
@@ -255,6 +275,14 @@ export default {
                 display: flex;
                 align-items: flex-end;
                 flex-direction: column;
+                @include mobile {
+                    display: flex;
+                    align-items: baseline;
+                    flex-direction: row;
+                    justify-content: end;
+                    width: 100%;
+                    gap: 8px;
+                }
 
                 .weight {
                     @include inter-300;
