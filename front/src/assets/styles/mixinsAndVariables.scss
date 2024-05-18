@@ -9,11 +9,11 @@ $lightGreenishGreen: #C1D4B2;
 
 @mixin header-link {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    line-height: 22px;
-    text-decoration: none;
+    font-size: 16px;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    line-height: 21.6px;
+    text-align: left;
+    
 }
 @mixin h3 {
     font-family: 'Comfortaa', sans-serif;
@@ -30,6 +30,13 @@ $lightGreenishGreen: #C1D4B2;
     font-size: 72px;
     line-height: 110%;
     letter-spacing: -1.8px;
+    @include mobile {
+        font-family: 'Inter', sans-serif;
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 19.8px;
+        text-align: left;
+    }
 }
 @mixin inter-300 {
     font-family: 'Inter', sans-serif;
@@ -47,6 +54,12 @@ $lightGreenishGreen: #C1D4B2;
     line-height: 25px;
     letter-spacing: -0.02em;
     text-align: left;
+    @include mobile {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 19.8px;
+        text-align: left;
+    }
 }
 @mixin inter-500 {
     font-family: 'Inter', sans-serif;
@@ -55,6 +68,13 @@ $lightGreenishGreen: #C1D4B2;
     line-height: 26px;
     letter-spacing: -0.02em;
     text-align: left;
+    @include mobile {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 26px;
+        text-align: center;
+
+    }
 }
 @mixin comforta-500 {
     font-size: 24px;
@@ -65,13 +85,22 @@ $lightGreenishGreen: #C1D4B2;
 @mixin green-button {
     color: white;
     background: $olive;
-    border-radius: 16px;
+    border-radius: 7.53px;
     padding: 16px 24px;
     @include inter-500;
     font-size: 20px;
     line-height: 22px;
     border: none;
     cursor: pointer;
+    @include mobile {
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 22px;
+        text-align: left;
+        padding: 10px 20px;
+
+    }
 }
 @mixin green-button-hover {
     background: $lightGreenishGreen;
@@ -111,4 +140,38 @@ $lightGreenishGreen: #C1D4B2;
 }
 @mixin default-form-hover {
     border: 1px solid $olive;
+}
+@mixin mobile {
+    @media (max-width: 800px) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: 801px) {
+        @content;
+    }
+}
+@mixin inter-400-burger-item{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27px;
+    text-align: center;
+
+}
+@mixin inter-400-cart {
+    
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    @include mobile {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: center;
+    }
 }

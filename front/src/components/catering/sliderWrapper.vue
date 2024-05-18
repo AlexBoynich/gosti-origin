@@ -98,12 +98,24 @@ export default {
         display: flex;
         width: 100%;
         height: 1550px;
+        @include mobile {
+            height: max-content;
+        }
 
         .slide {
             position: relative;
             width: 100%;
             height: 100%;
             border-radius: 16px;
+            @include mobile {
+                height: auto;
+            }
+            img {
+                @include mobile {
+                    max-width: 800px;
+                    width: 100%;
+                }
+            }
         }
     }
 
@@ -114,6 +126,11 @@ export default {
         width: 280px;
         height: 48px;
         color: $olive;
+        @include mobile {
+            margin: 40px auto 0;
+            justify-content: center;
+            gap: 0 36px;
+        }
 
 
         .arrows {
@@ -126,6 +143,10 @@ export default {
                 transform: rotate(180deg);
                 margin-right: 64px;
                 margin-top: -4px;
+                @include mobile {
+                    margin-right: 0;
+                    margin-top: 0;
+                }
             }
             &.arrow_prev, &.arrow_next {
                 @include slider-arrow;

@@ -15,7 +15,7 @@
         </div>
         <div v-show="!cartIsActive" class="cart-inactive">
             <div class="message-title">Вы ничего не добавили</div>
-            <div class="message-desc">Бесплатная доставка от 1500 рублей</div>
+            <div class="message-desc">Бесплатная доставка <br>от 1500 рублей</div>
             <router-link to="/catalog" class="to-catalog">
                 <button>Перейти в каталог</button>
             </router-link>
@@ -130,9 +130,21 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+.container{
+    padding-top: 0;
+    .title{
+        @include mobile{
+            display: none
+        }
+    }
+}
+
 #cart {
-    margin-top: 174px;
+    margin-top: 120px;
     min-height: 90vh;
+    @include mobile {
+        min-height: auto;
+    }
 
     h2 {
         @include h2;
@@ -142,6 +154,9 @@ export default {
         display: flex;
         justify-content: space-between;
         padding-bottom: 120px;
+        @include mobile {
+            flex-direction: column;
+        }
     }
     .cart-inactive {
         display: flex;
@@ -155,6 +170,9 @@ export default {
             font-size: 32px;
             line-height: 35px;
             margin-bottom: 32px;
+            @include mobile {
+                margin-bottom: 18px;
+            }
         }
 
         .message-desc {
@@ -162,6 +180,11 @@ export default {
             font-size: 24px;
             line-height: 26px;
             margin-bottom: 72px;
+            @include mobile {
+                margin-bottom: 40px;
+                text-align: center !important;
+                font-size: 18px !important;
+            }
         }
 
         .to-catalog {

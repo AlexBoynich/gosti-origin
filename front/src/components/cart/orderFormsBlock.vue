@@ -51,6 +51,10 @@
             </div>
         </div>
         <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
+            <div class="message">
+                <div class="wayToPay">Способ оплаты</div>
+                <span class="wayToPayMessage">{{ wayToGet.delivery.deliveryPriceBlock.text }}</span>
+            </div>
             <div class="sum-delivery">
                 <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
                 <div class="price">{{ deliveryPrice + ' ₽' }}</div>
@@ -85,7 +89,9 @@
                 </label>
             </div>
         </div>
+        
         <button @click="checkForms">Оформить заказ</button>
+
     </div>
 </template>
 
@@ -112,7 +118,8 @@ export default {
                 delivery: {
                     deliveryPriceBlock: {
                         title: 'Сумма доставки',
-                        message: '*бесплатная доставка от 1500 рублей'
+                        message: '*бесплатная доставка от 1500 рублей', 
+                        text: 'С вами свяжется менеджер для уточнения способа оплаты'
                     },
                     isDelivery: true,
                 },
@@ -188,7 +195,7 @@ export default {
             if (totalPrice >= 1500) {
                 return 0
             } else {
-                return 200
+                return 300
             }
         },
         formIsEmpty: function () {
@@ -393,12 +400,22 @@ export default {
 
     .title {
         @include inter-500;
+        @include mobile {
+            text-align: start;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 19.8px;
+
+        }
     }
 
     .radio-buttons {
         display: flex;
         flex-direction: column;
         gap: 0 64px;
+        @include mobile {
+            display: none;
+        }
 
         .section-title {
             @include inter-500;
@@ -449,15 +466,42 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 8px 0;
+        @include mobile {
+            gap: 20px 0;
+        }
+        .wayToPay{
+                    display: none;
+                    @include mobile {
+                        display: block;
+                        font-weight: 400;
+                        line-height: 19.8px;
+                        text-align: left;
+                    }
+                }
 
         .sum-delivery {
             display: flex;
             gap: 0 40px;
+            @include mobile {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 23.4px;
+                text-align: left;
+                gap: 0 5px;
+                align-items: center;
+                justify-content: space-between;
+            }
 
             .section-title {
                 @include inter-500;
                 font-size: 20px;
                 line-height: 22px;
+                @include mobile{
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 19.8px;
+                    text-align: left;
+                }
             }
 
             .price {
@@ -471,6 +515,29 @@ export default {
             font-size: 16px;
             line-height: 18px;
             @include inter-400;
+            @include mobile {
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 18.2px;
+                text-align: left;
+                gap: 14px;
+                .wayToPay{
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 19.8px;
+                    text-align: left;
+                }
+                .wayToPayMessage{
+font-size: 14px;
+font-weight: 400;
+line-height: 18.2px;
+text-align: left;
+
+                }
+
+            }
         }
     }
 
@@ -485,6 +552,13 @@ export default {
                 @include inter-500;
                 font-size: 20px;
                 line-height: 22px;
+                @include mobile{
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 19.8px;
+                    text-align: left;
+
+                }
             }
 
             .price {
@@ -538,6 +612,13 @@ export default {
                     line-height: 18px;
                     color: black;
                     text-decoration: none;
+                    @include mobile{
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 18.2px;
+                        text-align: left;
+
+                    }
 
                     span {
                         border-bottom: 1px solid transparent;

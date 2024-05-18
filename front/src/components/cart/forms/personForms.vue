@@ -221,6 +221,7 @@ export default {
 @import "@/assets/styles/global";
 
 .person-forms {
+    max-width: 100%;
 
     .title {
         @include inter-500;
@@ -236,12 +237,23 @@ export default {
             font-size: 20px;
             line-height: 22px;
             margin-bottom: 16px;
+            @include mobile {
+                text-align: start;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 19.8px;
+                text-align: left;
+                margin-bottom: 18px;
+            }
         }
 
         .forms {
             display: flex;
             flex-wrap: wrap;
             gap: 16px 0;
+            @include mobile {
+                flex-direction: column;
+            }
 
             form {
                 display: flex;
@@ -256,6 +268,13 @@ export default {
                         @include inter-400;
                         margin-bottom: 8px;
                         line-height: 20px;
+                        @include mobile {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 19.8px;
+                            text-align: left;
+
+                        }
                     }
 
                     .form-icon.error {
@@ -299,6 +318,9 @@ export default {
 
                             &.no-margin {
                                 margin-right: 16px;
+                                @include mobile {
+                                    margin-right: 0;
+                                }
                             }
                         }
 
@@ -318,18 +340,30 @@ export default {
 
                     &.full {
                         width: 596px;
+                        @include mobile {
+                            width: 100%;
+                        }
                     }
 
                     &.medium {
                         width: 290px;
+                        @include mobile {
+                            width: 100%;
+                        }
 
                         &.no-margin {
                             margin-right: 16px;
+                            @include mobile {
+                                margin-right: 0;
+                            }
                         }
                     }
 
                     &.textarea {
                         width: 596px;
+                        @include mobile {
+                            width: 100%;
+                        }
                     }
                 }
             }

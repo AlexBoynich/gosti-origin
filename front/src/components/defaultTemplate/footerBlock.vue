@@ -2,7 +2,7 @@
     <footer id="footer">
         <div class="container">
             <div class="footer-top">
-                <div class="left-part">
+                <div id="contacts" class="left-part">
                     <div class="left-part-top">
                         <div class="left-part-top-items"
                              v-for="(item, index) in leftPartFooterItems"
@@ -58,7 +58,7 @@
 
 <script>
 import footerMap from "@/components/map/footerMap";
-import {mapActions, mapState} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
     name: "footerBlock",
@@ -74,7 +74,7 @@ export default {
           title: "Контакты",
           descItems: [
             { img: "/images/footer/footer-left-part-map-icon.svg", desc: "г.Томск, пр.Фрунзе 90" },
-            { img: "/images/footer/footer-left-part-phone-icon.svg", desc: "8(3822)50-99-90", "href": "tel:+73822509990", "isClickable": true },
+            { img: "/images/footer/footer-left-part-phone-icon.svg", desc: "+7 (3822)50-99-90", "href": "tel:+73822509990", "isClickable": true },
             { img: "/images/footer/footer-left-part-mail-icon.svg", desc: "gosti_cafe@mail.ru", "href": "mailto:gosti_cafe@mail.ru", "isClickable": true }
           ]
         },
@@ -91,9 +91,9 @@ export default {
     components: {
         footerMap
     },
-    computed: {
-        ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
-    },
+    // computed: {
+    //     ...mapState('leftPartFooterItems', ['leftPartFooterItems']),
+    // },
     methods: {
         ...mapActions('leftPartFooterItems', ['GET_LEFT_PART_FOOTER_ITEMS']),
     },
@@ -110,33 +110,68 @@ footer {
     width: 100%;
     background: rgba(123, 149, 97, 0.65);
 
+    .container{
+        padding: 46px 16px 90px; 
+    };
+
     .footer-top {
         padding: 48px 0;
         display: flex;
         justify-content: space-between;
+        
+        @include mobile {
+            flex-direction: column;
+            padding: 0;
+            
+            .right-part {
+                order: -1;
+                padding-bottom: 30px;
+        }
+        }
+        
 
         .left-part {
             max-width: 530px;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
+            @include mobile {
+                gap: 44px 0;
+            }
 
             .left-part-top {
                 display: flex;
                 justify-content: space-between;
                 gap: 0 40px;
+                @include mobile {
+                    gap: 20px 0;
+                }
+
+                @include mobile {
+                    flex-direction: column;
+                }
 
                 .left-part-top-items {
 
                     .title {
                         @include comforta-500;
                         margin-bottom: 16px;
+                        @include mobile {
+                            font-size: 18px;
+                            font-weight: 500;
+                            line-height: 34px;
+                            text-align: left;
+
+                        }
                     }
 
                     .desc-box {
                         display: flex;
                         flex-direction: column;
                         gap: 18px 0;
+                        @include mobile {
+                            gap: 13px 0;
+                        }
 
                         .desc-item {
                             display: flex;
@@ -154,6 +189,14 @@ footer {
                                 font-size: 20px;
                                 line-height: 22px;
                                 color: black;
+                                @include mobile {
+                                    font-size: 14px;
+                                    font-weight: 300;
+                                    line-height: 22px;
+                                    letter-spacing: -0.4000000059604645px;
+                                    text-align: left;
+
+                                }
                             }
                         }
                     }
@@ -172,18 +215,33 @@ footer {
         width: 100%;
         height: 0.5px;
         background: black;
+        @include mobile {
+            height: 1px;
+            margin: 32px 0 16px;
+        }
     }
 
     .footer-bottom {
         padding: 16px 0;
         display: flex;
         justify-content: center;
+        @include mobile {
+            justify-content: start;
+        }
 
         .footer-link {
             @include inter-400;
             line-height: 20px;
             color: black;
             cursor: pointer;
+            @include mobile {
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 20px;
+                letter-spacing: -0.36000001430511475px;
+                text-align: left;
+
+            }
         }
     }
 }

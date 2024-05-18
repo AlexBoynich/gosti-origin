@@ -15,4 +15,10 @@ a {
     max-width: 1240px;
     margin: 0 auto;
     position: relative;
+    @include mobile {
+        padding: 46px 16px;
+    }
+}
+.no-scroll{
+    overflow: hidden;
 }

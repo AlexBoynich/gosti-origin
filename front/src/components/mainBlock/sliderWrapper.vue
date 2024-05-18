@@ -54,7 +54,7 @@ export default {
             return {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
-                allowTouchMove: false,
+                allowTouchMove: true,
                 loop: this.oneSlide,
                 pagination: {
                     el: '.swiper-pagination.main',
@@ -106,6 +106,9 @@ export default {
         top: 0;
         bottom: 0;
         margin: auto;
+        @include mobile {
+            display: none;
+        }
 
         .arrows {
             position: absolute;
@@ -147,6 +150,10 @@ export default {
             img {
                 width: 100%;
                 height: 100vh;
+                @include mobile {
+                    aspect-ratio: 360/200;
+                    height: auto;
+                }
             }
         }
     }

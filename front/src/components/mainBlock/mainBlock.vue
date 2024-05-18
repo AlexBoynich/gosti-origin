@@ -29,4 +29,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.main-block {
+    margin-top: 100px;
+}
 </style>

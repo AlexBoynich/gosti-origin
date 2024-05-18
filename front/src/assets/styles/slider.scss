@@ -1,3 +1,5 @@
+@import "@/assets/styles/mixinsAndVariables";
+
 .pagination-position {
     margin: 0 auto;
     display: flex;
@@ -13,6 +15,10 @@
         padding: 16px;
         border-radius: 50px;
         margin: -72px auto 0;
+        @include mobile {
+            margin: 0;
+            background: transparent;
+        }
 
         .swiper-pagination-bullet {
             width: 8px;
@@ -27,6 +33,9 @@
                 width: 48px;
                 height: 8px;
                 opacity: 1;
+                @include mobile {
+                    width: 8px;
+                }
             }
         }
     }

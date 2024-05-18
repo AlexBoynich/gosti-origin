@@ -24,8 +24,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+
+    }
 
     .left-part {
+        @include mobile {
+            margin-top: 30px;
+        }
 
         .slide-title {
             @include h3;
@@ -34,6 +41,16 @@ export default {
             display: inline-block;
             margin-bottom: 32px;
             padding-right: 25px;
+            padding-top: 5px;
+            @include mobile {
+                font-size: 30px;
+                font-weight: 500;
+                line-height: 22px;
+                text-align: left;
+                padding-bottom: 12px;
+                margin-bottom: 24px;
+
+            }
 
         }
 
@@ -43,6 +60,15 @@ export default {
             flex-direction: column;
             max-width: 460px;
             gap: 16px 0;
+            @include mobile {
+                margin-bottom: 58px;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 20.25px;
+                text-align: left;
+
+
+            }
         }
     }
 
@@ -52,6 +78,12 @@ export default {
         width: 596px;
         height: 656px;
         border-radius: 16px;
+        
+        @include mobile {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 328/294;
+        }
 
         img {
             position: absolute;

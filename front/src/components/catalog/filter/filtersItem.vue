@@ -13,11 +13,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: "filtersItem",
     methods: {
+        ...mapActions(['CHANGE_FILTER']),
         pickFilter() {
             this.$emit('pickFilter', this.filtersItem.id)
+            console.log(this.filtersItem.id-1)
+            this.CHANGE_FILTER(this.filtersItem.id-1)
         }
     },
     props: ['filtersItem']
@@ -31,6 +36,11 @@ export default {
     display: flex;
     align-items: center;
     padding: 2px 0;
+    white-space: nowrap;
+
+    @include mobile {
+        margin-right: 16px;
+    }
 
     .checkbox {
         display: flex;
@@ -42,6 +52,9 @@ export default {
         border: 1px solid rgba(123, 149, 97, 0.5);
         border-radius: 3px;
         margin-right: 16px;
+        @include mobile {
+            margin-right: 6px;
+        }
 
         img {
             width: 14px;
@@ -68,6 +81,15 @@ export default {
         line-height: 110%;
         letter-spacing: -0.36px;
         margin-right: 8px;
+
+        @include mobile {
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.8px;
+            text-align: left;
+
+        }
     }
 
     img {

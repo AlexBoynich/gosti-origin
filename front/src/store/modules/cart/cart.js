@@ -9,7 +9,7 @@ const cart = {
     actions: {
         GET_DISHES({commit}, params) {
             axios
-                .get('/api/check-dishes', {
+                .get('https://gosti-cafe.ru/api/check-dishes', {
                     params: {
                         arr: params
                     }

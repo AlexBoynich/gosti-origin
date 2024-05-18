@@ -29,7 +29,7 @@ export default {
                 {
                     img: "/images/homePage/aboutUs/main-hall.png",
                     title: "Основной зал",
-                    desc: "<p>Зал рассчитан на 50-55 человек.</p><p>На территории основного зала находится барная зона. Можно использовать для рассадки гостей или фуршетной планировки. Часть зала может быть использована под выступление группы или под фотозону.</p>"
+                    desc: "<p>Зал рассчитан на 50-55 человек.</p><p>На территории основного зала находится барная зона. Можно использовать для рассадки гостей или фуршетной планировки.</p> <p>Часть зала может быть использована под выступление группы или под фотозону.</p>"
                 },
                 {
                     img: "/images/homePage/aboutUs/vip.png",
@@ -58,10 +58,17 @@ export default {
 <style scoped lang="scss">
 @import "src/assets/styles/global";
 
+.container{
+    padding: 0 16px;
+}
 .about-us-block {
     padding: 96px 0;
     background: rgba(123, 149, 97, 0.52);
     position: relative;
+
+    @include mobile {
+        padding: 60px 0;
+    }
 
     .slider {
         z-index: 2;
@@ -73,6 +80,12 @@ export default {
         bottom: -44px;
         width: 810px;
         height: 408px;
+        @include mobile {
+            width: 100%;
+            height: auto;
+            bottom: 0;
+            left: 0;
+        }
     }
 }
 </style>

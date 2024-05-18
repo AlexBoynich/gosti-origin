@@ -12,7 +12,14 @@
             </div>
         </div>
         <div class="catering-sliders">
-            <MainSlider :slides="cateringSlides"/>
+            <MainSlider 
+            :slides="cateringSlidesMobile"
+            v-if="width<=800"
+            />
+            <MainSlider 
+            :slides="cateringSlides"
+            v-else
+            />
         </div>
     </div>
 </template>
@@ -28,7 +35,12 @@ export default {
             cateringSlides: [
                 '/images/catering/keit-page-1.png',
                 '/images/catering/keit-page-2.png'
-            ]
+            ],
+            cateringSlidesMobile: [
+                '/images/catering/keit-page-mobile-1.svg',
+                '/images/catering/keit-page-mobile-2.svg'
+            ],
+            width: 0
         }
     },
     components: {MainSlider},
@@ -37,26 +49,41 @@ export default {
         phoneNumber: function () {
             return this.leftPartFooterItems[0].descItems[1].desc
         }
-    }
+    },
+    created() {
+        const onResize = () => this.width = window.innerWidth;
+        onResize();
+        window.addEventListener('resize', onResize);
+        this.$on('hook:beforeDestroy', () => window.removeEventListener('resize', onResize));
+    },
 }
 </script>
 
 <style scoped lang="scss">
-@import "src/assets/styles/global";
+
+@import "@/assets/styles/global";
 
 .container {
 
     .title {
         @include h2;
         margin-bottom: 16px;
+        @include mobile {
+            display: none;
+        }
     }
 
     .message {
-        border-radius: 16px;
+        border-radius: 5px;
         padding: 40px 93px 40px 88px;
         margin-bottom: 72px;
-        background: #DFE8D7;
-        border-left: solid 5px $olive;
+        background: #FFFFFF;
+        border: 1px solid #7B9561;
+    
+        @include mobile {
+            padding: 18px 20px;
+            margin-bottom: 30px;
+        }
 
         .txt {
             @include inter-400;
@@ -64,6 +91,13 @@ export default {
             font-size: 20px;
             line-height: 140%;
             letter-spacing: -0.4px;
+            @include mobile {  
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 18.9px;
+                text-align: center;
+
+            }
 
             .phone {
                 text-decoration: none;

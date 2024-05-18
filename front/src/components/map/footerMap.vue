@@ -1,5 +1,5 @@
 <template>
-    <div id="map" style="width: 644px; height: 427px"></div>
+    <div id="map" ></div>
 </template>
 
 <script>
@@ -28,10 +28,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import'/src/assets/styles/global.scss';
     #map {
         border-radius: 16px;
         overflow: hidden;
+        width: 628px;
+        height: 427px;
+        @media (max-width: 800px) {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 328/258;
+            border-radius: 7px;
+        }
     }
 
 </style>

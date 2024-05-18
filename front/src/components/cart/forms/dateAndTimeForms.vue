@@ -329,12 +329,23 @@ export default {
         font-size: 20px;
         line-height: 22px;
         margin-bottom: 16px;
+        @include mobile{
+            display: none;
+        }
     }
 
     .forms {
         display: flex;
         flex-wrap: wrap;
         gap: 16px 0;
+        @include mobile {
+            gap: 16px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.8px;
+            text-align: left;
+
+        }
 
         form {
             display: flex;
@@ -349,6 +360,14 @@ export default {
                     @include inter-400;
                     margin-bottom: 8px;
                     line-height: 20px;
+                    
+                    @include mobile {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 19.8px;
+                        text-align: left;
+
+                    }
                 }
 
                 .date {
@@ -402,6 +421,10 @@ export default {
                 &.small {
                     width: 172px;
                     margin-right: 39px;
+                    @include mobile {
+                        width: 43vw;
+                        margin-right: 0;
+                    }
 
                     &.no-margin {
                         margin-right: 0;
@@ -436,6 +459,9 @@ export default {
                         z-index: 1;
                         scrollbar-width: none;
                         -ms-overflow-style: none;
+                        @include mobile {
+                            width: 43vw;
+                        }
 
                         &::-webkit-scrollbar {
                             display: none;

@@ -51,9 +51,17 @@ const routes = [
         component: () => import( '../views/404/PageNotFound.vue')
     },
 ]
-
 const router = new VueRouter({
     mode: 'history',
+    scrollBehavior(to,){
+        if (to.hash) {
+            return {selector: to.hash}
+        }
+         return {
+            x:0,
+            y: 0
+         }
+    },
     base: process.env.BASE_URL,
     routes
 })

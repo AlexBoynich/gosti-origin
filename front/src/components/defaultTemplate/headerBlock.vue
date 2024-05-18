@@ -1,33 +1,85 @@
 <template>
     <header>
+        <div 
+        class="burger-menu-layout"
+        v-show="isBurgerShow"
+        @click.self="toggleBurgerMenu"
+        >
+        <div class="opacity" @click="clickOnMenuItem('smooth')"></div>
+            <div 
+            class='burger-menu'          
+            >
+            <div class="burger-menu_top">
+                <div class="burger-menu_top-part">
+                    <div class="burger-menu_right-part">
+                        <div 
+                        class="close-burger-menu"
+                        @click="clickOnMenuItem('smooth')"
+                        >
+
+                        </div>
+                    </div>
+                    <router-link to="/">
+                        <img
+                            src="/images/header/header-logo-black.svg"
+                            alt="Логотип Гости"
+                            class="logo"
+                            @click="clickOnMenuItem('smooth')"
+                        >
+                    </router-link>
+                </div>
+                <nav class="right-part">
+                    <template v-for="(navItem, index) in itemsMobile">
+
+                        <router-link
+                            v-if="!navItem.onAnotherSite"
+                            :key="index"
+                            :class="['nav-item', {'text' : navItem.isText}]"
+                            :to="{path: navItem.link, hash: navItem.hash}"
+                        >
+                            <p v-if="navItem.title" @click="clickOnMenuItem('auto')">
+                                {{ navItem.title }}
+                            </p>
+                            <div v-else class="cart-icon">
+                                <img :src="navItem.img" :alt="navItem.alt" @click="onTop('auto')">
+                                <div v-show="cart.length > 0" class="cart-counter">{{ productCounter }}</div>
+                            </div>
+
+                        </router-link>
+
+                        <a
+                            v-else
+                            :key="index"
+                            :href="navItem.link"
+                            :class="['nav-item', {'text' : navItem.isText}]"
+                            target="_blank"
+                        >
+                            {{ navItem.title }}
+                        </a>
+                    </template>
+                </nav>
+            </div>
+            <div class="burger-menu_bottom">
+                <a
+                 href="tel:++7 (3822) 50-99-90"
+                 class="phoneNumber"
+                 >+7 (3822) 50-99-90</a>
+                 <button class="button">
+                    Забронировать стол
+                 </button>
+            </div>
+            </div>
+        </div>
         <div class="container header-content">
             <div class="left-part">
                 <router-link to="/">
                     <img
                         src="/images/header/header-logo.svg"
                         alt="header-logo"
-                        class="logo"
+                        class="header-logo"
                         @click="onTop('smooth')"
                     >
                 </router-link>
-                <div
-                    @mouseenter="isHover = true"
-                    @mouseleave="isHover = false"
-                    class="in-catalog-box"
-                    @click="onTop('auto')"
-                >
-                    <router-link
-                        :class="['navItem', 'from-main-in-catalog', {'in-catalog' : isCatalog}]"
-                        to="/catalog"
-                    >
-                        <div class="burger-menu">
-                            <div :class="['line', 'line1', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
-                            <div :class="['line', 'line2', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
-                            <div :class="['line', 'line3', {'active' : isHover, 'in-catalog' : isCatalog}]"></div>
-                        </div>
-                        <p :class="{'in-catalog' : isCatalog}">Каталог</p>
-                    </router-link>
-                </div>
             </div>
             <nav class="right-part">
                 <template v-for="(navItem, index) in items">
@@ -58,6 +110,12 @@
                         {{ navItem.title }}
                     </a>
                 </template>
+                <img 
+                src="images/header/header-burger.svg" 
+                alt="header-burger"
+                :class="['header-burger',]"
+                @click="toggleBurgerMenu"
+                >
             </nav>
         </div>
     </header>
@@ -73,6 +131,11 @@ export default {
         return {
             items: [
                 {
+                    title: 'Меню',
+                    link: '/catalog',
+                    isText: true
+                },
+                {
                     title: 'Кейтеринг',
                     link: '/catering',
                     isText: true
@@ -84,13 +147,57 @@ export default {
                     isText: true
                 },
                 {
+                    title: 'Система лояльности',
+                    link: 'https://hr-torta.ru/',
+                    onAnotherSite: true,
+                    isText: true
+                },
+                {
                     img: 'images/header/header-cart.svg',
                     link: '/cart',
                     alt: 'header-cart'
                 },
             ],
+            itemsMobile: [
+                
+                {
+                    title: 'Меню',
+                    link: '/catalog',
+                    isText: true
+                },
+                {
+                    title: 'Кейтеринг',
+                    link: '/catering',
+                    isText: true
+                },
+                {
+                    title: 'Доставка',
+                    link: '/',
+                    isText: true,
+                    hash: '#delivery'
+                },
+                {
+                    title: 'Вакансии',
+                    link: 'https://hr-torta.ru/',
+                    onAnotherSite: true,
+                    isText: true
+                },
+                {
+                    title: 'Система лояльности',
+                    link: 'https://loyalty-torta.tilda.ws/?utm_source=Sayt&utm_medium=Gosti&utm_campaign=Menyu',
+                    onAnotherSite: true,
+                    isText: true
+                },               {
+                    title: 'Контакты',
+                    link: '/',
+                    isText: true,
+                    hash: '#contacts'
+                },
+                
+            ],
             isHover: false,
-            isCatalog: false
+            isCatalog: false,
+            isBurgerShow: false,
         }
     },
     computed: {
@@ -100,31 +207,156 @@ export default {
         }
     },
     methods: {
-        onTop
+        onTop,
+        toggleBurgerMenu() {
+            this.isBurgerShow = !this.isBurgerShow
+            document.querySelector('body').classList.add('no-scroll')
+        },
+        clickOnMenuItem(height) {
+            this.isBurgerShow = false;
+            this.onTop(height)
+            document.querySelector('body').classList.remove('no-scroll')
+        }
     },
     watch: {
         '$route.path'() {
             window.location.pathname === '/catalog' ? this.isCatalog = true : this.isCatalog = false
         }
-    }
+    },
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+.router-link-exact-active{
+    color: #7B9561 !important;
+}
+
 header {
-    position: fixed;
+    position: absolute;
     top: 0;
     z-index: 11;
-    width: 100%;
+    width: 100vw;
     background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
+    @include mobile {
+        background: linear-gradient(180deg, #FFFFFF 64.04%, rgba(255, 255, 255, 0) 100%);
+    }
+    .burger-menu-layout {
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        overflow: hidden;
+        .opacity{
+            background-color: #000000;
+            opacity: 0.3;
+            width: 26%;
+            position: absolute;
+            height: 100vh;
+        }
+    }
+
+    .burger-menu {
+            @include desktop {
+                display: none;
+            }
+            @include mobile {
+                width: 74%;
+                background: #FFFFFF;
+                position: absolute;
+                border-radius: 0 0 20px 20px;
+                z-index: 10;
+                right: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                padding: 0 26px 40px;
+                
+                .burger-menu_bottom{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 10px;
+                        }
+                
+            .phoneNumber {
+                text-decoration: none;
+                color: black;
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 22px;
+                letter-spacing: -0.4000000059604645px;
+                text-align: left;
+
+            }
+            
+            .button {
+                @include green-button;
+                font-size: 15px !important;
+                font-weight: 500 !important;
+                line-height: 22px !important;
+
+                &:hover, &:active {
+                    @include green-button-hover;
+                }
+            }
+            }
+            .burger-menu_top-part {
+                padding: 40px 0;
+                justify-content: space-between;
+                .burger-menu_right-part{
+                    display: flex;
+                    gap: 0 20px;
+                    align-items: center;
+                    justify-content: end;
+                }
+            }
+            .right-part {
+                @include mobile {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 17px;
+                    align-items: start;
+                    a.nav-item {
+                        @include inter-400-burger-item;
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #000000;
+                    }
+                }
+                }
+                .close-burger-menu{
+                    width: 28px;
+                    height: 28px;
+                    background-color: transparent;
+                    position: relative;
+                    cursor: pointer;
+                    &::before, &::after{
+                        content: '';
+                        background-color: #000000;
+                        position: absolute;
+                        width: 100%;
+                        height: 2px;
+                        top: 13px;
+                    }
+                    &::before{
+                        rotate: 45deg;
+                    }
+                    &::after{
+                        rotate: -45deg;
+                    }
+                }
+        }
 
     .header-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 27px 0;
+        padding: 46px 16px;
+        @include mobile {
+            padding: 46px 16px 32px;
+        }
 
         .left-part {
             display: flex;
@@ -132,9 +364,13 @@ header {
             justify-content: center;
 
             .header-logo {
-                height: 63px;
-                width: 137px;
+                height: 70px;
+                width: 151px;
                 cursor: pointer;
+                @include mobile {
+                    width: 88px;
+                    height: 41px;
+                }
             }
 
             .in-catalog-box {
@@ -145,6 +381,9 @@ header {
                     align-items: center;
                     justify-content: center;
                     @include green-button;
+                    @include mobile {
+                        display: none;
+                    }
 
                     .burger-menu {
                         width: 24px;
@@ -186,18 +425,74 @@ header {
             display: flex;
             align-items: center;
             gap: 0 48px;
+            @include mobile {
+                gap: 0 20px;
+            }
+            &:last-child {
+                    padding: 0;
+
+                    .cart-icon {
+                        position: relative;
+                        margin-left: 5px;
+                        padding: 0;
+
+                        img {
+                            width: 44px;
+                            height: 44px;
+                            @include mobile {
+                                width: 35px;
+                                height: 35px;
+                            }
+                        }
+
+                        .cart-counter {
+                            position: absolute;
+                            right: -8px;
+                            top: 0;
+                            width: 25px;
+                            height: 25px;
+                            background: $olive;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            @include inter-400;
+                            font-size: 16px;
+                            line-height: 16px;
+                        }
+                    }
+                }
+
+            .header-burger {
+                @include desktop {
+                    display: none;
+                }
+                @include mobile {
+                    cursor: pointer;
+                }
+            }
 
             .nav-item {
                 @include header-link;
                 color: black;
                 padding: 16px 24px;
+                @include mobile {
+                    padding: 0;
+                }
 
                 &.text {
-                    padding: 8px 24px;
+                    padding: 0;
                     border-bottom: 2px solid transparent;
+                    @include mobile {
+                        display: none;
+                    }
 
-                    &:active, &:hover {
-                        border-bottom: 2px solid $olive;
+                    &:hover {
+                        color: #7B9561;
+                    }
+                    &:active{
+                        color: #374b23;
                     }
                 }
 
@@ -214,6 +509,10 @@ header {
                         img {
                             width: 35px;
                             height: 36px;
+                            @include mobile {
+                                width: 35px;
+                                height: 35px;
+                            }
                         }
 
                         .cart-counter {
