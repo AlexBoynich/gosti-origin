@@ -154,7 +154,6 @@ export default {
                     justify-content: center;
                 }
             }
-        }
 
         img {
             position: absolute;
