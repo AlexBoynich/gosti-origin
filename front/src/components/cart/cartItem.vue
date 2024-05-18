@@ -3,11 +3,11 @@
         <div class="img">
             <img :src="cartItem.img" alt="cart-item-img">
             <div class="counter-mobile">
-                    <button class="action-button" @click="transformCartItemAmount('-')">
+                    <button class="action-button minus" @click="transformCartItemAmount('-')">
                         <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
                     <div class="count">{{ cartItem.count }}</div>
-                    <button class="action-button" @click="transformCartItemAmount('+')">
+                    <button class="action-button plus" @click="transformCartItemAmount('+')">
                         <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
@@ -21,11 +21,11 @@
             </div>
             <div class="product-desc-box">
                 <div class="counter">
-                    <button class="action-button minus" @click="transformCartItemAmount('-')">
+                    <button class="action-button" @click="transformCartItemAmount('-')">
                         <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
                     <div class="count">{{ cartItem.count }}</div>
-                    <button class="action-button plus" @click="transformCartItemAmount('+')">
+                    <button class="action-button" @click="transformCartItemAmount('+')">
                         <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
@@ -119,11 +119,14 @@ export default {
             min-width: 78px;
             min-height: 78px;
             height: 113px;
+            width: 78px;
         }
         .counter-mobile{
             display: none;
             @include mobile {
                 display: flex;
+                justify-content: space-around;
+                width: 100%;
             }
                 button {
                     max-width: 24px;
@@ -166,6 +169,9 @@ export default {
                 position: relative;
                 width: 78px;
                 height: 78px;
+                top: 0;
+                left: 0;
+                transform: none;
             }
         }
     }
