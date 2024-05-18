@@ -69,23 +69,20 @@ export default {
         @include h2;
         margin-bottom: 16px;
         @include mobile {
-            margin-bottom: 28px;
-            font-size: 32px;
-            font-weight: 400;
-            line-height: 22px;
-            text-align: left;
+            display: none;
         }
     }
 
     .message {
-        border-radius: 16px;
+        border-radius: 5px;
         padding: 40px 93px 40px 88px;
         margin-bottom: 72px;
-        background: #DFE8D7;
-        border-left: solid 5px $olive;
+        background: #FFFFFF;
+        border: 1px solid #7B9561;
+    
         @include mobile {
             padding: 18px 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .txt {
@@ -95,10 +92,9 @@ export default {
             line-height: 140%;
             letter-spacing: -0.4px;
             @include mobile {  
-                text-align: center;
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: 400;
-                line-height: 24.3px;
+                line-height: 18.9px;
                 text-align: center;
 
             }

@@ -1,5 +1,5 @@
 <template>
-    <div>       
+    <div id="delivery">       
          <deliveryBlock/>
     </div>
 </template>

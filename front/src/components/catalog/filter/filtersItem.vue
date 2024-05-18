@@ -36,6 +36,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 2px 0;
+    white-space: nowrap;
 
     @include mobile {
         margin-right: 16px;
@@ -51,6 +52,9 @@ export default {
         border: 1px solid rgba(123, 149, 97, 0.5);
         border-radius: 3px;
         margin-right: 16px;
+        @include mobile {
+            margin-right: 6px;
+        }
 
         img {
             width: 14px;
@@ -80,6 +84,11 @@ export default {
 
         @include mobile {
             white-space: nowrap;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.8px;
+            text-align: left;
+
         }
     }
 

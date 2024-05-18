@@ -237,6 +237,14 @@ export default {
             font-size: 20px;
             line-height: 22px;
             margin-bottom: 16px;
+            @include mobile {
+                text-align: start;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 19.8px;
+                text-align: left;
+                margin-bottom: 18px;
+            }
         }
 
         .forms {
@@ -260,6 +268,13 @@ export default {
                         @include inter-400;
                         margin-bottom: 8px;
                         line-height: 20px;
+                        @include mobile {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 19.8px;
+                            text-align: left;
+
+                        }
                     }
 
                     .form-icon.error {

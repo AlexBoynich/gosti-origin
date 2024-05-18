@@ -132,10 +132,15 @@ export default {
 
 .container{
     padding-top: 0;
+    .title{
+        @include mobile{
+            display: none
+        }
+    }
 }
 
 #cart {
-    margin-top: 174px;
+    margin-top: 120px;
     min-height: 90vh;
     @include mobile {
         min-height: auto;

@@ -6,6 +6,7 @@
         />
         <mainBlock/>
         <aboutUsBlock id="about-us-block"/>
+        <deliveryBlock id="delivery"/>
     </div>
 </template>
 
@@ -14,6 +15,7 @@
 import mainBlock from "@/components/mainBlock/mainBlock.vue";
 import aboutUsBlock from "@/components/aboutUs/aboutUsBlock.vue";
 import CookieModal from "../../components/cookieModal/cookieModal";
+import deliveryBlock from "@/components/deliveryBlock/deliveryBlock.vue";
 
 export default {
     name: 'HomeView',
@@ -30,7 +32,8 @@ export default {
     components: {
         CookieModal,
         aboutUsBlock,
-        mainBlock
+        mainBlock,
+        deliveryBlock
     },
     created() {
         if (!localStorage.getItem('cookieModal')) {

@@ -42,15 +42,6 @@ const routes = [
         component: () => import( '../views/cart/cartView.vue')
     },
     {
-        path: '/delivery',
-        name: 'delivery',
-        meta: {
-            title: 'Гости • Корзина',
-            description: 'Доставка и самовывоз любимых блюд'
-        },
-        component: () => import( '../views/delivery/deliveryView.vue')
-    },
-    {
         path: '*',
         name: '404',
         meta: {
@@ -60,9 +51,17 @@ const routes = [
         component: () => import( '../views/404/PageNotFound.vue')
     },
 ]
-
 const router = new VueRouter({
     mode: 'history',
+    scrollBehavior(to,){
+        if (to.hash) {
+            return {selector: to.hash}
+        }
+         return {
+            x:0,
+            y: 0
+         }
+    },
     base: process.env.BASE_URL,
     routes
 })

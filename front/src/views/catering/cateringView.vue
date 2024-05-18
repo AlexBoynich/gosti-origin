@@ -24,6 +24,7 @@ export default {
     margin-top: 174px;
     @include mobile {
         margin-top: 100px;
+        padding-bottom: 90px;
     }
 }
 </style>

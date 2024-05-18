@@ -9,11 +9,11 @@ $lightGreenishGreen: #C1D4B2;
 
 @mixin header-link {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    line-height: 22px;
-    text-decoration: none;
+    font-size: 16px;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    line-height: 21.6px;
+    text-align: left;
+    
 }
 @mixin h3 {
     font-family: 'Comfortaa', sans-serif;
@@ -85,13 +85,22 @@ $lightGreenishGreen: #C1D4B2;
 @mixin green-button {
     color: white;
     background: $olive;
-    border-radius: 16px;
+    border-radius: 7.53px;
     padding: 16px 24px;
     @include inter-500;
     font-size: 20px;
     line-height: 22px;
     border: none;
     cursor: pointer;
+    @include mobile {
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 22px;
+        text-align: left;
+        padding: 10px 20px;
+
+    }
 }
 @mixin green-button-hover {
     background: $lightGreenishGreen;

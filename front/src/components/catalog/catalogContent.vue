@@ -1,9 +1,8 @@
 <template>
     <div 
     class="catalog-content"
-    v-show="showOnMobile()"
     >
-        <div
+        <!-- <div
             v-show="showMessage"
             :class="['message', {'bad' : !isGood || catalogItems.length === 0}]"
         >
@@ -25,20 +24,8 @@
             >
                 {{ messageContent.noDishes }}
             </div>
-        </div>
-        <div
-            v-show="catalogItems.length > 0"
-            :class="['categories-title',
-            {'no-message' : !showMessage}]"
-        >
-            {{ activeItems.categoriesTitle }}
-        </div>
-        <div
-            v-show="catalogItems.length > 0"
-            class="subcategories-title"
-        >
-            {{ activeItems.subcategoriesTitle }}
-        </div>
+        </div> -->
+
         <button
             v-show="catalogItems.length === 0"
             class="go-to-catalog"
@@ -173,37 +160,35 @@ export default {
     }
 
     .message {
-        border-radius: 16px;
-        padding: 40px 90px 40px 93px;
+        border-radius: 5px;
+        padding: 20px 90px 20px 93px;
         margin-bottom: 24px;
-        background: #DFE8D7;
-        border-left: solid 5px $olive;
+        border: 1px solid #7B9561;
 
         @include mobile {
-            padding: 30px 16px;
+            padding: 20px 16px;
             margin-top: 30px;
         }
 
 
         .txt {
-            @include inter-400;
-            color: #000;
+            font-family: 'Inter', sans-serif;
             font-size: 20px;
-            line-height: 140%;
-            letter-spacing: -0.4px;
+            font-weight: 400;
+            line-height: 27px;
+            text-align: center;
+            color: #000;
 
             @include mobile {
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: 400;
-                line-height: 24.3px;
+                line-height: 18.9px;
                 text-align: center;
-
             }
         }
 
         &.bad {
-            background: $lightGrayishRed;
-            border-left: 5px solid $madderLake;
+            // border: 1px solid #b85b3f;
         }
     }
 
@@ -251,8 +236,8 @@ export default {
     .catalog-items {
         display: flex;
         flex-wrap: wrap;
-        gap: 48px 40px;
-        min-width: 918px;
+        gap: 48px 30px;
+        min-width: 1030px;
         width: 100%;
         @include mobile {
             min-width: auto;

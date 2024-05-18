@@ -1,33 +1,11 @@
 <template>
     <div class="categories-block container">
         <aside>
-            <h2 v-show="showOnMobile()" class="title">Каталог</h2>
             
-            <div 
-                class="titleMobile" 
-                @click="CHANGE_SHOW_CATALOG(true)"
-                v-show="!showOnMobile()" 
-            >
-                <img src="/images/catalog/sidebar/arrow-left.png" alt="" >
-                <h2 
-                    :class="['title',{'margin-0' : !showOnMobile()}]"
-                    >Каталог
-                </h2>
-            </div>
-            
-            <div 
-            class="breadcrumbsMobile"
-            v-show="!GET_SHOW_CATALOG"
-            >
-                {{ activeItemsForSidebar.categoriesTitle }} - {{ activeItemsForSidebar.subcategoriesTitle }}
-            </div>
-
-
             <div class="content">
                 <div :class="['categories', {'margin-0' : !showOnMobile()}]">
                     <CategoriesItem
-                        v-for="category in categories"
-                        v-show="showOnMobile()"
+                        v-for="category in categories.slice(2, 3)"
                         :key="category.id"
                         :categoriesItem="category"
                         :activeIndices="activeIndices"
@@ -66,7 +44,7 @@ export default {
             title: 'Каталог',
             activeIndices: {
                 categoriesIndex: 0,
-                subcategoriesIndex: 0
+                subcategoriesIndex: 10
             },
             width: 0,
         }
@@ -114,7 +92,7 @@ export default {
                 this.activeIndices.subcategoriesIndex = subcategory.id
 
                 this.$emit('activeItems', {
-                    categoryTitle: this.categories[this.activeIndices.categoriesIndex - 1].title,
+                    categoryTitle: 1,
                     categoriesIndex: this.activeIndices.categoriesIndex - 1,
                     subcategoryTitle: subcategory.title,
                     subcategoriesIndex: subcategory.id
@@ -207,6 +185,9 @@ aside {
             width: 100%;
             margin-top: 16px;
             padding-bottom: 0;
+            gap: 30px;
+            display: flex;
+            flex-direction: column;
         }
 
         .categories {
@@ -241,6 +222,7 @@ aside {
                 @include mobile {
                     flex-direction: row;
                     overflow: scroll;
+                    margin-bottom: 20px;
                 }
             }
         }

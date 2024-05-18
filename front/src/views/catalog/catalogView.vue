@@ -32,7 +32,7 @@ export default {
                 categoriesTitle: '',
                 categoriesIndex: 0,
                 subcategoriesTitle: '',
-                subcategoriesIndex: 1
+                subcategoriesIndex: 10
             },
             width: 0,
             filters: [
@@ -79,7 +79,7 @@ export default {
             this.activeItems.subcategoriesIndex = el.subcategoriesIndex
 
             if (!el.subcategoriesIndex) {
-                this.activeItems.subcategoriesIndex = 1
+                this.activeItems.subcategoriesIndex = 10
             } else {
                 this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
@@ -136,7 +136,7 @@ export default {
         goToCatalog() {
             this.activeItems.categoriesIndex = 0
             this.activeItems.categoriesTitle = this.categories[0].title
-            this.activeItems.subcategoriesIndex = 1
+            this.activeItems.subcategoriesIndex = 10
             this.activeItems.subcategoriesTitle = this.categories[0].subcategories[0].title
 
             for (let i = 0; i < this.filters.length; i++) {
@@ -146,7 +146,7 @@ export default {
 
             this.$emit('goToCatalog',)
             this.GET_CATALOG_ITEMS({
-                subcategoryId: 1,
+                subcategoryId: 10,
                 requestFilter: ''
             })
             this.onTop('smooth')
@@ -182,7 +182,7 @@ export default {
         flex-direction: column;
         margin-top: 100px;
         min-height: auto;
-        background-color: #DFE8D7;
+        padding-top: 0;
     }
 
     .categories {

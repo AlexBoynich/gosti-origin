@@ -30,6 +30,9 @@ export default {
     }
 
     .left-part {
+        @include mobile {
+            margin-top: 30px;
+        }
 
         .slide-title {
             @include h3;
@@ -44,6 +47,8 @@ export default {
                 font-weight: 500;
                 line-height: 22px;
                 text-align: left;
+                padding-bottom: 12px;
+                margin-bottom: 24px;
 
             }
 
@@ -57,10 +62,11 @@ export default {
             gap: 16px 0;
             @include mobile {
                 margin-bottom: 58px;
-                font-size: 18px;
+                font-size: 15px;
                 font-weight: 400;
-                line-height: 24.3px;
+                line-height: 20.25px;
                 text-align: left;
+
 
             }
         }

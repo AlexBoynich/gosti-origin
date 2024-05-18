@@ -32,15 +32,22 @@ export default {
 @import "@/assets/styles/global.scss";
 
 .subcategories-item {
-    margin-left: 48px;
     font-size: 18px;
     cursor: pointer;
     text-decoration: none;
     color: black;
-    opacity: .5;
+    @include mobile {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.8px;
+        text-align: left;
+
+
+    }
 
     &.active {
-        opacity: 1;
+        color: #7B9561;
+        font-weight: 600;
     }
 
     &:hover {

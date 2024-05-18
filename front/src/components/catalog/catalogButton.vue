@@ -91,7 +91,7 @@ export default {
 @import "@/assets/styles/global";
 
 .main-button {
-    border-radius: 16px;
+    border-radius: 7px;
     background: $olive;
     border: none;
     padding: 16px 0;
@@ -107,6 +107,7 @@ export default {
     .invisibleOnMobile {
        @include mobile { 
             display: none;
+            border-radius: 5px;
        }
     }
 

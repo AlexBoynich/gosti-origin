@@ -340,6 +340,11 @@ export default {
         gap: 16px 0;
         @include mobile {
             gap: 16px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.8px;
+            text-align: left;
+
         }
 
         form {
@@ -355,6 +360,14 @@ export default {
                     @include inter-400;
                     margin-bottom: 8px;
                     line-height: 20px;
+                    
+                    @include mobile {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 19.8px;
+                        text-align: left;
+
+                    }
                 }
 
                 .date {

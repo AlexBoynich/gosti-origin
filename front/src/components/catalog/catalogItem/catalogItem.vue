@@ -97,7 +97,7 @@ export default {
 .catalog-item {
     display: flex;
     flex-direction: column;
-    max-width: 439px;
+    max-width: 235px;
     cursor: pointer;
     
     @include mobile {
@@ -111,8 +111,8 @@ export default {
         .product-img {
             position: relative;
             overflow: hidden;
-            width: 439px;
-            height: 359px;
+            width: 100%;
+            aspect-ratio: 1/1;
             border-radius: 16px;
             margin-bottom: 24px;
             
@@ -142,6 +142,9 @@ export default {
         .catalog-item-content {
             display: flex;
             flex-direction: column;
+            @include mobile {
+                gap: 45px;
+            }
 
             .title {
                 height: 56px;
@@ -155,9 +158,9 @@ export default {
                 letter-spacing: -0.4px;
                 margin-bottom: 24px;
                 @include mobile {
-                    font-size: 14px;
+                    font-size: 15px;
                     font-weight: 400;
-                    line-height: 18.2px;
+                    line-height: 19.5px;
                     text-align: left;
                     margin-bottom: 0;
 

@@ -4,6 +4,21 @@
         <div class="right-part">
             <h2 class="title"> {{ delivery.title }}</h2>
             <div class="desc">{{ delivery.desc }}</div>
+            <div class="delivery-table-2">
+                <div class="row-1">
+                    <div>Заказ</div>
+                    <div>Доставка</div>
+                </div>
+                <hr>
+                <div class="row-2">
+                    <div>до 1500</div>
+                    <div>От 300</div>
+                </div>
+                <div class="row-3">
+                    <div>от 1500</div>
+                    <div>Бесплатно</div>
+                </div>
+            </div>
             <div class="delivery-table">
                 <div class="table-column"
                      v-for="(column, index) in delivery.tableColumns"
@@ -17,17 +32,10 @@
                     </div>
                 </div>
             </div>
-            <div class="delivery-table-mobile">
-                <div class="table-item-mobile"
-                     v-for="(item, index) in delivery.tableItemsMobile"
-                     :key="index"
-                >
-                    {{ item }}
-                </div>
-            </div>
+        
             <router-link to="/catalog">
                 <button class="delivery-button" @click="onTop('auto')">
-                    Перейти в каталог
+                    Перейти в меню
                 </button>
             </router-link>
         </div>
@@ -43,7 +51,7 @@ export default {
         return {
             delivery: {
                 title: 'Доставка',
-                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу.',
+                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
                 tableColumns: [
                     {tableItems: ['Заказ', 'Доставка']},
                     {tableItems: ['До 1500 ₽', 'от 300 р']},
@@ -69,9 +77,6 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
-.container{
-    margin-top: 100px !important;
-}
 
 .delivery-block {
     padding: 174px 0 92px;
@@ -80,6 +85,7 @@ export default {
     justify-content: space-between;
     @include mobile {
         flex-direction: column;
+        padding: 70px 16px 90px;
     }
 
     .left-part {
@@ -122,11 +128,10 @@ export default {
             margin-bottom: 16px;
             max-width: 468px;
             @include mobile {
-                font-size: 18px;
+                font-size: 15px;
                 font-weight: 400;
-                line-height: 24.3px;
+                line-height: 20.25px;
                 text-align: left;
-
             }
         }
 
@@ -154,7 +159,34 @@ export default {
 
             }
         }
-    
+        .delivery-table-2 {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            hr{
+                color: #0000008C;
+            }
+            .row-1,.row-2,.row-3 {
+                display: flex;
+                justify-content: space-between;
+                font-family: 'Inter', sans-serif;
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 22px;
+                text-align: left;
+                margin: 10px 0;
+                div{
+                    min-width: 105px;
+                }
+
+            }
+            .row-1 {
+                color: #0000008C;
+            }
+            @media (min-width: 800px) {
+                display: none;
+            }
+        }
         .delivery-table {
             display: flex;
             align-items: center;

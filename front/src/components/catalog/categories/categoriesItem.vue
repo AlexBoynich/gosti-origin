@@ -1,14 +1,7 @@
 <template>
     <div :class="['categories-item', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]">
-        <div :class="['categories-header', {'active' : categoriesItem.id === activeIndices.categoriesIndex}]"
-             @click="toggleCategory()">
-            <div class="categories-title">
-                {{ categoriesItem.title }}
-            </div>
-            <img src="/images/catalog/categories/categories-arrow.svg" alt="categories-arrow"
-                 :class="['toggle-arrow', { 'reverse-arrow' : categoriesItem.id === activeIndices.categoriesIndex}]">
-        </div>
-        <div v-show="categoriesItem.id === activeIndices.categoriesIndex" class="categories-body">
+
+        <div  class="categories-body">
             <subcategoriesItem
                 v-for="(item, index) in categoriesItem.subcategories"
                 :key="index"
@@ -52,9 +45,12 @@ export default {
     width: 100%;
     color: black;
     border-radius: 16px;
-    border: 1px solid $olive;
+    border: none;
     background: #fff;
     overflow: hidden;
+    @include mobile {
+        white-space: nowrap;
+    }
 
     .categories-header {
         display: flex;
@@ -100,12 +96,29 @@ export default {
         text-align: left;
         gap: 16px 0;
         padding: 12px 0 40px;
-        background: $paleGreen;
+        color: #000000;
+        &::-webkit-scrollbar-thumb{
+            background: black;
+        }
+        @include mobile {
+            flex-direction: row;
+            overflow-x: scroll;
+            overflow-y: auto;
+            padding: 0;
+            border: none;
+            scrollbar-width: 0;
+            scrollbar-color: transparent;
+            gap: 0 16px;
+            ::-webkit-scrollbar{
+                background: transparent;
+                width: 0;
+                height: 0;
+            }
+        }
 
     }
 
     &.active, &:hover {
-        background: $paleGreen;
         color: white;
 
         .categories-header {
