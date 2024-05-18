@@ -61,6 +61,11 @@ export default {
         background: white;
         padding: 32px;
         position: relative;
+        @include mobile {
+            width: 328px;
+            height: 278px;
+            border-radius: 10px;
+        }
 
         .close-modal {
             cursor: pointer;
@@ -71,6 +76,10 @@ export default {
             top: 32px;
             width: 17px;
             height: 16px;
+            @include mobile {
+                top: 10px;
+                right: 10px;
+            }
 
             img {
                 width: 100%;
@@ -84,6 +93,9 @@ export default {
             justify-content: center;
             flex-direction: column;
             margin-top: 88px;
+            @include mobile {
+                margin-top: 23px;
+            }
 
             .title {
                 @include inter-400;
@@ -97,6 +109,9 @@ export default {
                 font-size: 24px;
                 line-height: 26px;
                 margin-bottom: 64px;
+                @include mobile {
+                    margin-bottom: 44px;
+                }
             }
 
             .buttons {
@@ -109,6 +124,11 @@ export default {
                     width: 227px;
                     height: 58px;
                     text-align: center;
+                    @include mobile {
+                        width: 120px;
+                        height: 48px;
+                        text-align: center;
+                    }
 
                     &:hover {
                         @include green-button-hover;

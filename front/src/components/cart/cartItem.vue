@@ -2,6 +2,15 @@
     <div class="cart-item">
         <div class="img">
             <img :src="cartItem.img" alt="cart-item-img">
+            <div class="counter-mobile">
+                    <button class="action-button" @click="transformCartItemAmount('-')">
+                        <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
+                    </button>
+                    <div class="count">{{ cartItem.count }}</div>
+                    <button class="action-button" @click="transformCartItemAmount('+')">
+                        <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
+                    </button>
+                </div>
         </div>
         <div class="cart-item-content">
             <div class="product-header">
@@ -95,6 +104,10 @@ export default {
     display: flex;
     background: #EFF4EB;
     border-radius: 16px;
+    @include mobile {
+        border-radius: 10px;
+        padding: 10px 10px 10px 6px;
+    }
 
     .img {
         position: relative;
@@ -102,6 +115,46 @@ export default {
         width: 196px;
         height: 136px;
         border-radius: 16px;
+        @include mobile {
+            min-width: 78px;
+            width: 78px;
+            min-height: 78px;
+            height: 78px;
+        }
+        .counter-mobile{
+            display: none;
+            @include mobile {
+                display: flex;
+            }
+                button {
+                    max-width: 24px;
+                    max-height: 24px;
+                    padding: 6px 8px;
+                    border: 1px solid $olive;
+                    background: $olive;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
+                .count {
+                    @include inter-400;
+                    font-size: 16px;
+                    line-height: 18px;
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
 
         img {
             position: absolute;
@@ -121,6 +174,9 @@ export default {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        @include mobile {
+            padding: 0 0 0 10px;
+        }
 
         .product-header {
 
@@ -130,6 +186,12 @@ export default {
                 line-height: 18px;
                 max-width: 290px;
                 height: 52px;
+                @include mobile {
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 20.8px;
+                    text-align: left;
+                }
             }
 
             button {
@@ -158,6 +220,9 @@ export default {
                 display: flex;
                 align-items: center;
                 gap: 0 15px;
+                @include mobile {
+                    display: none;
+                }
 
                 button {
                     max-width: 24px;
@@ -197,11 +262,23 @@ export default {
                     font-size: 16px;
                     line-height: 22px;
                     margin-bottom: 8px;
+                    @include mobile {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 19.8px;
+                        text-align: left;
+                    }
                 }
                 .price {
                     @include inter-500;
                     font-size: 20px;
                     line-height: 22px;
+                    @include mobile {
+                        font-size: 20px;
+                        font-weight: 500;
+                        line-height: 19.8px;
+                        text-align: left;
+                    }
                 }
             }
         }
