@@ -1,6 +1,5 @@
 <template>
     <div class="catering-block">
-        <h2 class="title">Кейтеринг</h2>
         <div class="message">
             <div class="txt">Вы можете ознакомиться с меню нашего кейтеринга и позвонить по номеру телефона
                 <a

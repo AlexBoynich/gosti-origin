@@ -67,6 +67,9 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
+    @include mobile {
+        padding: 16px;
+    }
 
     .modal-container {
         width: 704px;
@@ -125,11 +128,25 @@ export default {
                     display: flex;
                     align-items: flex-start;
                     justify-content: space-between;
+                    @include mobile {
+                        flex-direction: column;
+                        gap: 9px;
+                    }
+                    &:last-child{
+                        flex-direction: row;
+                        gap: 15px;
+                    }
 
                     .item-title {
                         @include inter-500;
                         font-size: 20px;
                         line-height: 22px;
+                        @include mobile {
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: 20.8px;
+                            text-align: left;
+                        }
                     }
 
                     .item-desc {
@@ -140,6 +157,12 @@ export default {
                         width: 100%;
                         word-wrap: break-word;
                         text-align: left;
+                        @include mobile {
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: 20.8px;
+                            text-align: left;
+                        }
                     }
                 }
 
@@ -151,6 +174,9 @@ export default {
                 height: 58px;
                 text-align: center;
                 margin-bottom: 16px;
+                @include mobile {
+                    text-align: center;
+                }
 
                 &:hover {
                     @include green-button-hover;

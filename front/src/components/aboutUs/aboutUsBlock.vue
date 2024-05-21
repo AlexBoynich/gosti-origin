@@ -81,6 +81,7 @@ export default {
         width: 810px;
         height: 408px;
         @include mobile {
+            display: none;
             width: 100%;
             height: auto;
             bottom: 0;

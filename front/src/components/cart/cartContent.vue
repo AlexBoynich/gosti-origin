@@ -123,6 +123,14 @@ export default {
                 @include inter-400;
                 cursor: pointer;
                 line-height: 20px;
+                @include mobile {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 19.8px;
+                    text-align: left;
+                    color: #000000;
+
+                }
             }
         }
 

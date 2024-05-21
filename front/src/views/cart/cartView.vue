@@ -1,6 +1,5 @@
 <template>
     <div id="cart" class="container">
-        <h2 class="title">Корзина</h2>
         <div class="content">
             <cartContent
                 :cart="cart"
@@ -8,7 +7,7 @@
                 :isDelivery="isDelivery"
             />
             <orderFormsBlock
-                v-show="cartIsActive"
+                v-show="true"
                 @resultAction="resultAction"
                 @activeWayToGetButton="activeWayTo"
             />
@@ -17,7 +16,7 @@
             <div class="message-title">Вы ничего не добавили</div>
             <div class="message-desc">Бесплатная доставка <br>от 1500 рублей</div>
             <router-link to="/catalog" class="to-catalog">
-                <button>Перейти в каталог</button>
+                <button>Перейти в меню</button>
             </router-link>
         </div>
         <validationError
@@ -25,7 +24,7 @@
             @closeModal="closeModal"
         />
         <ReadyOrderModal
-            v-if="readyModalIsActive"
+            v-if="true"
             @closeModal="closeModal"
             :dataForModal="dataForModal"
             :orderId="orderId"

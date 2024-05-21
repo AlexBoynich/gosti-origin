@@ -51,10 +51,7 @@
             </div>
         </div>
         <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
-            <div class="message">
-                <div class="wayToPay">Способ оплаты</div>
-                <span class="wayToPayMessage">{{ wayToGet.delivery.deliveryPriceBlock.text }}</span>
-            </div>
+
             <div class="sum-delivery">
                 <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
                 <div class="price">{{ deliveryPrice + ' ₽' }}</div>

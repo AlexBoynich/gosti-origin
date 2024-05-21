@@ -3,12 +3,12 @@
         <div class="img">
             <img :src="cartItem.img" alt="cart-item-img">
             <div class="counter-mobile">
-                    <button class="action-button minus" @click="transformCartItemAmount('-')">
-                        <img src="/images/cart/cartItem/counter/minus.svg" alt="minus">
+                    <button class="action-button" @click="transformCartItemAmount('-')">
+                        <img class="minus" src="/images/cart/cartItem/counter/minus.svg" alt="minus">
                     </button>
                     <div class="count">{{ cartItem.count }}</div>
-                    <button class="action-button plus" @click="transformCartItemAmount('+')">
-                        <img src="/images/cart/cartItem/counter/plus.svg" alt="plus">
+                    <button class="action-button" @click="transformCartItemAmount('+')">
+                        <img class="plus" src="/images/cart/cartItem/counter/plus.svg" alt="plus">
                     </button>
                 </div>
         </div>

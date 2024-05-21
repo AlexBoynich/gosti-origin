@@ -6,7 +6,7 @@
                 class="main-button default-button"
                 @click="inCart"
             >
-                Добавить в корзину
+                В корзину
             </button>
             <button
                 v-show="isActive"

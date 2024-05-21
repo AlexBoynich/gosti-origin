@@ -65,7 +65,7 @@
                  class="phoneNumber"
                  >+7 (3822) 50-99-90</a>
                  <button class="button">
-                    Забронировать стол
+                    <a href="https://wa.me/79138209990" style="color: white;">Забронировать стол</a>
                  </button>
             </div>
             </div>
@@ -148,7 +148,7 @@ export default {
                 },
                 {
                     title: 'Система лояльности',
-                    link: 'https://hr-torta.ru/',
+                    link: 'https://loyalty-torta.tilda.ws/?utm_source=Sayt&utm_medium=Gosti&utm_campaign=Menyu',
                     onAnotherSite: true,
                     isText: true
                 },
@@ -234,11 +234,11 @@ export default {
 }
 
 header {
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 11;
     width: 100vw;
-    background: linear-gradient(180deg, #FFFFFF 55.04%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg,#fff 55.04%,hsla(0,0%,100%,0));
     @include mobile {
         background: linear-gradient(180deg, #FFFFFF 64.04%, rgba(255, 255, 255, 0) 100%);
     }
@@ -264,7 +264,6 @@ header {
                 width: 74%;
                 background: #FFFFFF;
                 position: absolute;
-                border-radius: 0 0 20px 20px;
                 z-index: 10;
                 right: 0;
                 height: 100vh;
@@ -353,9 +352,9 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 46px 16px;
+        padding: 27px 16px;
         @include mobile {
-            padding: 46px 16px 32px;
+            padding: 46px 16px 77px;
         }
 
         .left-part {
@@ -530,6 +529,11 @@ header {
                             @include inter-400;
                             font-size: 16px;
                             line-height: 16px;
+                            @include mobile {
+                                width: 18px;
+                                height: 18px;
+                                font-size: 10px !important;
+                            }
                         }
                     }
                 }

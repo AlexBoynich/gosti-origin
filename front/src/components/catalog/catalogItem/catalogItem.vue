@@ -111,7 +111,7 @@ export default {
         .product-img {
             position: relative;
             overflow: hidden;
-            width: 100%;
+            width: 235px;
             aspect-ratio: 1/1;
             border-radius: 16px;
             margin-bottom: 24px;

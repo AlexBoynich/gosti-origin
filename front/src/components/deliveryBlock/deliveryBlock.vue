@@ -164,7 +164,8 @@ export default {
             flex-direction: column;
             margin-bottom: 40px;
             hr{
-                color: #0000008C;
+                color: #7B9561CC;
+                margin-bottom: 10px;
             }
             .row-1,.row-2,.row-3 {
                 display: flex;
@@ -175,6 +176,7 @@ export default {
                 line-height: 22px;
                 text-align: left;
                 margin: 10px 0;
+                padding-right: 60px;
                 div{
                     min-width: 105px;
                 }
