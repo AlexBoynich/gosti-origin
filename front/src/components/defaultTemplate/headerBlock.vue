@@ -466,6 +466,11 @@ header {
                             @include inter-400;
                             font-size: 16px;
                             line-height: 16px;
+                            @include mobile {
+                                width: 18px;
+                                height: 18px;
+                                font-size: 10px !important;
+                            }
                         }
                     }
                 }

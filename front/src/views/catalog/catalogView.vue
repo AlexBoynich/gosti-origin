@@ -105,19 +105,16 @@ export default {
 
                 if (!sugar) {
                     filtersForRequest.sugar = 0
-                    console.log(sugar, 'SUGAR')
                 } else {
                     delete filtersForRequest.sugar
                 }
                 if (!gluten) {
                     filtersForRequest.gluten = 0
-                    console.log(gluten, 'GLUTEN')
                 } else {
                     delete filtersForRequest.gluten
                 }
                 if (!lactose) {
                     filtersForRequest.lactose = 0
-                    console.log(lactose, 'LACTOSE')
                 } else {
                     delete filtersForRequest.lactose
                 }

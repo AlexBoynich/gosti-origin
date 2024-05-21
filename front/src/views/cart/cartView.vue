@@ -143,6 +143,8 @@ export default {
     min-height: 90vh;
     @include mobile {
         min-height: auto;
+        position: relative;
+        z-index: 12;
     }
 
     h2 {

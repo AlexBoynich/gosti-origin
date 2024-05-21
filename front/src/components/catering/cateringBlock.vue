@@ -6,7 +6,7 @@
                     :href="leftPartFooterItems[0].descItems[1].href"
                     class="phone"
                 >
-                    {{ phoneNumber }}
+                    +7(3822)50-99-90  
                 </a>
             </div>
         </div>

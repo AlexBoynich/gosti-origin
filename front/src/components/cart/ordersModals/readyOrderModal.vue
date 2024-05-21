@@ -176,7 +176,7 @@ export default {
                 text-align: center;
                 margin-bottom: 16px;
                 @include mobile {
-                    text-align: center;
+                    text-align: center !important;
                 }
 
                 &:hover {
