@@ -15,7 +15,7 @@ class ContactSeeder extends Seeder
     {
         Contact::query()->firstOrCreate(
             [
-                'phone' => '8(3822)50-99-90',
+                'phone' => '+7(3822)50-99-90',
             ],
             [
                 'email' => 'gosti.cafe@mail.ru',
