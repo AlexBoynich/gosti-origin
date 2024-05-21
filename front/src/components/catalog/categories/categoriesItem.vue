@@ -97,8 +97,8 @@ export default {
         gap: 16px 0;
         padding: 12px 0 40px;
         color: #000000;
-        &::-webkit-scrollbar-thumb{
-            background: black;
+        &::-webkit-scrollbar{
+            display: none;
         }
         @include mobile {
             flex-direction: row;
@@ -109,10 +109,10 @@ export default {
             scrollbar-width: 0;
             scrollbar-color: transparent;
             gap: 0 16px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             ::-webkit-scrollbar{
-                background: transparent;
-                width: 0;
-                height: 0;
+                display: none;
             }
         }
 

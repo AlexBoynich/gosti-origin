@@ -7,7 +7,7 @@
                 :isDelivery="isDelivery"
             />
             <orderFormsBlock
-                v-show="true"
+                v-show="cartIsActive"
                 @resultAction="resultAction"
                 @activeWayToGetButton="activeWayTo"
             />

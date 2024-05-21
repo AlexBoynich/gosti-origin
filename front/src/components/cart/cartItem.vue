@@ -216,23 +216,6 @@ export default {
                     right: 0;
                     top: 0;
                 }
-
-                .minus, .plus {
-                    width: 16px;
-                    height: 16px;
-                }
-                .minus{
-                    @include mobile {
-                        width: 8px;
-                        height: 1px;
-                    }
-                }
-                .plus{
-                    @include mobile {
-                        width: 8px;
-                        height: 8px;
-                    }
-                }
             }
         }
 
@@ -264,6 +247,24 @@ export default {
                     img {
                         width: 12px;
                         height: 12px;
+                    }
+                    
+
+                    .minus, .plus {
+                        width: 16px;
+                        height: 16px;
+                    }
+                    .minus{
+                        @include mobile {
+                            width: 8px;
+                            height: 1px;
+                        }
+                    }
+                    .plus{
+                        @include mobile {
+                            width: 8px;
+                            height: 8px;
+                        }
                     }
                 }
                 .count {

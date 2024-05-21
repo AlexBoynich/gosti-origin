@@ -224,6 +224,11 @@ aside {
                     flex-direction: row;
                     overflow: scroll;
                     margin-bottom: 20px;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    ::-webkit-scrollbar{
+                        display: none;
+                    }
                 }
             }
         }
