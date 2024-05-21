@@ -68,7 +68,7 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
     @include mobile {
-        padding: 16px;
+        padding: 40px 16px;
     }
 
     .modal-container {
@@ -146,6 +146,7 @@ export default {
                             font-weight: 400;
                             line-height: 20.8px;
                             text-align: left;
+                            white-space: nowrap; 
                         }
                     }
 

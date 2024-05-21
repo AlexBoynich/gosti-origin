@@ -24,7 +24,7 @@
             @closeModal="closeModal"
         />
         <ReadyOrderModal
-            v-if="true"
+            v-if="readyModalIsActive"
             @closeModal="closeModal"
             :dataForModal="dataForModal"
             :orderId="orderId"

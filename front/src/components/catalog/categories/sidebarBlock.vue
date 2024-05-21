@@ -188,6 +188,7 @@ aside {
             gap: 30px;
             display: flex;
             flex-direction: column;
+            z-index: 11;
         }
 
         .categories {

@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header :class="{'zIndex' : isBurgerShow}" >
         <div 
         class="burger-menu-layout"
         v-show="isBurgerShow"
@@ -233,6 +233,12 @@ export default {
     color: #7B9561 !important;
 }
 
+.zIndex{
+            @include mobile {
+                z-index: 13;
+            }
+        }
+
 header {
     position: fixed;
     top: 0;
@@ -253,6 +259,7 @@ header {
             width: 26%;
             position: absolute;
             height: 100vh;
+            z-index: 15;
         }
     }
 
