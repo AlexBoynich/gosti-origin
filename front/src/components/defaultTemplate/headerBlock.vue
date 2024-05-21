@@ -246,7 +246,7 @@ header {
     width: 100vw;
     background: linear-gradient(180deg,#fff 55.04%,hsla(0,0%,100%,0));
     @include mobile {
-        background: linear-gradient(180deg, #FFFFFF 64.04%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(180deg, #FFFFFF 80.04%, rgba(255, 255, 255, 0) 100%);
     }
     .burger-menu-layout {
         height: 100vh;
@@ -359,9 +359,9 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 27px 16px;
+        padding: 27px 0;
         @include mobile {
-            padding: 46px 16px 77px;
+            padding: 26px 16px 36px;
         }
 
         .left-part {

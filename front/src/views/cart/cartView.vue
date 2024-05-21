@@ -7,7 +7,7 @@
                 :isDelivery="isDelivery"
             />
             <orderFormsBlock
-                v-show="cartIsActive"
+                v-show="true"
                 @resultAction="resultAction"
                 @activeWayToGetButton="activeWayTo"
             />
@@ -144,7 +144,6 @@ export default {
     @include mobile {
         min-height: auto;
         position: relative;
-        z-index: 12;
     }
 
     h2 {

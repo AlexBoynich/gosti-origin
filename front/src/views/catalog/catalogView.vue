@@ -177,7 +177,7 @@ export default {
     margin-top: 174px;
     @include mobile {
         flex-direction: column;
-        margin-top: 100px;
+        margin-top: 73px;
         min-height: auto;
         padding-top: 0;
     }

@@ -31,7 +31,7 @@ export default {
 <style scoped lang="scss">
 .main-block {
     @media (max-width: 800px) {
-         margin-top: 100px;  
+         margin-top: 80px;  
     }
 }
 </style>

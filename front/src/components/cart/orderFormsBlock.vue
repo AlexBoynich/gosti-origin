@@ -51,6 +51,11 @@
             </div>
         </div>
         <div v-if="wayToGet.delivery.isDelivery" class="delivery-price">
+            <div class="message">
+                <div class="wayToPay">Способ оплаты</div>
+                <span class="wayToPayMessage">{{ wayToGet.delivery.deliveryPriceBlock.text }}</span>
+            </div>
+
 
             <div class="sum-delivery">
                 <div class="section-title">{{ wayToGet.delivery.deliveryPriceBlock.title }}</div>
@@ -466,7 +471,7 @@ export default {
         @include mobile {
             gap: 20px 0;
         }
-        .wayToPay{
+        .wayToPay, .wayToPayMessage{
                     display: none;
                     @include mobile {
                         display: block;
@@ -527,11 +532,10 @@ export default {
                     text-align: left;
                 }
                 .wayToPayMessage{
-font-size: 14px;
-font-weight: 400;
-line-height: 18.2px;
-text-align: left;
-
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 18.2px;
+                    text-align: left;
                 }
 
             }

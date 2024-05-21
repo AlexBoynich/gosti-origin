@@ -164,7 +164,7 @@ export default {
             flex-direction: column;
             margin-bottom: 40px;
             hr{
-                color: #7B9561CC;
+                color: rgba(123,149,97,.35);
                 margin-bottom: 10px;
             }
             .row-1,.row-2,.row-3 {
