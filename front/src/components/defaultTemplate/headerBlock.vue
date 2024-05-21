@@ -470,6 +470,7 @@ header {
                                 width: 18px;
                                 height: 18px;
                                 font-size: 10px !important;
+                                right: 0;
                             }
                         }
                     }
@@ -545,6 +546,7 @@ header {
                                 width: 18px;
                                 height: 18px;
                                 font-size: 10px !important;
+                                right: 0;
                             }
                         }
                     }

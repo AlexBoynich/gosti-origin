@@ -100,6 +100,19 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/global";
 
+.minus{
+    @include mobile {
+        width: 8px !important;
+        height: 1px !important;
+    }
+}
+.plus{
+    @include mobile {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}
+
 .cart-item {
     display: flex;
     background: #EFF4EB;
@@ -256,14 +269,14 @@ export default {
                     }
                     .minus{
                         @include mobile {
-                            width: 8px;
-                            height: 1px;
+                            width: 8px !important;
+                            height: 1px !important;
                         }
                     }
                     .plus{
                         @include mobile {
-                            width: 8px;
-                            height: 8px;
+                            width: 8px !important;
+                            height: 8px !important;
                         }
                     }
                 }
