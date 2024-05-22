@@ -176,9 +176,9 @@ export default {
                 .price {
                     color: #000;
                     @include inter-500;
-                    font-size: 24px;
+                    font-size: 20px;
                     line-height: 110%;
-                    letter-spacing: -0.48px;
+                    letter-spacing: -0.4px;
                     @include mobile {
                         font-size: 22px;
                         font-weight: 500;
