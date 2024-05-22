@@ -164,10 +164,11 @@ export default {
             flex-direction: column;
             margin-bottom: 40px;
             hr{
-                color: rgba(123,149,97,.35);
                 margin-bottom: 10px;
-                background: rgba(123,149,97,.35);
-                height: 0.5px;
+                background: rgba(123, 149, 97, 0.35);
+                height: 1px;
+                border: none;
+}
             }
             .row-1,.row-2,.row-3 {
                 display: flex;
