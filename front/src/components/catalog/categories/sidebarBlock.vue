@@ -15,9 +15,7 @@
                 </div>
                 <div 
                 class="filters-box"
-                v-show="!GET_SHOW_CATALOG"
                 >
-                    <div class="title invisibleOnMobile">Фильтр</div>
                     <div class="filters">
                         <FiltersItem
                             v-for="filter in filters"
@@ -79,8 +77,8 @@ export default {
         },
         activeItems(subcategory) {
             if (!subcategory) {
-                let categoriesName = this.categories[0].title
-                let subcategoriesName = this.categories[0].subcategories[0].title
+                let categoriesName = 'Основное меню'
+                let subcategoriesName = 'Салаты'
 
                 this.$emit('activeItems', {
                     categoryTitle: categoriesName,
@@ -195,15 +193,13 @@ aside {
             flex-direction: column;
             gap: 24px 0;
             margin-bottom: 48px;
+            @include mobile {
+                margin-bottom: 0;
+            }
         }
 
         .filters-box {
 
-            .invisibleOnMobile {
-                @include mobile {
-                    display: none;
-                }
-            }
 
             .title {
                 color: #000;
