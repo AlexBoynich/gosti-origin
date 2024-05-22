@@ -142,7 +142,7 @@ export default {
                 },
                 {
                     title: 'Вакансии',
-                    link: 'https://hr-torta.ru/',
+                    link: 'https://hr-torta.ru/?utm_source=sayt&utm_medium=gosti&utm_campaign=vakansii',
                     onAnotherSite: true,
                     isText: true
                 },
@@ -178,7 +178,7 @@ export default {
                 },
                 {
                     title: 'Вакансии',
-                    link: 'https://hr-torta.ru/',
+                    link: 'https://hr-torta.ru/?utm_source=sayt&utm_medium=gosti&utm_campaign=vakansii',
                     onAnotherSite: true,
                     isText: true
                 },
@@ -361,7 +361,7 @@ header {
         justify-content: space-between;
         padding: 27px 0;
         @include mobile {
-            padding: 26px 16px 36px;
+            padding: 26px 16px 28px;
         }
 
         .left-part {

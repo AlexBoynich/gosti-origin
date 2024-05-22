@@ -29,9 +29,9 @@ export default {
     data() {
         return {
             activeItems: {
-                categoriesTitle: '',
+                categoriesTitle: 'Основное меню',
                 categoriesIndex: 0,
-                subcategoriesTitle: '',
+                subcategoriesTitle: 'Салаты',
                 subcategoriesIndex: 10
             },
             width: 0,

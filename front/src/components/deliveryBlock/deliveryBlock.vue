@@ -166,6 +166,8 @@ export default {
             hr{
                 color: rgba(123,149,97,.35);
                 margin-bottom: 10px;
+                background: rgba(123,149,97,.35);
+                height: 0.5px;
             }
             .row-1,.row-2,.row-3 {
                 display: flex;
