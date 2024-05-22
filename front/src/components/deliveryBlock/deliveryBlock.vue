@@ -168,7 +168,6 @@ export default {
                 background: rgba(123, 149, 97, 0.35);
                 height: 1px;
                 border: none;
-}
             }
             .row-1,.row-2,.row-3 {
                 display: flex;
