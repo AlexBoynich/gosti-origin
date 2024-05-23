@@ -31,7 +31,7 @@
             class="go-to-catalog"
             @click="goToCatalog"
         >
-            Перейти в каталог
+            Перейти в меню
         </button>
         <div class="catalog-items">
             <catalogItem
