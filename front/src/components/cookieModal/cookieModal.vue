@@ -6,7 +6,9 @@
             </button>
             <div class="modal-content">
                 Наш сайт использует файлы cookie, чтобы улучшить работу сайта, повысить его эффективность и удобство.
-                Продолжая использовать наш сайт, вы соглашаетесь на использование файлов cookie.
+                <a class="link" target="_blank" href="/documents/agreement.pdf">
+                    Продолжая использовать наш сайт, вы соглашаетесь на использование файлов cookie.
+                </a>
             </div>
         </div>
     </div>
@@ -62,6 +64,11 @@ export default {
             @include inter-400;
             line-height: 22px;
             font-size: 20px;
+            .link {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
         }
     }
 }

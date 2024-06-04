@@ -183,9 +183,13 @@ aside {
             width: 100%;
             margin-top: 16px;
             padding-bottom: 0;
-            gap: 30px;
+            gap: 25px;
             display: flex;
             flex-direction: column;
+            position: fixed;
+            top: 63px;
+            z-index: 12;
+            background: white;
         }
 
         .categories {
@@ -218,7 +222,7 @@ aside {
                 @include mobile {
                     flex-direction: row;
                     overflow: scroll;
-                    margin-bottom: 20px;
+                    margin-bottom: 0;
                     scrollbar-width: none;
                     -ms-overflow-style: none;
                     ::-webkit-scrollbar{

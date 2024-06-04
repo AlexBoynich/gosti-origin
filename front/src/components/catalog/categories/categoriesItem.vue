@@ -104,7 +104,7 @@ export default {
             flex-direction: row;
             overflow-x: scroll;
             overflow-y: auto;
-            padding: 0;
+            padding: 5px 0;
             border: none;
             scrollbar-width: 0;
             scrollbar-color: transparent;

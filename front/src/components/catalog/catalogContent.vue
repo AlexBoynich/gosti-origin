@@ -157,6 +157,7 @@ export default {
     
     @include mobile {
         padding-bottom: 0;
+        margin-top: 115px;
     }
 
     .message {
