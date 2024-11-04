@@ -20,7 +20,7 @@
             </swiper>
 
         </div>
-        <div class="arrows-box">
+        <div v-if="slides.length > 1" class="arrows-box">
             <button
                 v-if="slides.length > 1"
                 class="arrows arrow_prev catering"
@@ -111,6 +111,8 @@ export default {
                 height: auto;
             }
             img {
+                width: 100%;
+                height: 100%;
                 @include mobile {
                     max-width: 800px;
                     width: 100%;

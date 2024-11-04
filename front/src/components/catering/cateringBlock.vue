@@ -33,11 +33,9 @@ export default {
         return {
             cateringSlides: [
                 '/images/catering/keit-page-1.png',
-                '/images/catering/keit-page-2.png'
             ],
             cateringSlidesMobile: [
-                '/images/catering/keit-page-mobile-1.svg',
-                '/images/catering/keit-page-mobile-2.svg'
+                '/images/catering/keit-page-1.png',
             ],
             width: 0
         }

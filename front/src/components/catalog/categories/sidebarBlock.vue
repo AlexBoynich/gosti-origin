@@ -42,14 +42,32 @@ export default {
             title: 'Каталог',
             activeIndices: {
                 categoriesIndex: 0,
-                subcategoriesIndex: 10
+                subcategoriesIndex: null
             },
             width: 0,
         }
     },
     computed: {
         ...mapState('categories', ['categories']),
-        ...mapGetters(['GET_SHOW_CATALOG'])
+        ...mapGetters(['GET_SHOW_CATALOG']),
+        subcategoriesIndex() {
+            if (this.categories && this.categories[2] && this.categories[2].subcategories) {
+                // если данные доступны, вернуть нужный id
+                return this.categories[2].subcategories[0].id;
+            }
+            return null; // иначе вернуть null или другое значение по умолчанию
+        }
+    },
+    watch: {
+        // следим за изменениями categories и обновляем activeIndices
+        categories: {
+            immediate: true,
+            handler(newCategories) {
+                if (newCategories && newCategories[2] && newCategories[2].subcategories) {
+                    this.activeIndices.subcategoriesIndex = newCategories[2].subcategories[0].id;
+                }
+            }
+        }
     },
     methods: {
         ...mapActions('categories', ['GET_CATEGORIES']),
@@ -180,7 +198,7 @@ aside {
         padding-bottom: 40px;
         
         @include mobile {
-            width: 100%;
+            width: 94%;
             margin-top: 16px;
             padding-bottom: 0;
             gap: 25px;

@@ -120,7 +120,7 @@ export default {
                 delivery: {
                     deliveryPriceBlock: {
                         title: 'Сумма доставки',
-                        message: '*бесплатная доставка от 1500 рублей', 
+                        message: '*бесплатная доставка от 1500 рублей. Стоимость и условия доставки в отдалённые районы города могут  отличаться', 
                         text: 'С вами свяжется менеджер для уточнения способа оплаты'
                     },
                     isDelivery: true,
@@ -183,7 +183,7 @@ export default {
             let totalPrice = this.cart.reduce((acc, item) => acc + item.price * item.count, 0)
             if (this.wayToGet.delivery.isDelivery) {
                 if (totalPrice < 1500) {
-                    return totalPrice + 200
+                    return totalPrice + 300
                 } else {
                     return totalPrice
                 }

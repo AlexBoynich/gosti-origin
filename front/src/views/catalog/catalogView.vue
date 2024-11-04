@@ -32,7 +32,7 @@ export default {
                 categoriesTitle: 'Основное меню',
                 categoriesIndex: 0,
                 subcategoriesTitle: 'Салаты',
-                subcategoriesIndex: 10
+                subcategoriesIndex: null
             },
             width: 0,
             filters: [
@@ -68,6 +68,13 @@ export default {
         ...mapGetters(['GET_LACTOSE']),
         ...mapState('catalogItems', ['catalogItems']),
         ...mapState('categories', ['categories']),
+        subcategoriesIndex() {
+            if (this.categories && this.categories[2] && this.categories[2].subcategories) {
+                // если данные доступны, вернуть нужный id
+                return this.categories[2].subcategories[0].id;
+            }
+            return null; // иначе вернуть null или другое значение по умолчанию
+        }
     },
     methods: {
         ...mapActions('catalogItems', ['GET_CATALOG_ITEMS']),
@@ -79,7 +86,7 @@ export default {
             this.activeItems.subcategoriesIndex = el.subcategoriesIndex
 
             if (!el.subcategoriesIndex) {
-                this.activeItems.subcategoriesIndex = 10
+                this.activeItems.subcategoriesIndex = this.categories[2].subcategories[0].id
             } else {
                 this.activeItems.subcategoriesIndex = el.subcategoriesIndex
             }
@@ -133,7 +140,7 @@ export default {
         goToCatalog() {
             this.activeItems.categoriesIndex = 0
             this.activeItems.categoriesTitle = this.categories[0].title
-            this.activeItems.subcategoriesIndex = 10
+            this.activeItems.subcategoriesIndex = this.categories[2].subcategories[0].id
             this.activeItems.subcategoriesTitle = this.categories[0].subcategories[0].title
 
             for (let i = 0; i < this.filters.length; i++) {

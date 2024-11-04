@@ -277,7 +277,7 @@ header {
                 display: flex;
                 justify-content: space-between;
                 flex-direction: column;
-                padding: 0 26px 80px;
+                padding: 0 26px 12vh;
                 
                 .burger-menu_bottom{
                             display: flex;

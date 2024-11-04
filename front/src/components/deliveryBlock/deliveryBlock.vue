@@ -4,6 +4,7 @@
         <div class="right-part">
             <h2 class="title"> {{ delivery.title }}</h2>
             <div class="desc">{{ delivery.desc }}</div>
+            <div class="desc">{{ delivery.desc2 }}</div>
             <div class="delivery-table-2">
                 <div class="row-1">
                     <div>Заказ</div>
@@ -51,10 +52,11 @@ export default {
         return {
             delivery: {
                 title: 'Доставка',
-                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку по всему городу. Привезём свежую еду за 2 часа!',
+                desc: 'Выбирайте любимые блюда в каталоге и заказывайте их через нашу доставку. Привезем свежую еду в течение 1,5 часов',
+                desc2: '*условия доставки в отдалённые районы города могут отличаться',
                 tableColumns: [
                     {tableItems: ['Заказ', 'Доставка']},
-                    {tableItems: ['До 1500 ₽', 'от 300 р']},
+                    {tableItems: ['До 1500 ₽', 'от 300 ₽']},
                     {tableItems: ['От 1500 ₽', 'Бесплатно']},
                 ],
                 tableItemsMobile: [

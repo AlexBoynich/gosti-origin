@@ -2,29 +2,29 @@
     <div 
     class="catalog-content"
     >
-        <!-- <div
-            v-show="showMessage"
+        <div
+            v-show="activeItems.subcategoriesTitle === 'Завтраки' || catalogItems.length === 0"
             :class="['message', {'bad' : !isGood || catalogItems.length === 0}]"
         >
             <div
-                v-show="activeItems.categoriesIndex === 0 && catalogItems.length > 0"
+                v-show="activeItems.subcategoriesTitle === 'Завтраки'"
                 class="txt"
             >
                 {{ messageContent.breakfast }}
             </div>
-            <div
+            <!-- <div
                 v-show="activeItems.categoriesIndex === 1 && catalogItems.length > 0"
                 class="txt"
             >
                 {{ messageContent.businessLunch }}
-            </div>
+            </div> -->
             <div
                 v-show="catalogItems.length === 0"
                 class="txt"
             >
                 {{ messageContent.noDishes }}
             </div>
-        </div> -->
+        </div>
 
         <button
             v-show="catalogItems.length === 0"
@@ -168,7 +168,6 @@ export default {
 
         @include mobile {
             padding: 20px 16px;
-            margin-top: 30px;
         }
 
 
