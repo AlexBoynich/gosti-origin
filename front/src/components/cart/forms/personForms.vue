@@ -16,6 +16,7 @@
                             :class="['default-form', 'textarea', form.class]"
                             :placeholder="form.placeholder"
                             :maxlength="form.maxLength"
+                            v-model="form.formContent"
                         >
                         </textarea>
                         <input
