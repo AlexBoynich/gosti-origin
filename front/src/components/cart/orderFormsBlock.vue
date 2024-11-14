@@ -86,7 +86,7 @@
                         href="/documents/consent-to-the-processing-of-personal-data.pdf"
                         target="_blank"
                     >
-                        даю <span>{{personalData.link}}</span>
+                     <span>{{personalData.link}}</span>
                     </a>
                 </label>
             </div>

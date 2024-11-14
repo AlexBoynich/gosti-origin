@@ -207,7 +207,7 @@ export default {
         background: $lightGrayishRed;
         border-left: 5px solid $madderLake;
         position: absolute;
-        top: 10px;
+        top: 30px;
         right: 0;
         transition: .3s ease-in-out;
 

@@ -12,12 +12,12 @@
             >
                 {{ messageContent.breakfast }}
             </div>
-            <!-- <div
-                v-show="activeItems.categoriesIndex === 1 && catalogItems.length > 0"
+            <div
+                v-show="activeItems.subcategoriesTitle === 'Бизнес-ланч' || catalogItems.length === 0"
                 class="txt"
             >
                 {{ messageContent.businessLunch }}
-            </div> -->
+            </div>
             <div
                 v-show="catalogItems.length === 0"
                 class="txt"
